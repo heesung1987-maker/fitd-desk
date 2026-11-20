@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>2027 미국 크레딧(US Credit) 연간전망 종합</title>
+<title>2027 미국 크레딧(US Credit) 연간전망 종합 (v2)</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 :root{
@@ -81,8 +81,8 @@ section{display:flex;flex-direction:column;gap:14px}
 
 .chartcard{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:12px}
 .toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--soft)}
-.seg button{font:inherit;font-size:13px;font-weight:600;border:0;background:transparent;color:var(--muted);padding:6px 14px;cursor:pointer;transition:all .15s}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--soft);flex-wrap:wrap}
+.seg button{font:inherit;font-size:12.5px;font-weight:600;border:0;background:transparent;color:var(--muted);padding:6px 12px;cursor:pointer;transition:all .15s}
 .seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
 .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted)}
@@ -212,21 +212,20 @@ function toggleOutlookTheme() {
 
 <header>
   <div class="hdr-top">
-    <span class="eyebrow">해외 주요 IB 2027 미국 크레딧(US Credit) 연간전망 종합 · Barclays · Goldman Sachs · Wells Fargo · MS · Citi · ING</span>
-    <span class="badge-draft">2027 US Credit Outlook · 실시간 폴더 연동</span>
+    <span class="eyebrow">해외 주요 IB 6곳(9개 리포트) 2027 미국 크레딧 연간전망 종합 · J.P. Morgan · BofA · Wells Fargo · Barclays · Goldman Sachs · MS/Citi/ING</span>
+    <span class="badge-draft">v2 업데이트 · JPM · BofA · WFS IG DCM 통합 완료</span>
   </div>
-  <h1>2027 미국 크레딧(US IG · HY · 레버리지론 · 유동화) 연간전망</h1>
+  <h1>2027 미국 크레딧(US IG · HY · 레버리지론 · AI 부채) 연간전망</h1>
   <div class="meta">
-    <span>기준일: <b class="num">2026.11.11~11.19</b></span>
-    <span>Bloomberg USD IG OAS <b class="num">88~90bp</b></span>
-    <span>Bloomberg USD HY OAS <b class="num">320bp</b> (CCC가 OAS의 <span class="num">26%</span> 차지)</span>
-    <span>2026 US IG 총발행 <b class="num">$1.90조</b> (YTD <span class="num">$1.66조</span>)</span>
-    <span>2026 YTD 글로벌 AI 부채 발행 <b class="num">$687bn</b></span>
-    <span>Big 5 하이퍼스케일러 채권 <b class="num">$230bn('26) → ~$250bn('27E)</b></span>
+    <span>기준일: <b class="num">2026.11.06~11.19</b></span>
+    <span>US IG OAS <b class="num">88~90bp</b> (BofA 89bp / GS 88bp)</span>
+    <span>US HY OAS <b class="num">320bp</b> (CCC가 OAS의 <span class="num">26%</span>)</span>
+    <span>JPM JULI IG 지수 <b class="num">$9.5조</b> (수익률 <span class="num">6.12%</span> / 평균쿠폰 <span class="num">4.77%</span>)</span>
+    <span>3Q26 IG 이익성장 <b class="num">+25.5% YoY</b> (금융·에너지·AI 제외 <span class="num">+9.4%</span>)</span>
   </div>
   <div class="context-bar">
-    <span><b>2026년 말 미국 크레딧 배경:</b> ① 실질금리 급등과 주가 변동성 확대에도 S&P 500 기업이익 호조(+36%)와 높은 절대금리 캐리 수요 덕에 US IG(~90bp)·HY(~320bp) 스프레드는 역사적 타이튼 수준 유지</span>
-    <span><b>2027년 핵심 화두:</b> ② 사상 최대 미국 기업채 공급(총발행 <b>$2.97조</b>, IG <b>$2.10~2.25조</b>) 및 HY/레버리지론의 ‘3년 내 차환 벽(26%)’ 도래 속에서 <b>Barclays(보합~축소·캐리 롱)</b>와 <b>GS(IG 105bp·HY 410bp 확대)</b>의 시각이 정면 대립</span>
+    <span><b>2026년 리뷰:</b> ① 미국 IG 총발행이 <b>$2.00~2.10조</b>로 사상 최고치를 경신(상위 25개 발행사가 $645bn·34% 차지, 비달러 발행 $253bn 사상 최대)하며 Tech 섹터(12.3%)가 미국 은행채를 제치고 IG 내 최대 섹터로 등극(JPM)</span>
+    <span><b>2027년 핵심 전환:</b> ② AI 자금조달의 중심축이 하이퍼스케일러 선순위 무담보채($200~225bn 보합)에서 <b>부외(Off-B/S) GPU·칩 담보부 딜 및 데이터센터 프로젝트 본드($225~275bn)</b>로 이동하며 공급 만기(Duration)가 단축되는 국면</span>
   </div>
 </header>
 
@@ -235,76 +234,75 @@ function toggleOutlookTheme() {
   <div class="kpis" id="kpis"></div>
   <ul class="keys">
     <li>
-      <span class="t">스프레드 방향성 (Barclays vs GS 대립)</span>
-      <span class="b">Barclays “보합~소폭 축소 (IG ~90bp 지지)” vs GS “IG 105bp(+17bp) · HY 410bp(+90bp) 확대”</span>
-      <span class="desc"><b>Barclays</b>는 견조한 명목 성장과 기업이익(27년 SPX EPS $434, +15%)이 고금리를 이겨내며 IG·Performing HY 중심의 스프레드 압착이 이어질 것으로 전망. 반면 <b>Goldman Sachs</b>는 대규모 AI 차입 물결(Borrowing wave) 지속과 1998년식 금리 인하 부재로 2027년 스프레드가 완만히 확대되고 특히 US HY가 언더퍼폼할 것으로 경고.</span>
+      <span class="t">2027 US IG 발행량 컨센서스</span>
+      <span class="b">총발행 $2.10~2.15조 사상 최대 (JPM·Barclays·WFS) vs $1.90조 감소 (BofA, GPU 제외)</span>
+      <span class="desc"><b>WFS($2.15조, Bull $2.225조)</b>·<b>JPM($2.10조, +5%)</b>·<b>Barclays($2.10조, +11%)</b>는 AI 인프라 조달 확대로 또 한 번의 사상 최대 발행을 전망. 반면 <b>BofA($1.90조, -10%)</b>는 26년 급증했던 M&amp;A·은행채 정상화와 EUR 발행 이동을 근거로 감소를 전망하되, 부외 GPU 딜($100bn+) 포함 시 전년 수준(~$2.0조+) 유지 가능성 제시.</span>
     </li>
     <li>
-      <span class="t">US IG 공급 &amp; AI 하이퍼스케일러 조달</span>
-      <span class="b">2027년 US IG 총발행 $2.10~2.25조 · 순발행 $1.19조(+23% YoY)로 사상 최대 경신</span>
-      <span class="desc">만기 도래($910bn)가 정체되어 총발행 증가분이 대부분 순발행(+$220bn)으로 직결. <b>WFS</b>는 하이퍼스케일러 채권 발행이 26년 $230bn → 27년 ~$250bn으로 늘고 만기도 장기화된다고 본 반면, <b>Barclays</b>는 AI 조달이 1~5년 단기·칩 파이낸싱·사모·네오클라우드로 분산돼 10Y+ 장기 IG 발행 증가율은 +5%($360bn)에 그친다고 분석.</span>
+      <span class="t">순발행(Net)과 현금 환류 (JPM ‘Net-Net $508bn’)</span>
+      <span class="b">순발행 $1.06~1.19조 사상 최대이나, 만기($1.04조)+쿠폰($556bn) 환류로 소화 가능</span>
+      <span class="desc"><b>JPM</b> 분석에 따르면 2027년 IG 순발행($1,064bn, +13%)은 JULI 지수($9.5조) 대비 <b>11.2%</b>로 장기 평균(11.0%) 수준이며, 고금리 차환으로 쿠폰 수입이 <b>$556bn(+12%)</b>으로 급증해 실제 투자자가 순흡수해야 할 <b>‘Net-Net’ 공급은 $508bn</b>(2020년 기록 $512bn 하회)에 불과. 액면 $60 이하 저가채($276bn)에 대한 공개매수(Tender)도 추가 완충재.</span>
     </li>
     <li>
-      <span class="t">US HY &amp; 레버리지론 (Leveraged Loans)</span>
-      <span class="b">역대 가장 앞당겨진 ‘차환의 벽(Maturity Wall)’ vs CCC 등급(OAS의 26%) 부실 리스크</span>
-      <span class="desc">2027년 HY 총발행 $400bn(+13%, 순발행 $100bn)·레버리지론 총발행 $470bn(+7%, 순발행 $75bn) 전망(Barclays). HY 지수 액면의 26%가 3년 내 만기 도래해 차환($150~170bn)과 대출→채권 고정금리 전환($80~100bn)이 공급을 주도. 액면 비중 10.5%인 CCC 등급이 전체 HY OAS의 26%를 차지해 취약 차주 꼬리 리스크 경계 필수.</span>
+      <span class="t">AI 조달 2막: 하이퍼스케일러 보합 vs GPU·데이터센터 딜 폭발</span>
+      <span class="b">Tech·Media가 전체 IG 순발행의 50% 차지 ($1.5조 = 전체 HY 지수 규모와 동등!)</span>
+      <span class="desc"><b>JPM</b>은 AI 공급이 26년 $274bn → 27년 <b>$450bn(+64%)</b>으로 늘되, 하이퍼스케일러 무담보채($225bn, -3%)는 정점을 지나고 <b>데이터센터·GPU 파이낸싱($225bn, +436%)</b>이 급증할 것으로 전망. <b>WFS</b> 역시 27년 Tech 발행 <b>$650bn(+54%, IG의 30%)</b> 중 부외 Chip 딜($150~200bn, 가시적 본드 테이크아웃 ~$120bn)과 DC 프로젝트 본드($50~100bn)를 핵심 동인으로 지목.</span>
     </li>
     <li>
-      <span class="t">채권시장 전체 수급 균형 (Securitized &amp; UST)</span>
-      <span class="b">기업채 순발행 급증(+$165bn)을 국채 이표채(-$162bn)와 유동화증권(-$122bn) 감소가 상쇄</span>
-      <span class="desc">2027년 미국 전체 채권(T-Bill 제외) 순발행은 $3.07조로 전년비 4%(-$114bn) 감소(Barclays). 7%대 모기지 금리와 바젤III 엔드게임에 따른 은행 직접보유 확대로 Agency MBS 등 Securitized 순발행이 -22%($426bn, 2H27 MBS 순공급 ~0) 급감하고 국채 10Y 환산 듀레이션 공급도 -20% 줄어 크레딧 시장의 듀레이션 소화 부담을 완충.</span>
+      <span class="t">스프레드·커브·섹터 전략</span>
+      <span class="b">BofA(박스권·5s10s 스프레드 스팁·1H27 AI vs 방어주 압축) · Barclays(축소) vs GS(확대)</span>
+      <span class="desc"><b>BofA</b>는 2027년 스프레드가 더 넓은 박스권(Range-bound)에 머물고 UST 커브 플랫 시 일드 매수세로 <b>IG 5s10s 스프레드 커브가 스티프닝</b>될 것으로 전망하며 <b>Banks·Insurance·REITs·Tech/AI·Utilities 비중확대(OW)</b> 권고. <b>Barclays</b>는 장기 스프레드 듀레이션 롱을, <b>GS</b>는 AI 구축효과로 IG 105bp(+17bp)·HY 410bp(+90bp) 확대를 전망.</span>
     </li>
   </ul>
 </section>
 
 <section>
-  <h2>투자 시사점 &amp; 미국 크레딧 섹터별 핵심 전략</h2>
+  <h2>투자 시사점 &amp; 미국 크레딧 핵심 트레이드 전략</h2>
   <div class="panel">
     <dl class="kv">
-      <dt>미국 투자등급 (US IG)</dt>
-      <dd><b>캐리(Carry) · 비경기민감(Non-cyclicals) · 장기 스프레드 듀레이션 선호 (Barclays) vs 밸류에이션 부담 경계 (GS)</b>: <b>Barclays</b>는 US IG 내에서 캐리와 저평가 종목(Cheaper credits), 그리고 10년+ 장기 IG 공급 증가율이 +5%에 불과한 점을 활용해 <b>장기 스프레드 듀레이션(Longer spread duration)</b>을 선호하며 경기민감 업종(Cyclicals)에는 부정적(Negative) 뷰 제시. 반면 <b>GS</b>는 현재 88bp 수준에서 추가 타이튼 여력이 거의 없다며 12개월 목표 105bp(+17bp 확대)를 제시하고 상대적으로 스프레드 버퍼가 큰 유럽 IG(99→105bp)를 선호.</dd>
-      <dt>AI 생태계 크레딧 선별</dt>
-      <dd><b>테마보다 ‘개별 발행사 &amp; 만기 선택’이 핵심 (Barclays · GS · WFS)</b>: US IG 내 스프레드 분산(Dispersion)은 AI 생태계에 집중되어 있음. 막대한 발행 수요, 불확실한 잉여현금흐름(FCF), 그리고 **전력망(Power) 및 데이터센터 인허가(Permits) 확보 역량**에 따라 차주 간 격차가 벌어지고 있으므로 무차별적 AI 테마 추종을 피하고 종목·만기 선별에 집중(Barclays). GS 또한 2027년 AI 조달 비용 상승이 비(非)AI 기업의 설비투자를 구축(Crowd-out)할 위험 지적.</dd>
-      <dt>미국 하이일드 (US HY)</dt>
-      <dd><b>Performing HY 캐리 집중 &amp; CCC 부실채·듀레이션 리스크 회피 (Barclays · GS 공통)</b>: <b>Barclays</b>는 HY에서 캐리를 추구하되 신용등급(Quality)에는 중립을 유지하며 **가장 부실한 CCC 종목(Distressed names)과 듀레이션 리스크(Duration risk)를 모두 회피**할 것을 권고. <b>GS</b> 역시 고금리 장기화가 취약 차주(Tail of weaker borrowers)의 현금흐름을 압박해 **US HY가 320bp → 410bp(+90bp)로 언더퍼폼**할 것으로 전망.</dd>
-      <dt>레버리지론 &amp; 사모크레딧</dt>
-      <dd><b>차환(A&amp;E·BSL) 중심 대응 &amp; 사모크레딧→공모 신디케이트 역류 주시 (Barclays)</b>: 레버리지론(BSL)은 고금리로 M&amp;A($70~90bn)·LBO($65~85bn) 신규 딜이 제약되는 대신 차환($220~250bn)이 시장을 주도. 특히 사모크레딧(Private Credit) 대출 중 **$10~20bn이 금리 절감을 위해 공모 신디케이트론 시장으로 리파이낸싱**되어 넘어올 전망이나, 지연인출(Delayed-draw)이 필요한 맞춤형 데이터센터 프로젝트 파이낸싱은 여전히 사모크레딧 시장이 흡수.</dd>
-      <dt>유동화(MBS·CLO) &amp; 지방채</dt>
-      <dd><b>Agency MBS 수급 호조(2H27 순공급 ~0) &amp; Muni 신규발행 소화 (Barclays)</b>: 모기지 금리 고착과 은행의 대출 직접 보유(Loan retention)로 2H27 Agency MBS 순발행이 제로 수준으로 감소해 MBS 스프레드 하방 지지. 반면 CLO는 신규 레버리지론 부족으로 26년(-17%)에 이어 25년 고점 회복이 어렵고, 지방채(Munis)는 신규 인프라 자금 조달로 총발행 $590bn의 무거운 공급 지속.</dd>
+      <dt>스프레드 &amp; 커브 콜</dt>
+      <dd><b>BofA(박스권 캐리 &amp; IG 5s10s 스프레드 스티프너) · Barclays(장기 스프레드 듀레이션 롱) vs GS(확대 헤지)</b>: <b>BofA</b>는 금리 상승(연준 추가 인상 프라이싱)으로 UST 수익률 곡선이 평탄화될 때 수익률(Yield) 타겟 투자자들이 중장기 회사채보다 중단기물을 선호하며 <b>IG 5s10s 스프레드 커브가 스티프닝</b>될 것으로 분석. 반면 <b>JPM·Barclays</b>는 고금리 고정 기피(10월 신규쿠폰-만기쿠폰 격차 +283bp)와 5~7년 만기 GPU 딜 비중 확대, 장기채 위주 M&amp;A 급감(-52%, JPM)으로 **2027년 IG 공급 평균 만기가 추가 단축(25년 9.9Y→26년 9.6Y→27년 추가 하락)**되어 10Y+ 장기 회사채 수급이 우호적이라고 평가.</dd>
+      <dt>섹터 Overweight (BofA·JPM·WFS)</dt>
+      <dd><b>1) 미국 은행(Banks)</b>: 산업재(Industrials) 대비 매력적인 스프레드 레벨 + 2027년 공급 감소(JPM US Banks -2%, WFS Big 6 -5%, BofA 공급 정상화) 및 바젤III 엔드게임 RWA 경감 기대. <b>2) 유틸리티(Utilities) &amp; 에너지·철도(Rails)</b>: AI 전력망 확충 수혜(EEI 추산 유틸리티 CapEx 26년 $239bn→27년 $262bn→30년 $296bn)와 함께 **AI 테마 흔들림을 방어할 실물자산(Hard assets) 헤지 수단**(BofA). <b>3) 리츠(REITs) &amp; 생명보험(Life Insurance)</b>: 타이트한 밸류에이션 환경에서 높은 캐리를 제공하는 방어 섹터이자, 2027년 REITs 발행($35~37bn)이 지수 비중(2.5%) 유지 필요액($50~55bn)에 크게 못 미쳐 **섹터 비중 축소에 따른 기술적 강세(Technical squeeze)** 기대(JPM). <b>4) Tech / AI</b>: 1H27 중 방어주 대비 스프레드 압축(Compression) 포지셔닝(BofA).</dd>
+      <dt>섹터 Underweight &amp; 헤지</dt>
+      <dd><b>1) 헬스케어(Health Care) · 필수소비재(Consumer Products) · 음식료(Food &amp; Bev) 비중축소 (BofA·JPM)</b>: 1H27 AI 섹터와의 스프레드 압축 상대 페어(Underweight, BofA)이자, 2027년 M&amp;A 조달 파이프라인이 가장 무거운 섹터(JPM 추산 27년 M&amp;A 발행 $144bn 중 헬스케어가 $50bn·35%, 음식료 McCormick $13bn 등 차지). <b>2) 유럽 양키채(European Yankees) 비중축소 (BofA)</b>: 이란 전쟁 및 에너지 가격 재급등 리스크에 대한 지정학적 헤지 수단. <b>3) 경기민감주(Cyclicals) 및 US HY CCC 등급 회피 (Barclays·GS)</b>: HY 지수 액면의 10.5%에 불과한 CCC가 전체 OAS의 26%를 차지하며 3년 내 HY 만기 도래(26%) 충격이 취약 차주에 집중.</dd>
+      <dt>신종 크레딧 기회</dt>
+      <dd><b>1) 부외(Off-B/S) Chip/GPU 구조화 채권 (`$150~225bn`)</b>: Anthropic($63B)·OpenAI(&gt;$50B)·SpaceX($40B)·CruxAI($22B) 등 프론티어 랩 딜에서 **NVIDIA·Broadcom의 잔존가치 보증(Residual value support) 및 담보 가치**를 통해 IG 등급을 획득하고 하이퍼스케일러 선순위채 대비 넓은 스프레드 픽업을 제공하는 5~7년 상각(Amortizing) 구조물 선별(WFS·JPM). <b>2) 기업 하이브리드(Corporate Hybrids, 26년 사상 최대 `$45bn`)</b>: 무디스 50% 자본인정 개편 이후 유틸리티·에너지·통신·음식료(CPB, KDP 등)에서 30년 만기(쿠폰 플로어 포함) 표준화 시장으로 정착($135bn 규모, JPM·Barclays·WFS). <b>3) 저가채 공개매수(Low-$ Bond Tenders)</b>: 액면 $60 이하로 거래되는 JULI 채권이 **$276bn**(25년 말 $74bn 대비 3.7배)으로 급증해 발행사의 부채 축소용 Tender 타겟으로 유망(JPM).</dd>
     </dl>
   </div>
 </section>
 
 <section class="chart-sec">
-  <h2>2027 미국 크레딧 스프레드 전망 &amp; 섹터별 발행 구조 차트</h2>
+  <h2>2027 미국 크레딧 발행량 · 스프레드 · 섹터별 수급 인터랙티브 차트</h2>
   <div class="chartcard">
     <div class="toolbar">
       <div class="seg" role="group" aria-label="차트 지표 선택">
-        <button type="button" id="tabSpread" aria-pressed="true">US &amp; 글로벌 크레딧 스프레드 전망 (bp)</button>
-        <button type="button" id="tabFiccSupply" aria-pressed="false">미국 FICC &amp; 기업채 2025~2027 발행량 ($bn)</button>
-        <button type="button" id="tabCorpMix" aria-pressed="false">US IG · HY · Loan 세부 공급 동인 분해 ($bn)</button>
+        <button type="button" id="tabIgCompare" aria-pressed="true">1. 하우스별 US IG 발행 전망 ($bn)</button>
+        <button type="button" id="tabJpmSectors" aria-pressed="false">2. JPM 15개 섹터별 총발행·순발행 ($bn)</button>
+        <button type="button" id="tabAiBreakdown" aria-pressed="false">3. AI·Tech 조달 구조 &amp; Chip 파이프라인 ($bn)</button>
+        <button type="button" id="tabSpread" aria-pressed="false">4. US &amp; 글로벌 스프레드 전망 (bp)</button>
       </div>
       <div class="legend" id="chartLegend"></div>
     </div>
-    <div class="scroll"><svg id="mainChart" role="img" aria-label="2027 미국 크레딧 스프레드 및 발행량 비교 차트"></svg></div>
+    <div class="scroll"><svg id="mainChart" role="img" aria-label="2027 미국 크레딧 전망 비교 차트"></svg></div>
     <p class="note" id="chartNote"></p>
   </div>
 </section>
 
 <section>
-  <h2>해외 주요 IB별 2027 미국 크레딧 전망 총괄표</h2>
-  <p class="sec-sub">현재 수록된 해외 IB 리포트(Barclays · Goldman Sachs · Wells Fargo · Morgan Stanley · Citi · ING)의 미국 크레딧 핵심 뷰 비교</p>
+  <h2>해외 주요 IB 6곳 2027 미국 크레딧 전망 총괄표</h2>
+  <p class="sec-sub">J.P. Morgan · Bank of America · Wells Fargo · Barclays · Goldman Sachs · MS/Citi/ING의 2027 US Credit 전망 비교</p>
   <div class="tablebox">
     <table>
       <thead>
         <tr>
-          <th>하우스 (리포트·애널리스트)</th>
-          <th>크레딧 뷰</th>
-          <th>US IG OAS 전망<br><span style="font-weight:400">(현재 88~90bp)</span></th>
-          <th>US HY OAS 전망<br><span style="font-weight:400">(현재 320bp)</span></th>
-          <th>2027 US IG 발행량<br><span style="font-weight:400">Gross / Net ($bn)</span></th>
-          <th>AI 하이퍼스케일러 &amp; 공급 핵심 뷰</th>
-          <th>핵심 추천 전략 (Top Trades)</th>
+          <th>하우스 (발간일·애널리스트)</th>
+          <th>스프레드 &amp; 수급 뷰</th>
+          <th>2027 US IG 총발행<br><span style="font-weight:400">(Gross Supply)</span></th>
+          <th>2027 US IG 만기 / 순발행<br><span style="font-weight:400">(Maturities / Net)</span></th>
+          <th>2027 AI · Tech 공급 전망<br><span style="font-weight:400">(하이퍼스케일러 · GPU · DC)</span></th>
+          <th>M&amp;A · 은행채 · 만기 구조</th>
+          <th>최선호 섹터 (OW) &amp; 핵심 전략</th>
         </tr>
       </thead>
       <tbody id="houseTbody"></tbody>
@@ -313,94 +311,359 @@ function toggleOutlookTheme() {
 </section>
 
 <section class="supply-sec">
-  <h2>미국 FICC &amp; 기업 크레딧(IG · HY · 레버리지론 · 유동화 · 지방채) 공급 매트릭스</h2>
+  <h2>AI 하이퍼스케일러(Big 5) CapEx &amp; 신종 IG 부채 구조 심층 분석 (WFS · JPM)</h2>
   <div class="panel">
-    <h3>2025~2027E 미국 고정금리·크레딧 자산군별 총발행(Gross) 및 순발행(Net) 전망 (Barclays · WFS)</h3>
+    <h3>1. Big 5 하이퍼스케일러 개별 신용등급 · 2026 조달 실적 · 2027E CapEx 및 채권 발행 필요액 (WFS IG DCM)</h3>
+    <p class="sec-sub">선순위 무담보채를 통한 CapEx 조달 비중은 2026년 37%($300bn) → 2027년 30%($324bn: USD $200~225bn + Non-USD ~$100bn)로 하락하며 주식(ATM)·부외(Off-B/S) 구조물로 다변화</p>
     <div class="scroll">
-      <table style="min-width:940px;font-size:12.5px">
+      <table style="min-width:960px;font-size:12.5px">
         <thead>
           <tr>
-            <th>자산군 / 섹터 구분</th>
-            <th>2025 실적<br><span style="font-weight:400">Gross / Net ($bn)</span></th>
-            <th>2026 추정<br><span style="font-weight:400">Gross / Net ($bn)</span></th>
-            <th>2027 전망 (Barclays)<br><span style="font-weight:400">Gross / Net ($bn)</span></th>
-            <th>2027/2026 증감 ($bn)<br><span style="font-weight:400">Gross / Net</span></th>
-            <th>2027/2026 증감률 (%)<br><span style="font-weight:400">Gross % / Net %</span></th>
-            <th>만기 구조 및 핵심 수급 동인</th>
+            <th>구분 / 지표</th>
+            <th>Hyperscaler A<br><span style="font-weight:400">Aa2 / AA+ (Stable)<br>[Alphabet / Meta 급]</span></th>
+            <th>Hyperscaler B<br><span style="font-weight:400">A1 / AA (Stable)<br>[Amazon 급]</span></th>
+            <th>Hyperscaler C<br><span style="font-weight:400">Aa3 / AA- (Stable/Neg)<br>[Meta / Alphabet 급]</span></th>
+            <th>Hyperscaler D<br><span style="font-weight:400">Baa2 / BBB- (Neg/Stable)<br>[Oracle]</span></th>
+            <th>Hyperscaler E<br><span style="font-weight:400">Aaa / AAA (Stable)<br>[Microsoft]</span></th>
+            <th>Big 5 합계 (Total)<br><span style="font-weight:400">WFS 2026.11.10 기준</span></th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><b>미국 기업채 합계 (Total Corporate)</b><br><span class="note">US IG + US HY + Leveraged Loans</span></td>
-            <td class="n">$2,207 / $726</td>
-            <td class="n">$2,688 / $1,200</td>
-            <td class="n"><b>$2,970 / $1,365</b></td>
-            <td class="n">+$282 / +$165</td>
-            <td class="n"><span class="up">+10%</span> / <span class="up">+14%</span></td>
-            <td>AI 인프라 Capex 조달과 HY·Loan 차환 벽 도래로 사상 최대 경신. 단, 고금리 장기화로 M&amp;A·LBO 조달은 둔화.</td>
+            <td><b>기존 채권 잔고 (Bond Portfolio)</b></td>
+            <td class="n">$136bn</td>
+            <td class="n">$162bn</td>
+            <td class="n">$109bn</td>
+            <td class="n">$131bn</td>
+            <td class="n">$66bn</td>
+            <td class="n"><b>$604bn</b></td>
           </tr>
           <tr>
-            <td>├─ <b>미국 투자등급 (US IG)</b><br><span class="note">Bloomberg USD IG Index 기준</span></td>
-            <td class="n">$1,437 / $503</td>
-            <td class="n">$1,900 / $970</td>
-            <td class="n"><b>$2,100 / $1,190</b><br><span class="note">(WFS 총발행 $2,250)</span></td>
-            <td class="n">+$200 / +$220</td>
-            <td class="n"><span class="up">+11%</span> / <span class="up">+23%</span></td>
-            <td>만기 도래($910bn)가 정체되어 총발행 증가분이 순발행으로 직결. <b>1~5Y 발행 +13% vs 10Y+ 장기 발행 +5%($360bn, 비중 17%)</b>로 단기·벨리에 편중(Barclays). 은행 $295bn(+15%), 유틸리티 $170bn(+21%).</td>
+            <td><b>설비투자 (CapEx)</b><br><span class="note">2026E → 2027E (YoY)</span></td>
+            <td class="n">$201bn → <b>$327bn</b><br><span class="up">(+63% YoY)</span></td>
+            <td class="n">$223bn → <b>$307bn</b><br><span class="up">(+38% YoY)</span></td>
+            <td class="n">$140bn → <b>$223bn</b><br><span class="up">(+59% YoY)</span></td>
+            <td class="n">$85bn → <b>$96bn</b><br><span class="up">(+13% YoY)</span></td>
+            <td class="n">$154bn → <b>$222bn</b><br><span class="up">(+44% YoY)</span></td>
+            <td class="n">$803bn → <b>$1,175bn</b><br><span class="up"><b>(+46% YoY)</b></span></td>
           </tr>
           <tr>
-            <td>├─ <b>미국 하이일드 (US HY)</b><br><span class="note">밴드 $380~420bn Gross</span></td>
-            <td class="n">$330 / $92</td>
-            <td class="n">$350 / $145</td>
-            <td class="n"><b>$400 / $100</b></td>
-            <td class="n">+$50 / -$45</td>
-            <td class="n"><span class="up">+13%</span> / <span class="dn">-31%</span></td>
-            <td>지수 액면의 <b>26%가 3년 내 만기</b>. 채권 차환($150~170bn) + 대출→채권 전환($80~100bn) + GCP/Capex($55~80bn) + M&amp;A($50~70bn) + LBO($5~15bn).</td>
+            <td><b>2026년 채권 발행 총액</b><br><span class="note">USD / Non-USD 비중</span></td>
+            <td class="n"><b>$91bn</b> (9개 통화 11회)<br>USD $45.0B (49%)<br>Non-USD $46.3B (51%)</td>
+            <td class="n"><b>$98bn</b> (5개 통화 6회)<br>USD $62.0B (63%)<br>Non-USD $36.2B (37%)</td>
+            <td class="n"><b>$50bn</b> (2개 통화 3회)<br>USD $40.0B (80%)<br>Non-USD $10.1B (20%)</td>
+            <td class="n"><b>$35bn</b> (USD 2회)<br>USD $35.0B (100%)<br>Non-USD $0B</td>
+            <td class="n"><b>$25bn</b> (USD 1회)<br>USD $25.0B (100%)<br>Non-USD $0B</td>
+            <td class="n"><b>$300bn</b><br>USD <b>$207.0B (69%)</b><br>Non-USD <b>$92.6B (31%)</b></td>
           </tr>
           <tr>
-            <td>└─ <b>레버리지론 (Leveraged Loans)</b><br><span class="note">BSL 밴드 $450~490bn Gross</span></td>
-            <td class="n">$440 / $131</td>
-            <td class="n">$438 / $85</td>
-            <td class="n"><b>$470 / $75</b></td>
-            <td class="n">+$32 / -$10</td>
-            <td class="n"><span class="up">+7%</span> / <span class="dn">-12%</span></td>
-            <td>차환 주도($220~250bn: BSL 차환 $140~160bn, A&amp;E $70~80bn, <b>사모→BSL 전환 $10~20bn</b>). M&amp;A $70~90bn, LBO $65~85bn, 배당/리캡 $35~55bn, Capex $25~35bn.</td>
+            <td><b>2026년 비달러(Non-USD) 내역</b></td>
+            <td class="n">EUR €15B · CAD C$8.5B<br>GBP £5.5B · JPY ¥576.5B<br>CHF 3.1B · AUD 5.5B 등</td>
+            <td class="n">EUR €14.5B · CAD C$14B<br>GBP £4.3B · CHF 2.8B</td>
+            <td class="n">EUR €9.0B (20%)</td>
+            <td class="n">–</td>
+            <td class="n">–</td>
+            <td class="n">EUR €38.5B · CAD C$22.5B<br>GBP £9.8B · CHF 5.9B<br>JPY ¥576.5B · AUD/HKD/SGD</td>
           </tr>
           <tr>
-            <td><b>유동화증권 (Securitized)</b><br><span class="note">Agency MBS · CMBS · ABS · CLO</span></td>
-            <td class="n">$2,308 / $484</td>
-            <td class="n">$2,407 / $548</td>
-            <td class="n"><b>$2,079 / $426</b></td>
-            <td class="n">-$328 / -$122</td>
-            <td class="n"><span class="dn">-14%</span> / <span class="dn">-22%</span></td>
-            <td>고금리로 주택 거래·차환 위축 및 바젤III 엔드게임 은행 직접보유 확대로 <b>2H27 Agency MBS 순공급 ~0</b>. 사모 CMBS -16%, CLO(26년 -17%)도 신규 론 부족으로 제한적.</td>
+            <td><b>2026년 주식 조달 (Equity ATM)</b><br><span class="note">총 조달액 (채권+주식)</span></td>
+            <td class="n">주식 <b>$62bn</b><br>(총조달 $153bn)</td>
+            <td class="n">주식 <b>$0bn</b><br>(총조달 $98bn)</td>
+            <td class="n">주식 <b>$37bn</b><br>(총조달 $87bn)</td>
+            <td class="n">주식 <b>$35bn</b><br>(총조달 $70bn)</td>
+            <td class="n">주식 <b>$0bn</b><br>(총조달 $25bn)</td>
+            <td class="n">주식 <b>$134bn</b><br>(총조달 <b>$434bn</b>)<br><span class="note">*Meta 1Q27 $60B ATM 예정</span></td>
           </tr>
           <tr>
-            <td><b>미국 지방채 (Municipals)</b><br><span class="note">전체 시장규모 ~$5조 근접</span></td>
-            <td class="n">$581 / $235</td>
-            <td class="n">$595 / $240</td>
-            <td class="n"><b>$590 / $245</b></td>
-            <td class="n">-$5 / +$5</td>
-            <td class="n"><span class="dn">-1%</span> / <span class="up">+2%</span></td>
-            <td>고금리로 차환(Refunding)은 부진하나 인프라·주택·의료·고등교육 등 신규 자금(New money) 조달로 3년 연속 기록적 공급 지속.</td>
-          </tr>
-          <tr>
-            <td><b>미국채 이표채 (US Treasury N/B)</b><br><span class="note">T-Bill 제외 대민 공급</span></td>
-            <td class="n">$4,390 / $1,683</td>
-            <td class="n">$4,395 / $1,193</td>
-            <td class="n"><b>$4,548 / $1,031</b></td>
-            <td class="n">+$153 / -$162</td>
-            <td class="n"><span class="up">+3%</span> / <span class="dn">-14%</span></td>
-            <td>T-Bill 순발행 확대($845bn~1.1조)와 장기물 바이백($431bn)으로 <b>10Y 환산 국채 듀레이션 공급 -20%($781bn→$620bn) 감소</b>.</td>
+            <td><b>2026 CapEx 중 채권 조달 비율</b></td>
+            <td class="n">45%</td>
+            <td class="n">44%</td>
+            <td class="n">36%</td>
+            <td class="n">41%</td>
+            <td class="n">16%</td>
+            <td class="n"><b>37%</b> (27년 <b>30%</b> 가정)</td>
           </tr>
           <tr style="background:var(--soft);font-weight:600">
-            <td><b>미국 채권 총합 (Total US FICC ex-Bills)</b></td>
-            <td class="n">$9,486 / $3,128</td>
-            <td class="n">$10,085 / $3,181</td>
-            <td class="n"><b>$10,187 / $3,067</b></td>
-            <td class="n">+$102 / -$114</td>
-            <td class="n"><span class="up">+1%</span> / <span class="dn">-4%</span></td>
-            <td><b>핵심 시사점</b>: 기업채 순공급 증가(+$165bn)를 국채 이표채(-$162bn)와 유동화증권(-$122bn) 순공급 감소가 100% 이상 상쇄!</td>
+            <td><b>2027E 내재 채권 발행 필요액</b><br><span class="note">(2027E CapEx의 30% 기준)</span></td>
+            <td class="n"><b>$98bn</b></td>
+            <td class="n"><b>$92bn</b></td>
+            <td class="n"><b>$67bn</b></td>
+            <td class="n"><b>$0bn</b><br><span class="note">(FY30까지 추가 조달 없음)</span></td>
+            <td class="n"><b>$67bn</b></td>
+            <td class="n"><b>$324bn (글로벌 합계)</b><br><span class="note">USD $200~225B / 외화 ~$100B</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="panel">
+      <h3>2. AI CapEx 조달을 위한 3대 IG 부채 구조 스펙트럼 (WFS · JPM)</h3>
+      <dl class="kv">
+        <dt>① 부외 Chip 딜<br><span class="num">$150~200bn</span></dt>
+        <dd><b>Off-Balance Sheet Chip Deals (가시적 본드 테이크아웃 `~$120bn`)</b>: 프론티어 AI 랩(Anthropic, OpenAI, SpaceX, CruxAI 등)이나 하이퍼스케일러가 GPU/TPU/XPU를 조달할 때 사모펀드(Apollo, Blackstone) SPV를 통해 발행. <b>담보 품질(Collateral quality)과 칩 제조사(NVIDIA·Broadcom·Google)의 잔존가치 보증(Residual value support)</b>을 결합해 IG 등급을 획득하며, 빠른 하드웨어 감가상각에 맞춰 <b>담보부·원리금균등상환(Amortizing)·단기(5~7년) 구조</b>가 핵심(WFS·JPM).</dd>
+        <dt>② 데이터센터 본드<br><span class="num">$50~100bn</span></dt>
+        <dd><b>Datacenter Project Bonds (`+76% YoY`, 가시적 파이프라인 `$50~60bn`)</b>: 2025년 사모(Off-screens) 데뷔 및 2026년 첫 공모 신디케이트 IG 데이터센터 채권 발행에 이어 2027년 본격 확대. 단, 완전 상각(Fully amortizing) 구조 선호와 콜 유연성(Call flexibility) 간 트레이드오프가 존재하며, <b>미 중간선거에서 주지사가 교체된 주(텍사스 건설중 28%/계획 27%, 조지아 7%, 오하이오 5%, 네바다 4%)</b>의 인허가 지연이 핵심 변수(WFS).</dd>
+        <dt>③ 선순위 무담보<br><span class="num">$200~225bn</span></dt>
+        <dd><b>Big 5 Hyperscaler Senior Unsecured (`+4% YoY` USD / `-3% YoY` JPM `$225bn`)</b>: 대차대조표 내(On-balance sheet) 중단기~장기물(26년 가중평균 만기 15.1년, JPM) 위주 조달. 2027년에는 예측 가능한 정기적 발행(Prescriptive cadence)으로 전환되며 비달러 조달(`~$100bn`) 및 주식 발행(Meta `$60bn` ATM, Alphabet `$40bn` ATM 잔여분)으로 무담보채 의존도를 37%→30%로 낮춤.</dd>
+      </dl>
+    </div>
+
+    <div class="panel">
+      <h3>3. 공개된 대형 AI Chip 파이낸싱 파이프라인 (WFS Page 5)</h3>
+      <div class="scroll">
+        <table style="min-width:460px;font-size:12.5px">
+          <thead>
+            <tr>
+              <th>오프테이커 (Offtaker)</th>
+              <th>규모 (Bank+Bonds)</th>
+              <th>대상 AI 칩</th>
+              <th>RVS(잔존가치) / 스폰서</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Anthropic</b></td>
+              <td class="n"><b>~$63bn</b></td>
+              <td>Google TPU</td>
+              <td>Broadcom (AVGO) / Blackstone (BX)</td>
+            </tr>
+            <tr>
+              <td><b>OpenAI</b></td>
+              <td class="n"><b>&gt;$50bn</b></td>
+              <td>Broadcom XPU</td>
+              <td>Apollo (APO) / Blackstone (BX)</td>
+            </tr>
+            <tr>
+              <td><b>SpaceX (xAI)</b></td>
+              <td class="n"><b>~$40bn</b></td>
+              <td>NVIDIA GPU</td>
+              <td>Apollo (APO)</td>
+            </tr>
+            <tr>
+              <td><b>CruxAI</b></td>
+              <td class="n"><b>~$22bn</b></td>
+              <td>Google TPU</td>
+              <td>Blackstone (BX) / Google (GOOGL)</td>
+            </tr>
+            <tr>
+              <td><b>Amazon</b></td>
+              <td class="n"><b>~$8bn</b></td>
+              <td>NVIDIA GPU</td>
+              <td>n/d</td>
+            </tr>
+            <tr>
+              <td><b>Oracle</b></td>
+              <td class="n"><b>규모 미공개 (n/d)</b></td>
+              <td>NVIDIA GPU</td>
+              <td>Apollo (APO)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="sub"><b>시사점 (WFS · JPM · BofA)</b>: 위 파이프라인에서 2027년 중 약 <b>$100~120bn 이상의 공모/144A IG 본드 테이크아웃(Takeout)</b>이 출회될 전망이며, 하이퍼스케일러 선순위채 대비 매력적인 스프레드 픽업과 짧은 듀레이션(5~7Y)을 제공.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>2027 US IG 15개 전(全) 섹터 공급 · 만기 · 순발행 · M&amp;A 상세 전망표 (JPM · WFS · BofA)</h2>
+  <div class="panel">
+    <h3>J.P. Morgan 2027F 섹터별 총발행(Gross) · 상환(Redemptions) · 순발행(Net) · M&amp;A 및 WFS/BofA 섹터 뷰 통합</h3>
+    <div class="scroll">
+      <table style="min-width:1020px;font-size:12.5px">
+        <thead>
+          <tr>
+            <th>섹터 (JPM JULI 기준)</th>
+            <th>2026F 총발행<br><span style="font-weight:400">Gross ($bn)</span></th>
+            <th>2027F 총발행<br><span style="font-weight:400">Gross ($bn, YoY)</span></th>
+            <th>2027F 상환(만기)<br><span style="font-weight:400">Redemptions ($bn)</span></th>
+            <th>2027F 순발행<br><span style="font-weight:400">Net ($bn, YoY)</span></th>
+            <th>2027F M&amp;A<br><span style="font-weight:400">Gross ($bn)</span></th>
+            <th>WFS 2027E 비교 &amp; 하우스별 핵심 동인 · 투자의견 (JPM · WFS · BofA)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:var(--soft)">
+            <td><b>금융채 합계 (Financials)</b></td>
+            <td class="n">$671.3</td>
+            <td class="n"><b>$697.0</b> <span class="up">(+4%)</span></td>
+            <td class="n">$502.3</td>
+            <td class="n"><b>$194.7</b> <span class="up">(+31%)</span></td>
+            <td class="n">$12.0</td>
+            <td>전체 공급의 1/3 차지. <b>BofA: Banks &amp; Life Insurance 비중확대(OW)</b></td>
+          </tr>
+          <tr>
+            <td>├─ <b>미국 은행 (US Banks)</b></td>
+            <td class="n">$240.0</td>
+            <td class="n"><b>$235.0</b> <span class="dn">(-2%)</span></td>
+            <td class="n">$192.9</td>
+            <td class="n"><b>$42.1</b> <span class="dn">(-27%)</span></td>
+            <td class="n">$0.0</td>
+            <td>JPM: GSIB $182bn(지주 선순위 $150bn, 은행 $21bn, 후순위 $11bn) + 지방은행 $53bn(+4%). WFS: Big 6 $225bn(-5%, 28년 콜러블 $263bn 선차환 주목), 바젤III RWA 경감 수혜. <b>BofA OW</b></td>
+          </tr>
+          <tr>
+            <td>├─ <b>양키 은행 (Yankee Banks)</b></td>
+            <td class="n">$261.0</td>
+            <td class="n"><b>$290.0</b> <span class="up">(+11%)</span></td>
+            <td class="n">$200.4</td>
+            <td class="n"><b>$89.6</b> <span class="up">(+598%)</span></td>
+            <td class="n">$0.0</td>
+            <td>만기 감소(-19%)로 순발행 급증($13bn→$90bn). 유럽 은행 바젤 3.1 RWA(+4.1%) 및 여신 증가(WFS). 단, <b>BofA는 이란 전쟁 헤지 목적으로 European Yankees 비중축소(UW)</b> 권고</td>
+          </tr>
+          <tr>
+            <td>├─ <b>여전·금융사 (Finance Cos)</b></td>
+            <td class="n">$80.3</td>
+            <td class="n"><b>$76.0</b> <span class="dn">(-5%)</span></td>
+            <td class="n">$51.8</td>
+            <td class="n"><b>$24.2</b> <span class="dn">(-33%)</span></td>
+            <td class="n">$0.0</td>
+            <td>BDC 만기 도래(~$14bn, WFS BDC -3%) 및 카드·오토렌더(Ally, Schwab, Synchrony 포함) 예수금 조달비용 상승에 따른 채권 조달 지속</td>
+          </tr>
+          <tr>
+            <td>└─ <b>보험 (Insurance)</b></td>
+            <td class="n">$90.0</td>
+            <td class="n"><b>$96.0</b> <span class="up">(+7%)</span></td>
+            <td class="n">$57.2</td>
+            <td class="n"><b>$38.8</b> <span class="dn">(-5%)</span></td>
+            <td class="n">$12.0</td>
+            <td>JPM: 국내 보험 ~$83bn 중 <b>FABN(보험금지급보증채) ~$42bn</b>(26년 YTD $39bn 대비 증가) 및 보험 브로커 M&amp;A $12bn. <b>BofA: Life Insurance 비중확대(OW)</b></td>
+          </tr>
+          <tr style="background:var(--soft)">
+            <td><b>비금융 기업채 합계 (Non-Financials)</b></td>
+            <td class="n">$1,328.9</td>
+            <td class="n"><b>$1,403.0</b> <span class="up">(+6%)</span></td>
+            <td class="n">$534.0</td>
+            <td class="n"><b>$869.0</b> <span class="up">(+10%)</span></td>
+            <td class="n">$132.0</td>
+            <td>전체 공급의 2/3 차지. Tech·Media 2개 섹터에 순발행이 극단적으로 집중(나머지 10개 섹터는 총발행 감소)</td>
+          </tr>
+          <tr>
+            <td>├─ <b>테크 (Technology)</b></td>
+            <td class="n">$388.0</td>
+            <td class="n"><b>$495.0</b> <span class="up">(+28%)</span></td>
+            <td class="n">$71.9</td>
+            <td class="n"><b>$423.1</b> <span class="up">(+44%)</span></td>
+            <td class="n">$12.0</td>
+            <td>JPM: <b>AI 조달 $360bn(하이퍼스케일러 $135bn + DC/GPU $225bn)</b> + 비AI/M&amp;A(NVIDIA-Hugging Face 등) $135bn. 지수 비중 12.1%→14.5%($1.5조). WFS는 Tech 전체 $650bn(+54%) 추산. <b>BofA OW</b></td>
+          </tr>
+          <tr>
+            <td>├─ <b>미디어·엔터 (Media/Ent.)</b></td>
+            <td class="n">$109.0</td>
+            <td class="n"><b>$117.0</b> <span class="up">(+7%)</span></td>
+            <td class="n">$7.7</td>
+            <td class="n"><b>$109.3</b> <span class="up">(+12%)</span></td>
+            <td class="n">$0.0</td>
+            <td>JPM 분류상 <b>Meta·SpaceX가 포함</b>되어 <b>AI CapEx 조달이 $90bn(섹터의 77%)</b> 차지! 만기($7.7bn)가 극소량이라 총발행의 93%가 순발행($109bn)으로 직결</td>
+          </tr>
+          <tr>
+            <td>├─ <b>유틸리티 (Utilities)</b></td>
+            <td class="n">$153.6</td>
+            <td class="n"><b>$152.5</b> <span class="dn">(-1%)</span></td>
+            <td class="n">$62.4</td>
+            <td class="n"><b>$90.1</b> <span class="dn">(-16%)</span></td>
+            <td class="n">$0.0</td>
+            <td>WFS(+25%, Barclays $170bn) vs JPM($153bn 보합). EEI 미국 유틸리티 CapEx 26년 $239bn→27년 $262bn→30년 $296bn. 신용지표 방어용 <b>기업 하이브리드 발행 활발. BofA 최선호(OW)</b></td>
+          </tr>
+          <tr>
+            <td>├─ <b>헬스케어·제약 (Healthcare)</b></td>
+            <td class="n">$135.0</td>
+            <td class="n"><b>$128.7</b> <span class="dn">(-5%)</span></td>
+            <td class="n">$55.2</td>
+            <td class="n"><b>$73.5</b> <span class="dn">(-8%)</span></td>
+            <td class="n"><b>$50.0</b></td>
+            <td>27년 전체 M&amp;A 채권($144bn)의 <b>35%($50bn)가 집중된 최대 인수금융 섹터</b>(Boston Scientific-Penumbra $10bn 등). <b>BofA는 1H27 AI 대비 스프레드 압축 타겟으로 비중축소(UW)</b></td>
+          </tr>
+          <tr>
+            <td>├─ <b>자동차 (Automotive)</b></td>
+            <td class="n">$79.8</td>
+            <td class="n"><b>$78.9</b> <span class="dn">(-1%)</span></td>
+            <td class="n">$80.8</td>
+            <td class="n"><b>-$1.9</b> <span class="dn">(순상환)</span></td>
+            <td class="n">$0.0</td>
+            <td>미국 자동차 판매 1,600만대 SAAR 보합. 캡티브(Toyota, Hyundai Capital America, Ford, GM, Stellantis) 주도. GM·Ford·Stellantis 산업은행(Industrial bank) 인가로 향후 예수금 조달 확대</td>
+          </tr>
+          <tr>
+            <td>├─ <b>통신 (Telecoms)</b></td>
+            <td class="n">$43.0</td>
+            <td class="n"><b>$76.0</b> <span class="up">(+77%)</span></td>
+            <td class="n">$22.4</td>
+            <td class="n"><b>$53.6</b> <span class="up">(+119%)</span></td>
+            <td class="n">$0.0</td>
+            <td>미국 국내 주파수 경매(Spectrum auctions) 자금 조달 수요로 인해 국내 발행($68bn)이 급증하며 전 섹터 중 가장 높은 증가율(+77%) 기록(JPM·WFS)</td>
+          </tr>
+          <tr>
+            <td>├─ <b>소비재·음식료 (Consumer)</b></td>
+            <td class="n">$97.2</td>
+            <td class="n"><b>$71.9</b> <span class="dn">(-26%)</span></td>
+            <td class="n">$48.2</td>
+            <td class="n"><b>$23.7</b> <span class="dn">(-55%)</span></td>
+            <td class="n">$20.0</td>
+            <td>음식료 $36bn(McCormick-Unilever Foods $13bn M&amp;A 포함), 생활용품 $14.5bn(-31%), 담배 $8.6bn(-21%). Sysco·CPB·KDP 등 후순위 하이브리드 활용. <b>BofA 비중축소(UW)</b></td>
+          </tr>
+          <tr>
+            <td>├─ <b>자본재·산업재 (Capital Goods)</b></td>
+            <td class="n">$95.4</td>
+            <td class="n"><b>$70.7</b> <span class="dn">(-26%)</span></td>
+            <td class="n">$51.9</td>
+            <td class="n"><b>$18.8</b> <span class="dn">(-57%)</span></td>
+            <td class="n">$18.0</td>
+            <td>방산·항공(A&amp;D) $25bn + 제조 $45bn(CAT·Deere 캡티브 $13.5bn, 데이터센터 발전기 수요 강세). <b>Schneider-PTC(€16~17bn)·GE Vernova-Trench($4.5bn)</b> M&amp;A 조달</td>
+          </tr>
+          <tr>
+            <td>├─ <b>에너지 (Energy)</b></td>
+            <td class="n">$93.8</td>
+            <td class="n"><b>$62.0</b> <span class="dn">(-34%)</span></td>
+            <td class="n">$38.8</td>
+            <td class="n"><b>$23.2</b> <span class="dn">(-49%)</span></td>
+            <td class="n">$6.0</td>
+            <td>고유가에 따른 잉여현금흐름(FCF) 호조와 미드스트림($30bn)의 사모시장 활용으로 공모 발행 -34% 급감(WFS도 -20% 전망). <b>BofA: 희소성 및 실물자산 AI 헤지 수단으로 선호</b></td>
+          </tr>
+          <tr>
+            <td>├─ <b>운송·철도·항공 (Transportation)</b></td>
+            <td class="n">$30.0</td>
+            <td class="n"><b>$52.5</b> <span class="up">(+75%)</span></td>
+            <td class="n">$25.5</td>
+            <td class="n"><b>$27.0</b> <span class="up">(순증전환)</span></td>
+            <td class="n">$15.0</td>
+            <td>항공기 인도 병목 완화로 항공사(UAL IG 승격 기대)·리스사(AER $4bn 만기) 발행 재개 + <b>2H27 Union Pacific(UNP) - Norfolk Southern(NSC) $85bn 철도 합병(채권 ~$15bn)</b>. <b>BofA: Rails 선호</b></td>
+          </tr>
+          <tr>
+            <td>├─ <b>기초소재·화학 (Basic Ind.)</b></td>
+            <td class="n">$52.4</td>
+            <td class="n"><b>$38.8</b> <span class="dn">(-26%)</span></td>
+            <td class="n">$27.6</td>
+            <td class="n"><b>$11.2</b> <span class="dn">(-62%)</span></td>
+            <td class="n">$2.0</td>
+            <td>이란 전쟁 이후 글로벌 공급 차질로 북미 석유화학(DOW, LYB) 마진이 반등하며 <b>Fallen Angel(투기등급 추락) 리스크가 2028년으로 이연</b>(JPM). 화학 하이브리드 발행 지속(WFS)</td>
+          </tr>
+          <tr>
+            <td>├─ <b>부동산·리츠 (Property/REITs)</b></td>
+            <td class="n">$37.0</td>
+            <td class="n"><b>$36.5</b> <span class="dn">(-1%)</span></td>
+            <td class="n">$20.1</td>
+            <td class="n"><b>$16.4</b> <span class="up">(+35%)</span></td>
+            <td class="n">$0.0</td>
+            <td>은행 대출(SOFR+100bp 미만)·전환사채·보험사 JV(Apollo/Athene) 활용으로 공모채 발행이 지수 비중 유지 필요액($50~55bn)을 하회 → <b>섹터 축소에 따른 수급 강세(JPM·BofA OW)</b></td>
+          </tr>
+          <tr>
+            <td>└─ <b>유통·소매 (Retail)</b></td>
+            <td class="n">$15.0</td>
+            <td class="n"><b>$22.6</b> <span class="up">(+51%)</span></td>
+            <td class="n">$21.5</td>
+            <td class="n"><b>$1.1</b> <span class="up">(순증전환)</span></td>
+            <td class="n">$10.0</td>
+            <td>식자재 유통·편의점(C-stores) 롤업 M&amp;A($10bn)가 발행 견인. 반면 Home Depot($2.75bn)·Lowe's($2.9bn) 등 대형사는 현금 상환을 통한 디레버리징 주력</td>
+          </tr>
+          <tr style="background:var(--accent-soft);font-weight:700">
+            <td><b>US IG 전체 합계 (Total JPM HG)</b></td>
+            <td class="n">$2,000.2</td>
+            <td class="n"><b>$2,100.0 (+5%)</b></td>
+            <td class="n">$1,036.3</td>
+            <td class="n"><b>$1,063.7 (+13%)</b></td>
+            <td class="n"><b>$144.0 (-52%)</b></td>
+            <td><b>쿠폰 수입 $556bn(+12%) 차감 후 ‘Net-Net’ 공급은 $508bn(+14%) · Tech+Media가 전체 순발행의 50%($532bn) 점유!</b></td>
           </tr>
         </tbody>
       </table>
@@ -409,104 +672,67 @@ function toggleOutlookTheme() {
 </section>
 
 <section>
-  <h2>미국 크레딧 시장 4대 핵심 쟁점 (Key Debates)</h2>
+  <h2>미국 크레딧 시장 5대 핵심 쟁점 (Key Debates)</h2>
   <div class="grid2">
     <div class="panel">
-      <h3>1. 스프레드 방향성: 왜 Barclays는 ‘축소’, GS는 ‘확대’를 보는가?</h3>
+      <h3>1. 2027 IG 총발행: 왜 BofA는 ‘$1.9조(-10%)’, 타 하우스는 ‘$2.1~2.15조(사상 최대)’인가?</h3>
       <dl class="kv">
-        <dt>Barclays (강세/보합)</dt>
-        <dd><b>명목 성장과 기업이익(+15%)의 힘</b>: 실질금리가 급등하고 주식 변동성이 커졌음에도 US IG(~90bp)와 HY(~320bp)가 흔들리지 않은 것은 탄탄한 명목 GDP 성장과 기업이익 덕분. 2027년에도 S&amp;P 500 EPS가 $377 → <b>$434(+15%)</b>로 성장하고 국채·MBS 듀레이션 공급이 줄어 크레딧 스프레드는 현 수준에서 보합~추가 압착(Compress) 가능.</dd>
-        <dt>Goldman Sachs (약세/확대)</dt>
-        <dd><b>AI 차입 물결 &amp; 1998년과의 차이점</b>: 현재 스프레드(IG 88bp, HY 320bp)는 추가 축소 여력이 극히 제한적인 비대칭 구간. 1998~2000년 닷컴붐 후반부에는 1998년 연준의 금리 인하가 뒷받침되었으나 현재는 고금리가 지속되고 있어, AI 수익성 의구심이나 성장 둔화 발생 시 <b>US IG 105bp(+17bp), US HY 410bp(+90bp)</b>로 확대될 전망.</dd>
-        <dt>미국 vs 유럽 상대가치</dt>
-        <dd><b>GS·Barclays 공통 포인트</b>: GS는 이미 리스크 프리미엄이 더 많이 반영된 유럽 크레딧(EUR IG 99→105bp, EUR HY 353→380bp)이 미국보다 스프레드 축소 여력 또는 방어력이 크다고 평가. Barclays 역시 유럽 현물 크레딧이 CDS 인덱스 대비 저평가되어 단기 캐치다운 강세를 전망.</dd>
+        <dt>BofA ($1.90조)</dt>
+        <dd><b>M&amp;A·은행채 정상화 + EUR 이동 + GPU 딜 별도 분리</b>: BofA는 2026년($2.1조) 발행 급증에 AI뿐 아니라 기록적인 M&amp;A와 은행채 발행이 기여했으며 이 두 축이 2027년에 줄어들고, 연준 매파 기조로 조달비용이 낮은 EUR 시장으로 발행이 이동할 것으로 분석. 다만 **BofA의 $1.9조 전망은 부외 GPU 파이낸싱($100bn+)을 제외한 수치로, 이를 포함할 경우 전년 수준(~$2.0조+) 유지 가능**하다고 명시.</dd>
+        <dt>JPM · WFS · Barclays ($2.10~2.15조)</dt>
+        <dd><b>AI 생태계 하류(DC·GPU)로의 조달 확산이 M&amp;A 감소를 압도</b>: JPM($2.10조)과 WFS($2.15조, Bull $2.225조) 역시 27년 M&amp;A 조달 감소(JPM -52% $144bn, WFS -20% $250bn)와 미국 은행채 둔화(JPM -2%, WFS Big 6 -5%)에는 동의. 그러나 **데이터센터 프로젝트 본드와 부외 GPU/칩 구조화 채권($225~275bn)이 지수 내 IG 공모/144A 시장으로 대거 유입**되면서 총발행 신기록을 경신할 것으로 전망.</dd>
       </dl>
     </div>
 
     <div class="panel">
-      <h3>2. AI 하이퍼스케일러 부채 공급: ‘단기·사모 분산’ vs ‘장기 구축효과’</h3>
+      <h3>2. $2.1조 공급의 소화 가능성: ‘현금 환류 $1.6조(JPM)’ vs ‘구축효과(GS·ING)’</h3>
       <dl class="kv">
-        <dt>공급 규모 팩트</dt>
-        <dd>2026년 글로벌 AI 관련 부채 발행은 YTD <b>$687bn</b>(주식 발행 $115bn 별도, GS)에 달했으며, 미국 Big 5 하이퍼스케일러의 USD 회사채 발행은 2026년 <b>$230bn → 2027년 ~$250bn</b>(WFS)으로 추산됨.</dd>
-        <dt>Barclays (부담 제한적)</dt>
-        <dd><b>무담보 공모채 한계 → 비(非)지수·단기 조달로 다변화</b>: 무담보 USD IG 시장이 연간 소화할 수 있는 하이퍼스케일러 물량이 한계에 가까워져 27년 공모 하이퍼스케일러 발행은 보합세를 유지하고, 추가 AI 조달은 <b>칩 공급사 파이낸싱·데이터센터 프로젝트 파이낸싱·네오클라우드·사모크레딧·주식</b>으로 분산될 것. 특히 짧은 칩 수명주기 때문에 발행이 1~5년(+13%)에 몰리고 <b>10Y+ 장기 IG 발행은 +5%($360bn)</b>에 그침.</dd>
-        <dt>WFS · GS · ING (구축효과)</dt>
-        <dd><b>장기 듀레이션 경합 &amp; 비AI 투자 구축(Crowd-out)</b>: WFS는 Big 5 하이퍼스케일러들이 장기 인프라 자산 특성에 맞춰 **장기 고정금리 회사채 발행을 늘리며 딜 규모와 듀레이션 풋프린트가 동시에 급증**했다고 반박. GS와 ING 또한 2027년 누적된 AI 부채 조달이 자본비용을 밀어 올려 비(非)AI 기업의 투자를 구축(Crowd-out)할 것으로 경고.</dd>
+        <dt>JPM · Barclays (소화 가능)</dt>
+        <dd><b>만기($1.04조) + 쿠폰($556bn) = $1.59조 현금 환류 &amp; 국채·MBS 듀레이션 축소</b>: JPM은 2027년 순발행($1,064bn)이 JULI 지수($9.5조)의 11.2%로 과거 평균(11.0%) 수준이며, 평균 수익률(6.12%)이 평균 쿠폰(4.77%)보다 135bp 높아 **연간 쿠폰 수입이 $556bn(+12%)으로 급증해 ‘Net-Net’ 공급은 $508bn에 불과**하다고 강조. Barclays 또한 미 국채 10Y 듀레이션 공급(-20%)과 MBS 순발행(-22%) 감소가 회사채 순증분을 상쇄한다고 분석.</dd>
+        <dt>GS · ING (구축효과 경계)</dt>
+        <dd><b>비(非)AI 실물경제 기업 구축(Crowd-out) 및 발행사 양극화</b>: GS는 2027년 AI 차입 물결이 자본비용을 높여 비(非)AI 기업의 투자를 구축하고 스프레드를 확대(IG 105bp, HY 410bp)시킬 것으로 경고. 실제로 JPM 데이터에서도 **상위 25개 발행사가 전체 공급의 34%($645bn)를 독식한 반면 실물경제 5개 섹터의 발행 비중은 사상 최저(17%)로 위축**됨.</dd>
       </dl>
     </div>
 
     <div class="panel">
-      <h3>3. US HY &amp; 레버리지론: ‘차환의 벽(Maturity Wall)’과 CCC 양극화</h3>
+      <h3>3. 공급 듀레이션(만기 구조): ‘단기화(5~7Y GPU 딜)’ vs ‘하이퍼스케일러 장기채’</h3>
       <dl class="kv">
-        <dt>3년 내 26% 만기 도래</dt>
-        <dd><b>기록적인 단기 차환 벽 (Barclays)</b>: 현재 US HY 지수 액면(Par)의 무려 <b>26%가 향후 3년 이내에 만기 도래</b>하며, 레버리지론(BSL) 시장 역시 역사상 가장 앞당겨진 만기 벽(Front-loaded maturity wall)에 직면. 이에 따라 2027년 HY 총발행($400bn) 중 $150~170bn이 채권 차환, $80~100bn이 대출→채권 전환으로 채워질 전망.</dd>
-        <dt>CCC 등급의 꼬리 리스크</dt>
-        <dd><b>액면 비중 10.5% vs OAS 비중 26% (Barclays·GS)</b>: HY 지수 내에서 CCC 등급은 액면 기준 10.5%에 불과하나 전체 HY 스프레드(OAS)의 26%를 설명함. 실질금리 상승의 타격이 가장 취약한 대차대조표(CCC)에 집중되어 만기 도래 CCC 기업의 채권 시장 차환이 막히고 부실화될 위험이 높음.</dd>
-        <dt>사모크레딧 vs 공모 시장</dt>
-        <dd><b>양방향 자금 이동</b>: 한편에서는 기존 고금리 사모크레딧(Private Credit) 대출 중 <b>$10~20bn이 스프레드가 낮은 공모 신디케이트론(BSL)으로 리파이낸싱</b>되어 넘어오는 반면, 지연인출(Delayed-draw)과 맞춤형 구조가 필요한 AI·데이터센터 Capex 딜은 공모 HY/BSL 대신 사모크레딧으로 유입.</dd>
+        <dt>JPM · Barclays (만기 단축)</dt>
+        <dd><b>고금리 스티커 쇼크 + 5~7Y GPU 딜 + M&amp;A 급감 = 평균 만기 하락</b>: JPM에 따르면 10월 신규 발행 쿠폰이 만기 도래 쿠폰보다 **+283bp** 높아 발행사들이 장기 고금리 고정을 회피하며 2026년 평균 발행 만기가 9.9Y → 9.6Y로 단축됨(하이퍼스케일러 18.6Y→15.1Y, 데이터센터 23.6Y→17.2Y). 2027년에는 **빠른 하드웨어 감가상각 때문에 5~7년 만기로 구조화되는 GPU 딜이 중심에 서고 장기채 비중이 높은 M&amp;A가 반토막**나면서 평균 듀레이션이 추가 하락할 전망(Barclays도 10Y+ 발행 증가율 +5% vs 1~5Y +13% 추산).</dd>
+        <dt>커브 전략 시사점</dt>
+        <dd><b>Barclays(장기 스프레드 듀레이션 롱) &amp; BofA(IG 5s10s 스프레드 커브 스티프너)</b>: 10년+ 장기 회사채 공급 비중이 줄어드는 반면, 연준 인상 우려로 UST 수익률 곡선이 플래트닝될 때 일드 중심 투자자들의 수요가 중단기물에 몰리며 **IG 5s10s 스프레드 커브는 스티프닝**될 전망(BofA).</dd>
       </dl>
     </div>
 
     <div class="panel">
-      <h3>4. 비(非)테크 IG 공급 동인: 은행채(+15%) · 유틸리티(+21%) · 데이터센터 규제</h3>
+      <h3>4. 구조적 시장 변화: 비달러($275bn) · CP($375bn) · 하이브리드($45bn) · 144A</h3>
       <dl class="kv">
-        <dt>미국 은행채 ($295bn)</dt>
-        <dd><b>전년 대비 +15% 발행 증가 (Barclays)</b>: AI 이외의 US IG 공급 증가를 이끄는 핵심 축은 미국 대형 은행권으로, 2027년 약 <b>$295bn(+15% YoY)</b>의 IG 채권 발행이 예상됨. 단, eSLR 및 바젤III 관련 규제 완화로 은행들의 대차대조표 여력과 대출 보유 비중도 함께 확대.</dd>
-        <dt>유틸리티 ($170bn)</dt>
-        <dd><b>전력망 확충 Capex로 +21% 급증 ($140bn → $170bn, Barclays)</b>: AI 데이터센터 가동을 위한 발전·송배전 그리드 투자 수요가 폭증하면서 유틸리티 섹터의 IG 회사채 발행이 26년 $140bn에서 27년 <b>~$170bn(+21%)</b>으로 크게 증가.</dd>
-        <dt>정치·규제 리스크</dt>
-        <dd><b>중간선거 이후 데이터센터 모라토리엄 (Barclays·GS·Citi)</b>: 11월 미 중간선거에서 텍사스·오하이오·조지아·미시간·뉴멕시코·위스콘신 등 **미국 계획 데이터센터 용량의 40% 이상을 차지하는 주(State)에서 데이터센터 유예·규제 공약을 내건 신임 주지사들이 당선**(Barclays). 27년 물량은 기발급 인허가로 진행되나 28~29년 프로젝트 및 전력 확보 여부에 따른 크레딧 차별화 심화 불가피.</dd>
+        <dt>비달러(Non-USD) 조달</dt>
+        <dd><b>26년 $253bn(+31%, 하이퍼스케일러 5.8배 폭증) → 27년 $275bn (JPM·WFS·BofA)</b>: 2026년 미국 IG 기업들의 외화 조달이 USD 발행의 13.3%(EUR 69%)로 금융위기 이후 최고치를 기록. BofA·WFS는 27년에도 금리가 낮은 EUR 등으로의 이탈을 예상하나, JPM은 최근 EUR-USD 스프레드 차 확대로 인해 27년 비달러 발행 증가율은 +9%($275bn, 하이퍼스케일러 $100bn)로 완만해질 것으로 분석.</dd>
+        <dt>CP 잔고($375bn) &amp; 하이브리드</dt>
+        <dd><b>단기채 Term-out 잠재력 &amp; 30년 하이브리드 정착 (JPM)</b>: 비금융 CP 잔고가 $375bn(3개월 +$77bn, 99분위)으로 급증해 향후 3Y 채권-CP 금리 차(현재 128bp) 축소 시 1~3년 회사채 발행이 평균 +14.4% 급증할 상방 리스크 보유. 또한 무디스 규정 개편 이후 **USD 기업 하이브리드가 26년 $45bn(잔고 $135bn)**으로 구조적 성장하며 유틸리티·통신·음식료의 핵심 조달 수단으로 부상.</dd>
+        <dt>144A 지수 편입 &amp; 저가채 텐더</dt>
+        <dd><b>Bloomberg US Agg 편입 자문 &amp; $276bn 저가채 (JPM)</b>: 시장의 16.8%($1.6조)를 차지하는 144A-for-life 채권의 Bloomberg Agg 지수 편입 자문이 진행 중이며 성사 시 GPU 구조화 딜 발행 탄력 예상. 한편 액면 $60 이하 JULI 채권이 $276bn으로 급증해 27년 공개매수(Tender)를 통한 조기 상환 확대 전망.</dd>
       </dl>
-    </div>
-  </div>
-
-  <div class="panel">
-    <h3>미국 크레딧 주요 쟁점별 하우스 시각 대립 요약</h3>
-    <p class="consensus"><b>공통 인식</b> 2027년 미국 기업채 발행은 AI 인프라·전력망 투자와 차환 수요로 사상 최대($2.97조)에 달하나, 국채 듀레이션(-20%)과 MBS 순발행(-22%) 감소가 전체 채권 수급을 완충. 포트폴리오 내에서는 <b>IG 및 Performing HY 중심의 상위 등급 선별과 CCC 부실 등급 회피</b>에 모든 하우스가 일치.</p>
-    <div class="scroll">
-      <table class="dt">
-        <thead><tr><th>핵심 쟁점</th><th class="pos">우호적 / 스프레드 지지 시각</th><th class="neg">신중한 / 스프레드 확대·경계 시각</th></tr></thead>
-        <tbody>
-          <tr>
-            <td>US IG &amp; HY 스프레드</td>
-            <td><b>보합~소폭 축소 (Barclays)</b>: 명목 성장과 SPX EPS(+15%)가 실질금리 부담을 상쇄하며 연말·27년 중 스프레드 지지 (~90bp / ~320bp)</td>
-            <td><b>점진적 확대 (Goldman Sachs)</b>: AI 차입 물결 지속과 타이트한 출발점으로 인해 12개월 후 <b>US IG 105bp(+17bp), US HY 410bp(+90bp)</b> 확대</td>
-          </tr>
-          <tr>
-            <td>AI 회사채 듀레이션</td>
-            <td><b>1~5년 단기·사모 분산 (Barclays)</b>: 짧은 칩 수명과 비지수 조달(사모·칩 파이낸싱) 확대로 10Y+ IG 발행은 +5%($360bn)에 불과해 장기 스프레드 듀레이션 매수 유리</td>
-            <td><b>장기 발행 급증 &amp; 구축효과 (WFS · GS · ING)</b>: WFS는 하이퍼스케일러($250bn)의 장기채 선호로 Big 5 딜의 듀레이션 풋프린트가 급증했다고 분석. 비AI 기업 투자 구축 우려(GS·ING)</td>
-          </tr>
-          <tr>
-            <td>US HY 차환 벽</td>
-            <td><b>Performing HY 캐리 매력 (Barclays)</b>: 높은 절대금리가 인컴 수요를 견인하며, 변동금리 대출에서 고정금리 채권으로의 전환($80~100bn)이 우량 HY 시장을 지지</td>
-            <td><b>CCC 부실 및 차환 실패 리스크 (GS · Barclays)</b>: 3년 내 26% 만기 도래 속 CCC(OAS의 26%) 차주들이 고금리를 견디지 못해 HY 전반의 변동성 유발 가능</td>
-          </tr>
-          <tr>
-            <td>미국 vs 유럽 크레딧</td>
-            <td><b>미국 성장 우위 (Barclays 매크로)</b>: AI Capex와 긍정적 아웃풋 갭으로 미국 기업 이익 성장률(+15%)이 유럽(+10%)을 상회</td>
-            <td><b>유럽 크레딧 상대 방어력 우위 (Goldman Sachs)</b>: 미국 스프레드가 역사적 하단에 막혀 있는 반면, 유럽은 이미 리스크 프리미엄이 반영되어 추가 확대 폭(EUR IG +6bp vs US IG +17bp)이 제한적</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </div>
 </section>
 
 <section class="why-sec">
   <h2>하우스별 2027 미국 크레딧 상세 전망 근거 (House-by-House Thesis &amp; Strategy)</h2>
-  <p class="sec-sub">각 해외 IB 원문에서 도출한 2027년 미국 크레딧(IG · HY · Loans · Securitized) 핵심 논거와 트레이드 추천</p>
+  <p class="sec-sub">폴더 내 9개 원문 리포트에서 추출한 6대 하우스별 2027 미국 크레딧 핵심 논거 및 포트폴리오 전략</p>
   <div class="whygrid" id="whyGrid"></div>
 </section>
 
 <div class="notes">
-  <b>분석 대상 원문 리스트 (`C:\Users\Administrator\.gemini\antigravity\scratch\2027 outlook` &amp; `credit outlook`)</b>
+  <b>분석 대상 원문 리스트 (`C:\Users\Administrator\.gemini\antigravity\scratch\credit outlook` &amp; `2027 outlook`)</b>
   <ul>
-    <li><b>Barclays (US Credit Strategy &amp; FICC Issuance)</b>: <i>Global Outlook: A correction, not a collapse — Theme 6 (Use dispersion in credit to find opportunity), FICC Issuance: It's all in the mix, US Corporates: To record highs, but the pace is slowing, Securitized products: Fading, Municipals</i> (2026.11.19, Dominique Toublan, Corry Short, Ajay Rajadhyaksha, Anshul Pradhan, Lea Overby, Michael Khankin, Mikhail Foux)</li>
-    <li><b>Goldman Sachs (Macro &amp; Credit Forecasts)</b>: <i>Global Economics Analyst — Macro Outlook 2027: Steady Baseline, Downside Risks</i> (2026.11.12, Jan Hatzius, Dominic Wilson 외 — Credit Markets AI Debt Issuance &amp; GS Market Forecasts Corporate Bond Spreads) &amp; <i>2027 Global Rates Outlook: A Better Buffer</i> (2026.11.16)</li>
-    <li><b>Wells Fargo Securities (WFS IG Syndicate &amp; Rates)</b>: <i>2027 Rates Outlook: Tightening’s Last Act</i> (2026.11.19, Marcus Jennings, Angelo Manolatos, WFS IG Syndicate — Hyperscaler &amp; Big 5 Corporate Duration Supply)</li>
-    <li><b>ING · Citi · Morgan Stanley</b>: <i>ING Rates Outlook 2027: The Good, the Bad and the Ugly</i> (AI Corporate Issuance Crowding-out), <i>Citi Global Economic Outlook &amp; Strategy</i> (Global Savings Pool &amp; AI Political Risk), <i>Morgan Stanley 2027 Global Economic Outlook</i> ($1.6trn Hyperscaler Capex)</li>
-    <li><b>자료 추가 자동 반영 안내</b>: <code>C:\Users\Administrator\.gemini\antigravity\scratch\credit outlook</code> 폴더에 추가 미국 크레딧 전용 리포트(JPM Credit, BofA Credit, MS Credit, GS Credit 등)를 넣어주시면 본 페이지의 차트, 총괄표, 쟁점 및 하우스별 카드에 즉시 정밀 통합됩니다.</li>
+    <li><b>J.P. Morgan (`JPM_발행전망.txt`)</b>: <i>North America Credit Research — 2027 US High Grade Issuance Forecast: Go big or go home: $2.1tr gross supply will be another record high but net won't be</i> (2026.11.13, Nathaniel Rosenbaum, Silvi Mantri, Kabir Caprihan, Vincent Barretta, Evan Piascik, Aaron Rosenthal, Arjun Chandar, Yilma Abebe, Matthew Anavy, Carla Casella, Erica Spear, Mark Streeter, Kevin Kwan)</li>
+    <li><b>Wells Fargo Securities (`WFS_IG_DCM_2027_Outlook.txt` &amp; `WFS 2027 Rates Outlook`)</b>: <i>Corporate &amp; Investment Banking — Investment Grade Debt Capital Markets 2027 Outlook</i> (2026.11, Maureen O'Connor, Will Langdale, Luke Barbour, Nick Cooper, Brian Smith, Hayley Hunter)</li>
+    <li><b>Bank of America (`Bofa_발행전망.txt` &amp; `Bofa_섹터 및 스프레드.txt`)</b>: <i>IG Credit Strategist — 2027 US IG supply outlook: lower</i> (2026.11.06) &amp; <i>IG Credit Strategist — Sector outlook</i> (2026.11.13, Yuri Seliger, Sohyun Marie Lee)</li>
+    <li><b>Barclays (`Barclays_Global_Outlook_A_correction_not_a_collapse.pdf`)</b>: <i>Global Outlook — US Credit Strategy, FICC Issuance &amp; US Corporates: To record highs, but the pace is slowing</i> (2026.11.19, Dominique Toublan, Corry Short, Lea Overby, Mikhail Foux)</li>
+    <li><b>Goldman Sachs (`Global Economics Analyst_ Macro Outlook 2027.pdf`)</b>: <i>Macro Outlook 2027: Steady Baseline, Downside Risks — Credit Markets &amp; GS Market Forecasts</i> (2026.11.12, Jan Hatzius, Dominic Wilson 외)</li>
+    <li><b>ING · Citi · Morgan Stanley</b>: <i>ING Rates Outlook 2027</i>, <i>Citi Global Economic Outlook &amp; Strategy</i>, <i>Morgan Stanley 2027 Global Economic Outlook</i></li>
   </ul>
 </div>
 
@@ -515,22 +741,79 @@ function toggleOutlookTheme() {
 <script>
 const US_CREDIT_HOUSES = [
   {
+    id: "JPM",
+    name: "J.P. Morgan",
+    authors: "Nathaniel Rosenbaum · Silvi Mantri 외 13명 (11/13)",
+    stance: "bull",
+    stanceLabel: "수급 소화 가능 (Net-Net $508bn)",
+    gross27: "$2,100bn (+5% YoY)",
+    net27: "만기 $1,036bn / 순발행 $1,064bn (+13%) / Net-Net $508bn (+14%)",
+    aiSupply: "AI $450bn (+64%: 하이퍼스케일러 $225bn [-3%] + DC/GPU $225bn [+436%]) · Tech+Media $612bn (순발행의 50%)",
+    maBank: "M&A $144bn (-52%, 비중 15%→7%) · US Banks $235bn (-2%) · Yankee $290bn (+11%) · 만기 단축 지속",
+    strat: "쿠폰($556bn)+만기($1.04조)+텐더($276bn 저가채 풀)로 $1.6조+ 현금 환류 · 공급 축소에 따른 REITs 수급 강세 · 5~7Y GPU 구조화 딜 및 30Y 기업 하이브리드($45bn) 주목",
+    quote: "“Go big or go home: 총발행 $2.1조는 사상 최고치이나, 지수 대비 순발행(11.2%)은 평균 수준이며 쿠폰($556bn) 차감 후 Net-Net은 $508bn에 불과하다”",
+    points: [
+      "<b>총발행 $2.10조(+5%) vs 실질 흡수 부담(Net-Net $508bn)</b>: 2027년 만기 상환($1,036bn)과 고금리 차환에 따른 쿠폰 수입($556bn, +12% YoY; 28년 $576bn)만으로 <b>$1.59조의 현금이 투자자에게 환류</b>됨. 추가로 make-whole 콜($22bn)과 액면 $60 이하 저가채($276bn 규모)에 대한 공개매수(Tender)가 가세해 수급을 지지.",
+      "<b>AI 조달의 무게중심 이동 ($450bn, +64% YoY)</b>: 하이퍼스케일러 자체 발행은 26년 $232bn → 27년 <b>$225bn(-3%)</b>으로 정점을 지난 반면, NVIDIA·Broadcom 잔존가치 보증 등을 활용한 <b>데이터센터 및 GPU 파이낸싱이 26년 $42bn → 27년 $225bn(+436%)</b>으로 폭발. 이에 따라 JULI 내 Tech 비중이 12.1% → <b>14.5%($1.5조, 전체 HY 지수 규모와 동등!)</b>, TMT 비중은 19.6% → <b>22.6%</b>로 확대.",
+      "<b>공급 듀레이션 단축 & M&A 반토막</b>: 10월 신규 쿠폰이 만기 쿠폰보다 +283bp 높아 발행사들이 장기 발행을 줄이며 평균 만기가 9.9Y(25년) → 9.6Y(26년)로 축소(하이퍼스케일러 18.6Y→15.1Y, DC 23.6Y→17.2Y). 27년에는 <b>5~7년 만기 위주인 GPU 딜 급증과 장기물 위주인 M&A 반토막($302bn→$144bn, -52%)</b>으로 공급 만기가 더 짧아질 전망.",
+      "<b>발행사 양극화 & 비달러·CP·하이브리드</b>: 상위 25개 발행사가 공급의 34%($645bn)를 차지한 반면 실물경제 5개 섹터 비중은 사상 최저(17%). 비달러 발행은 $253bn→$275bn으로 완만히 증가하고, 사상 최고치에 근접한 비금융 CP($375bn)의 단기채 전환 가능성 및 Bloomberg Agg의 144A($1.6조) 편입 자문 결과가 핵심 변수."
+    ]
+  },
+  {
+    id: "BOFA",
+    name: "Bank of America (BofA)",
+    authors: "Yuri Seliger · Sohyun Marie Lee (11/06, 11/13)",
+    stance: "bull",
+    stanceLabel: "박스권 횡보 / 공급 감소 ($1.9T)",
+    gross27: "$1,900bn (-10%, GPU 제외) / GPU 포함 시 ~$2,000~2,100bn",
+    net27: "M&A·은행채 정상화 및 EUR 발행 이동으로 USD 공급 부담 완화",
+    aiSupply: "하이퍼스케일러 조달원 다변화로 공모 IG 발행 속도 유지 + 부외 GPU Funding $100bn+ 추가 가능",
+    maBank: "M&A 파이프라인 $168bn (9월 $72bn 사상 최대 후 10월 $8bn 둔화) · 은행채 공급 감소",
+    strat: "OW: Banks, Life Insurance, REITs, Tech/AI, Utilities · UW: Health Care, Consumer Products, Food & Bev (1H27 AI vs 방어주 압축) · 헤지: European Yankees UW(이란) & Energy/Rails/Utilities(실물자산 AI 헤지) · IG 5s10s 스프레드 커브 스티프너",
+    quote: "“2027 US IG supply outlook: lower ($1.9tr ex-GPU) — 넓은 박스권 속 캐리 극대화 및 1H27 AI vs 방어주 스프레드 압축에 포지셔닝하라”",
+    points: [
+      "<b>월가 유일의 총발행 감소 콜 ($2.1조 → $1.9조, GPU 제외)</b>: AI CapEx는 늘어나지만 하이퍼스케일러 공급은 이미 2026년에 급증했고 조달원이 다변화되고 있음. 무엇보다 2026년 공급을 밀어 올렸던 <b>M&A와 은행채 발행이 2027년에 정상화(감소)</b>되고, 연준 매파 기조 속 금리가 낮은 EUR로의 발행 이동이 USD 공급을 줄일 전망(단, $100bn+ 규모의 GPU 파이낸싱 포함 시 전년 수준 유지).",
+      "<b>스프레드 박스권(Range-bound) & IG 5s10s 스프레드 커브 스티프닝</b>: 현재 IG 지수 스프레드(89bp, 11/12 기준)는 2027년 중 다소 넓어진 박스권 내에서 등락할 전망. 10월 CPI 서프라이즈로 연준 인상 우려가 커지며 <b>미국채(UST) 커브가 플래트닝될 때, 일드(Yield)에 민감한 IG 매수 특성상 IG 5s10s 스프레드 커브는 반대로 스티프닝</b>될 것.",
+      "<b>4대 섹터 로테이션 전략</b>: ① 타이트한 밸류에이션 방어 및 캐리 확보를 위해 <b>Utilities, REITs, Life Insurance, Banks(산업재 대비 저평가+공급 감소) OW</b> ② <b>1H27 AI 섹터와 방어주 간 스프레드 압축(Compression)</b>을 노려 Tech/AI OW vs <b>Health Care·Consumer Products·Food & Bev UW</b> ③ 이란 전쟁 리스크 헤지를 위해 <b>European Yankees UW</b> ④ AI 리스크 헤지를 위해 <b>실물자산(Hard assets: Energy, Rails, Utilities) 선호</b>.",
+      "<b>견조한 3Q26 펀더멘털 & 등급 동향</b>: 3Q26 IG 기업 이익은 <b>+25.5% YoY</b>(금융·에너지·AI 제외 시에도 <b>+9.4% YoY</b>)로 강세 지속. 10월 AI 등급 우려로 순등급상향이 보합으로 둔화됐으나 AI 제외 시 +$21bn으로 건전하며, 딜러 재고(+$2.9bn)도 매우 가벼운 상태."
+    ]
+  },
+  {
+    id: "WFS",
+    name: "Wells Fargo Securities (WFS)",
+    authors: "Maureen O'Connor · Will Langdale · Luke Barbour 외 (11월)",
+    stance: "mix",
+    stanceLabel: "총발행 $2.15T (Tech +54% 급증)",
+    gross27: "Base $2,150bn (+2%) · Bull $2,225bn (+6%) · Bear $2,075bn (-1%)",
+    net27: "27년 잔여 만기 $756bn (26년 중 18%·$161bn 선제 차환 완료, 28년 타워 $1,054bn)",
+    aiSupply: "Tech 총발행 $650bn (+54%, 전체의 30%): Big 5 무담보 $200~225bn + 부외 Chip $150~200bn + AI-Adj $75~100bn + DC 본드 $50~100bn + 기타 $100bn",
+    maBank: "M&A $250bn (-20% vs 26년 $311bn) · Big 6 은행채 $225bn (-5% vs 26년 $238bn)",
+    strat: "하이퍼스케일러 무담보채 대비 밸류에이션 매력이 높은 부외(Off-B/S) Chip 담보부 딜(가시적 본드 테이크아웃 ~$120bn) 선호 · 2028년 은행 콜러블($263bn, Big 6 $129bn)의 2027년 중 선차환 물량 및 유틸리티(+25%)/통신(주파수 경매) 공급 주목",
+    quote: "“Tech Issuance Expected to Jump by 54% to $650bn: 2027년 IG 공급 증가는 전적으로 AI 자산 유동화(Asset-level financing)가 결정한다”",
+    points: [
+      "<b>2027 IG 공급 브릿지 (26E $2,100bn → 27E Base $2,150bn)</b>: M&A(-$79bn), 만기 차환 감소(-$58bn), Big 6 은행채 감소(-$21bn)가 공급을 $175bn 낮추지만, <b>자산 유동화 AI 딜(+$182bn)과 AI 인접 발행사(+$43bn)가 +$225bn을 더해 사상 최대인 $2.15조(+2%)</b> 달성 전망 (데이터센터 규제 심화 시 Bear $2.075조 vs 가속 시 Bull $2.225조).",
+      "<b>Big 5 하이퍼스케일러 CapEx $1.175조(+46%)와 조달 다변화</b>: 2026년 Big 5는 채권 $300bn(USD $207bn / Non-USD $93bn)과 주식 $134bn으로 CapEx($803bn)의 37%를 채권 조달함. 2027년에는 주식(Meta 1Q27 $60bn ATM 등)과 부외 구조물 활용으로 무담보채 조달 비중을 <b>30%(글로벌 $324bn: USD $200~225bn + 외화 ~$100bn)</b>로 낮출 전망(Oracle은 FY30까지 추가 조달 없음).",
+      "<b>가시화된 ~$120bn Chip 본드 테이크아웃 파이프라인</b>: Anthropic(~$63B, GOOGL TPU), OpenAI(>$50B, AVGO XPU), SpaceX(~$40B, NVDA GPU), CruxAI(~$22B, GOOGL TPU) 등 대형 AI 칩 딜들이 담보 품질과 잔존가치 보증을 바탕으로 단기 상각 구조의 IG 채권($150~200bn)으로 출회될 예정.",
+      "<b>선제 차환된 2027 만기 타워 vs 2028 TLAC 콜러블</b>: 2027년 원래 만기($917bn) 중 18%($161bn, 은행 콜러블 $150bn)가 이미 2026년에 상환되어 27년 잔여 만기는 $756bn으로 가벼움. 대신 <b>2028년 만기 도래하는 은행 콜러블 $263bn(Big 6 $129bn)이 2027년에 대거 리파이낸싱</b>될 전망."
+    ]
+  },
+  {
     id: "BARC",
     name: "Barclays",
     authors: "Dominique Toublan · Corry Short · Lea Overby 외 (11/19)",
     stance: "bull",
     stanceLabel: "보합~축소 (IG·Performing HY 롱)",
-    igTarget: "~85~90bp (보합~소폭 축소)",
-    hyTarget: "~310~320bp (CCC 제외 캐리)",
-    igSupply: "Gross $2,100bn (+11%) / Net $1,190bn (+23%)",
-    aiView: "무담보 IG 하이퍼스케일러 발행은 한계 근접(보합), 칩·DC·네오클라우드·사모로 분산. 10Y+ 발행은 +5%($360bn)뿐",
-    strat: "US IG: 롱 캐리·저평가 종목·장기 스프레드 듀레이션 선호, 경기민감(Cyclicals) UW, AI는 발행사/만기 선별 · US HY: 캐리 선호, CCC 부실 및 듀레이션 리스크 회피 · MBS: 2H27 순공급 ~0 수혜",
-    quote: "“Use dispersion in credit to find opportunity: 기록적 공급에도 단기 편중과 국채·MBS 축소가 장기 듀레이션을 지지한다”",
+    gross27: "US IG $2,100bn (+11%) / 기업채 합계 $2,970bn (+10%)",
+    net27: "US IG 순발행 $1,190bn (+23%) / 기업채 합계 순발행 $1,365bn (+14%)",
+    aiSupply: "무담보 IG 하이퍼스케일러 발행은 한계 근접(보합), 칩·DC·네오클라우드·사모로 분산. 10Y+ 발행은 +5%($360bn)뿐",
+    maBank: "미국 은행채 ~$295bn (+15%) · 유틸리티 ~$170bn (+21%) · 1~5Y 단기 발행 +13% 편중",
+    strat: "US IG: 롱 캐리·저평가 종목·장기 스프레드 듀레이션 선호, 경기민감(Cyclicals) UW, AI는 발행사/만기 선별 · US HY($400bn Gross): 캐리 선호, CCC(OAS의 26%) 및 듀레이션 리스크 회피 · MBS: 2H27 순공급 ~0 수혜",
+    quote: "“Use dispersion in credit to find opportunity: 기록적 기업채 공급에도 1~5Y 단기 편중과 국채·MBS 듀레이션 축소가 장기 크레딧을 지지한다”",
     points: [
-      "<b>실질금리 급등을 이겨낸 펀더멘털</b>: 2026년 실질금리 상승과 주식 변동성에도 US IG(~90bp)와 HY(~320bp)는 탄탄한 명목 성장과 기업이익(27년 SPX EPS $434, +15%) 덕에 강세 유지. 2027년에도 강한 이익이 스프레드를 압축하겠으나 취약한 대차대조표(CCC)는 고금리 타격을 받을 전망.",
-      "<b>사상 최대 기업채 공급($2.97조 Gross / $1.37조 Net)의 이면</b>: 2027년 IG 총발행 $2.10조(+11%)·순발행 $1.19조(+23%), HY 총발행 $400bn(+13%), 레버리지론 $470bn(+7%) 전망. 단, 고금리·스팁 커브·짧은 칩 수명주기 때문에 <b>IG 1~5년 발행이 +13% 늘어나는 반면 10년+ 장기 발행은 +5%($360bn, 비중 17%)</b>에 그침.",
-      "<b>AI 생태계 내 극심한 분산(Dispersion)</b>: AI 관련 크레딧은 대규모 발행 수요, 불확실한 잉여현금흐름(FCF), 전력망(Power) 및 인허가(Permits) 접근성 차이로 차주 간 격차가 확대. 비(非)AI 섹터에서는 <b>미국 은행($295bn, +15%)과 유틸리티($170bn, +21%)</b>가 공급 증가 주도.",
-      "<b>HY/Loan 차환 벽과 Securitized 순공급 급감(-22%)</b>: HY 액면의 26%가 3년 내 만기 도래해 차환($150~170bn)과 대출→채권 전환($80~100bn)이 주도하며, 액면 10.5%인 CCC가 HY OAS의 26%를 차지. 반면 유동화증권(Securitized) 순발행이 $426bn(-22%, 2H27 MBS 순공급 ~0)으로 줄고 국채 듀레이션도 -20% 감소해 전체 채권 수급 균형 유지."
+      "<b>실질금리 급등을 이겨낸 기업이익(+15%)</b>: 2026년 실질금리 상승에도 US IG(~90bp)와 HY(~320bp)는 탄탄한 명목 성장과 기업이익(27년 SPX EPS $434, +15%) 덕에 강세 유지. 2027년에도 강한 이익이 스프레드를 압축하겠으나 취약한 대차대조표(CCC)는 고금리 타격을 받을 전망.",
+      "<b>기업채 사상 최대 공급($2.97조 Gross / $1.37조 Net)과 만기 단기화</b>: 2027년 IG 총발행 $2.10조(+11%)·순발행 $1.19조(+23%), HY 총발행 $400bn(+13%), 레버리지론 $470bn(+7%) 전망. 단, 고금리·스팁 커브·짧은 칩 수명주기 때문에 <b>IG 1~5년 발행이 +13% 늘어나는 반면 10년+ 장기 발행은 +5%($360bn, 비중 17%)</b>에 그침.",
+      "<b>HY/Loan 차환 벽(3년 내 26% 만기)과 사모크레딧 역류</b>: HY 총발행($400bn)은 채권 차환($150~170bn)과 변동금리 대출→고정금리 채권 전환($80~100bn)이 주도하며, 액면 10.5%인 CCC가 HY OAS의 26%를 차지. 레버리지론($470bn)에서는 사모크레딧 대출 중 $10~20bn이 공모 BSL 시장으로 리파이낸싱되어 역류할 전망.",
+      "<b>전체 FICC 수급의 핵심 완충재 (Securitized -22% & UST 듀레이션 -20%)</b>: 유동화증권 순발행이 $426bn(-22%, 2H27 Agency MBS 순공급 ~0)으로 급감하고 미 국채 10Y 환산 듀레이션 공급도 -20% 줄어들어 미국 전체 채권(T-Bill 제외) 순공급은 $3.07조(-4%)로 감소."
     ]
   },
   {
@@ -538,12 +821,12 @@ const US_CREDIT_HOUSES = [
     name: "Goldman Sachs",
     authors: "Jan Hatzius · Dominic Wilson · GS Credit Strategy (11/12, 11/16)",
     stance: "bear",
-    stanceLabel: "확대 전망 (US HY 언더퍼폼)",
-    igTarget: "3m 90bp → 6m 95bp → 12m 105bp (+17bp)",
-    hyTarget: "3m 345bp → 6m 370bp → 12m 410bp (+90bp)",
-    igSupply: "글로벌 AI 부채 26년 YTD $687bn → 27년 추가 확대",
-    aiView: "AI 차입 물결(Borrowing wave) 지속으로 조달비용 상승 및 2027년 비(非)AI 기업 투자 구축효과(Crowd-out) 본격화",
-    strat: "US 크레딧보다 리스크 프리미엄 버퍼가 큰 유럽 크레딧(EUR IG 99→105bp, +6bp) 상대 선호 · US HY 언더퍼폼 대비 및 취약 차주(Tail of weaker borrowers) 리스크 헤지",
+    stanceLabel: "스프레드 확대 (US HY 언더퍼폼)",
+    gross27: "글로벌 AI 부채 26년 YTD $687bn (+주식 $115bn) → 27년 추가 확대",
+    net27: "비(非)AI 기업 투자 구축효과(Crowd-out) 및 차입 비용 상승 압력 가시화",
+    aiSupply: "AI 차입 물결(Borrowing wave) 지속 및 수익성 검증 국면 진입으로 크레딧 지수 전반의 스프레드 확대 압력",
+    maBank: "1998년식 연준 금리 인하 부재로 고금리 취약 차주(Tail of weaker borrowers) 부실 위험 상존",
+    strat: "12개월 타겟: USD IG 88→105bp (+17bp 확대) · USD HY 320→410bp (+90bp 확대, 언더퍼폼) · 리스크 프리미엄 버퍼가 큰 유럽 크레딧(EUR IG 99→105bp, +6bp) 상대 선호",
     quote: "“Wider Spreads in 2027: AI 차입 물결이 이어지고 1998년식 금리 인하가 없는 상황에서 미국 크레딧 스프레드는 확대 쪽으로 기울어 있다”",
     points: [
       "<b>명시적 스프레드 확대 타겟 제시 (11/11 기준)</b>: <b>Bloomberg USD IG</b>는 현재 88bp → 3개월 90bp → 6개월 95bp → <b>12개월(YE27) 105bp(+17bp)</b>로, <b>Bloomberg USD HY</b>는 현재 320bp → 3개월 345bp → 6개월 370bp → <b>12개월(YE27) 410bp(+90bp)</b>로 확대를 전망 (EM 하드커런시 소버린도 197bp → 240bp, +43bp 확대).",
@@ -553,50 +836,31 @@ const US_CREDIT_HOUSES = [
     ]
   },
   {
-    id: "WFS",
-    name: "Wells Fargo Securities (WFS)",
-    authors: "WFS IG Syndicate · Marcus Jennings · Angelo Manolatos (11/19)",
-    stance: "mix",
-    stanceLabel: "중립~경계 (장기 IG 공급 최대)",
-    igTarget: "장기 크레딧 듀레이션 공급 부담 경계",
-    hyTarget: "AI 성장 둔화 시 주식·크레딧 동반 조정 리스크",
-    igSupply: "Gross $2,250bn (하이퍼스케일러 ~$250bn)",
-    aiView: "하이퍼스케일러 발행이 26년 $230bn → 27년 ~$250bn으로 증가하며, 기초자산 특성에 맞춰 ‘장기물(Long-dated)’ 위주로 발행해 듀레이션 부담 가중",
-    strat: "Big 5 하이퍼스케일러의 장기 고정금리 채권 발행이 장기 금리 및 기간프리미엄을 자극하는 요인임을 감안 · 반면 미 재무부의 10~30Y 바이백(총발행의 43%) 및 은행 국채 매수(+$160bn, eSLR 완화)로 초장기 국채 스왑스프레드(UST 강세) 매수 추천",
-    quote: "“Competing Duration Supply: 2027년 US IG 총발행 $2.25조(하이퍼스케일러 $250bn), Big 5 딜의 규모와 만기가 동시에 길어지고 있다”",
-    points: [
-      "<b>월가 최고 수준의 2027 US IG 발행 전망 ($2.25조)</b>: WFS IG 신디케이트 팀은 2027년 미국 IG 총발행이 <b>$2.25조</b>(Barclays 전망 $2.10조 상회)에 달하고, 이 중 하이퍼스케일러 발행이 2026년 추정 $230bn에서 <b>2027년 ~$250bn</b>으로 추가 증가할 것으로 전망.",
-      "<b>Barclays와 정반대인 ‘장기 듀레이션 풋프린트’ 진단</b>: 단기·벨리 편중을 예상한 Barclays와 달리, WFS는 하이퍼스케일러들이 장기 인프라 투자(데이터센터·전력)의 자산 수명에 맞춰 <b>장기 만기 고정금리 부채(Long-maturity debt)를 선호</b>하며 2026년 Big 5 USD 고정금리 딜의 규모와 평균 듀레이션이 급격히 확대되었음을 실증(Fig 10, 11).",
-      "<b>국채 vs 하이퍼스케일러 채권 경합</b>: 투자자들이 국채를 팔고 하이퍼스케일러 채권으로 교체했다는 직접적 증거는 혼재되어 있으나, 연간 $250bn 규모의 장기 빅테크 회사채는 채권시장의 핵심 경쟁 듀레이션 공급원으로서 기간프리미엄과 명목 성장을 동시에 밀어 올림.",
-      "<b>AI 하방 시나리오에서의 크레딧-금리 피드백</b>: 만약 2027년 중 AI 수익성 우려가 커져 주식과 크레딧 스프레드가 의미 있게 흔들릴 경우, 역설적으로 하이퍼스케일러의 회사채 듀레이션 공급 전망이 축소되면서 미국채 장기물에는 강력한 강세 요인으로 작동."
-    ]
-  },
-  {
     id: "ING_CITI_MS",
     name: "ING · Citi · Morgan Stanley",
     authors: "Padhraic Garvey(ING) · Nathan Sheets(Citi) · Seth Carpenter(MS)",
     stance: "neu",
     stanceLabel: "구축효과 & 저축풀 경쟁 경계",
-    igTarget: "AI 회사채 누적에 따른 크레딧·금리 구축효과 주의",
-    hyTarget: "고금리 장기화로 한계기업 리파이낸싱 부담 가중",
-    igSupply: "글로벌 AI Capex 27년 $1.6조(MS) → 30년 $3.5조+(Citi)",
-    aiView: "2027년은 AI 회사채 발행 압력이 생산성 향상 호재를 압도(Eclipse)하기 시작하는 해(ING) · 전력망·유권자 반발이 데이터센터 크레딧의 핵심 변수(Citi)",
-    strat: "크레딧 시장의 과도한 레버리지 Capex 및 전력·인허가 병목 노출 차주 비중 축소 · 금리 커브 중간 구간(5Y Belly)을 통해 장기 공급 리스크 회피",
+    gross27: "하이퍼스케일러 CapEx 27년 $1.6조 → 28년 $1.8조 (MS)",
+    net27: "미 국채($2조+) · 해외 국채($1조+) · AI CapEx가 글로벌 저축풀 경합 (Citi)",
+    aiSupply: "2027년은 AI 회사채 발행 압력이 생산성 향상 호재를 압도(Eclipse)하기 시작하는 변곡점 (ING)",
+    maBank: "전력망 병목·전기요금 급등 및 유권자 반발(지지율 <30%)로 데이터센터 인허가 리스크 부상 (Citi)",
+    strat: "크레딧 시장 내 과도한 레버리지 CapEx 및 전력·인허가 병목 노출 차주 비중 축소 · 금리 커브 중간 구간(5Y Belly)을 통해 장기 공급 리스크 회피",
     quote: "“Crowding-Out & Savings Pool: 2027년은 AI 부채 발행 압력이 생산성 호재를 압도할 위험이 있는 변곡점이다”",
     points: [
       "<b>ING — ‘좋은 요인(AI 생산성)’을 잠식하는 ‘AI 채권 발행 압력’</b>: 2026년 막대한 AI 회사채 발행이 시작됐으나 2027년에도 그 기세가 꺾이지 않을 전망. 2027년의 핵심 뉘앙스는 <b>AI 관련 채권 발행 압력이 AI 생산성 향상 효과를 압도(Eclipse)하며 시장 전체의 구축효과(Crowding-out)를 유발</b>할 수 있다는 점.",
-      "<b>Citi — 글로벌 저축풀(Savings Pool) 경쟁과 정치적 역풍</b>: 미 국채(연 $2조+)·선진국 국채(연 $1조+)와 함께 글로벌 AI Capex(2030년 $3.5조+)가 한정된 글로벌 저축풀을 흡수하며 장기 조달 금리를 구조적으로 높임. 특히 전력망 부담·전기요금 급등으로 현 속도 AI 개발에 대한 미국 유권자 지지율이 30% 미만(WSJ 조사)으로 추락한 점이 데이터센터 크레딧의 잠재 리스크.",
-      "<b>Morgan Stanley — 하이퍼스케일러 Capex $1.6조(27년)→$1.8조(28년)와 증가율 둔화</b>: 명목 하이퍼스케일러 Capex 자체는 거대하나 연간 증가율은 2027~2028년 급격히 둔화. 만약 완만한 크레딧 침체(Modest credit downturn)가 발생할 경우 설비투자와 고용 둔화를 증폭시킬 수 있음."
+      "<b>Citi — 글로벌 저축풀(Savings Pool) 경쟁과 정치적 역풍</b>: 미 국채(연 $2조+)·선진국 국채(연 $1조+)와 함께 글로벌 AI CapEx(2030년 $3.5조+)가 한정된 글로벌 저축풀을 흡수하며 장기 조달 금리를 구조적으로 높임. 특히 전력망 부담·전기요금 급등으로 현 속도 AI 개발에 대한 미국 유권자 지지율이 30% 미만(WSJ 조사)으로 추락한 점이 데이터센터 크레딧의 잠재 리스크.",
+      "<b>Morgan Stanley — 하이퍼스케일러 CapEx $1.6조(27년)→$1.8조(28년)와 증가율 둔화</b>: 명목 하이퍼스케일러 CapEx 자체는 거대하나 연간 증가율은 2027~2028년 급격히 둔화. 만약 완만한 크레딧 침체(Modest credit downturn)가 발생할 경우 설비투자와 고용 둔화를 증폭시킬 수 있음."
     ]
   }
 ];
 
 // KPI 렌더링
 const KPI_ITEMS = [
-  { k: "2027 US IG 총발행 / 순발행", v: "$2.10~2.25T", d: "순발행 $1.19조 (+23% YoY, 만기 $910bn 정체)", cls: "up" },
-  { k: "2027 미국 기업채 총발행 합계", v: "$2.97T", d: "순발행 $1.37조 (+14% YoY, IG+HY+레버리지론)", cls: "up" },
-  { k: "US IG OAS 전망 (현재 88~90bp)", v: "90 vs 105bp", d: "Barclays 보합·축소 vs GS 12m 105bp(+17bp) 확대", cls: "up" },
-  { k: "US HY OAS 전망 (현재 320bp)", v: "320 vs 410bp", d: "Barclays 캐리 롱(CCC 회피) vs GS 410bp(+90bp)", cls: "up" }
+  { k: "2027 US IG 총발행 컨센서스", v: "$2.10~2.15T", d: "WFS $2.15T · JPM/Barclays $2.10T vs BofA $1.90T(Ex-GPU)", cls: "up" },
+  { k: "2027 US IG 순발행 / Net-Net", v: "$1.06T / $508B", d: "만기 $1.04T + 쿠폰 $556B($1.59T 환류) 차감 후 Net-Net $508B(JPM)", cls: "dn" },
+  { k: "2027 AI · Tech IG 공급 비중", v: "30% ($612~650B)", d: "JPM AI $450B(TMT $612B, 순발행의 50%) · WFS Tech $650B(+54%)", cls: "up" },
+  { k: "US IG / HY OAS 전망 (현재 89/320)", v: "횡보 vs 105/410", d: "BofA·Barclays 박스권/축소 vs GS 12m IG 105bp·HY 410bp 확대", cls: "up" }
 ];
 document.getElementById("kpis").innerHTML = KPI_ITEMS.map(item => `
   <div class="kpi">
@@ -611,10 +875,10 @@ document.getElementById("houseTbody").innerHTML = US_CREDIT_HOUSES.map(h => `
   <tr>
     <td><span class="who">${h.name}</span><span class="an">${h.authors}</span></td>
     <td><span class="pill ${h.stance}">${h.stanceLabel}</span></td>
-    <td class="n">${h.igTarget}</td>
-    <td class="n">${h.hyTarget}</td>
-    <td class="n">${h.igSupply}</td>
-    <td>${h.aiView}</td>
+    <td class="n">${h.gross27}</td>
+    <td class="n">${h.net27}</td>
+    <td>${h.aiSupply}</td>
+    <td>${h.maBank}</td>
     <td>${h.strat}</td>
   </tr>
 `).join("");
@@ -633,31 +897,183 @@ document.getElementById("whyGrid").innerHTML = US_CREDIT_HOUSES.map(h => `
   </article>
 `).join("");
 
-// 인터랙티브 SVG 차트
+// 인터랙티브 SVG 차트 (4개 탭)
 const svg = document.getElementById("mainChart");
 const legendEl = document.getElementById("chartLegend");
 const noteEl = document.getElementById("chartNote");
+
+function drawIgCompareChart() {
+  legendEl.innerHTML = `
+    <span><i class="sw" style="background:var(--accent)"></i>2027E 총발행 Gross ($bn)</span>
+    <span><i class="sw" style="background:var(--bull)"></i>2027E 순발행 Net ($bn)</span>
+    <span><i class="sw" style="background:var(--purple)"></i>2027E Net-Net (쿠폰 $556bn 차감 후)</span>
+    <span><i class="sw" style="background:var(--now)"></i>2026E 기준선</span>
+  `;
+  noteEl.textContent = "단위: $bn (십억 달러) · 4대 IB(WFS · Barclays · J.P. Morgan · BofA)의 2027년 미국 투자등급(US IG) 회사채 발행 전망 비교";
+
+  const items = [
+    { label: "WFS (Bull Case)", g26: 2100, g27: 2225, net: 1390, note: "Gross $2,225bn (+6% YoY, AI 유동화 딜 가속 시나리오)" },
+    { label: "WFS (Base Case)", g26: 2100, g27: 2150, net: 1394, note: "Gross $2,150bn (+2% YoY, 잔여 만기 $756bn 차감 기준)" },
+    { label: "Barclays (Base Case)", g26: 1900, g27: 2100, net: 1190, note: "Gross $2,100bn (+11% YoY) / Net $1,190bn (+23% YoY, 만기 $910bn)" },
+    { label: "J.P. Morgan (Base Case)", g26: 2000, g27: 2100, net: 1064, netnet: 508, note: "Gross $2,100bn (+5%) / Net $1,064bn (+13%) / Net-Net $508bn (쿠폰 $556bn 차감)" },
+    { label: "WFS (Bear Case)", g26: 2100, g27: 2075, net: 1319, note: "Gross $2,075bn (-1% YoY, 데이터센터 규제·지연 시나리오)" },
+    { label: "BofA (GPU 딜 포함 시)", g26: 2100, g27: 2025, net: 1025, note: "Gross ~$2,000~2,050bn (기본 $1.9T + 부외 GPU 파이낸싱 $100bn+ 합산 시)" },
+    { label: "BofA (Base, GPU 제외)", g26: 2100, g27: 1900, net: 900, note: "Gross $1,900bn (-10% YoY, M&A·은행채 정상화 및 EUR 발행 이동 반영)" }
+  ];
+
+  const W = 980, L = 195, R = 290, T = 32, GH = 56, B = 34;
+  const Ht = T + items.length * GH + B;
+  const maxVal = 2350;
+  const x = v => L + (v / maxVal) * (W - L - R);
+  svg.setAttribute("viewBox", `0 0 ${W} ${Ht}`);
+  svg.setAttribute("width", W);
+  svg.setAttribute("height", Ht);
+
+  let s = "";
+  for (let v = 0; v <= 2300; v += 500) {
+    s += `<line x1="${x(v)}" x2="${x(v)}" y1="${T - 10}" y2="${Ht - B + 4}" stroke="var(--line)" stroke-width="1"/>`;
+    s += `<text x="${x(v)}" y="${Ht - B + 20}" text-anchor="middle" font-size="11" fill="var(--muted)">$${v}bn</text>`;
+  }
+
+  items.forEach((it, i) => {
+    const y0 = T + i * GH;
+    s += `<text x="${L - 12}" y="${y0 + 25}" text-anchor="end" font-size="12.5" font-weight="700" fill="var(--fg)">${it.label}</text>`;
+    // Gross bar
+    s += `<rect x="${x(0)}" y="${y0 + 5}" width="${x(it.g27) - x(0)}" height="15" rx="3" fill="var(--accent)"/>`;
+    s += `<line x1="${x(it.g26)}" x2="${x(it.g26)}" y1="${y0 + 2}" y2="${y0 + 23}" stroke="var(--now)" stroke-width="2.5"><title>2026E $${it.g26}bn</title></line>`;
+    s += `<text x="${Math.max(x(it.g27), x(it.g26)) + 8}" y="${y0 + 17}" font-size="11.5" font-weight="600" fill="var(--fg)">$${it.g27.toLocaleString()}bn</text>`;
+    // Net bar
+    s += `<rect x="${x(0)}" y="${y0 + 23}" width="${x(it.net) - x(0)}" height="15" rx="3" fill="var(--bull)"/>`;
+    if (it.netnet) {
+      s += `<rect x="${x(0)}" y="${y0 + 23}" width="${x(it.netnet) - x(0)}" height="15" rx="3" fill="var(--purple)"/>`;
+    }
+    s += `<text x="${x(it.net) + 8}" y="${y0 + 35}" font-size="11" fill="var(--muted)">${it.note}</text>`;
+  });
+
+  svg.innerHTML = s;
+}
+
+function drawJpmSectorsChart() {
+  legendEl.innerHTML = `
+    <span><i class="sw" style="background:var(--accent)"></i>2027F 총발행 Gross ($bn, JPM)</span>
+    <span><i class="sw" style="background:var(--bull)"></i>2027F 순발행 Net ($bn, JPM)</span>
+    <span><i class="sw" style="background:var(--bear)"></i>전년비 총발행 증가 섹터 (+YoY)</span>
+  `;
+  noteEl.textContent = "단위: $bn (십억 달러) · 출처: J.P. Morgan 2027 US High Grade Issuance Forecast (Figure 8, 9, 10, 35) · Tech($423bn)와 Media($109bn)가 전체 순발행($1,064bn)의 50% 차지";
+
+  const secs = [
+    { name: "Technology (테크)", gross: 495, net: 423, yoy: "+28%", up: true },
+    { name: "Yankee Banks (양키 은행)", gross: 290, net: 90, yoy: "+11%", up: true },
+    { name: "US Banks (미국 은행)", gross: 235, net: 42, yoy: "-2%", up: false },
+    { name: "Utilities (유틸리티)", gross: 153, net: 90, yoy: "-1%", up: false },
+    { name: "Healthcare/Pharma (헬스케어)", gross: 129, net: 73, yoy: "-5%", up: false },
+    { name: "Media/Entertainment (미디어)", gross: 117, net: 109, yoy: "+7%", up: true },
+    { name: "Insurance (보험·FABN)", gross: 96, net: 39, yoy: "+7%", up: true },
+    { name: "Automotive (자동차)", gross: 79, net: -2, yoy: "-1%", up: false },
+    { name: "Telecoms (통신·주파수)", gross: 76, net: 54, yoy: "+77%", up: true },
+    { name: "Finance Companies (여전·BDC)", gross: 76, net: 24, yoy: "-5%", up: false },
+    { name: "Consumer (소비재·음식료)", gross: 72, net: 24, yoy: "-26%", up: false },
+    { name: "Capital Goods (자본재·방산)", gross: 71, net: 19, yoy: "-26%", up: false },
+    { name: "Energy (에너지·미드스트림)", gross: 62, net: 23, yoy: "-34%", up: false },
+    { name: "Transportation (철도·항공)", gross: 53, net: 27, yoy: "+75%", up: true },
+    { name: "Basic Industries (소재·화학)", gross: 39, net: 11, yoy: "-26%", up: false },
+    { name: "Property/REITs (리츠)", gross: 37, net: 16, yoy: "-1%", up: false },
+    { name: "Retail (유통·소매)", gross: 23, net: 1, yoy: "+51%", up: true }
+  ];
+
+  const W = 980, L = 210, R = 220, T = 28, RH = 30, B = 32;
+  const Ht = T + secs.length * RH + B;
+  const maxVal = 520;
+  const x = v => L + (Math.max(0, v) / maxVal) * (W - L - R);
+  svg.setAttribute("viewBox", `0 0 ${W} ${Ht}`);
+  svg.setAttribute("width", W);
+  svg.setAttribute("height", Ht);
+
+  let s = "";
+  for (let v = 0; v <= 500; v += 100) {
+    s += `<line x1="${x(v)}" x2="${x(v)}" y1="${T - 8}" y2="${Ht - B + 4}" stroke="var(--line)" stroke-width="1"/>`;
+    s += `<text x="${x(v)}" y="${Ht - B + 20}" text-anchor="middle" font-size="11" fill="var(--muted)">$${v}bn</text>`;
+  }
+
+  secs.forEach((sc, i) => {
+    const y = T + i * RH;
+    s += `<text x="${L - 10}" y="${y + 19}" text-anchor="end" font-size="12" font-weight="600" fill="var(--fg)">${sc.name}</text>`;
+    s += `<rect x="${x(0)}" y="${y + 5}" width="${x(sc.gross) - x(0)}" height="18" rx="3" fill="${sc.up ? 'var(--accent)' : 'var(--neutral)'}" opacity="0.85"/>`;
+    if (sc.net > 0) {
+      s += `<rect x="${x(0)}" y="${y + 9}" width="${x(sc.net) - x(0)}" height="10" rx="2" fill="var(--bull)"/>`;
+    }
+    s += `<text x="${x(sc.gross) + 8}" y="${y + 18}" font-size="11.5" fill="var(--muted)">Gross $${sc.gross}bn (${sc.yoy}) · Net $${sc.net}bn</text>`;
+  });
+
+  svg.innerHTML = s;
+}
+
+function drawAiBreakdownChart() {
+  legendEl.innerHTML = `
+    <span><i class="sw" style="background:var(--accent)"></i>WFS 2027E Tech IG $650bn 세부 구성</span>
+    <span><i class="sw" style="background:var(--purple)"></i>JPM 2027F AI IG $450bn 세부 구성</span>
+    <span><i class="sw" style="background:var(--teal)"></i>공개된 주요 AI Chip 딜 파이프라인 (Bank+Bonds)</span>
+  `;
+  noteEl.textContent = "단위: $bn (십억 달러) · 출처: Wells Fargo IG DCM 2027 Outlook (Pages 4-5) 및 J.P. Morgan 2027 US HG Issuance Forecast (Page 9)";
+
+  const items = [
+    { label: "[WFS] Big 5 하이퍼스케일러 무담보 (USD)", val: 215, col: "var(--accent)", desc: "$200~225bn (+4% YoY, 비달러 ~$100bn 별도)" },
+    { label: "[WFS] 부외(Off-B/S) Chip 담보부 딜", val: 175, col: "var(--accent)", desc: "$150~200bn (가시적 IG 본드 테이크아웃 ~$120bn)" },
+    { label: "[WFS] 기타 일반 Tech (Other Tech)", val: 100, col: "var(--accent)", desc: "~$100bn (-20% YoY)" },
+    { label: "[WFS] AI 인접 & 신규 IG 진입 (NVDA·SPCX 등)", val: 85, col: "var(--accent)", desc: "$75~100bn (+70% YoY)" },
+    { label: "[WFS] 데이터센터 프로젝트 본드 (DC Bonds)", val: 75, col: "var(--accent)", desc: "$50~100bn (+76% YoY, 가시적 파이프라인 $50~60bn)" },
+    { label: "[JPM] 하이퍼스케일러 (Tech $135B + Media $90B)", val: 225, col: "var(--purple)", desc: "$225bn (-3% YoY vs 26년 $232bn, 자체 차입은 정점 통과)" },
+    { label: "[JPM] 데이터센터 & GPU 파이낸싱", val: 225, col: "var(--purple)", desc: "$225bn (+436% YoY vs 26년 $42bn, 5~7Y 단기 구조 중심)" },
+    { label: "[Chip 딜] Anthropic (GOOGL TPU)", val: 63, col: "var(--teal)", desc: "~$63bn (스폰서: Broadcom / Blackstone)" },
+    { label: "[Chip 딜] OpenAI (AVGO XPU)", val: 50, col: "var(--teal)", desc: ">$50bn (스폰서: Apollo / Blackstone)" },
+    { label: "[Chip 딜] SpaceX (NVDA GPU)", val: 40, col: "var(--teal)", desc: "~$40bn (스폰서: Apollo)" },
+    { label: "[Chip 딜] CruxAI (GOOGL TPU) + Amazon", val: 30, col: "var(--teal)", desc: "CruxAI ~$22bn (BX/GOOGL) + Amazon ~$8bn (NVDA GPU)" }
+  ];
+
+  const W = 980, L = 265, R = 290, T = 28, RH = 33, B = 32;
+  const Ht = T + items.length * RH + B;
+  const maxVal = 250;
+  const x = v => L + (v / maxVal) * (W - L - R);
+  svg.setAttribute("viewBox", `0 0 ${W} ${Ht}`);
+  svg.setAttribute("width", W);
+  svg.setAttribute("height", Ht);
+
+  let s = "";
+  for (let v = 0; v <= 250; v += 50) {
+    s += `<line x1="${x(v)}" x2="${x(v)}" y1="${T - 8}" y2="${Ht - B + 4}" stroke="var(--line)" stroke-width="1"/>`;
+    s += `<text x="${x(v)}" y="${Ht - B + 20}" text-anchor="middle" font-size="11" fill="var(--muted)">$${v}bn</text>`;
+  }
+
+  items.forEach((it, i) => {
+    const y = T + i * RH;
+    s += `<text x="${L - 10}" y="${y + 20}" text-anchor="end" font-size="12" font-weight="600" fill="var(--fg)">${it.label}</text>`;
+    s += `<rect x="${x(0)}" y="${y + 6}" width="${x(it.val) - x(0)}" height="18" rx="4" fill="${it.col}"/>`;
+    s += `<text x="${x(it.val) + 8}" y="${y + 19}" font-size="11.5" fill="var(--muted)">${it.desc}</text>`;
+  });
+
+  svg.innerHTML = s;
+}
 
 function drawSpreadChart() {
   legendEl.innerHTML = `
     <span><i class="sw" style="border:2px solid var(--accent);background:var(--surface)"></i>현재 스프레드 (2026.11, bp)</span>
     <span><i class="sw" style="background:var(--purple)"></i>GS 3m / 6m 경로 (bp)</span>
     <span><i class="sw" style="background:var(--bear)"></i>GS 12m (4Q27) 확대 타겟</span>
-    <span><i class="sw" style="background:var(--bull)"></i>Barclays 2027 타겟 범위 (보합~축소)</span>
+    <span><i class="sw" style="background:var(--bull)"></i>BofA · Barclays 타겟 범위 (박스권~축소)</span>
   `;
-  noteEl.textContent = "단위: bp (OAS 기준) · 출처: Goldman Sachs (Global Economics Analyst, 11/12 Appendix) 3m·6m·12m 명시적 전망치 및 Barclays (Global Outlook, 11/19) 전략 뷰 비교";
+  noteEl.textContent = "단위: bp (OAS 기준) · 출처: BofA (11/13, 현재 89bp 박스권), Barclays (11/19, 보합~축소), Goldman Sachs (11/12, 3m·6m·12m 확대 타겟)";
 
   const rows = [
-    { label: "USD IG (Goldman Sachs)", cur: 88, m3: 90, m6: 95, m12: 105, col: "var(--bear)", desc: "88 → 90(3m) → 95(6m) → 105bp (+17bp 확대)" },
-    { label: "USD IG (Barclays)", cur: 90, m3: 88, m6: 86, m12: 85, col: "var(--bull)", desc: "90 → ~85~90bp (보합~소폭 축소, 장기 듀레이션 선호)" },
+    { label: "USD IG (BofA Range-bound)", cur: 89, m3: 90, m6: 88, m12: 89, col: "var(--bull)", desc: "현재 89bp (9/25 77bp) → 2027년 넓은 박스권 횡보 (5s10s 스팁)" },
+    { label: "USD IG (Barclays Tighter)", cur: 90, m3: 88, m6: 86, m12: 85, col: "var(--bull)", desc: "현재 ~90bp → 보합~소폭 축소 (장기 스프레드 듀레이션 롱)" },
+    { label: "USD IG (Goldman Sachs)", cur: 88, m3: 90, m6: 95, m12: 105, col: "var(--bear)", desc: "88 → 90(3m) → 95(6m) → 105bp (+17bp 확대, AI 구축효과)" },
     { label: "EUR IG (Goldman Sachs)", cur: 99, m3: 110, m6: 108, m12: 105, col: "var(--accent)", desc: "99 → 110(3m) → 108(6m) → 105bp (+6bp, US 대비 방어력 우위)" },
     { label: "EM Sovereign (GS Hard Ccy)", cur: 197, m3: 210, m6: 225, m12: 240, col: "var(--purple)", desc: "197 → 240bp (+43bp 확대)" },
     { label: "USD HY (Barclays Performing)", cur: 320, m3: 315, m6: 315, m12: 310, col: "var(--bull)", desc: "320 → ~310~320bp (Performing HY 캐리 지지, CCC는 회피)" },
-    { label: "USD HY (Goldman Sachs)", cur: 320, m3: 345, m6: 370, m12: 410, col: "var(--bear)", desc: "320 → 345(3m) → 370(6m) → 410bp (+90bp, 취약차주 부실로 언더퍼폼)" },
-    { label: "EUR HY (Goldman Sachs)", cur: 353, m3: 400, m6: 390, m12: 380, col: "var(--accent)", desc: "353 → 400(3m) → 390(6m) → 380bp (+27bp)" }
+    { label: "USD HY (Goldman Sachs)", cur: 320, m3: 345, m6: 370, m12: 410, col: "var(--bear)", desc: "320 → 345(3m) → 370(6m) → 410bp (+90bp, 취약차주 부실로 언더퍼폼)" }
   ];
 
-  const W = 980, L = 195, R = 285, T = 32, RH = 38, B = 34;
+  const W = 980, L = 205, R = 290, T = 32, RH = 38, B = 34;
   const Ht = T + rows.length * RH + B;
   const dom = [60, 430];
   const x = v => L + (v - dom[0]) / (dom[1] - dom[0]) * (W - L - R);
@@ -688,115 +1104,28 @@ function drawSpreadChart() {
   svg.innerHTML = s;
 }
 
-function drawFiccSupplyChart() {
-  legendEl.innerHTML = `
-    <span><i class="sw" style="background:var(--accent)"></i>2027E 총발행 Gross ($bn, Barclays)</span>
-    <span><i class="sw" style="background:var(--bull)"></i>2027E 순발행 Net ($bn, Barclays)</span>
-    <span><i class="sw" style="background:var(--now)"></i>2026 총발행 기준선</span>
-  `;
-  noteEl.textContent = "단위: $bn (십억 달러) · 출처: Barclays 2027 FICC Issuance (Figure 1 & Figure 6) 및 WFS IG Syndicate ($2,250bn) · 기업채 순발행 증가(+$165bn)를 국채 이표채(-$162bn) 및 유동화증권(-$122bn) 감소가 상쇄";
-
-  const items = [
-    { sec: "US IG (투자등급 회사채)", g26: 1900, g27: 2100, n27: 1190, note: "Gross +11% (WFS $2,250bn) / Net +23% (+$220bn)" },
-    { sec: "Securitized (MBS·ABS·CLO)", g26: 2407, g27: 2079, n27: 426, note: "Gross -14% / Net -22% (-$122bn, 2H27 MBS 순공급 ~0)" },
-    { sec: "US Treasury 이표채 (Net 비교)", g26: 1193, g27: 1031, n27: 1031, note: "이표채 대민 순발행 -14% (-$162bn, 10Y 듀레이션 -20%)" },
-    { sec: "Municipals (미국 지방채)", g26: 595, g27: 590, n27: 245, note: "Gross -1% / Net +2% (신규 인프라 조달 지속)" },
-    { sec: "Leveraged Loans (레버리지론)", g26: 438, g27: 470, n27: 75, note: "Gross +7% ($450~490bn, 차환 주도) / Net -12%" },
-    { sec: "US HY (하이일드 회사채)", g26: 350, g27: 400, n27: 100, note: "Gross +13% ($380~420bn, 3년내 26% 만기) / Net -31%" }
-  ];
-
-  const W = 980, L = 195, R = 275, T = 34, GH = 62, B = 34;
-  const Ht = T + items.length * GH + B;
-  const maxVal = 2500;
-  const x = v => L + (v / maxVal) * (W - L - R);
-  svg.setAttribute("viewBox", `0 0 ${W} ${Ht}`);
-  svg.setAttribute("width", W);
-  svg.setAttribute("height", Ht);
-
-  let s = "";
-  for (let v = 0; v <= 2500; v += 500) {
-    s += `<line x1="${x(v)}" x2="${x(v)}" y1="${T - 10}" y2="${Ht - B + 4}" stroke="var(--line)" stroke-width="1"/>`;
-    s += `<text x="${x(v)}" y="${Ht - B + 20}" text-anchor="middle" font-size="11" fill="var(--muted)">$${v}bn</text>`;
-  }
-
-  items.forEach((it, i) => {
-    const y0 = T + i * GH;
-    s += `<text x="${L - 12}" y="${y0 + 28}" text-anchor="end" font-size="12.5" font-weight="700" fill="var(--fg)">${it.sec}</text>`;
-    s += `<rect x="${x(0)}" y="${y0 + 6}" width="${x(it.g27) - x(0)}" height="16" rx="4" fill="var(--accent)"/>`;
-    s += `<line x1="${x(it.g26)}" x2="${x(it.g26)}" y1="${y0 + 3}" y2="${y0 + 25}" stroke="var(--now)" stroke-width="2.5"><title>2026 $${it.g26}bn</title></line>`;
-    s += `<text x="${Math.max(x(it.g27), x(it.g26)) + 8}" y="${y0 + 18}" font-size="11.5" font-weight="600" fill="var(--fg)">$${it.g27.toLocaleString()}bn (26년 $${it.g26.toLocaleString()}bn)</text>`;
-    s += `<rect x="${x(0)}" y="${y0 + 25}" width="${x(it.n27) - x(0)}" height="16" rx="4" fill="var(--bull)"/>`;
-    s += `<text x="${x(it.n27) + 8}" y="${y0 + 37}" font-size="11.5" fill="var(--muted)">Net $${it.n27.toLocaleString()}bn · ${it.note}</text>`;
-  });
-
-  svg.innerHTML = s;
-}
-
-function drawCorpMixChart() {
-  legendEl.innerHTML = `
-    <span><i class="sw" style="background:var(--accent)"></i>US IG 주요 섹터·만기별 공급 ($bn)</span>
-    <span><i class="sw" style="background:var(--purple)"></i>US HY 용도별 총발행 분해 ($bn)</span>
-    <span><i class="sw" style="background:var(--teal)"></i>Leveraged Loans 용도별 총발행 분해 ($bn)</span>
-  `;
-  noteEl.textContent = "단위: $bn (십억 달러) · 출처: Barclays US Credit Strategy (Dominique Toublan, Corry Short) 및 WFS IG Syndicate 2027 세부 추정치";
-
-  const items = [
-    { label: "[IG] 1~9Y 단기·벨리 발행 (Barclays)", val: 1740, col: "var(--accent)", desc: "$1,740bn (전체의 83%, 1~5Y +13% YoY 집중)" },
-    { label: "[IG] 10Y+ 장기 발행 (Barclays)", val: 360, col: "var(--accent)", desc: "$360bn (전체의 17%, +5% YoY에 그쳐 장기 부담 제한)" },
-    { label: "[IG] 미국 은행채 (US Banks)", val: 295, col: "var(--accent)", desc: "~$295bn (+15% YoY, 비AI 최대 공급원)" },
-    { label: "[IG] AI 하이퍼스케일러 (WFS)", val: 250, col: "var(--accent)", desc: "~$250bn (26년 $230bn 대비 확대, 칩·DC 사모 조달 별도)" },
-    { label: "[IG] 유틸리티·전력망 (Utilities)", val: 170, col: "var(--accent)", desc: "~$170bn (26년 $140bn 대비 +21% YoY 급증)" },
-    { label: "[HY] 채권 차환 (Bond-for-Bond Refi)", val: 160, col: "var(--purple)", desc: "$150~170bn (3년 내 지수 액면 26% 만기 도래)" },
-    { label: "[HY] 대출→채권 전환 (Bond-for-Loan)", val: 90, col: "var(--purple)", desc: "$80~100bn (변동금리 대출의 고정금리 채권 전환)" },
-    { label: "[HY] 설비투자·AI/DC (GCP/Capex)", val: 68, col: "var(--purple)", desc: "$55~80bn (AI·데이터센터 조달 포함)" },
-    { label: "[HY] M&A ($50~70bn) + LBO ($5~15bn)", val: 70, col: "var(--purple)", desc: "$55~85bn (고금리로 인수금융은 완만한 수준)" },
-    { label: "[Loan] 리파이낸싱 (BSL+A&E+사모전환)", val: 235, col: "var(--teal)", desc: "$220~250bn (사모크레딧→BSL 역류 $10~20bn 포함)" },
-    { label: "[Loan] M&A ($70~90bn) + LBO ($65~85bn)", val: 155, col: "var(--teal)", desc: "$135~175bn (스폰서 레버리지 제약으로 둔화)" },
-    { label: "[Loan] 배당/리캡 ($45bn) + Capex ($30bn)", val: 75, col: "var(--teal)", desc: "$60~90bn (맞춤형 데이터센터 딜은 사모크레딧 선호)" }
-  ];
-
-  const W = 980, L = 245, R = 290, T = 28, RH = 32, B = 32;
-  const Ht = T + items.length * RH + B;
-  const maxVal = 1800;
-  const x = v => L + (v / maxVal) * (W - L - R);
-  svg.setAttribute("viewBox", `0 0 ${W} ${Ht}`);
-  svg.setAttribute("width", W);
-  svg.setAttribute("height", Ht);
-
-  let s = "";
-  for (let v = 0; v <= 1800; v += 300) {
-    s += `<line x1="${x(v)}" x2="${x(v)}" y1="${T - 8}" y2="${Ht - B + 4}" stroke="var(--line)" stroke-width="${v % 600 === 0 ? 1 : 0.5}"/>`;
-    s += `<text x="${x(v)}" y="${Ht - B + 20}" text-anchor="middle" font-size="11" fill="var(--muted)">$${v}bn</text>`;
-  }
-
-  items.forEach((it, i) => {
-    const y = T + i * RH;
-    s += `<text x="${L - 10}" y="${y + 20}" text-anchor="end" font-size="12" font-weight="600" fill="var(--fg)">${it.label}</text>`;
-    s += `<rect x="${x(0)}" y="${y + 6}" width="${Math.max(4, x(it.val) - x(0))}" height="18" rx="4" fill="${it.col}"/>`;
-    s += `<text x="${x(it.val) + 8}" y="${y + 19}" font-size="11.5" fill="var(--muted)">${it.desc}</text>`;
-  });
-
-  svg.innerHTML = s;
-}
-
-const btnSpread = document.getElementById("tabSpread");
-const btnFiccSupply = document.getElementById("tabFiccSupply");
-const btnCorpMix = document.getElementById("tabCorpMix");
+const b1 = document.getElementById("tabIgCompare");
+const b2 = document.getElementById("tabJpmSectors");
+const b3 = document.getElementById("tabAiBreakdown");
+const b4 = document.getElementById("tabSpread");
 
 function selectTab(tab) {
-  btnSpread.setAttribute("aria-pressed", tab === "spread");
-  btnFiccSupply.setAttribute("aria-pressed", tab === "ficc");
-  btnCorpMix.setAttribute("aria-pressed", tab === "mix");
-  if (tab === "spread") drawSpreadChart();
-  else if (tab === "ficc") drawFiccSupplyChart();
-  else drawCorpMixChart();
+  b1.setAttribute("aria-pressed", tab === "ig");
+  b2.setAttribute("aria-pressed", tab === "sec");
+  b3.setAttribute("aria-pressed", tab === "ai");
+  b4.setAttribute("aria-pressed", tab === "sp");
+  if (tab === "ig") drawIgCompareChart();
+  else if (tab === "sec") drawJpmSectorsChart();
+  else if (tab === "ai") drawAiBreakdownChart();
+  else drawSpreadChart();
 }
 
-btnSpread.onclick = () => selectTab("spread");
-btnFiccSupply.onclick = () => selectTab("ficc");
-btnCorpMix.onclick = () => selectTab("mix");
+b1.onclick = () => selectTab("ig");
+b2.onclick = () => selectTab("sec");
+b3.onclick = () => selectTab("ai");
+b4.onclick = () => selectTab("sp");
 
-drawSpreadChart();
+drawIgCompareChart();
 </script>
 </body>
 </html>
