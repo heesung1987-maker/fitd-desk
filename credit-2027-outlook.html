@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>2027 크레딧(원화·글로벌) 연간전망 종합</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#f5f7fa; --surface:#ffffff; --fg:#142030; --muted:#5a6779; --line:#dbe1e9; --soft:#eaeef4;
+  --accent:#1d5bb8; --accent-soft:#e6effc;
+  --bull:#11805a; --bull-soft:#e1f2ea;
+  --bear:#c2410c; --bear-soft:#fbe9df;
+  --neutral:#4b5563; --neutral-soft:#eceff3;
+  --now:#b8860b; --purple:#6d28d9; --purple-soft:#f1ebfe;
+  --teal:#0d9488; --teal-soft:#ccfbf1;
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f141b; --surface:#161d27; --fg:#e4e9f0; --muted:#97a3b4; --line:#2a3442; --soft:#1d2531;
+  --accent:#6ea2ef; --accent-soft:#192a42;
+  --bull:#4cc596; --bull-soft:#15302a;
+  --bear:#f08a5d; --bear-soft:#3a2219;
+  --neutral:#a1abb9; --neutral-soft:#232b36;
+  --now:#e3b341; --purple:#a78bfa; --purple-soft:#281e46;
+  --teal:#2dd4bf; --teal-soft:#133836;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0f141b; --surface:#161d27; --fg:#e4e9f0; --muted:#97a3b4; --line:#2a3442; --soft:#1d2531;
+  --accent:#6ea2ef; --accent-soft:#192a42;
+  --bull:#4cc596; --bull-soft:#15302a;
+  --bear:#f08a5d; --bear-soft:#3a2219;
+  --neutral:#a1abb9; --neutral-soft:#232b36;
+  --now:#e3b341; --purple:#a78bfa; --purple-soft:#281e46;
+  --teal:#2dd4bf; --teal-soft:#133836;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--fg); font-family:var(--f-body);
+  font-size:14.5px; line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:32px 64px;
+}
+.wrap{max-width:1140px;margin:0 auto;display:flex;flex-direction:column;gap:34px}
+h1,h2,h3,h4{text-wrap:balance;margin:0;line-height:1.3}
+h1{font-size:29px;font-weight:700;letter-spacing:-.015em}
+h2{font-size:19.5px;font-weight:700;display:flex;align-items:center;gap:8px}
+h3{font-size:15px;font-weight:600}
+p{margin:0}
+.eyebrow{font-size:12px;letter-spacing:.06em;color:var(--accent);font-weight:700;text-transform:uppercase}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+header{display:flex;flex-direction:column;gap:10px;border-bottom:1px solid var(--line);padding-bottom:20px}
+.hdr-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.badge-draft{font-size:12px;font-weight:600;background:var(--accent-soft);color:var(--accent);padding:4px 10px;border-radius:6px;border:1px solid var(--line)}
+header .meta{color:var(--muted);font-size:13.5px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+header .context-bar{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 18px}
+header .context-bar b{color:var(--fg)}
+
+section{display:flex;flex-direction:column;gap:14px}
+.sec-sub{font-size:13px;color:var(--muted);margin-top:-8px}
+
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:13px 16px;display:flex;flex-direction:column;gap:3px}
+.kpi .k{font-size:12px;color:var(--muted);font-weight:600}
+.kpi .v{font-family:var(--f-mono);font-size:22.5px;font-weight:700}
+.kpi .d{font-size:12px;font-family:var(--f-mono);color:var(--muted)}
+.up{color:var(--bear)} .dn{color:var(--bull)}
+@media (max-width:780px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.keys{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0;padding:0;list-style:none}
+@media (max-width:780px){.keys{grid-template-columns:1fr}}
+.keys li{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 15px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.keys .t{font-size:12px;color:var(--accent);font-weight:700}
+.keys .b{font-weight:600;font-size:14.5px}
+.keys .desc{font-size:13px;color:var(--muted)}
+
+.chartcard{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--soft)}
+.seg button{font:inherit;font-size:13px;font-weight:600;border:0;background:transparent;color:var(--muted);padding:6px 14px;cursor:pointer;transition:all .15s}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{display:inline-block;width:10px;height:10px;border-radius:50%}
+.scroll{overflow-x:auto}
+svg text{font-family:var(--f-body)}
+.note{font-size:12px;color:var(--muted)}
+
+table{border-collapse:collapse;width:100%;min-width:860px;font-size:13px}
+th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11.5px;color:var(--muted);font-weight:700;background:var(--soft);position:sticky;top:0;white-space:nowrap}
+td.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td .who{font-weight:700;font-size:14px}
+td .an{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+.tablebox{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow-x:auto}
+
+.pill{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.pill.bull{background:var(--bull-soft);color:var(--bull)}
+.pill.bear{background:var(--bear-soft);color:var(--bear)}
+.pill.neu{background:var(--neutral-soft);color:var(--neutral)}
+.pill.mix{background:var(--purple-soft);color:var(--purple)}
+
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.grid3,.grid2{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:15px 17px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.panel ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:5px;font-size:13.5px}
+.panel .sub{font-size:12.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px;margin-top:auto}
+.split{display:flex;flex-direction:column;gap:8px}
+.split .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.split .lab{font-size:12px;font-weight:700;min-width:92px;font-family:var(--f-mono)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12px;border:1px solid var(--line);border-radius:5px;padding:2px 8px;background:var(--soft);font-weight:500}
+.chip .num{color:var(--muted);margin-left:4px;font-size:11.5px}
+
+dl.kv{margin:0;display:grid;grid-template-columns:auto 1fr;gap:7px 14px;font-size:13.5px}
+dl.kv dt{font-weight:700;white-space:nowrap;color:var(--fg)}
+dl.kv dd{margin:0;min-width:0;color:var(--fg)}
+
+table.dt{min-width:680px;font-size:13px}
+table.dt td:first-child{font-weight:700;white-space:nowrap;width:14%}
+table.dt th.pos{color:var(--bull)} table.dt th.neg{color:var(--bear)}
+table.dt td:nth-child(2),table.dt td:nth-child(3){width:43%}
+.consensus{font-size:13.5px;background:var(--soft);border-left:3px solid var(--accent);border-radius:4px;padding:9px 13px}
+.consensus b{margin-right:6px;color:var(--accent)}
+
+.whygrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.whygrid{grid-template-columns:1fr}}
+.why{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--neutral);border-radius:8px;padding:15px 18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.why.bull{border-left-color:var(--bull)}
+.why.bear{border-left-color:var(--bear)}
+.why.mix{border-left-color:var(--purple)}
+.why .hd{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:8px}
+.why .hd .who{font-weight:700;font-size:16px}
+.why .hd .an{font-size:12px;color:var(--muted)}
+.why .hd .pill{margin-left:auto}
+.why .v{font-weight:700;font-size:14.5px;color:var(--accent)}
+.why ul{margin:0;padding-left:18px;font-size:13.2px;display:flex;flex-direction:column;gap:4px}
+.why .s{font-size:12.8px;background:var(--soft);padding:8px 11px;border-radius:6px;margin-top:auto}
+.why .s b{color:var(--fg);font-weight:700;margin-right:6px}
+
+.notes{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line);padding-top:16px}
+.notes ul{margin:0;padding-left:18px}
+
+.desk-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 14px;margin-bottom:-12px}
+.desk-nav .nav-left,.desk-nav .nav-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.desk-nav a,.desk-nav button{font:inherit;font-size:12.5px;font-weight:600;color:var(--muted);text-decoration:none;padding:5px 11px;border-radius:6px;border:1px solid transparent;background:transparent;cursor:pointer;transition:all .15s}
+.desk-nav a:hover,.desk-nav button:hover{background:var(--soft);color:var(--fg)}
+.desk-nav a.back{color:var(--fg);border-color:var(--line);background:var(--soft)}
+.desk-nav a.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.desk-nav .sep{width:1px;height:18px;background:var(--line);margin:0 2px}
+
+.print-only{display:none}
+@page{size:A4;margin:10mm}
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  :root{--bg:#ffffff}
+  body{font-size:10.5px;padding:0;background:#ffffff}
+  .wrap{gap:16px;max-width:none}
+  h1{font-size:22px} h2{font-size:15px}
+  h2{break-after:avoid}
+  .seg,.desk-nav{display:none}
+  .print-only{display:block}
+  svg{width:100%;height:auto}
+  .scroll,.tablebox{overflow:visible}
+  table{min-width:0;font-size:9px}
+  th,td{padding:4px 5px}
+  th{position:static}
+  .kpi,.panel,.keys li,tr,.why{break-inside:avoid}
+  .chart-sec,.supply-sec,.why-sec{break-before:page}
+}
+</style>
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('fitd-theme');
+    if (saved === 'dark' || saved === 'slate') document.documentElement.setAttribute('data-theme', 'dark');
+    else if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  } catch (e) {}
+})();
+function toggleOutlookTheme() {
+  var cur = document.documentElement.getAttribute('data-theme');
+  var isDark = cur === 'dark' || (!cur && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  var next = isDark ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('fitd-theme', next); } catch (e) {}
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="desk-nav" aria-label="FITD 데스크 및 연간전망 내비게이션">
+  <div class="nav-left">
+    <a href="./index.html#rv" class="back">← FITD Trading Desk</a>
+    <span class="sep"></span>
+    <a href="./krw-2027-outlook.html">🇰🇷 원화 (KRW)</a>
+    <a href="./ust-2027-outlook.html">🇺🇸 미국 (UST)</a>
+    <a href="./credit-2027-outlook.html" class="active">🏢 크레딧 (Credit)</a>
+  </div>
+  <div class="nav-right">
+    <button type="button" onclick="toggleOutlookTheme()">☀️/🌙 테마 전환</button>
+    <button type="button" onclick="window.print()">🖨️ 인쇄 / PDF</button>
+  </div>
+</nav>
+
+<header>
+  <div class="hdr-top">
+    <span class="eyebrow">국내 증권사 11곳 & 해외 IB 크레딧 전망 종합 · 원화 크레딧 · US IG/HY · 글로벌 수급</span>
+    <span class="badge-draft">2027 Credit Outlook · 실시간 연동</span>
+  </div>
+  <h1>2027 크레딧(원화·글로벌) 연간전망</h1>
+  <div class="meta">
+    <span>기준일: <b class="num">2026.11.19</b></span>
+    <span>회사채 AA- (3Y) <b class="num">67~69bp</b></span>
+    <span>여전채 AA- (3Y) <b class="num">70~75bp</b></span>
+    <span>은행채 AAA (3Y) <b class="num">37~40bp</b></span>
+    <span>공사채 AAA (3Y) <b class="num">36~37bp</b></span>
+    <span>US IG OAS <b class="num">~90bp</b></span>
+    <span>US HY OAS <b class="num">~320bp</b></span>
+  </div>
+  <div class="context-bar">
+    <span><b>원화 크레딧 배경:</b> 1Q27 기준금리 인상 종료(3.50%) 인식과 함께 416조원 규모 ‘반도체 머니’·퇴직연금·투신 캐리 자금 유입으로 3Q27까지 스프레드 축소(전강후약) 컨센서스, 단 하나증권은 공급·고금리 부담에 따른 확대 전망</span>
+    <span><b>글로벌(US) 크레딧 배경:</b> 2027년 미국 회사채 총발행 $2.97조(IG $2.10~2.25조, 하이퍼스케일러 ~$250bn)로 사상 최대 경신 예상이나, 1~5년 단기·벨리 집중 및 MBS 순공급 감소(-22%)가 장기 듀레이션 부담을 완충</span>
+  </div>
+</header>
+
+<section>
+  <h2>핵심 요약</h2>
+  <div class="kpis" id="kpis"></div>
+  <ul class="keys">
+    <li>
+      <span class="t">원화 크레딧 방향성 & 경로</span>
+      <span class="b">인상 종료 확인 후 캐리 강세 (3Q 저점 → 4Q 소폭 재확대, ‘전강후약’)</span>
+      <span class="desc">다수 하우스(NH·신한·SK·신영·한화·메리츠·BNK)가 4Q27 회사채 AA- 50~62bp로의 축소를 전망. 연초 기관 자금 집행과 금리 고점 인식이 맞물려 3Q까지 강세를 보인 뒤 연말 북클로징으로 소폭 되돌림. <b>하나증권만 연초효과 후 약세(확대)</b>를 경고.</span>
+    </li>
+    <li>
+      <span class="t">원화 섹터별 상대가치</span>
+      <span class="b">초우량물 ‘은행채 &gt; 공사채(LH 부담)’ · 크레딧 ‘상위 여전채 &amp; AA급 회사채’ 선호</span>
+      <span class="desc">공사채는 한전에서 <b>LH(27년 순증 20.4조, 28년 35.3조)</b>로 공급 축이 이동하며 구축효과 우려(신한·한화·NH). 반면 시중은행채는 발행 압력이 완화되고, 반도체 기업 금전신탁(120조+)의 상위 여전채 위탁 투자 재개로 여전채 AA+/AA- 및 회사채 AA급 선호.</span>
+    </li>
+    <li>
+      <span class="t">미국/글로벌 크레딧 공급</span>
+      <span class="b">US IG 총발행 $2.10~2.25조 사상 최대 (AI 하이퍼스케일러 ~$250bn)</span>
+      <span class="desc">Barclays는 27년 미국 기업채 총발행 $2.97조(+10%)·순발행 $1.37조(+14%), 이 중 IG 총발행 $2.10조(WFS $2.25조)·순발행 $1.19조(+23%) 전망. 다만 칩·데이터센터 조달의 단기화·사모 분산으로 10Y+ 장기 IG 발행 증가율은 +5%($360bn)에 그치고 1~5Y(+13%)에 집중.</span>
+    </li>
+    <li>
+      <span class="t">업종별 펀더멘털 & 하위등급 차별화</span>
+      <span class="b">반도체·조선·방산·전력기기(+) vs 건설·석유화학·지방PF·CCC급(−)</span>
+      <span class="desc">원화 시장은 상반기 차환 만기 집중(약 500조 중 1H 54.9%) 속 반도체·조선·전력장비 신용도 개선 vs 건설·석유화학·저축은행 취약성 지속. 미국 HY 시장 역시 CCC 등급(비중 10.5%, OAS 기여 26%)에 고금리 이자부담이 집중되어 Performing HY/IG 위주 선별 필수.</span>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2>투자 시사점 & 섹터별 핵심 전략</h2>
+  <div class="panel">
+    <dl class="kv">
+      <dt>원화 초우량 (AAA)</dt>
+      <dd><b>시중은행채 선호 / 공사채(LH)·특은채 경계 (신한·SK·NH·한화)</b>: 공사채는 LH의 대규모 신규 조달(27년 순증 20.4조)로 RW 0% 영역 수급 부담이 가중되고, 특수은행채는 생산적금융·첨단전략산업기금(첨단채 한도 18조) 발행 부담 존재. 반면 시중은행채는 순발행이 약 40조로 줄어 AAA 내 상대 매력 우위 (단, <b>하나</b>는 전체 스프레드 확대 국면에서 공사채·은행채 방어력을 상대 우위로 평가).</dd>
+      <dt>원화 여전채 vs 회사채</dt>
+      <dd><b>상위 여전채(AA+~AA-) 캐리 최선호 vs AA급 회사채 안정성 (신한·NH vs SK)</b>: <b>신한·NH·한양</b>은 삼성전자·SK하이닉스 등 반도체 여유자금(금융자산 416조, 금전신탁 120조 돌파)의 상위 여전채 편입 재개와 레포펀드 수요를 근거로 여전채 우위를 제시. 반면 <b>SK</b>는 여전채 역대 최대 만기(92~93조)를 감안해 AA 구간에서는 발행이 제한적인 일반 회사채 강세를 전망.</dd>
+      <dt>하위 등급 (A급 이하)</dt>
+      <dd><b>상반기 보수적 대응 → 하반기 A+ 선별 편입 (신한·NH·한화 vs SK·하나)</b>: 상반기 크레딧 만기 집중(55%)과 부동산 PF·석유화학 구조조정 잔여 리스크로 1H27까지는 상위 등급 중심 운용 권고. <b>한화·NH·신한</b>은 기준금리 동결 안착 및 종투사 발행어음·IMA 자금 유입이 가시화되는 하반기 중 A+ 우량 캐리 픽업을 추천하는 반면, <b>SK·하나</b>는 하위 등급 차별화 심화로 보수적 접근 유지.</dd>
+      <dt>미국/글로벌 IG &amp; HY</dt>
+      <dd><b>US IG 롱 캐리·비경기민감·장기 스프레드 듀레이션 vs HY CCC 회피 (Barclays·WFS)</b>: <b>Barclays</b>는 견조한 명목 성장과 기업이익(SPX EPS +15%)이 높은 실질금리를 상쇄한다며 IG 비중확대(비경기민감·저평가 종목·장기 스프레드 듀레이션 선호) 및 AI 섹터 내 전력·인허가·잉여현금흐름(FCF) 기반 종목 선별을 권고. HY는 3년 내 만기 도래 비중(26%)과 CCC 리스크를 감안해 듀레이션 리스크를 줄이고 Performing HY 캐리에 집중.</dd>
+      <dt>유럽 &amp; EM 크레딧</dt>
+      <dd><b>유럽 IG Down-in-rating·기업 하이브리드 &amp; EM HY 소버린 선별 (Barclays)</b>: 유럽은 현물 스프레드가 CDS 인덱스 대비 넓어 추가 축소 여력(기업 하이브리드 선호, Xover 헤지). EM 크레딧은 공급 부담이 큰 IG 소버린(멕시코 MW 하향, 사우디·필리핀·루마니아 UW)보다 펀더멘털·등급 상향 모멘텀이 있는 EM HY 소버린(남아공·나이지리아·파키스탄·스리랑카 등 OW) 및 아시아 IG 장기 저가채/단기 BB급 선호.</dd>
+    </dl>
+  </div>
+</section>
+
+<section class="chart-sec">
+  <h2>2027 크레딧 스프레드 경로 &amp; 발행 수급 차트</h2>
+  <div class="chartcard">
+    <div class="toolbar">
+      <div class="seg" role="group" aria-label="차트 지표 선택">
+        <button type="button" id="tabSpread" aria-pressed="true">원화 크레딧 스프레드 전망 (bp)</button>
+        <button type="button" id="tabKrwSupply" aria-pressed="false">원화 섹터별 2027 발행량 (조원)</button>
+        <button type="button" id="tabUsSupply" aria-pressed="false">미국 크레딧 2025~2027 발행량 ($bn)</button>
+      </div>
+      <div class="legend" id="chartLegend"></div>
+    </div>
+    <div class="scroll"><svg id="mainChart" role="img" aria-label="2027 크레딧 스프레드 및 발행량 비교 차트"></svg></div>
+    <p class="note" id="chartNote"></p>
+  </div>
+</section>
+
+<section>
+  <h2>하우스별 2027 원화 크레딧 전망 총괄표</h2>
+  <p class="sec-sub">국내 주요 증권사 11곳의 2027년 크레딧 스프레드 방향성, 섹터별 타겟 레벨 및 최선호 섹터 비교</p>
+  <div class="tablebox">
+    <table>
+      <thead>
+        <tr>
+          <th>하우스 (애널리스트)</th>
+          <th>스프레드 뷰</th>
+          <th>연간 경로 패턴</th>
+          <th>회사채 AA- (3Y)<br><span style="font-weight:400">현재/1Q → 4Q27 (3Q 저점)</span></th>
+          <th>여전채 AA- (3Y)<br><span style="font-weight:400">현재/1Q → 4Q27</span></th>
+          <th>공사채 / 은행채 AAA<br><span style="font-weight:400">현재/1Q → 4Q27</span></th>
+          <th>선호 섹터 &amp; 핵심 전략</th>
+        </tr>
+      </thead>
+      <tbody id="krwHouseTbody"></tbody>
+    </table>
+  </div>
+</section>
+
+<section class="supply-sec">
+  <h2>원화 크레딧 섹터별 수급 &amp; 투자자 수요 심층 분석</h2>
+  <div class="tablebox">
+    <table>
+      <thead>
+        <tr>
+          <th>섹터</th>
+          <th>2027 총발행 전망</th>
+          <th>핵심 수급 포인트 (만기·순발행·구조 변화)</th>
+          <th>하우스별 상대가치 의견</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="who">공사채</span><span class="an">AAA · RW 0%</span></td>
+          <td class="n"><b>125조</b> (한화)<br><b>110~120조</b> (SK)</td>
+          <td>공급 주체가 <b>한전에서 LH(한국토지주택공사)로 이동</b>. LH 순증 규모가 2027년 <b class="num">20.4조</b> → 2028년 <b class="num">35.3조</b>로 급증하며 27년 만기는 3.0조뿐이라 대부분 신규 조달 물량. 한전채 만기 16.7조, MBS 만기 17.8조(한화). 26년 1~9월 LH 발행 11.9조로 전년비 3.2배 급증(신영).</td>
+          <td><span class="pill bear">경계 다수</span> <b>신한</b>(LH 순발행 20조+로 RW 0% 공급이 수요 초과·구축효과 우려) · <b>NH·SK</b>(AAA 내 은행채 대비 후순위) · <b>한화</b>(LH 공급 부담) vs <span class="pill bull">방어 우위</span> <b>하나</b>(약세장 확대 폭 최소)</td>
+        </tr>
+        <tr>
+          <td><span class="who">은행채</span><span class="an">시중은행 · 특수은행</span></td>
+          <td class="n"><b>250조</b> (한화)<br><b>250~290조</b> (SK)</td>
+          <td>전체 은행채 순발행은 약 <b class="num">40조</b>로 2026년 대비 감소(신영). 다만 <b>특수은행채</b>는 생산적금융 및 첨단전략산업기금 조달(첨단채 한도 <b class="num">18조</b>)로 순발행 확대(신한). 반면 <b>시중은행채</b>는 RWA 관리 및 예대율 안정으로 발행 압력 완화(신한·한화).</td>
+          <td><span class="pill bull">최선호 다수</span> <b>한화·SK·NH</b>(AAA 구간 내 공사채 대비 우위) · <b>신한</b>(초우량물 중 시중은행채 최선호, 단 특은채는 경계) · <b>하나</b>(확대 폭 작음) vs <span class="pill bear">경계</span> <b>한양</b>(월 25조 물량 부담)</td>
+        </tr>
+        <tr>
+          <td><span class="who">여전채</span><span class="an">카드 · 캐피탈</span></td>
+          <td class="n"><b>101조</b> (한화)<br><b>110~120조</b> (SK)</td>
+          <td>2027년 만기 도래 물량이 <b class="num">92~93조</b>(전년비 +14~16조)로 역대 최대이나, 순발행은 <b class="num">+10조</b> 수준으로 감소(신영). AA+ 3년 금리가 26년 초 3.34% → 9월 4.64%로 상승해 금리 매력 확보. 단, A급 이하 캐피탈사는 PF 잔여 부담으로 차환·스프레드 확대 압력 상존.</td>
+          <td><span class="pill bull">상위등급 선호</span> <b>신한</b>(상위등급 최선호, 반도체 금전신탁·레포펀드 유입) · <b>NH</b>(상·하위 모두 회사채 대비 우위) · <b>한양</b>(우량 캐피탈 선호) vs <span class="pill neu">신중</span> <b>SK</b>(AA에선 회사채 우위) · <b>하나</b>(확대 폭 큼)</td>
+        </tr>
+        <tr>
+          <td><span class="who">회사채</span><span class="an">일반기업 AA / A</span></td>
+          <td class="n"><b>75조</b> (한화)<br><b>60~80조</b> (SK)</td>
+          <td>2026년에는 기업 대출금리가 회사채 금리를 밑돌고 단기 CP·전단채로 조달이 이동해 공모 회사채 발행 위축. 2027년 1Q 기준금리 인상 종료 시 단기차입의 장기 치환 수요와 함께 회사채 조달 복귀 전망(신영·신한).</td>
+          <td><span class="pill bull">우량물 강세</span> <b>SK</b>(AA급 수급 강세) · <b>NH</b>(기업이익 증가로 신용 이벤트 제한) · <b>신한</b>(캡티브 영업 규제로 여전채 대비 탄력 둔화, A+는 하반기 확대) · <b>한화</b>(연초 발행 집중·비우량 심리 점검)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div class="panel">
+      <h3>수요 주체별 자금 흐름 &amp; 금융규제 영향</h3>
+      <dl class="kv">
+        <dt>반도체 머니</dt>
+        <dd><b>삼성전자·SK하이닉스 금융자산 <span class="num">416조</span> (신한·SK·신영·NH)</b>: 반도체 슈퍼사이클로 축적된 기업 여유자금이 채권형 금전신탁(<span class="num">120조</span> 돌파) 및 단기 사모채권형 펀드로 유입되며, 상위 등급 여전채 위탁 투자가 본격 재개됨.</dd>
+        <dt>투신 · 연기금</dt>
+        <dd><b>인상 종료 시점 선행 유입 (SK)</b>: 투신권은 기준금리 인상 종료 인식 시점에 잔고와 듀레이션을 선행 확대하는 경향. 국민연금 또한 국내채권 비중(16.8% → 27년 목표 <span class="num">21.8%</span>) 확대로 크레딧 매수 여력 뒷받침. 미래대응기금 여유자금(97~104조)도 단기 국고·초우량 크레딧에 우호적(NH).</dd>
+        <dt>은행 · 리테일</dt>
+        <dd><b>RWA 완화 &amp; 5%대 리테일 수요 (SK·신한)</b>: 환율 안정(1,300원대) 시 은행권 RWA 부담이 완화되며 AA급 회사채 매수 재개. 개인·리테일 투자자들도 절대금리 4%대 후반~5%대 크레딧물에 대한 만기보유(Buy &amp; Hold) 수요 견조.</dd>
+        <dt>금융규제 변화</dt>
+        <dd><b>우량채 쏠림 강화 vs 하반기 모험자본 유입 (NH·신한)</b>: 증권사 신조정유동성비율 도입, 보험사 K-ICS 기본자본 관리, 은행 경기대응완충자본(SSyRB) 등은 상반기 우량채 선호를 강화. 반면 종합금융투자사업자의 발행어음·IMA(종합투자계좌) 모험자본 의무비율 확대는 하반기 A급 회사채·여전채 수요를 지지.</dd>
+        <dt>만기 차환 벽</dt>
+        <dd><b>2027년 크레딧 총 만기 약 <span class="num">500조</span> 상반기 집중 (NH)</b>: 전체 만기의 <span class="num">54.9%</span>(1Q 27.9%, 2Q 27.0%)가 상반기에 집중되어 있어 1분기 발행 물량 소화 과정에서의 일시적 마찰 주의.</dd>
+      </dl>
+    </div>
+
+    <div class="panel">
+      <h3>2027 원화 크레딧 업종별 기상도 (신영 · SK · NH · 한화)</h3>
+      <dl class="kv">
+        <dt>긍정적 (+) 업종</dt>
+        <dd>
+          <div class="chips" style="margin-bottom:4px">
+            <span class="chip" style="border-color:var(--bull);color:var(--bull)">반도체 (HBM·선단공정)</span>
+            <span class="chip" style="border-color:var(--bull);color:var(--bull)">조선 (고가 수주잔고)</span>
+            <span class="chip" style="border-color:var(--bull);color:var(--bull)">전력기기·장비 (AI 그리드)</span>
+            <span class="chip" style="border-color:var(--bull);color:var(--bull)">방산 (수출 확대)</span>
+            <span class="chip" style="border-color:var(--bull);color:var(--bull)">건설기계</span>
+          </div>
+          AI 데이터센터 전력망 확충 및 글로벌 인프라 투자 수혜로 현금흐름과 재무완충력이 동반 개선되며 등급 상향 모멘텀 보유(신영·SK).
+        </dd>
+        <dt>부정적 (−) 업종</dt>
+        <dd>
+          <div class="chips" style="margin-bottom:4px">
+            <span class="chip" style="border-color:var(--bear);color:var(--bear)">석유화학 (공급과잉·마진부진)</span>
+            <span class="chip" style="border-color:var(--bear);color:var(--bear)">건설 · 지방 PF</span>
+            <span class="chip" style="border-color:var(--bear);color:var(--bear)">철강 · 제지</span>
+            <span class="chip" style="border-color:var(--bear);color:var(--bear)">저축은행 · 하위 캐피탈</span>
+            <span class="chip" style="border-color:var(--bear);color:var(--bear)">리츠 (고금리 차환)</span>
+          </div>
+          중국발 공급과잉이 지속되는 석유화학·철강과 지방 미분양 및 브릿지론 정리 부담이 남은 건설·하위 제2금융권은 신용등급 하향 및 스프레드 차별화 지속(신영·SK).
+        </dd>
+        <dt>핵심 모니터링</dt>
+        <dd><b>AI Capex 피크아웃 시점 &amp; 조달 금리</b>: BNK는 2Q27 중 글로벌 AI 투자·조달 이슈가 부각될 경우 국내외 신용스프레드가 일시 확대될 리스크를 지적. NH는 삼성전자 목표주가 하향 시점을 듀레이션 확대 및 크레딧 베타 전환의 핵심 시그널로 제시.</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>미국 · 글로벌 크레딧 전망 &amp; FICC 공급 매트릭스 (해외 IB)</h2>
+  <div class="panel">
+    <h3>미국 FICC 및 기업 크레딧(IG · HY · 레버리지론 · 유동화) 발행 전망 (Barclays · WFS)</h3>
+    <div class="scroll">
+      <table style="min-width:920px;font-size:12.5px">
+        <thead>
+          <tr>
+            <th>자산군 / 섹터</th>
+            <th>2025 실적<br><span style="font-weight:400">Gross / Net ($bn)</span></th>
+            <th>2026 추정<br><span style="font-weight:400">Gross / Net ($bn)</span></th>
+            <th>2027 전망 (Barclays)<br><span style="font-weight:400">Gross / Net ($bn)</span></th>
+            <th>전년비 증감 (27/26)<br><span style="font-weight:400">Gross % / Net %</span></th>
+            <th>핵심 동인 &amp; 하우스 코멘트 (Barclays · WFS · ING · Citi)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>미국채 이표채 (TSY)</b><br><span class="note">Notes &amp; Bonds (ex-Bills)</span></td>
+            <td class="n">$4,390 / $1,683</td>
+            <td class="n">$4,395 / $1,193</td>
+            <td class="n"><b>$4,548 / $1,031</b></td>
+            <td class="n"><span class="up">+3%</span> / <span class="dn">-14%</span><br><span class="note">(-$162bn Net)</span></td>
+            <td>T-Bill 순발행 확대($845bn~1.1조)와 장기 바이백($431bn)으로 <b>10Y 환산 국채 듀레이션 공급 -20% 감소($781bn→$620bn)</b>. 회사채 발행 증가분을 국채 듀레이션 축소가 상쇄.</td>
+          </tr>
+          <tr>
+            <td><b>미국 기업채 합계 (Corp)</b><br><span class="note">IG + HY + Lev Loans</span></td>
+            <td class="n">$2,207 / $726</td>
+            <td class="n">$2,688 / $1,200</td>
+            <td class="n"><b>$2,970 / $1,365</b></td>
+            <td class="n"><span class="up">+10%</span> / <span class="up">+14%</span><br><span class="note">(+$165bn Net)</span></td>
+            <td>AI 인프라 조달과 HY/Loan 차환 벽 도래로 총발행·순발행 모두 사상 최대 경신. 단, 고금리로 M&amp;A·LBO 조달은 둔화.</td>
+          </tr>
+          <tr>
+            <td>├─ <b>투자등급 (US IG)</b><br><span class="note">현재 OAS ~90bp</span></td>
+            <td class="n">$1,437 / $503</td>
+            <td class="n">$1,900 / $970</td>
+            <td class="n"><b>$2,100 / $1,190</b><br><span class="note">(WFS 총발행 $2,250)</span></td>
+            <td class="n"><span class="up">+11%</span> / <span class="up">+23%</span><br><span class="note">(+$220bn Net)</span></td>
+            <td>만기 도래($910bn)가 평이해 총발행 증가분이 대부분 순발행(+$220bn)으로 연결. <b>AI 하이퍼스케일러 ~$250bn(WFS)</b>, 미 은행채 ~$295bn(+15%), 유틸리티 ~$170bn(+21%). 단, 10Y+ 장기 발행은 +5%($360bn, 비중 17%)에 그치고 <b>1~5Y(+13%) 단기·벨리에 집중</b>(Barclays).</td>
+          </tr>
+          <tr>
+            <td>├─ <b>하이일드 (US HY)</b><br><span class="note">현재 OAS ~320bp</span></td>
+            <td class="n">$330 / $92</td>
+            <td class="n">$350 / $145</td>
+            <td class="n"><b>$400 / $100</b><br><span class="note">(밴드 $380~420bn)</span></td>
+            <td class="n"><span class="up">+13%</span> / <span class="dn">-31%</span><br><span class="note">(-$45bn Net)</span></td>
+            <td>HY 지수 액면의 26%가 3년 내 만기 도래해 <b>차환 발행($150~170bn) + 변동금리 대출의 고정금리 채권 전환($80~100bn)</b>이 주도. GCP/Capex(AI·데이터센터 포함) $55~80bn. CCC 등급이 전체 OAS의 26% 차지.</td>
+          </tr>
+          <tr>
+            <td>└─ <b>레버리지론 (BSL)</b><br><span class="note">Syndicated Loans</span></td>
+            <td class="n">$440 / $131</td>
+            <td class="n">$438 / $85</td>
+            <td class="n"><b>$470 / $75</b><br><span class="note">(밴드 $450~490bn)</span></td>
+            <td class="n"><span class="up">+7%</span> / <span class="dn">-12%</span><br><span class="note">(-$10bn Net)</span></td>
+            <td>역대 가장 앞당겨진 만기 벽으로 리파이낸싱($220~250bn, 사모크레딧→신디케이트론 전환 $10~20bn 포함)이 공급 주도. M&amp;A($70~90bn)·LBO($65~85bn)는 고금리로 제약.</td>
+          </tr>
+          <tr>
+            <td><b>유동화증권 (Securitized)</b><br><span class="note">Agency MBS · ABS · CMBS · CLO</span></td>
+            <td class="n">$2,308 / $484</td>
+            <td class="n">$2,407 / $548</td>
+            <td class="n"><b>$2,079 / $426</b></td>
+            <td class="n"><span class="dn">-14%</span> / <span class="dn">-22%</span><br><span class="note">(-$122bn Net)</span></td>
+            <td>7%대 모기지 금리와 바젤III 엔드게임 도입에 따른 은행 직접 대출 보유 확대로 <b>2H27 에이전시 MBS 순공급이 제로(0)에 수렴</b>. BSL/사모 CLO 발행도 26년 -17%에 이어 제한적. 채권시장 전체 듀레이션 부담을 낮추는 핵심 완충재.</td>
+          </tr>
+          <tr>
+            <td><b>지방채 (Municipals)</b><br><span class="note">전체 시장규모 ~$5조 근접</span></td>
+            <td class="n">$581 / $235</td>
+            <td class="n">$595 / $240</td>
+            <td class="n"><b>$590 / $245</b></td>
+            <td class="n"><span class="dn">-1%</span> / <span class="up">+2%</span><br><span class="note">(+$5bn Net)</span></td>
+            <td>차환(Refunding)은 고금리로 위축됐으나 인프라·주택·의료·고등교육 등 신규 자금(New money) 조달 수요로 3년 연속 사상 최대 수준의 발행 지속.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>크레딧 시장 핵심 쟁점 &amp; 하우스 간 시각 차이</h2>
+  <div class="panel">
+    <p class="consensus"><b>공통 인식</b> 원화 크레딧은 기준금리 인상 종료와 풍부한 대기 자금(반도체 머니·투신·연기금)에 힘입어 3분기까지 캐리 강세(전강후약)가 우세하며, 글로벌 크레딧은 AI Capex발 사상 최대 IG 공급에도 견조한 기업이익이 스프레드를 지지. 다만 <b>하나증권의 스프레드 확대 콜, 공사채(LH) vs 여전채 선호도, AI 회사채의 구축효과</b>를 두고 시각이 갈림.</p>
+    <div class="scroll">
+      <table class="dt">
+        <thead><tr><th>핵심 쟁점</th><th class="pos">우호적 / 스프레드 축소 시각</th><th class="neg">신중한 / 스프레드 확대·경계 시각</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>원화 스프레드 방향성</td>
+            <td><b>인상 종료 + 캐리 수요로 축소 (SK·NH·신영·신한·한화·메리츠·BNK)</b>: 기준금리 피크아웃 확인과 416조 반도체 기업 자금·퇴직연금·투신 자금 유입으로 3Q27까지 회사채 AA- 50~59bp까지 압축</td>
+            <td><b>연초효과 후 확대 전환 (하나)</b>: 크레딧 순발행 증가와 높은 절대금리 부담으로 연초 기관 집행 이후 약세 전환 · <b>상반기 고점 후 소폭 축소 (한화)</b> · <b>초우량물 공급이 강세 폭 제한 (신한)</b></td>
+          </tr>
+          <tr>
+            <td>초우량물: 은행채 vs 공사채</td>
+            <td><b>시중은행채 상대 강세 (한화·SK·NH·신한)</b>: 은행채 순발행이 약 40조로 줄어드는 반면 공사채는 LH 순증(20.4조) 부담이 커 AAA 구간 내 은행채가 공사채 대비 우위</td>
+            <td><b>공사채 방어력 우위 (하나)</b>: 전체 크레딧 약세 국면에서는 공사채 확대 폭이 가장 작음 · <b>은행채 물량 경계 (한양·SK)</b>: 대출 증가로 월 25조 발행 지속 및 특은채(첨단채 18조) 부담(신한)</td>
+          </tr>
+          <tr>
+            <td>여전채 vs 일반 회사채</td>
+            <td><b>상위 여전채 최선호 (신한·NH·한양)</b>: 반도체 금전신탁(120조+)의 상위 여전채 위탁 투자 재개 및 회사채 캡티브 영업 규제로 여전채가 회사채보다 아웃퍼폼 전망</td>
+            <td><b>AA급은 회사채 우위 (SK) · 여전채 차환 경계 (신영·한화·하나)</b>: 여전채 만기(92~93조)가 역대 최대이고 A급 이하 캐피탈의 부동산 PF 잔여 리스크가 상존해 대출로 이동한 회사채가 수급상 우위</td>
+          </tr>
+          <tr>
+            <td>하위 등급 (A급 이하 / US CCC)</td>
+            <td><b>하반기 고금리 캐리 픽업 (한화·NH·신한)</b>: 절대금리 메리트로 하반기 축소 폭이 상위 등급보다 클 수 있으며(한화), 발행어음·IMA 모험자본 유입이 A+ 수요 지지(신한)</td>
+            <td><b>신용 차별화 심화 및 회피 권고 (SK·하나·Barclays)</b>: 원화 비우량물은 차환 리스크로 차별화 심화(SK·하나). 미국 HY에서도 CCC 등급(OAS의 26%)에 고금리 타격이 집중되어 부실 크레딧 회피 필수(Barclays)</td>
+          </tr>
+          <tr>
+            <td>AI 하이퍼스케일러 채권 공급</td>
+            <td><b>만기 단기화·조달 다변화로 흡수 가능 (Barclays)</b>: AI 조달이 1~5년 단기 채권, 사모 크레딧, 칩 공급사 파이낸싱으로 분산되어 10Y+ 장기 IG 발행은 +5%에 불과하며 기업이익(+15%)이 뒷받침</td>
+            <td><b>장기물 구축효과 및 변동성 요인 (WFS·ING·Citi·BNK)</b>: 하이퍼스케일러 채권 발행(~$250bn) 및 빅5 딜의 만기 장기화가 국채 장기물과 경쟁(구축효과)하며, 2Q27 AI 수익성·전력망 병목 우려 시 스프레드 확대 촉발 가능</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="why-sec">
+  <h2>하우스별 크레딧 전망 근거 &amp; 세부 전략 (House-by-House Thesis)</h2>
+  <p class="sec-sub">국내 증권사 및 해외 IB 원문에서 제시한 2027년 크레딧 시장 핵심 논거와 포트폴리오 전략</p>
+  <div class="whygrid" id="whyGrid"></div>
+</section>
+
+<div class="notes">
+  <b>출처 및 폴더 연동 안내 (`C:\Users\Administrator\.gemini\antigravity\scratch\credit outlook`)</b>
+  <ul>
+    <li><b>국내 증권사 크레딧 분석</b>: 신한투자증권, NH투자증권, 한화투자증권, SK증권, 신영증권, 하나증권, 한양증권, 현대차증권, iM증권, BNK투자증권, 메리츠증권 2027 연간전망 크레딧 섹션 종합</li>
+    <li><b>해외 IB 크레딧 &amp; FICC 공급 분석</b>: Barclays (<i>Global Outlook: A correction, not a collapse — US Credit Strategy &amp; FICC Issuance</i>, Dominique Toublan, Corry Short, Anshul Pradhan, Lea Overby, Mikhail Foux), Wells Fargo Securities (<i>2027 Rates Outlook</i> — IG Syndicate), ING, Citi, Goldman Sachs</li>
+    <li><b>자료 추가 자동 반영</b>: <code>C:\Users\Administrator\.gemini\antigravity\scratch\credit outlook</code> 폴더에 추가 크레딧 전망 PDF/문서를 넣어주시면 본 페이지의 차트, 총괄표 및 하우스별 상세 카드에 즉시 정밀 반영됩니다.</li>
+  </ul>
+</div>
+
+</div>
+
+<script>
+const KRW_HOUSES = [
+  {
+    name: "NH투자증권",
+    analyst: "최성종 · 강승원",
+    stance: "bull",
+    stanceLabel: "축소 (강세)",
+    pattern: "3Q 저점 후 4Q 소폭 확대",
+    corpAA: "67bp → 59bp (3Q 55bp)",
+    cardAA: "71bp → 63bp (A+ 149→131bp)",
+    aaa: "공사 36→35bp / 은행 37→33bp",
+    pref: "은행채 > 공사채 · 여전채(상·하위) > 회사채 · 하반기 A급 선별 캐리",
+    pts: [
+      "<b>기업이익 증가와 신용 이벤트 제한</b>: 반도체 중심 기업 실적이 개선되며 2027년 중 시스템적 신용 이벤트 발생 가능성은 낮음. 크레딧 만기 약 500조원 중 상반기(1Q 27.9%, 2Q 27.0%) 차환 물량 소화 후 강세 폭 확대.",
+      "<b>섹터별 정밀 타겟 (현재→4Q27)</b>: 공사채 AAA 36→35bp, 은행채 AAA 37→33bp, 여전채 AA- 71→63bp, 회사채 AA- 67→59bp(3Q 55bp), 여전채 A+ 149→131bp, 회사채 A+ 106→91bp.",
+      "<b>규제와 수급</b>: 증권사 신조정유동성비율, 보험 K-ICS 기본자본, 은행 SSyRB 등으로 기본적인 우량채 선호가 유지되나, 미래대응기금 여유자금(104.4조)과 기준금리 동결 안착이 캐리 수요를 견인."
+    ],
+    strat: "초우량물 내 은행채 선호(공사채 후순위) · 여전채가 상·하위 등급 모두에서 회사채 대비 상대 우위 · 하반기 선별적 하위등급 캐리 투자"
+  },
+  {
+    name: "신한투자증권",
+    analyst: "김찬희 · 크레딧팀",
+    stance: "bull",
+    stanceLabel: "축소 (전강후약)",
+    pattern: "연초 강세 → 3Q 저점 → 4Q 되돌림",
+    corpAA: "69bp → 62bp (3Q 59bp)",
+    cardAA: "75bp → 65bp (A+ 153→145bp)",
+    aaa: "공사 37→34bp / 은행 40→35bp",
+    pref: "초우량 중 시중은행채 · 크레딧 중 상위등급 여전채 최선호",
+    pts: [
+      "<b>AI Capex 낙수효과와 반도체 머니 환류</b>: 삼성전자·SK하이닉스 금융자산이 416조원에 달하고 채권형 금전신탁이 120조원을 돌파하며 상위 등급 여전채 위탁 투자가 재개됨. 레포펀드 자금 유입도 여전채 수요를 뒷받침.",
+      "<b>초우량물 구축효과 경계</b>: 공사채는 LH 순발행이 20조원 이상으로 급증하며 RW 0% 영역 공급이 수요를 초과할 우려가 있고, 특수은행채는 첨단전략산업기금(첨단채 한도 18조) 부담이 존재해 시중은행채가 가장 편안한 선택.",
+      "<b>회사채 및 하위등급</b>: 회사채는 단기차입의 장기 치환으로 발행이 늘어나고 캡티브 영업 규제로 여전채 대비 강세 탄력이 둔화될 전망. A+ 등급(회사채 108→100bp)은 종투사 발행어음·IMA 자금 유입이 본격화되는 하반기 비중 확대 권고."
+    ],
+    strat: "연초 기관 자금 집행 활용한 전강후약 대응 · 시중은행채(AAA) 및 상위 여전채(AA+~AA-) 최선호 · A+ 등급은 하반기 비중 확대"
+  },
+  {
+    name: "한화투자증권",
+    analyst: "김성수 · 한시화",
+    stance: "bull",
+    stanceLabel: "축소 (하위등급 우위)",
+    pattern: "상반기 고점 확인 후 완만한 축소",
+    corpAA: "축소 전망 (27년 발행 75조)",
+    cardAA: "AA+ 60→55bp / AA- 70→63bp",
+    aaa: "공사 37→34bp / 은행 39→35bp",
+    pref: "은행채 선호 · 고금리 메리트 가진 하위 등급 축소 폭 우위",
+    pts: [
+      "<b>2027 섹터별 총발행 추산</b>: 공사채 125조(한전 만기 16.7조, MBS 17.8조, LH 순증 20.4조), 은행채 250조, 여전채 101조, 회사채 75조원으로 추산. 공사채의 공급 주체가 한전에서 LH(27년 순증 20.4조→28년 35.3조, 만기 3조뿐)로 완전히 이동.",
+      "<b>섹터별 스프레드 경로 (1Q→4Q27)</b>: 공사채 AAA 37→34bp, 은행채 AAA 39→35bp, 여전채 AA+ 60→55bp, 여전채 AA- 70→63bp.",
+      "<b>등급별 차별화 속 고금리 캐리</b>: 연초 회사채 발행 집중과 비우량 크레딧 심리는 점검이 필요하나, 기준금리 3.50% 동결 국면에서 절대금리 메리트가 높은 하위 등급의 스프레드 축소 폭이 상위 등급보다 더 클 것으로 전망."
+    ],
+    strat: "AAA 구간 은행채 선호(LH 물량 부담 있는 공사채 회피) · 상반기 발행 소화 확인 후 고금리 캐리 메리트 큰 하위 등급 비중 확대"
+  },
+  {
+    name: "SK증권",
+    analyst: "원유승 · 크레딧팀",
+    stance: "bull",
+    stanceLabel: "선제 축소 (수요 우위)",
+    pattern: "인상 종료 인식 시점 선제 강세 → 3Q 저점",
+    corpAA: "축소 (AA급 회사채 강세)",
+    cardAA: "축소 (단, AA에선 회사채가 우위)",
+    aaa: "은행채 > 공사채 상대 우위",
+    pref: "AAA 은행채 · AA급 일반 회사채 · 조선/전력기기 업종",
+    pts: [
+      "<b>2027 발행량 밴드 및 수급 우위</b>: 공사채 110~120조, 은행채 250~290조(월 25조 발행 지속), 여전채 110~120조, 회사채 60~80조원 전망. 기업들의 대출 선호로 회사채 순발행이 제한적이어서 AA 구간에서는 여전채보다 회사채 수급이 더 우호적.",
+      "<b>강력한 기관·리테일 수요</b>: 투신권은 한은 인상 종료 인식 시점에 잔고와 듀레이션을 선행 확대하며, 국민연금(국내채권 16.8%→27년 목표 21.8%), 은행(환율 안정 시 RWA 부담 완화), 리테일(5%대 만기보유 수요), 반도체 기업 여유자금이 동시 유입.",
+      "<b>업종 및 등급 양극화</b>: 조선·전력기기 업종은 신용도 개선이 뚜렷한 반면 석유화학·지방 PF는 부진 지속으로 하위 등급 내 차별화 심화 전망."
+    ],
+    strat: "인상 종료 시점(1Q27)에 맞춘 선제적 크레딧 및 듀레이션 확대 · AAA는 은행채, AA는 일반 회사채 선호 · 하위 등급은 보수적 선별"
+  },
+  {
+    name: "신영증권",
+    analyst: "조용구 · 크레딧팀",
+    stance: "bull",
+    stanceLabel: "축소 (캐리 우호적)",
+    pattern: "인상 종료 후 완만한 스프레드 압축",
+    corpAA: "축소 (회사채 발행 정상화)",
+    cardAA: "축소 (순발행 +10조로 감소)",
+    aaa: "은행채 순발행 40조로 감소 (LH는 급증)",
+    pref: "우량 회사채 및 상위 여전채 · 반도체/조선/방산/전력장비",
+    pts: [
+      "<b>섹터별 순발행 구조 변화</b>: 은행채 순발행은 약 40조원으로 2026년 대비 감소하고, 여전채는 만기(92~93조)가 역대 최대이나 순발행은 +10조원으로 둔화. 반면 LH 발행은 26년 1~9월 11.9조(전년비 3.2배)에 이어 27년에도 공급 부담 주도.",
+      "<b>CP에서 회사채로의 복귀</b>: 2026년에는 대출금리가 회사채를 밑돌고 CP·전단채로 쏠렸으나, 2027년 상반기 인상 종료와 함께 장기 회사채 조달이 정상화되며 단기물 쏠림 완화.",
+      "<b>업종별 크레딧 스코어카드</b>: 반도체·조선·방산·전력장비·건설기계는 실적 및 재무구조 개선(+), 건설·화학·철강·제지·저축은행·리츠는 비우호적(−) 환경 지속."
+    ],
+    strat: "금리 고점 확인 과정에서 캐리 중심 크레딧 비중 확대 · A급 이하 캐피탈 차환 리스크 경계 및 수혜 제조업(반도체·조선·전력장비) 중심 편입"
+  },
+  {
+    name: "메리츠 · BNK · 현대차 · iM · 한양",
+    analyst: "윤여삼 · 이성경 · 김명실 · 김수연 외",
+    stance: "bull",
+    stanceLabel: "축소~보합 (60bp대 안착)",
+    pattern: "연간 5~10bp 내외 축소 (2Q AI 변동성 유의)",
+    corpAA: "BNK 55→50bp · 메리츠 60→55bp · 현대차 62bp · iM 60~72bp",
+    cardAA: "우량 캐피탈·카드채 캐리 유효 (한양)",
+    aaa: "은행채 물량 부담은 일부 경계 (한양)",
+    pref: "우량 캐피탈채(한양) · 회사채 AA- 50~62bp 타겟",
+    pts: [
+      "<b>하우스별 회사채 AA- 3년 타겟 레벨</b>: BNK투자증권 약 55→50bp, 메리츠증권 약 60→55bp, 현대차증권 62bp, iM증권 60~72bp 밴드 제시.",
+      "<b>한양증권</b>: 은행채의 물량 부담을 경계하는 대신 금리 메리트가 확보된 우량 캐피탈채에 우호적 시각 제시.",
+      "<b>BNK투자증권 리스크 시나리오</b>: 기본 시나리오는 50bp로의 축소이나, 2Q27 중 글로벌 AI 투자 수익성 및 조달 이슈로 금융불안이 재부각될 경우 신용스프레드가 일시 확대될 리스크 병기."
+    ],
+    strat: "회사채 AA- 60bp 이상 구간에서 캐리 매수 유효 · 2Q27 글로벌 AI 회사채 조달 관련 변동성 구간을 분할 매수 기회로 활용"
+  },
+  {
+    name: "하나증권",
+    analyst: "박준우 · 크레딧팀",
+    stance: "bear",
+    stanceLabel: "확대 (연초효과 후 약세)",
+    pattern: "연초 강세 후 발행 증가·금리 부담으로 확대",
+    corpAA: "확대 전환 전망 (회사채·여전채 약세)",
+    cardAA: "확대 폭 큼 (비우호적)",
+    aaa: "공사채·은행채가 상대적으로 확대 폭 작음",
+    pref: "초우량 공사채·은행채 방어 중심 · 하위 등급 비추천",
+    pts: [
+      "<b>국내 하우스 중 유일한 스프레드 확대 콜</b>: 국고채 금리는 4Q27 3년 3.30%로 강세를 보더라도, 크레딧 시장은 발행 물량 증가와 누적된 고금리 이자비용 부담으로 인해 연초효과가 소멸된 이후 스프레드가 확대될 것으로 전망.",
+      "<b>섹터별 방어력 차별화</b>: 스프레드 확대 국면에서 공사채와 은행채의 확대 폭이 가장 작아 상대적 우위를 보이는 반면, 여전채와 일반 회사채는 확대 폭이 클 것으로 분석.",
+      "<b>하위 등급 경계</b>: 경기선행지수와 기업이익 증가율이 정점을 통과하는 국면에서 하위 등급 크레딧 투자는 비추천."
+    ],
+    strat: "연초 강세장에서 일반 회사채·여전채 비중 축소 및 공사채·은행채 등 초우량물 중심의 보수적 방어 포트폴리오 권고"
+  },
+  {
+    name: "Barclays · Wells Fargo (글로벌 IB)",
+    analyst: "Dominique Toublan · Marcus Jennings 외",
+    stance: "mix",
+    stanceLabel: "IG 캐리 선호 / 공급 사상 최대",
+    pattern: "US IG ~90bp 보합~소폭 축소 / 섹터·등급 분산 심화",
+    corpAA: "US IG 총발행 $2.10~2.25조 / 순발행 $1.19조(+23%)",
+    cardAA: "US HY 총발행 $400bn / CCC(OAS의 26%) 회피",
+    aaa: "Securitized 순발행 $426bn (-22%) 감소가 수급 완충",
+    pref: "US IG 비경기민감·장기 스프레드 듀레이션 · Performing HY · 유럽 하이브리드",
+    pts: [
+      "<b>기록적 기업채 공급과 만기 단기화 (Barclays)</b>: 2027년 미국 기업채 총발행 $2.97조(+10%)·순발행 $1.37조(+14%) 전망. IG 총발행은 $2.10조(WFS는 $2.25조, 하이퍼스케일러 ~$250bn)로 사상 최대이나, 고금리와 가파른 커브 및 짧은 칩 수명주기로 인해 10Y+ 발행은 +5%($360bn)에 그치고 1~5Y(+13%)에 집중.",
+      "<b>실질금리 상승을 이겨내는 명목 성장과 이익</b>: 실질금리 상승에도 S&P 500 EPS 성장(+15%, $434)과 명목 성장이 뒷받침되어 IG(~90bp)와 Performing HY(~320bp) 스프레드 지지. 단, AI 생태계 내에서는 전력·인허가 확보 및 FCF 창출력에 따라 종목별 스프레드 분산(Dispersion)이 극대화.",
+      "<b>HY 성숙기 차환 벽과 CCC 리스크</b>: 미국 HY 지수 액면의 26%가 3년 내 만기 도래하며, 액면 비중 10.5%에 불과한 CCC 등급이 전체 HY OAS의 26%를 차지해 고금리 타격이 취약 기업에 집중."
+    ],
+    strat: "US IG 비중확대(캐리·저평가 종목·장기 스프레드 듀레이션 선호, 경기민감 업종 UW) · US HY는 듀레이션 축소 및 CCC 부실 회피 · EM HY 소버린 선별 OW vs EM IG 소버린 신중"
+  }
+];
+
+// KPI 렌더링
+const KPI_ITEMS = [
+  { k: "원화 회사채 AA- (3Y) 4Q27", v: "59~62bp", d: "현재 67~69bp 대비 -7~-10bp (3Q 저점 55~59bp)", cls: "dn" },
+  { k: "원화 여전채 AA- (3Y) 4Q27", v: "63~65bp", d: "현재 71~75bp 대비 -8~-10bp (반도체 머니 유입)", cls: "dn" },
+  { k: "미국 IG 2027 총발행 / 순발행", v: "$2.10~2.25T", d: "순발행 $1.19조 (+23% YoY, AI 빅테크 ~$250bn)", cls: "up" },
+  { k: "미국 IG / HY 현재 OAS", v: "90 / 320bp", d: "IG 캐리·비경기민감 선호 / HY CCC(OAS 26%) 회피", cls: "dn" }
+];
+document.getElementById("kpis").innerHTML = KPI_ITEMS.map(item => `
+  <div class="kpi">
+    <span class="k">${item.k}</span>
+    <span class="v">${item.v}</span>
+    <span class="d ${item.cls}">${item.d}</span>
+  </div>
+`).join("");
+
+// 총괄표 렌더링
+document.getElementById("krwHouseTbody").innerHTML = KRW_HOUSES.map(h => `
+  <tr>
+    <td><span class="who">${h.name}</span><span class="an">${h.analyst}</span></td>
+    <td><span class="pill ${h.stance}">${h.stanceLabel}</span></td>
+    <td>${h.pattern}</td>
+    <td class="n">${h.corpAA}</td>
+    <td class="n">${h.cardAA}</td>
+    <td class="n">${h.aaa}</td>
+    <td>${h.pref}</td>
+  </tr>
+`).join("");
+
+// 하우스별 근거 카드 렌더링
+document.getElementById("whyGrid").innerHTML = KRW_HOUSES.map(h => `
+  <article class="why ${h.stance}">
+    <div class="hd">
+      <span class="who">${h.name}</span>
+      <span class="an">${h.analyst}</span>
+      <span class="pill ${h.stance}">${h.stanceLabel}</span>
+    </div>
+    <p class="v">${h.pattern} · ${h.corpAA}</p>
+    <ul>${h.pts.map(p => `<li>${p}</li>`).join("")}</ul>
+    <p class="s"><b>핵심 전략</b>${h.strat}</p>
+  </article>
+`).join("");
+
+// 인터랙티브 SVG 차트
+const svg = document.getElementById("mainChart");
+const legendEl = document.getElementById("chartLegend");
+const noteEl = document.getElementById("chartNote");
+
+function drawSpreadChart() {
+  legendEl.innerHTML = `
+    <span><i class="sw" style="border:2px solid var(--accent);background:var(--surface)"></i>현재 / 1Q27 (bp)</span>
+    <span><i class="sw" style="background:var(--bull)"></i>3Q27 저점 (bp)</span>
+    <span><i class="sw" style="background:var(--accent)"></i>4Q27 타겟 (bp)</span>
+  `;
+  noteEl.textContent = "단위: bp (국고 3년 대비 스프레드) · 신한·NH·한화·BNK·메리츠·현대차·iM 원문 제시 수치 기준 · 점선은 현재→4Q27 이동 폭 및 3Q27 연중 저점 표시";
+
+  const rows = [
+    { label: "회사채 AA- (BNK)", cur: 55, q3: 50, q4: 50, col: "var(--bull)" },
+    { label: "회사채 AA- (메리츠)", cur: 60, q3: 55, q4: 55, col: "var(--bull)" },
+    { label: "회사채 AA- (NH)", cur: 67, q3: 55, q4: 59, col: "var(--bull)" },
+    { label: "회사채 AA- (신한)", cur: 69, q3: 59, q4: 62, col: "var(--bull)" },
+    { label: "회사채 AA- (현대차)", cur: 67, q3: 62, q4: 62, col: "var(--accent)" },
+    { label: "여전채 AA+ (한화)", cur: 60, q3: 55, q4: 55, col: "var(--bull)" },
+    { label: "여전채 AA- (NH)", cur: 71, q3: 61, q4: 63, col: "var(--bull)" },
+    { label: "여전채 AA- (한화)", cur: 70, q3: 63, q4: 63, col: "var(--bull)" },
+    { label: "여전채 AA- (신한)", cur: 75, q3: 63, q4: 65, col: "var(--bull)" },
+    { label: "은행채 AAA (NH)", cur: 37, q3: 32, q4: 33, col: "var(--teal)" },
+    { label: "은행채 AAA (신한)", cur: 40, q3: 34, q4: 35, col: "var(--teal)" },
+    { label: "은행채 AAA (한화)", cur: 39, q3: 35, q4: 35, col: "var(--teal)" },
+    { label: "공사채 AAA (신한)", cur: 37, q3: 34, q4: 34, col: "var(--neutral)" },
+    { label: "공사채 AAA (한화)", cur: 37, q3: 34, q4: 34, col: "var(--neutral)" },
+    { label: "공사채 AAA (NH)", cur: 36, q3: 35, q4: 35, col: "var(--neutral)" },
+    { label: "회사채 A+ (NH)", cur: 106, q3: 91, q4: 91, col: "var(--purple)" },
+    { label: "회사채 A+ (신한)", cur: 108, q3: 100, q4: 100, col: "var(--purple)" },
+    { label: "여전채 A+ (NH)", cur: 149, q3: 131, q4: 131, col: "var(--bear)" },
+    { label: "여전채 A+ (신한)", cur: 153, q3: 145, q4: 145, col: "var(--bear)" }
+  ];
+
+  const W = 980, L = 175, R = 210, T = 30, RH = 27, B = 32;
+  const Ht = T + rows.length * RH + B;
+  const dom = [25, 165];
+  const x = v => L + (v - dom[0]) / (dom[1] - dom[0]) * (W - L - R);
+  svg.setAttribute("viewBox", `0 0 ${W} ${Ht}`);
+  svg.setAttribute("width", W);
+  svg.setAttribute("height", Ht);
+
+  let s = "";
+  for (let v = 30; v <= 160; v += 10) {
+    const major = v % 20 === 0;
+    s += `<line x1="${x(v)}" x2="${x(v)}" y1="${T - 8}" y2="${Ht - B + 4}" stroke="var(--line)" stroke-width="${major ? 1 : 0.5}"/>`;
+    if (major) s += `<text x="${x(v)}" y="${Ht - B + 20}" text-anchor="middle" font-size="11" fill="var(--muted)">${v}bp</text>`;
+  }
+
+  rows.forEach((r, i) => {
+    const y = T + i * RH + RH / 2;
+    s += `<text x="${L - 12}" y="${y + 4}" text-anchor="end" font-size="12" font-weight="600" fill="var(--fg)">${r.label}</text>`;
+    const minV = Math.min(r.cur, r.q3, r.q4);
+    const maxV = Math.max(r.cur, r.q3, r.q4);
+    s += `<line x1="${x(minV)}" x2="${x(maxV)}" y1="${y}" y2="${y}" stroke="${r.col}" stroke-width="2.5" opacity="0.45"/>`;
+    s += `<line x1="${x(r.cur)}" x2="${x(r.q4)}" y1="${y}" y2="${y}" stroke="${r.col}" stroke-width="3"/>`;
+    if (r.q3 < r.q4) {
+      s += `<circle cx="${x(r.q3)}" cy="${y}" r="4" fill="var(--bull)"><title>3Q 저점 ${r.q3}bp</title></circle>`;
+    }
+    s += `<circle cx="${x(r.cur)}" cy="${y}" r="5" fill="var(--surface)" stroke="${r.col}" stroke-width="2"><title>현재/1Q ${r.cur}bp</title></circle>`;
+    s += `<circle cx="${x(r.q4)}" cy="${y}" r="5" fill="${r.col}"><title>4Q27 ${r.q4}bp</title></circle>`;
+    const diff = r.q4 - r.cur;
+    const labelTxt = `${r.cur} → ${r.q4}bp (${diff > 0 ? "+" : ""}${diff}bp${r.q3 < r.q4 ? ", 3Q " + r.q3 + "bp" : ""})`;
+    s += `<text x="${x(maxV) + 10}" y="${y + 4}" font-size="11.5" fill="var(--muted)">${labelTxt}</text>`;
+  });
+
+  svg.innerHTML = s;
+}
+
+function drawKrwSupplyChart() {
+  legendEl.innerHTML = `
+    <span><i class="sw" style="background:var(--accent)"></i>한화투자증권 2027 총발행 전망 (조원)</span>
+    <span><i class="sw" style="background:var(--teal)"></i>SK증권 2027 총발행 밴드 중간값 (조원)</span>
+    <span><i class="sw" style="background:var(--bear)"></i>핵심 순발행 / 만기 지표 (조원)</span>
+  `;
+  noteEl.textContent = "단위: 조원 · 2027년 원화 크레딧 섹터별 총발행(한화·SK) 및 주요 순발행/만기 포인트 비교";
+
+  const items = [
+    { sec: "은행채 (시중+특은)", hanhwa: 250, sk: 270, skBand: "250~290조", netLabel: "순발행 ~40조 (신영) · 첨단채 한도 18조 (신한)" },
+    { sec: "공사채 (LH·한전 등)", hanhwa: 125, sk: 115, skBand: "110~120조", netLabel: "LH 순증 20.4조('27)→35.3조('28) · 한전 만기 16.7조" },
+    { sec: "여전채 (카드·캐피탈)", hanhwa: 101, sk: 115, skBand: "110~120조", netLabel: "만기 92~93조(역대 최대) · 순발행 +10조로 둔화" },
+    { sec: "회사채 (일반기업)", hanhwa: 75, sk: 70, skBand: "60~80조", netLabel: "인상 종료 후 CP→회사채 복귀 vs 대출 선호 지속" }
+  ];
+
+  const W = 980, L = 165, R = 280, T = 36, GH = 74, B = 36;
+  const Ht = T + items.length * GH + B;
+  const maxVal = 300;
+  const x = v => L + (v / maxVal) * (W - L - R);
+  svg.setAttribute("viewBox", `0 0 ${W} ${Ht}`);
+  svg.setAttribute("width", W);
+  svg.setAttribute("height", Ht);
+
+  let s = "";
+  for (let v = 0; v <= 300; v += 50) {
+    s += `<line x1="${x(v)}" x2="${x(v)}" y1="${T - 10}" y2="${Ht - B + 4}" stroke="var(--line)" stroke-width="${v % 100 === 0 ? 1 : 0.5}"/>`;
+    s += `<text x="${x(v)}" y="${Ht - B + 20}" text-anchor="middle" font-size="11" fill="var(--muted)">${v}조</text>`;
+  }
+
+  items.forEach((it, i) => {
+    const y0 = T + i * GH;
+    s += `<text x="${L - 12}" y="${y0 + 32}" text-anchor="end" font-size="13" font-weight="700" fill="var(--fg)">${it.sec}</text>`;
+    // 한화 bar
+    s += `<rect x="${x(0)}" y="${y0 + 8}" width="${x(it.hanhwa) - x(0)}" height="18" rx="4" fill="var(--accent)"/>`;
+    s += `<text x="${x(it.hanhwa) + 8}" y="${y0 + 21}" font-size="11.5" font-weight="600" fill="var(--fg)">한화 ${it.hanhwa}조</text>`;
+    // SK bar
+    s += `<rect x="${x(0)}" y="${y0 + 30}" width="${x(it.sk) - x(0)}" height="18" rx="4" fill="var(--teal)"/>`;
+    s += `<text x="${x(it.sk) + 8}" y="${y0 + 43}" font-size="11.5" font-weight="600" fill="var(--muted)">SK ${it.skBand} · ${it.netLabel}</text>`;
+  });
+
+  svg.innerHTML = s;
+}
+
+function drawUsSupplyChart() {
+  legendEl.innerHTML = `
+    <span><i class="sw" style="background:var(--accent)"></i>2027E 총발행 Gross ($bn, Barclays)</span>
+    <span><i class="sw" style="background:var(--bull)"></i>2027E 순발행 Net ($bn, Barclays)</span>
+    <span><i class="sw" style="background:var(--now)"></i>2026 총발행 기준선</span>
+  `;
+  noteEl.textContent = "단위: $bn (십억 달러) · 출처: Barclays 2027 Global Outlook (FICC Issuance) 및 WFS IG Syndicate · IG 순발행(+23%) 급증 vs Securitized 순발행(-22%) 및 국채 이표채 순발행(-14%) 감소";
+
+  const items = [
+    { sec: "US IG (투자등급 회사채)", g26: 1900, g27: 2100, n27: 1190, note: "Gross +11% (WFS $2,250bn) / Net +23% (+$220bn)" },
+    { sec: "Securitized (MBS·ABS·CLO)", g26: 2407, g27: 2079, n27: 426, note: "Gross -14% / Net -22% (-$122bn, 2H27 MBS 순공급 ~0)" },
+    { sec: "Municipals (미국 지방채)", g26: 595, g27: 590, n27: 245, note: "Gross -1% / Net +2% (전체 시장 $5조 근접)" },
+    { sec: "Leveraged Loans (레버리지론)", g26: 438, g27: 470, n27: 75, note: "Gross +7% ($450~490bn, 차환 주도) / Net -12%" },
+    { sec: "US HY (하이일드 회사채)", g26: 350, g27: 400, n27: 100, note: "Gross +13% ($380~420bn, 3년내 26% 만기) / Net -31%" }
+  ];
+
+  const W = 980, L = 195, R = 270, T = 36, GH = 68, B = 36;
+  const Ht = T + items.length * GH + B;
+  const maxVal = 2500;
+  const x = v => L + (v / maxVal) * (W - L - R);
+  svg.setAttribute("viewBox", `0 0 ${W} ${Ht}`);
+  svg.setAttribute("width", W);
+  svg.setAttribute("height", Ht);
+
+  let s = "";
+  for (let v = 0; v <= 2500; v += 500) {
+    s += `<line x1="${x(v)}" x2="${x(v)}" y1="${T - 10}" y2="${Ht - B + 4}" stroke="var(--line)" stroke-width="1"/>`;
+    s += `<text x="${x(v)}" y="${Ht - B + 20}" text-anchor="middle" font-size="11" fill="var(--muted)">$${v}bn</text>`;
+  }
+
+  items.forEach((it, i) => {
+    const y0 = T + i * GH;
+    s += `<text x="${L - 12}" y="${y0 + 30}" text-anchor="end" font-size="12.5" font-weight="700" fill="var(--fg)">${it.sec}</text>`;
+    // Gross 2027
+    s += `<rect x="${x(0)}" y="${y0 + 6}" width="${x(it.g27) - x(0)}" height="17" rx="4" fill="var(--accent)"/>`;
+    // 2026 Gross marker
+    s += `<line x1="${x(it.g26)}" x2="${x(it.g26)}" y1="${y0 + 3}" y2="${y0 + 26}" stroke="var(--now)" stroke-width="2.5"><title>2026 Gross $${it.g26}bn</title></line>`;
+    s += `<text x="${Math.max(x(it.g27), x(it.g26)) + 8}" y="${y0 + 19}" font-size="11.5" font-weight="600" fill="var(--fg)">Gross $${it.g27.toLocaleString()}bn</text>`;
+    // Net 2027
+    s += `<rect x="${x(0)}" y="${y0 + 27}" width="${x(it.n27) - x(0)}" height="17" rx="4" fill="var(--bull)"/>`;
+    s += `<text x="${x(it.n27) + 8}" y="${y0 + 40}" font-size="11.5" fill="var(--muted)">Net $${it.n27.toLocaleString()}bn · ${it.note}</text>`;
+  });
+
+  svg.innerHTML = s;
+}
+
+const btnSpread = document.getElementById("tabSpread");
+const btnKrwSupply = document.getElementById("tabKrwSupply");
+const btnUsSupply = document.getElementById("tabUsSupply");
+
+function selectTab(tab) {
+  btnSpread.setAttribute("aria-pressed", tab === "spread");
+  btnKrwSupply.setAttribute("aria-pressed", tab === "krw");
+  btnUsSupply.setAttribute("aria-pressed", tab === "us");
+  if (tab === "spread") drawSpreadChart();
+  else if (tab === "krw") drawKrwSupplyChart();
+  else drawUsSupplyChart();
+}
+
+btnSpread.onclick = () => selectTab("spread");
+btnKrwSupply.onclick = () => selectTab("krw");
+btnUsSupply.onclick = () => selectTab("us");
+
+drawSpreadChart();
+</script>
+</body>
+</html>
