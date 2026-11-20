@@ -1,0 +1,1055 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>2027 미국 매크로 & 미국채(UST) 연간전망 종합 (초안 v2)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#f5f7fa; --surface:#ffffff; --fg:#142030; --muted:#5a6779; --line:#dbe1e9; --soft:#eaeef4;
+  --accent:#1d5bb8; --accent-soft:#e6effc;
+  --bull:#11805a; --bull-soft:#e1f2ea;
+  --bear:#c2410c; --bear-soft:#fbe9df;
+  --neutral:#4b5563; --neutral-soft:#eceff3;
+  --now:#b8860b; --purple:#6d28d9; --purple-soft:#f1ebfe;
+  --teal:#0d9488; --teal-soft:#ccfbf1;
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f141b; --surface:#161d27; --fg:#e4e9f0; --muted:#97a3b4; --line:#2a3442; --soft:#1d2531;
+  --accent:#6ea2ef; --accent-soft:#192a42;
+  --bull:#4cc596; --bull-soft:#15302a;
+  --bear:#f08a5d; --bear-soft:#3a2219;
+  --neutral:#a1abb9; --neutral-soft:#232b36;
+  --now:#e3b341; --purple:#a78bfa; --purple-soft:#281e46;
+  --teal:#2dd4bf; --teal-soft:#133836;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0f141b; --surface:#161d27; --fg:#e4e9f0; --muted:#97a3b4; --line:#2a3442; --soft:#1d2531;
+  --accent:#6ea2ef; --accent-soft:#192a42;
+  --bull:#4cc596; --bull-soft:#15302a;
+  --bear:#f08a5d; --bear-soft:#3a2219;
+  --neutral:#a1abb9; --neutral-soft:#232b36;
+  --now:#e3b341; --purple:#a78bfa; --purple-soft:#281e46;
+  --teal:#2dd4bf; --teal-soft:#133836;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--fg); font-family:var(--f-body);
+  font-size:14.5px; line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:32px 64px;
+}
+.wrap{max-width:1140px;margin:0 auto;display:flex;flex-direction:column;gap:34px}
+h1,h2,h3,h4{text-wrap:balance;margin:0;line-height:1.3}
+h1{font-size:29px;font-weight:700;letter-spacing:-.015em}
+h2{font-size:19.5px;font-weight:700;display:flex;align-items:center;gap:8px}
+h3{font-size:15px;font-weight:600}
+p{margin:0}
+.eyebrow{font-size:12px;letter-spacing:.06em;color:var(--accent);font-weight:700;text-transform:uppercase}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+header{display:flex;flex-direction:column;gap:10px;border-bottom:1px solid var(--line);padding-bottom:20px}
+.hdr-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.badge-draft{font-size:12px;font-weight:600;background:var(--accent-soft);color:var(--accent);padding:4px 10px;border-radius:6px;border:1px solid var(--line)}
+header .meta{color:var(--muted);font-size:13.5px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+header .context-bar{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 18px}
+header .context-bar b{color:var(--fg)}
+
+section{display:flex;flex-direction:column;gap:14px}
+.sec-sub{font-size:13px;color:var(--muted);margin-top:-8px}
+
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:13px 16px;display:flex;flex-direction:column;gap:3px}
+.kpi .k{font-size:12px;color:var(--muted);font-weight:600}
+.kpi .v{font-family:var(--f-mono);font-size:22.5px;font-weight:700}
+.kpi .d{font-size:12px;font-family:var(--f-mono);color:var(--muted)}
+.up{color:var(--bear)} .dn{color:var(--bull)}
+@media (max-width:780px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.keys{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0;padding:0;list-style:none}
+@media (max-width:780px){.keys{grid-template-columns:1fr}}
+.keys li{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 15px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.keys .t{font-size:12px;color:var(--accent);font-weight:700}
+.keys .b{font-weight:600;font-size:14.5px}
+.keys .desc{font-size:13px;color:var(--muted)}
+
+.chartcard{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--soft)}
+.seg button{font:inherit;font-size:13px;font-weight:600;border:0;background:transparent;color:var(--muted);padding:6px 14px;cursor:pointer;transition:all .15s}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{display:inline-block;width:10px;height:10px;border-radius:50%}
+.scroll{overflow-x:auto}
+svg text{font-family:var(--f-body)}
+.note{font-size:12px;color:var(--muted)}
+
+table{border-collapse:collapse;width:100%;min-width:880px;font-size:13px}
+th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11.5px;color:var(--muted);font-weight:700;background:var(--soft);position:sticky;top:0;white-space:nowrap}
+td.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td .who{font-weight:700;font-size:14px}
+td .an{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+.tablebox{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow-x:auto}
+
+.pill{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.pill.bull{background:var(--bull-soft);color:var(--bull)}
+.pill.bear{background:var(--bear-soft);color:var(--bear)}
+.pill.neu{background:var(--neutral-soft);color:var(--neutral)}
+.pill.mix{background:var(--purple-soft);color:var(--purple)}
+
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.grid3,.grid2{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:15px 17px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.panel ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:5px;font-size:13.5px}
+.panel .sub{font-size:12.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px;margin-top:auto}
+.split{display:flex;flex-direction:column;gap:8px}
+.split .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.split .lab{font-size:12px;font-weight:700;min-width:92px;font-family:var(--f-mono)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12px;border:1px solid var(--line);border-radius:5px;padding:2px 8px;background:var(--soft);font-weight:500}
+.chip .num{color:var(--muted);margin-left:4px;font-size:11.5px}
+
+dl.kv{margin:0;display:grid;grid-template-columns:auto 1fr;gap:7px 14px;font-size:13.5px}
+dl.kv dt{font-weight:700;white-space:nowrap;color:var(--fg)}
+dl.kv dd{margin:0;min-width:0;color:var(--fg)}
+
+table.dt{min-width:680px;font-size:13px}
+table.dt td:first-child{font-weight:700;white-space:nowrap;width:14%}
+table.dt th.pos{color:var(--bull)} table.dt th.neg{color:var(--bear)}
+table.dt td:nth-child(2),table.dt td:nth-child(3){width:43%}
+.consensus{font-size:13.5px;background:var(--soft);border-left:3px solid var(--accent);border-radius:4px;padding:9px 13px}
+.consensus b{margin-right:6px;color:var(--accent)}
+
+.whygrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.whygrid{grid-template-columns:1fr}}
+.why{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--neutral);border-radius:8px;padding:15px 18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.why.bull{border-left-color:var(--bull)}
+.why.bear{border-left-color:var(--bear)}
+.why.mix{border-left-color:var(--purple)}
+.why .hd{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:8px}
+.why .hd .who{font-weight:700;font-size:16px}
+.why .hd .an{font-size:12px;color:var(--muted)}
+.why .hd .pill{margin-left:auto}
+.why .v{font-weight:700;font-size:14.5px;color:var(--accent)}
+.why ul{margin:0;padding-left:18px;font-size:13.2px;display:flex;flex-direction:column;gap:4px}
+.why .s{font-size:12.8px;background:var(--soft);padding:8px 11px;border-radius:6px;margin-top:auto}
+.why .s b{color:var(--fg);font-weight:700;margin-right:6px}
+
+.notes{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line);padding-top:16px}
+.notes ul{margin:0;padding-left:18px}
+
+.desk-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 14px;margin-bottom:-12px}
+.desk-nav .nav-left,.desk-nav .nav-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.desk-nav a,.desk-nav button{font:inherit;font-size:12.5px;font-weight:600;color:var(--muted);text-decoration:none;padding:5px 11px;border-radius:6px;border:1px solid transparent;background:transparent;cursor:pointer;transition:all .15s}
+.desk-nav a:hover,.desk-nav button:hover{background:var(--soft);color:var(--fg)}
+.desk-nav a.back{color:var(--fg);border-color:var(--line);background:var(--soft)}
+.desk-nav a.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.desk-nav .sep{width:1px;height:18px;background:var(--line);margin:0 2px}
+
+.print-only{display:none}
+@page{size:A4;margin:10mm}
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  :root{--bg:#ffffff}
+  body{font-size:10.5px;padding:0;background:#ffffff}
+  .wrap{gap:16px;max-width:none}
+  h1{font-size:22px} h2{font-size:15px}
+  h2{break-after:avoid}
+  .seg,.desk-nav{display:none}
+  .print-only{display:block}
+  svg{width:100%;height:auto}
+  .scroll,.tablebox{overflow:visible}
+  table{min-width:0;font-size:9px}
+  th,td{padding:4px 5px}
+  th{position:static}
+  .kpi,.panel,.keys li,tr,.why{break-inside:avoid}
+  .chart-sec,.supply-sec,.why-sec{break-before:page}
+}
+</style>
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('fitd-theme');
+    if (saved === 'dark' || saved === 'slate') document.documentElement.setAttribute('data-theme', 'dark');
+    else if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  } catch (e) {}
+})();
+function toggleOutlookTheme() {
+  var cur = document.documentElement.getAttribute('data-theme');
+  var isDark = cur === 'dark' || (!cur && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  var next = isDark ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('fitd-theme', next); } catch (e) {}
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="desk-nav" aria-label="FITD 데스크 및 연간전망 내비게이션">
+  <div class="nav-left">
+    <a href="./index.html#rv" class="back">← FITD Trading Desk</a>
+    <span class="sep"></span>
+    <a href="./ust-2027-outlook.html" class="active">🇺🇸 2027 미국채(UST) 연간전망</a>
+    <a href="./krw-2027-outlook.html">🇰🇷 2027 원화채(KRW) 연간전망</a>
+  </div>
+  <div class="nav-right">
+    <button type="button" onclick="toggleOutlookTheme()">☀️/🌙 테마 전환</button>
+    <button type="button" onclick="window.print()">🖨️ 인쇄 / PDF</button>
+  </div>
+</nav>
+
+<header>
+  <div class="hdr-top">
+    <span class="eyebrow">해외 주요 IB 7곳(9개 리포트) 2027 연간전망 종합 · GS · MS · JPM · Barclays · WFS · Citi · ING</span>
+    <span class="badge-draft">초안 v2 · WFS & Citi 통합 완료</span>
+  </div>
+  <h1>2027 미국 매크로 & 미국채(UST) 연간전망</h1>
+  <div class="meta">
+    <span>기준일: <b class="num">2026.10.29~11.19</b></span>
+    <span>현재 Fed 기준금리 <b class="num">3.75~4.00%</b> (상단 <span class="num">4.00%</span>)</span>
+    <span>UST 2Y <b class="num">4.88%</b></span>
+    <span>UST 5Y <b class="num">4.97%</b></span>
+    <span>UST 10Y <b class="num">5.13%</b></span>
+    <span>UST 30Y <b class="num">5.46%</b></span>
+    <span>2s10s <b class="num">+25bp</b></span>
+  </div>
+  <div class="context-bar">
+    <span><b>2026년 말 배경:</b> ① 2월 이란 전쟁 발발(호르무즈 차질·유가 급등)로 인플레 재점화 → 연준 9월 금리 인상 재개(+25bp, 3.75~4.00%) 및 케빈 워시(Warsh) 신임 연준 의장 취임</span>
+    <span>② AI Capex 급증(+86%)이 2026 성장을 견인했으나 4Q 전력·조달비용 우려 및 미 중간선거(민주당 상·하원 승리, 텍사스 등 데이터센터 규제)로 AI 기술주 조정 발생</span>
+  </div>
+</header>
+
+<section>
+  <h2>핵심 요약</h2>
+  <div class="kpis" id="kpis"></div>
+  <ul class="keys">
+    <li>
+      <span class="t">통화정책 (Fed)</span>
+      <span class="b">12월~1Q27 마지막 인상(4.25~4.75%) 후 동결 vs Citi 2Q27부터 3회 인하(3.50%)</span>
+      <span class="desc">7개 하우스 모두 12월 추가 인상에는 일치하나, 최종 상단은 WFS·Citi(4.25%) vs GS·MS·Barclays(4.50%) vs JPM(4.75%)으로 분화. 27년 중 인하는 Citi(3회)·GS(12월 1회)만 전망.</span>
+    </li>
+    <li>
+      <span class="t">매크로 & 인플레이션</span>
+      <span class="b">AI Capex 증가율 둔화(Peak Growth) 속 잠재수준 성장(1.8~2.5%), 완만한 물가 둔화</span>
+      <span class="desc">1Q27까지는 에너지·정제마진(디젤)·항공료·컴퓨터/메모리 가격 및 연초 잔여 계절성으로 Core PCE 2.8~3.2% 유지 후 4Q27 2.4~2.7%로 둔화. AI 주식-장기금리 동조화 심화(WFS).</span>
+    </li>
+    <li>
+      <span class="t">미국채 금리 경로</span>
+      <span class="b">1Q27 경계감(4.90~5.50%) 통과 후 하반기 강세(4.60~4.85%) vs 5.00% 보합 대립</span>
+      <span class="desc">GS(4.60%)·ING(4.63%)·WFS(4.85%)는 1Q27 마지막 인상·계절성 소화 후 듀레이션 강세를, Citi(5.00% 고정)·Barclays(5.00%)·JPM은 글로벌 저축풀 경쟁 및 높은 단기금리로 5%대 고착을 전망.</span>
+    </li>
+    <li>
+      <span class="t">수급 & 커브 전략</span>
+      <span class="b">T-Bill 확대·장기물 바이백으로 듀레이션 부담 완화 · 1Q 플랫 후 스팁 & 5년(Belly) 선호</span>
+      <span class="desc">재무부 T-Bill 순발행 확대($845bn~$1.1조)와 장기물 바이백(장기 총발행의 43%)으로 쿠폰 공급 부담 완화(WFS는 2H27 20·30년 경매 $3bn 감축 전망). 5Y 벨리 매수 및 1Q 이후 2s10s/5s30s 스티프너 추천.</span>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2>투자 시사점 & 핵심 트레이드 아이디어</h2>
+  <div class="panel">
+    <dl class="kv">
+      <dt>듀레이션 콜</dt>
+      <dd><b>GS(매수/YE27 <span class="num">4.60%</span>)</b>: 높은 시작 금리 버퍼 + 도비시 연준 + 주식 헤지 기능 복원 · <b>WFS(1Q 신중 → 2Q+ 강세/YE27 <span class="num">4.85%</span>)</b>: 1Q27 연초 물가·추가 인상 리스크 통과 후 매수, YE27 선도금리(2Y <span class="num">4.94%</span>, 10Y <span class="num">5.19%</span>)가 높아 롱 포지션 수익 허들이 낮음 · <b>ING(1Q 관망 → 2H 매수/YE27 <span class="num">4.63%</span>)</b>: 1Q <span class="num">5.25~5.50%</span> 고점 확인 후 매수 · <b>Citi·Barclays·JPM(중립/YE27 <span class="num">5.00%</span>)</b>: Citi는 연준 3회 인하(<span class="num">3.50%</span>) 전망에도 글로벌 저축풀 부족·기간프리미엄 상승으로 10Y <span class="num">5.00%</span> 횡보 예상</dd>
+      <dt>커브 포지션</dt>
+      <dd><b>5Y 벨리 선호 & 1Q 플랫 후 2Q+ 스티프너</b>: <b>WFS</b>는 1Q27까지 마지막 인상·1월 CPI 계절성으로 <b>2s10s가 26년 저점 아래로 추가 플래트닝</b>된 뒤 2Q27부터 <b>2s10s(+50bp)·5s30s 스티프너</b> 전환 권고 · <b>GS·Citi</b>는 단기 정책 불확실성과 장기 재정 부담 사이에서 캐리·롤다운이 우수한 <b>5Y(Belly) 매수</b> 선호 · <b>Barclays</b>는 <b>1y-forward 2s10s SOFR 스티프너</b> 추천</dd>
+      <dt>물가채 (TIPS)</dt>
+      <dd><b>GS(10Y TIPS 매수 vs 명목채 매도)</b>: 2026년 금리 상승의 100%(5y5y 기준)가 실질금리 급등으로 나타나 실질금리 저평가 · <b>Barclays(2Y BEI 에너지 헤지 매수 & Off-the-run 5Y TIPS 스프레드 확대)</b>: 3개월 연속 0.3% m/m 코어 CPI에도 단기 BEI가 과매도</dd>
+      <dt>스왑스프레드·머니마켓</dt>
+      <dd><b>WFS(20Y·30Y 스왑스프레드 사상 최고치 확대 vsING 10Y·30Y 축소/국채 약세 대립)</b>: WFS는 2H27 재무부의 <b>20·30년 경매 $3bn 축소</b> + <b>장기물 바이백(총발행의 43%)</b> + 은행 규제 완화(eSLR/G-SIB)로 초장기 스왑스프레드(국채 강세)가 신고점을 경신하고, <b>27년 10월 부채한도 X-date</b> 직전 T-Bill 감축으로 2Y 스왑스프레드가 타이튼(중간값 -4.7bp)될 것으로 전망. 반면 <b>ING</b>는 바이백 기대가 과도하다며 스왑스프레드 역전(국채 약세)에 베팅</dd>
+      <dt>변동성 (Vol) 헤지</dt>
+      <dd><b>GS</b>: 기본 시나리오상 금리 변동성 하락(감마 매도)이나 성장 하방 테일리스크 헤지를 위해 <b>6m~1y 만기 2y~5y 저행사가 리시버(Low-strike receiver)</b> 오버레이 · <b>Barclays</b>: 과도한 연준 인상 프라이싱을 페이드하는 <b>6m1y 1x1.5 페이어 스프레드(Payer spread)</b> · <b>WFS</b>: 옵션시장이 27년 말 SOFR <span class="num">5.60%+</span> 확률을 20%나 반영 중(과도한 우측 테일)</dd>
+    </dl>
+  </div>
+</section>
+
+<section class="chart-sec">
+  <h2>하우스별 2027~2028 금리 경로 비교</h2>
+  <div class="chartcard">
+    <div class="toolbar">
+      <div class="seg" role="group" aria-label="차트 지표 선택">
+        <button type="button" id="tab10" aria-pressed="true">UST 10년 금리 경로</button>
+        <button type="button" id="tabFed" aria-pressed="false">Fed 기준금리(상단) 경로</button>
+        <button type="button" id="tabCurve" aria-pressed="false">UST 만기별 커브 (GS · WFS vs 현재)</button>
+      </div>
+      <div class="legend" id="chartLegend"></div>
+    </div>
+    <div class="scroll"><svg id="mainChart" role="img" aria-label="하우스별 미국 금리 전망 차트"></svg></div>
+    <p class="note" id="chartNote"></p>
+  </div>
+</section>
+
+<section>
+  <h2>하우스별 매크로 & 미국채 전망 총괄표</h2>
+  <p class="sec-sub">현재 폴더에 수록된 해외 주요 IB 7곳(9개 리포트) 기준 · 4Q27 UST 10Y 강세 순 정렬</p>
+  <div class="tablebox">
+    <table>
+      <thead>
+        <tr>
+          <th>하우스 (리포트·발간일)</th>
+          <th>듀레이션 뷰</th>
+          <th>2027 실질 GDP<br><span style="font-weight:400">(4Q/4Q · 연평균)</span></th>
+          <th>2027 Core PCE<br><span style="font-weight:400">(4Q/4Q · 연평균)</span></th>
+          <th>Fed 기준금리 경로<br><span style="font-weight:400">(현재 3.75~4.00% 기준)</span></th>
+          <th>UST 2Y<br><span style="font-weight:400">1Q27 → 4Q27</span></th>
+          <th>UST 10Y<br><span style="font-weight:400">1Q27 → 4Q27</span></th>
+          <th>4Q27 커브<br><span style="font-weight:400">(2s10s)</span></th>
+          <th>핵심 뷰 & 추천 전략</th>
+        </tr>
+      </thead>
+      <tbody id="houseTbody"></tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>미국 매크로 세부 궤적 & 시나리오 매트릭스</h2>
+  <div class="panel">
+    <h3>2026~2028 주요 매크로 지표 6대 하우스 비교 (GS · MS · JPM · Barclays · WFS · Citi)</h3>
+    <div class="scroll">
+      <table style="min-width:960px;font-size:12.5px">
+        <thead>
+          <tr>
+            <th>지표</th>
+            <th>Goldman Sachs</th>
+            <th>Morgan Stanley</th>
+            <th>J.P. Morgan</th>
+            <th>Barclays</th>
+            <th>Wells Fargo (WFS)</th>
+            <th>Citi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>실질 GDP</b><br><span class="note">26 → 27 → 28</span></td>
+            <td class="n">연평균: 2.3 → <b>2.4</b> → 2.3%<br><span class="note">(잠재 2.3%, 컨센 2.2%)</span></td>
+            <td class="n">4Q/4Q: 2.6 → <b>2.5</b> → 2.7%<br><span class="note">(잠재 ~2.2%, 생산성 2.1%)</span></td>
+            <td class="n">4Q/4Q: 2.5 → <b>1.9</b> → 2.1%<br>연평균: 2.4 → <b>2.2</b> → 1.8%</td>
+            <td class="n">연평균: 2.4 → <b>2.2</b> → 1.9%<br><span class="note">(27년 매분기 2.0% SAAR)</span></td>
+            <td class="n">연평균: 2.4 → <b>2.5%</b><br>4Q/4Q: 2.6 → <b>2.4%</b><br><span class="note">(1Q 2.1→3Q 2.6→4Q 2.4%)</span></td>
+            <td class="n">연평균: 2.3 → <b>1.9%</b><br>4Q/4Q: 2.3 → <b>1.8%</b><br><span class="note">(27년 매분기 1.8% SAAR)</span></td>
+          </tr>
+          <tr>
+            <td><b>Core PCE</b><br><span class="note">4Q26 → 4Q27 → 4Q28</span></td>
+            <td class="n">3.2% → <b>2.4%</b> → ~2.1%<br><span class="note">(관세 +40bp 봄 소멸)</span></td>
+            <td class="n">3.2% → <b>2.6%</b> → ~2.1%<br><span class="note">(디젤·PPI로 완만한 둔화)</span></td>
+            <td class="n">3.3% → <b>2.7%</b> → 2.3%<br><span class="note">(1Q27 3.2% → 2H 2.5%)</span></td>
+            <td class="n">~3.2% → <b>2.6%</b><br><span class="note">(CPI 26년 3.5→27년 2.7%)</span></td>
+            <td class="n">3.3% → <b>2.6%</b> (연평균 2.8%)<br><span class="note">(1Q 3.0→2Q 2.9→4Q 2.6%)</span></td>
+            <td class="n">3.0% → <b>2.4%</b> (연평균 2.5%)<br><span class="note">(1Q 2.8→2Q 2.5→4Q 2.4%)</span></td>
+          </tr>
+          <tr>
+            <td><b>실업률 / 고용</b><br><span class="note">2027년 전망</span></td>
+            <td class="n">27년 안정(~4.1%)<br>28~29년 <b>4.5%</b> 상승</td>
+            <td class="n">4Q26 4.2% → 4Q27 <b>4.3%</b><br>비농업 월평균 <b>+35k</b></td>
+            <td class="n">1Q 4.0% → 4Q27 <b>4.2%</b><br>비농업 1Q 100k→4Q <b>25k</b></td>
+            <td class="n">타이트한 노동시장 유지<br><span class="note">(손익분기 이상 고용 지속)</span></td>
+            <td class="n">27년 전분기 <b>4.1%</b> 안정<br>비농업 월평균 <b>+64k</b> (균형)</td>
+            <td class="n">1H <b>4.3%</b> → 2H <b>4.2%</b><br><span class="note">(Low hire, low layoff 균형)</span></td>
+          </tr>
+          <tr>
+            <td><b>AI Capex & 투자</b><br><span class="note">2027년 핵심 가정</span></td>
+            <td class="n">글로벌 AI <b>$1.1조→$1.8조</b><br><span class="note">(1H27 증가율 피크)</span></td>
+            <td class="n">하이퍼스케일러 <b>$1.6조</b><br>비주거고정투자 <b>+6.9%</b></td>
+            <td class="n">하이퍼스케일러 <b>+48%</b><br>실질설비투자 <b>+8.3%</b></td>
+            <td class="n">AI 랩 매출 <b>$376bn</b>(+174%)<br>SPX EPS <b>$434</b>(+15%)</td>
+            <td class="n">실질 비주거투자 <b>+7.9%</b><br>하이퍼스케일러 채권 <b>$250bn</b></td>
+            <td class="n">실질 설비투자 <b>+3.8%</b> 감속<br>글로벌 AI 2030년 <b>$3.5조+</b></td>
+          </tr>
+          <tr>
+            <td><b>재정적자 / 부채</b><br><span class="note">GDP 대비 (2027)</span></td>
+            <td class="n">적자 유지, 재정임펄스<br>소폭 플러스(메디케이드 유예)</td>
+            <td class="n">적자 26년 6.2%→27년 <b>5.9%</b><br>총부채 <b>~125%</b> 횡보</td>
+            <td class="n">FY27 적자 <b>$2,060bn (6.1%)</b><br>재정충격(FIM) <b>-0.6%p</b> 드래그</td>
+            <td class="n">적자 26년 6.7%→27년 <b>6.6%</b><br>총부채 <b>125.6%</b></td>
+            <td class="n">FY27 적자 <b>$2,000bn</b><br><span class="note">(기초수지 기준 소폭 긴축)</span></td>
+            <td class="n">FY27 연방적자 <b>$2,195bn (6.4%)</b><br>일반정부 <b>-7.4%</b> / 부채 <b>124.9%</b></td>
+          </tr>
+          <tr>
+            <td><b>국제유가 (2027)</b><br><span class="note">Brent / WTI</span></td>
+            <td class="n">YE27 Brent <b>$78</b> / WTI <b>$70</b><br><span class="note">(확전 시 Brent $132)</span></td>
+            <td class="n">원유 완화되나 정제마진<br>(디젤) 1H27까지 타이트</td>
+            <td class="n">4Q27 선물 $74 vs<br>JPM 원자재팀 <b>$52</b>(WTI)</td>
+            <td class="n">27년 평균 Brent <b>$85</b> / WTI <b>$82</b><br><span class="note">(4Q27 Brent $80 / WTI $77)</span></td>
+            <td class="n">WTI 4Q26 $91 → 4Q27 <b>$76</b><br><span class="note">(27년 평균 WTI $80.3/bbl)</span></td>
+            <td class="n">항공유(+100%)·디젤(+110%)<br>운송비 전이 후 점진 완화</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>주요 리스크 시나리오 매트릭스 (MS · GS · ING · WFS · Citi)</h3>
+    <div class="scroll">
+      <table style="min-width:860px;font-size:12.5px">
+        <thead>
+          <tr><th>시나리오 구분</th><th>전제 조건 (Trigger)</th><th>매크로 영향 (GDP·물가)</th><th>Fed / UST 10Y 반응</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="pill bear">상방 1 (MS/ING/WFS)</span><br><b>총수요 과열 & 우측 테일<br>(Aggregate Demand)</b></td>
+            <td>AI 투자·고소득층 소비가 전 계층으로 확산, 닷컴붐 유사 과열 (WFS: 옵션시장이 SOFR 5.60%+ 확률 20% 반영)</td>
+            <td>미국 GDP <b>3%+</b>, 실업률 <b>3.5%</b> 하락, Core PCE <b>3% 상회</b> 고착</td>
+            <td class="n"><b>Fed 5.625% 인상</b> (23년 고점 상회)<br>ING: 실질금리 4% → <b>10Y 6.0%</b></td>
+          </tr>
+          <tr>
+            <td><span class="pill bear">상방 2 (MS/GS)</span><br><b>중동 재확전·유가 급등<br>(Rates & Oil Stagflation)</b></td>
+            <td>이란 전쟁 재확전·호르무즈 차질로 유가 <b>$125~150/bbl</b> (GS $132)</td>
+            <td>2차 파급으로 Core 물가 급등 후 <b>27년 말 미국 경미한 침체</b> (GDP 27년 1.6%, 28년 0.3%)</td>
+            <td class="n"><b>Fed 5.125~5.375% 인상</b> 후<br>28년 말 3.125%로 뒤늦은 인하</td>
+          </tr>
+          <tr>
+            <td><span class="pill neu">중립 상방 (MS/Citi)</span><br><b>AI 생산성 서프라이즈 vs<br>저축풀 구축 (Savings Pool)</b></td>
+            <td>AI 도입이 연간 <b>+50bp</b> 생산성 향상 달성 + 글로벌 국채($3조+)·AI Capex($3.5조)가 글로벌 저축풀 흡수(Citi)</td>
+            <td>GDP <b>3%+</b> 고성장에도 물가는 <b>2%</b> 둔화, 단 실질 중립금리(r*)와 기간프리미엄 동반 상승</td>
+            <td class="n"><b>Fed 3.50~4.375%</b> 인하/동결 불구<br><b>UST 10Y 5.00%+ 고착</b> (커브 스팁)</td>
+          </tr>
+          <tr>
+            <td><span class="pill bull">하방 (MS/GS/WFS/Citi)</span><br><b>AI Capex 급감·정치 반발<br>(AI Downside / Recession)</b></td>
+            <td>전력·그리드 병목, 유권자 반발(WSJ 여론조사 지지율 &lt;30%, Citi) 및 수익성 회의로 AI 투자·나스닥 급락</td>
+            <td>역(-)의 자산효과로 소비 위축, GDP <b>~1.0%</b>, 실업률 <b>5.1%+</b> 급등 (WFS: 나스닥-UST 높은 양(+)의 상관관계 작동)</td>
+            <td class="n"><b>Fed 27년 말 1.875% → 28년 말 1.375%</b> 공격적 인하 · <b>UST 10Y 급락(강세)</b></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>4대 핵심 쟁점 (Key Debates)</h2>
+  <div class="grid2">
+    <div class="panel">
+      <h3>1. Fed 통화정책 & 케빈 워시(Warsh) 신임 의장 체제</h3>
+      <div class="split">
+        <div class="row"><span class="lab" style="color:var(--bull)">4.00~4.25%<br>(12월 인상 후<br>27년 3회 인하)</span><div class="chips"><span class="chip">Citi<span class="num">12월 4.25% → 1Q 동결 → 2Q·3Q·4Q 분기별 인하(3.25~3.50%)</span></span></div></div>
+        <div class="row"><span class="lab" style="color:var(--teal)">4.00~4.25%<br>(12월 인상 후<br>27년 동결)</span><div class="chips"><span class="chip">Wells Fargo (WFS)<span class="num">12월 4.25% 후 27년 동결 (단, 1Q 1~2회 추가 인상 리스크)</span></span></div></div>
+        <div class="row"><span class="lab" style="color:var(--accent)">4.25~4.50%<br>(+50bp 후<br>인하/동결)</span><div class="chips"><span class="chip">Goldman Sachs<span class="num">12·3월 인상 → 27.12월 인하(4.25%)</span></span><span class="chip">Morgan Stanley<span class="num">12·3월 인상 → 동결</span></span><span class="chip">Barclays<span class="num">12·1월 인상 → 동결</span></span></div></div>
+        <div class="row"><span class="lab" style="color:var(--bear)">4.50~4.75%<br>(+75bp 후 동결)</span><div class="chips"><span class="chip">J.P. Morgan<span class="num">12·1·3월 3회 인상 → 27년 동결 → 1H28 2회 인하(4.25%)</span></span></div></div>
+      </div>
+      <ul>
+        <li><b>케빈 워시(Warsh) 신임 의장의 ‘가이던스 폐지’ 파장 (JPM·Citi)</b>: 워시 의장이 포워드 가이던스를 폐기하고 기자회견을 축소했으며 소통·대차대조표·데이터·인플레 프레임워크·생산성 등 5대 태스크포스(TF)를 가동(Citi). JPM은 내러티브 부재 속 연준이 1Q27 물가에 반응해 3회 연속 인상(4.75%)할 것으로 본 반면, Citi는 물가 둔화와 금융여건 긴축이 확인되는 2Q27부터 분기당 25bp씩 3회 인하(3.50%)할 것으로 전망.</li>
+        <li><b>높아진 중립금리(r*)와 1Q27 상방 비대칭성 (MS·WFS)</b>: MS는 실질 중립금리(r*)가 <b>1.5%(명목 ~3.5%)</b>로 상승했다고 분석. WFS 역시 연초 물가 잔여 계절성으로 인해 1Q27까지는 동결(4.25%) 기본 전망 대비 1~2회 추가 인상(4.50~4.75%) 리스크가 열려 있다고 경고.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h3>2. 인플레이션: 왜 Core PCE가 Core CPI보다 높았나 & 2027 경로</h3>
+      <dl class="kv">
+        <dt>PCE &gt; CPI 역전 현상</dt>
+        <dd><b>Citi·WFS·JPM 분석</b>: 통상 Core PCE가 Core CPI보다 낮으나 2026년에는 이례적으로 Core PCE(3.0~3.3%)가 Core CPI(3.1%)와 같거나 더 높게 나타남. 이는 ① 이란 전쟁 이후 <b>항공유(+100%)·디젤(+110%) 급등에 따른 항공료 및 비시장성 서비스 상승</b>과 ② AI 붐으로 인한 <b>컴퓨터 소프트웨어·주변기기·메모리 가격 폭등</b>이 CPI보다 PCE 가중치에서 훨씬 크게 반영되었기 때문(Citi).</dd>
+        <dt>1Q27 상방 리스크</dt>
+        <dd><b>연초 잔여 계절성 & 신규 관세 & 디젤</b>: WFS는 1월 CPI/PCE의 <b>잔여 계절성(Residual seasonality)</b>이 1Q27 채권시장의 최대 고비라고 지적. 또한 대법원의 IEEPA 관세 위헌 판결 이후 트럼프 행정부가 무역법 301조·232조 관세(실효세율 +3%p 복원, Core 물가 +0.2%p)를 재부과할 예정(JPM)이며, 정제 설비 부족으로 디젤 마진 강세가 1H27까지 이어짐(MS).</dd>
+        <dt>2H27 착지점 시각차</dt>
+        <dd><b>GS·Citi(4Q27 2.4%)</b>는 관세·에너지 기저효과 소멸과 타겟 부합 수준의 단위노동비용(생산성 반영 임금상승률)을 근거로 빠른 안정 전망. 반면 <b>WFS·MS·Barclays(2.6%)</b>와 <b>JPM(2.7%)</b>은 의료비·슈퍼코어 서비스(3.2%)의 관성으로 2% 중후반에서 완만하게 내려올 것으로 전망.</dd>
+      </dl>
+    </div>
+
+    <div class="panel">
+      <h3>3. AI 사이클 2막: 나스닥-금리 동조화 & 3대 구조적 리스크</h3>
+      <dl class="kv">
+        <dt>AI와 장기금리 동조화</dt>
+        <dd><b>“AI가 가는 곳으로 장기금리도 간다” (WFS)</b>: 2026년 하이테크 투자의 GDP 기여도가 1Q26 <b>1.64%p</b>(3Q26 1.45%p, 2000년 이후 최고)에 달하면서, <b>나스닥 지수와 UST 10Y 금리의 롤링 상관관계가 역사적 고점</b>으로 치솟음. 또한 2026년 10년물 금리 상승분 중 기간프리미엄 비중은 <b>20% 미만</b>이었고 <b>80% 이상이 성장·통화정책·중립금리(r*) 기대</b>였으며, 5y5y 금리 상승은 100% 실질금리 상승이었음(WFS).</dd>
+        <dt>수입 누출과 설비투자</dt>
+        <dd>하이퍼스케일러 Capex 증가율이 26년 +86% → 27년 +48%로 감속(JPM)하고, 서버·칩 수입 누출을 감안한 실질 비주거고정투자 증가율은 WFS <b>+7.9%</b>, MS <b>+6.9%</b>, Citi <b>+3.8%</b>로 완만해질 전망.</dd>
+        <dt>Citi의 3대 AI 리스크</dt>
+        <dd>① <b>금융 버블</b>(단, 최근 투자자들의 수익성 검증 강화는 건전한 신호) ② <b>미국 내 정치적 지지 약화</b>(전력망 부담·전기요금 급등과 일자리 공포로 WSJ 여론조사상 현 속도 AI 개발 지지율이 <b>30% 미만</b>으로 추락, 중간선거에서 데이터센터 반대 후보들 당선) ③ <b>사이버·로그(Rogue) AI 안보 리스크</b>.</dd>
+      </dl>
+    </div>
+
+    <div class="panel">
+      <h3>4. 미 중간선거 ‘블루 웨이브’와 글로벌 저축풀(Savings Pool)</h3>
+      <dl class="kv">
+        <dt>분점 정부와 재정 동결</dt>
+        <dd>민주당이 하원(261석)과 상원(56석)을 장악했으나 필리버스터 종결(60석)과 거부권 무력화(2/3)에는 미달(Barclays). <b>향후 2년간 예산조정권(Reconciliation)을 통한 대규모 감세·재정 지출 확대가 원천 차단</b>되며, IMF 경기조정 기초재정수지 기준으로 2027년 미국 재정은 <b>소폭 긴축(Mild fiscal tightening)</b>으로 전환(WFS·JPM).</dd>
+        <dt>글로벌 저축풀 경쟁</dt>
+        <dd><b>왜 Citi는 Fed 3.50% 인하에도 10Y 5.00%를 고수하나?</b>: 미국 연방적자(연 <b>$2조+</b>, 일반정부 GDP 대비 -7.4%) + 비미국 선진국 국채 순발행(연 <b>$1조+</b>) + 글로벌 AI Capex(2030년 <b>$3.5조+</b>)가 한정된 <b>글로벌 저축풀(Global Savings Pool)을 두고 경쟁</b>하면서 전 세계 장기 국채에 구조적인 기간·리스크 프리미엄을 요구하기 때문(Citi).</dd>
+        <dt>연준 독립성 방어</dt>
+        <dd>민주당의 상원 장악과 대법원의 리사 쿡(Lisa Cook) 연준 이사 사건 판결로 백악관의 연준 인사 교체 시도 가능성이 크게 낮아지며 제도적 리스크 프리미엄 완화(JPM·Barclays·Citi).</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="supply-sec">
+  <h2>미국채(UST) 및 달러 채권 수급 심층 분석</h2>
+  <div class="grid2">
+    <div class="panel">
+      <h3>미 재무부 발행: “T-Bill 확대 + 장기물 바이백 + 2H27 초장기 감축(WFS)”</h3>
+      <dl class="kv">
+        <dt>핵심 구조 변화</dt>
+        <dd>2027년 재정적자($2.0~2.2조) 조달은 막대하나, <b>T-Bill 순발행 확대($845bn~$1.1조)</b>와 <b>장기물 바이백 3배 증액</b>을 통해 민간이 흡수해야 할 <b>10년물 환산 듀레이션 공급은 전년 대비 20% 감소</b>($781bn → $620bn, Barclays).</dd>
+        <dt>쿠폰채 vs T-Bill</dt>
+        <dd><b>Barclays·GS 추산</b>: 이표채(Coupon) 대민 순발행은 26년 ~$1.2조 → 27년 <b>$1.03~1.10조(-10~14%)</b>로 감소하고 T-Bill 비중이 <b>23.1% → 25.0%</b>로 상승.<br><b>WFS 추산</b>: 2027년 <b>T-Bill 순발행이 $1.1조</b>에 달하며, 특히 <b>2027년 10월로 예상되는 부채한도 X-date</b> 전후로 1Q27과 4Q27에 T-Bill 발행이 집중될 전망.</dd>
+        <dt>8월 리펀딩 & 초장기 감축</dt>
+        <dd><b>GS·Barclays·WFS 공통</b>: 2027년 8월 리펀딩부터 <b>2년~10년물 이표채 경매 증액</b> 재개 전망.<br><b>WFS의 차별화된 콜</b>: 재무부가 장기 조달비용 절감을 위해 <b>2027년 하반기 중 20년물과 30년물 경매 규모를 각각 $3bn씩 전격 감축</b>할 것으로 전망!</dd>
+        <dt>장기물 바이백 위력</dt>
+        <dd>유동성 지원 바이백 한도가 회당 $2bn → <b>$6bn(분기 $32bn, 연간 총 바이백 $431bn)</b>으로 3배 확대(Barclays). <b>WFS 분석</b>에 따르면 현재 10년~30년 구간 바이백 규모가 <b>해당 구간 국채 총발행(Gross issuance)의 무려 43%</b>에 달해 초장기 수급을 강력하게 지지.</dd>
+      </dl>
+    </div>
+
+    <div class="panel">
+      <h3>은행 국채 매수 · 부채한도 X-Date · AI 회사채 수급</h3>
+      <dl class="kv">
+        <dt>부채한도 & 2Y 스프레드</dt>
+        <dd><b>부채한도 역학 (GS·WFS)</b>: GS는 1Q27 부채한도 봉착 시 TGA 방출(-$400bn)로 SOFR가 -4bp 하락한 뒤 타결 후 급등하는 변동성을 경고. <b>WFS</b>는 <b>2027년 10월 X-date</b>에 앞서 재무부가 T-Bill 발행을 줄일 때, 과거 2017년 이후 학습효과로 인해 <b>X-date 직전 63일 동안 2Y 스왑스프레드가 중간값 기준 4.7bp 타이튼(국채 강세)</b>되었다는 계량 분석 제시.</dd>
+        <dt>은행 규제 완화 & 수요</dt>
+        <dd><b>미국 은행권 수요 복귀 (WFS)</b>: 미국 상업은행들이 2026년 들어 이미 <b>국채 보유량을 +$160bn 확대</b>했으며, <b>eSLR(보완적 레버리지비율) 및 G-SIB 자본규제 완화</b>로 2027년 벨리(5~10년) 구간 국채 매수 및 딜러 대차대조표 여력이 한층 확대될 전망. 연준 또한 2Q27부터 <b>월 $25bn 지준관리매입(RMP)</b>으로 T-Bill을 흡수(GS).</dd>
+        <dt>AI 회사채 공급</dt>
+        <dd><b>WFS IG 신디케이트 vs Barclays 추산</b>: 2027년 미국 IG 총발행은 <b>WFS $2.25조</b>(Barclays $2.10조)로 사상 최대이며, 이 중 <b>하이퍼스케일러 발행이 26년 $230bn → 27년 ~$250bn</b>에 달하고 빅5 딜의 평균 만기(Duration)가 길어지고 있음(WFS). 반면 <b>Barclays</b>는 칩·데이터센터 조달이 1~5년 단기·사모·선수금으로 분산되어 10년+ IG 발행 증가율은 +5%($360bn)에 그친다고 평가.</dd>
+        <dt>MBS·유동화 축소</dt>
+        <dd><b>Securitized 순발행 -22% 감소 ($548bn → $426bn, Barclays)</b>: 7%대 모기지 금리와 은행 직접보유 확대로 2H27 에이전시 MBS 순공급이 제로(0) 수준으로 급감해 채권시장 전체 듀레이션 부담을 상쇄.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>미국채 수급 & 크레딧 시장에 대한 하우스 간 시각 차이</h3>
+    <p class="consensus"><b>공통 인식</b> 2027년 미 재무부의 이표채(Coupon) 순공급과 듀레이션 부담은 T-Bill 활용 및 바이백 확대로 2026년보다 완화(2027년 8월 리펀딩부터 2~10년물 증액 시작). 다만 <b>초장기 스왑스프레드 방향성·글로벌 저축풀 압박·AI 회사채 구축효과</b>를 두고는 해석이 뚜렷하게 갈림.</p>
+    <div class="scroll">
+      <table class="dt">
+        <thead><tr><th>핵심 쟁점</th><th class="pos">우호적 / 수급 안정 시각</th><th class="neg">신중한 / 수급 경계 시각</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>국채 듀레이션 & 초장기 공급</td>
+            <td>10년 환산 듀레이션 공급 <b>-20% 감소($781bn→$620bn)</b> (Barclays) · 10~30Y 바이백이 총발행의 <b>43%</b>에 달하고 <b>2H27 20Y·30Y 경매 $3bn 감축</b> 전망 (WFS) · 대민 순공급 $1.7조 보합 (GS)</td>
+            <td>미국 국채($2조+) + 비미국 국채($1조+) + AI Capex($3.5조)가 <b>글로벌 저축풀을 압박</b>해 연준 인하에도 10Y 5.0% 고착 (Citi) · T-Bill 단기조달 의존이 고금리의 이자비용 전이를 가속화 (MS)</td>
+          </tr>
+          <tr>
+            <td>USD 스왑스프레드<br>(WFS vs ING 정면 대립)</td>
+            <td><b>WFS(20Y·30Y 스프레드 신고점 확대 = 국채 상대 강세)</b>: 장기 바이백(43%) + 2H27 20·30Y 경매 감축 + 은행 국채 매수(+$160bn) 및 eSLR 규제 완화가 초장기 국채 수급을 지지 (1H27 벨리도 우호적)</td>
+            <td><b>ING(10Y·30Y 스프레드 축소/역전 = 국채 상대 약세)</b>: 베센트 장관의 바이백에 기댄 패스트머니 포지션이 과도하게 쏠려 있어, 재정적자 현실화 시 1Q27 중 국채가 스왑 대비 약세로 되돌릴 것</td>
+          </tr>
+          <tr>
+            <td>AI 회사채와 구축효과</td>
+            <td>AI 조달이 데이터센터·칩 파이낸싱(1~5년 단기)·사모·선수금으로 분산되어 10년+ IG 발행은 +5%에 불과, 듀레이션 발작 요인 아님 (Barclays)</td>
+            <td>27년 IG 총발행 <b>$2.25조(하이퍼스케일러 $250bn)</b> 및 빅테크 발행 만기 장기화로 장기 금리와 나스닥 간 동조화 심화 (WFS) · 누적 AI 부채의 <b>구축효과(Crowding-out)</b> 경계 (ING·Citi)</td>
+          </tr>
+          <tr>
+            <td>채권의 주식 헤지 기능</td>
+            <td>인플레가 2%대로 내려오면 주식-채권 수익률 상관관계가 다시 음(-)으로 전환되어 <b>포트폴리오 분산·헤지 수단으로서의 가치 회복</b> (GS) · 나스닥 조정 시 장기채 강세 작동 (WFS)</td>
+            <td>AI 생산성 주도로 실질 중립금리(r*)와 성장이 동시에 높아지면 <b>주가 상승과 고금리가 동행</b>하여 전통적 상관관계가 작동하지 않을 수 있음 (MS·Barclays)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="why-sec">
+  <h2>하우스별 상세 전망 근거 (House-by-House Thesis & Strategy)</h2>
+  <p class="sec-sub">각 하우스 원문에서 매크로·연준·미국채 경로를 도출한 핵심 논거와 트레이드 전략 (총 7개 하우스)</p>
+  <div class="whygrid" id="whyGrid"></div>
+</section>
+
+<div class="notes">
+  <b>분석 대상 원문 리스트 (`C:\Users\Administrator\.gemini\antigravity\scratch\2027 outlook`) — 총 7개 하우스 / 9개 리포트</b>
+  <ul>
+    <li><b>Goldman Sachs (Rates)</b>: <i>2027 Global Rates Outlook: A Better Buffer</i> (2026.11.16, William Marshall, Simon Freycenet, Isabella Rosenberg, Friedrich Schaper, Loic Mathys)</li>
+    <li><b>Goldman Sachs (Macro)</b>: <i>Global Economics Analyst — Macro Outlook 2027: Steady Baseline, Downside Risks</i> (2026.11.12, Jan Hatzius, Dominic Wilson, Joseph Briggs, Vickie Chang 외)</li>
+    <li><b>Wells Fargo Securities (Rates)</b>: <i>2027 Rates Outlook: Tightening’s Last Act</i> (2026.11.19, Marcus Jennings, Angelo Manolatos, Francis Brown)</li>
+    <li><b>Wells Fargo Securities (Economics)</b>: <i>Economic Outlook: November 2026</i> (2026.11.13, Tom Porcelli, Tim Quinlan, Michael Pugliese, Sarah House 외)</li>
+    <li><b>Citi</b>: <i>Global Economic Outlook & Strategy: The Global Economy’s Tenuous Balance — Resilience Amid Uncertainty</i> (2026.10.29, Nathan Sheets, Andrew Hollenhorst, Veronica Clark, Jason Williams, Alejandra Vazquez Plata, Jamie Searle)</li>
+    <li><b>Barclays</b>: <i>Global Outlook: A correction, not a collapse</i> (2026.11.19, Ajay Rajadhyaksha, Amrut Nashikkar, Anshul Pradhan, Marc Giannoni, Dominique Toublan, Venu Krishna, Michael McLean 외)</li>
+    <li><b>ING</b>: <i>Rates Outlook 2027: The Good, the Bad and the Ugly</i> (2026.11, Padhraic Garvey, Benjamin Schroeder, Michiel Tukker)</li>
+    <li><b>Morgan Stanley</b>: <i>Global Insight: 2027 Global Economic Outlook (Year Ahead)</i> (2026.11.15, Seth Carpenter, Michael Gapen, Sam Coffin, Diego Anzoategui 외)</li>
+    <li><b>J.P. Morgan</b>: <i>North America Economic Research — 2027 US Economic Outlook: After the AI High</i> (2026.11.19, Michael Feroli, Abiel Reinhart, Bennett Parrish, Tushar Komali)</li>
+    <li><b>확장 안내</b>: 폴더에 추가 IB 리포트(BofA, DB, UBS, HSBC 등)가 업로드되면 상단 KPI 중간값, 인터랙티브 차트, 총괄표 및 하우스별 근거 카드에 즉시 통합 반영됩니다.</li>
+  </ul>
+</div>
+
+</div>
+
+<script>
+const NOW = {
+  ffr: 4.00, // 3.75-4.00% top of range
+  y2: 4.88,
+  y5: 4.97,
+  y10: 5.13,
+  y30: 5.46
+};
+
+// 하우스별 통합 데이터 (4Q27 UST 10Y 강세 순 정렬)
+const HOUSES = [
+  {
+    id: "GS",
+    name: "Goldman Sachs",
+    authors: "Jan Hatzius · William Marshall 외 (11/12, 11/16)",
+    stance: "bull",
+    stanceLabel: "강세 (Bullish)",
+    gdp27: "2.4% (연평균)",
+    pce27: "2.4% (4Q/4Q)",
+    fedPath: "12·3월 인상(4.25~4.50%) → 27.12월 1회 인하(4.00~4.25%) → 28년 3회 인하(3.25~3.50%)",
+    fedQ: [4.00, 4.25, 4.50, 4.50, 4.50, 4.25, 4.00, 3.75, 3.50, 3.50], // Current, 4Q26, 1Q27..4Q27, 1Q28..4Q28 (상단 기준)
+    q2: [4.65, 4.50, 4.30, 4.10],   // 1Q27..4Q27
+    q5: [4.70, 4.55, 4.40, 4.25],
+    q10: [4.90, 4.80, 4.70, 4.60],  // 1Q27..4Q27 (4Q26=5.00, 4Q28=4.30)
+    q30: [5.25, 5.20, 5.15, 5.10],
+    band10: [4.50, 5.15],
+    curve4Q: "+50bp",
+    summary: "높은 시작 금리 버퍼 + 시장 대비 도비시한 연준. 5Y 벨리 선호, 10Y TIPS 매수, 2s10s 스팁"
+  },
+  {
+    id: "ING",
+    name: "ING",
+    authors: "Padhraic Garvey · Benjamin Schroeder (11월)",
+    stance: "mix",
+    stanceLabel: "전약후강 (1Q 약세→2H 강세)",
+    gdp27: "2.0%+ (안정)",
+    pce27: "2.0%+ (하반기 둔화)",
+    fedPath: "1Q27 인플레 확인 후 인상 종료 → 하반기 금리 인하 재프라이싱",
+    fedQ: [4.00, 4.25, 4.50, 4.50, 4.50, 4.25, 4.00, 3.75, 3.50, 3.50],
+    q2: null,
+    q10: [5.35, 5.00, 4.75, 4.63], // 1Q27 5.25~5.50%(중간 5.35), 4Q27 4.50~4.75%(중간 4.625)
+    band10: [4.50, 5.50],
+    curve4Q: "스팁 (10s30s↑)",
+    summary: "1Q27 5.25~5.50% 고점 테스트 후 인플레 둔화 시 4.50~4.75% 하락. 1Q 스왑스프레드 역전(국채 약세) 베팅"
+  },
+  {
+    id: "WFS",
+    name: "Wells Fargo (WFS)",
+    authors: "Tom Porcelli · Marcus Jennings 외 (11/13, 11/19)",
+    stance: "bull",
+    stanceLabel: "1Q 신중 → 2Q+ 강세",
+    gdp27: "2.4% (4Q) / 2.5% (연간)",
+    pce27: "2.6% (4Q) / 2.8% (연간)",
+    fedPath: "12월 인상(4.00~4.25%) 후 2027년 동결 (단, 1Q27 연초 물가로 1~2회 추가 인상 리스크)",
+    fedQ: [4.00, 4.25, 4.25, 4.25, 4.25, 4.25, 4.25, 4.25, 4.25, 4.25],
+    q2: [4.55, 4.45, 4.40, 4.35],
+    q5: [4.80, 4.75, 4.70, 4.65],
+    q10: [5.00, 4.95, 4.90, 4.85],
+    q30: [5.35, 5.35, 5.30, 5.30],
+    band10: [4.75, 5.15],
+    curve4Q: "+50bp (1Q 플랫→스팁)",
+    summary: "1Q27 2s10s 플랫 후 2Q+ 듀레이션 매수·스티프너 전환. 2H27 20·30Y 경매 $3bn 감축 및 초장기 스왑스프레드 신고점 전망"
+  },
+  {
+    id: "CITI",
+    name: "Citi",
+    authors: "Nathan Sheets · Andrew Hollenhorst 외 (10/29)",
+    stance: "neu",
+    stanceLabel: "중립 (5Y 벨리 선호)",
+    gdp27: "1.8% (4Q) / 1.9% (연간)",
+    pce27: "2.4% (4Q) / 2.5% (연간)",
+    fedPath: "12월 인상(4.00~4.25%) 및 1Q 동결 후, 2Q·3Q·4Q27 분기별 3회 인하(3.25~3.50%)",
+    fedQ: [4.00, 4.25, 4.25, 4.00, 3.75, 3.50, 3.50, 3.50, 3.50, 3.50],
+    q2: null,
+    q10: [5.00, 5.00, 5.00, 5.00],
+    band10: [4.85, 5.15],
+    curve4Q: "5Y 선호 / 완만한 불플랫",
+    summary: "외사 중 가장 도비시한 연준(27년 3회 인하→3.50%) 전망에도 글로벌 저축풀 경쟁·기간프리미엄으로 10Y 5.00% 횡보"
+  },
+  {
+    id: "BARC",
+    name: "Barclays",
+    authors: "Ajay Rajadhyaksha · Anshul Pradhan 외 (11/19)",
+    stance: "neu",
+    stanceLabel: "중립 (약세 편향)",
+    gdp27: "2.0% (4Q) / 2.2% (연간)",
+    pce27: "2.6% (4Q/4Q)",
+    fedPath: "12·1월 인상(4.25~4.50%) → 2027년 내내 동결 유지",
+    fedQ: [4.00, 4.25, 4.50, 4.50, 4.50, 4.50, 4.50, 4.25, 4.00, 4.00],
+    q2: [4.85, 4.85, 4.80, 4.75], // 2Y ~4.85% 적정 평가 반영 참고치
+    q10: [5.15, 5.10, 5.05, 5.00], // 공식 분기 전망 (Fig 1)
+    band10: [4.90, 5.25],
+    curve4Q: "1yf 2s10s 스팁",
+    summary: "듀레이션 중립(주식 비중확대). 국채 듀레이션 공급 -20% 감소에도 높은 단기금리가 10Y 하단(5.0%) 지지"
+  },
+  {
+    id: "MS",
+    name: "Morgan Stanley",
+    authors: "Seth Carpenter · Michael Gapen 외 (11/15)",
+    stance: "neu",
+    stanceLabel: "중립 (Neutral)",
+    gdp27: "2.5% (4Q/4Q)",
+    pce27: "2.6% (4Q/4Q)",
+    fedPath: "12·3월 인상(4.25~4.50%) → 27년 동결 → 2Q28부터 75bp 인하(3.50~3.75%)",
+    fedQ: [4.00, 4.25, 4.50, 4.50, 4.50, 4.50, 4.50, 4.25, 4.00, 3.75],
+    q2: null,
+    q10: null,
+    band10: null,
+    curve4Q: "–",
+    summary: "AI 투자·부유층 소비로 성장 견조, 디젤·PPI로 더딘 디스인플레. 실질 중립금리(r*) 1.5%로 상승"
+  },
+  {
+    id: "JPM",
+    name: "J.P. Morgan",
+    authors: "Michael Feroli · Abiel Reinhart 외 (11/19)",
+    stance: "bear",
+    stanceLabel: "약세~중립 (Fed 최고 4.75%)",
+    gdp27: "1.9% (4Q) / 2.2% (연간)",
+    pce27: "2.7% (4Q/4Q)",
+    fedPath: "12·1·3월 3회 인상(4.50~4.75%) → 27년 동결 → 1H28 2회 인하(4.00~4.25%)",
+    fedQ: [4.00, 4.25, 4.75, 4.75, 4.75, 4.75, 4.50, 4.25, 4.25, 4.25],
+    q2: null,
+    q10: null,
+    band10: [4.90, 5.30], // "do not anticipate much easing in 10Y over next year"
+    curve4Q: "플랫 후 스팁",
+    summary: "워시 의장의 가이던스 폐기로 1Q 물가(3.2%)에 반응해 4.75%까지 인상. 27년 10Y 금리 하락 여력 제한적"
+  }
+];
+
+const WHY_DATA = {
+  "GS": {
+    quote: "“A Better Buffer: 높은 시작 금리와 덜 매파적인 연준이 10년물 플러스 초과수익을 만든다”",
+    points: [
+      "<b>인플레 둔화와 연준 피벗</b>: 관세 효과(현재 Core PCE에 +40bp)가 내년 봄 YoY 통계에서 완전히 빠지고, 이란 전쟁발 에너지 충격도 브렌트유 $78/bbl 안정과 함께 소멸하며 Core PCE가 26년 말 3.2% → 27년 말 2.4%로 하락. 연준은 12월·3월 인상(4.25~4.50%) 후 <b>27년 12월 첫 인하</b>에 나설 전망(시장 프라이싱보다 도비시).",
+      "<b>밸류에이션 & 헤지 기능 복원</b>: 5y5y 선도금리가 모델 적정가치를 소폭 상회. 인플레가 2%대로 안정되면 주식-채권 수익률 상관관계가 다시 음(-)으로 돌아서며 AI 주가 변동성 및 성장 하방 리스크에 대한 채권의 포트폴리오 헤지 가치가 부각.",
+      "<b>수급 안정 & 8월 리펀딩</b>: 재무부의 T-Bill 활용, 바이백 확대, 연준의 T-Bill 매입(2Q27부터 RMP 월 $25bn 정착)으로 대민 국채 순공급($1.70조)은 보합, 이표채 순공급($1.10조)은 감소. 쿠폰 경매 증액은 8월 리펀딩부터 2~10년물 위주로만 단행.",
+      "<b>머니마켓 변동성</b>: 1Q27 부채한도 봉착 시 TGA 방출(-$400bn)로 SOFR가 4bp 가량 눌린 뒤, 하반기 한도 타결 후 TGA 재건 과정에서 레포 금리가 급등하는 전약후강 변동성 예상."
+    ],
+    strat: "10Y YE27 4.60% (2Y 4.10%, 5Y 4.25%, 30Y 5.10%) · 단기 정책 불확실성 방어를 위해 5Y(Belly) 롱 및 2s10s/10s30s 스티프너 · 10Y TIPS 롱 vs 명목채 숏 · 6m~1y 만기 2y~5y 저행사가 리시버로 성장 하방 헤지"
+  },
+  "ING": {
+    quote: "“The Good(AI), the Bad(재정적자), the Ugly(인플레): 1Q27 5.25~5.50% 상방 테스트 후 하반기 4.50~4.75% 안착”",
+    points: [
+      "<b>1Q27까지 ‘3중고(Triple Whammy)’ 지속</b>: AI 생산성이 실질금리를 끌어올린 가운데, 2027년에는 막대한 AI 회사채 발행 누적에 따른 <b>구축효과(Crowding-out)</b>가 생산성 호재를 압도할 위험. 여기에 GDP 대비 6~6.5%에 달하는 재정적자와 이란발 인플레 잔열이 겹쳐 1Q27까지 10년물이 <b>5.25%(상단 5.50%)</b>까지 재상승할 전망.",
+      "<b>하반기 반전의 열쇠는 ‘인플레 하락’</b>: 1분기를 지나며 성장과 물가가 모두 2%대 초반으로 내려오면 연준이 추가 인상을 멈추고, 현재 시장이 전혀 반영하지 않고 있는 <b>‘차기 금리 인하 사이클’을 재프라이싱</b>하기 시작하며 장기금리를 4.50~4.75%로 끌어내림.",
+      "<b>10년물 6.0% 도달의 3가지 테일 시나리오</b>: ① 닷컴붐처럼 실질 GDP가 3~4%로 폭증해 10Y 실질금리가 4%에 도달하거나 ② 재정적자가 GDP의 7~8%로 악화되거나 ③ 엘니뇨 등으로 인플레가 3%대에서 내려오지 않을 경우 10Y 6% 도달 가능.",
+      "<b>인위적으로 눌린 미국 스왑스프레드</b>: 베센트 재무장관의 장기물 바이백 증액과 패스트머니의 롱 UST / 페이 스왑 포지션 덕에 10Y SOFR 스왑스프레드가 40bp 아래로 축소됐으나, 재정적자 현실을 감안할 때 1Q27 중 재확대 불가피."
+    ],
+    strat: "너무 이른 시점에 채권 강세(롱) 베팅 지양 → 1Q27 5.25~5.50% 반등 시 분할 매수하여 하반기 4.50~4.75% 수렴 노림 · US 10Y(목표 50bp+) 및 30Y(목표 75bp+) 스왑스프레드 역전(국채 상대 약세) 포지션"
+  },
+  "WFS": {
+    quote: "“Tightening’s Last Act: 1Q27 마지막 인상·연초 계절성 고비만 넘기면 듀레이션 강세와 스티프닝이 열린다”",
+    points: [
+      "<b>12월 인상(4.25%) 후 동결 vs 1Q27 매파적 테일 리스크</b>: 경제팀 기본 전망은 12월 +25bp 인상(4.00~4.25%) 후 2027년 동결(실업률 4.1% 균형, 비농업 월 +64k, Core PCE 4Q26 3.3%→4Q27 2.6%, WTI $91→$76). 단, 금리전략팀은 <b>1월 CPI/PCE 잔여 계절성</b>으로 인해 1Q27 중 1~2회 추가 인상(4.50~4.75%) 위험이 열려 있어 1분기까지는 신중할 것을 권고.",
+      "<b>높은 선도금리 허들과 AI-금리 동조화</b>: 현재 YE27 선도금리(2Y 4.94%/실질 2.60%, 10Y 5.19%/실질 2.97%)가 너무 높아 1Q27 이후 채권 매수 포지션이 이기기 쉬운 구조. 2026년 10Y 금리 상승의 80% 이상은 기간프리미엄(<20%)이 아닌 성장·정책·r* 기대였으며, 나스닥과 10Y 금리의 롤링 상관계수가 고점에 달해 AI 투자 감속 시 장기금리 하락 폭이 커질 수 있음.",
+      "<b>2H27 20·30년 경매 $3bn 감축 & 바이백 43%</b>: 2027년 T-Bill 순발행 $1.1조(10월 부채한도 X-date 전후 1Q·4Q 집중) 및 8월 2~10년물 경매 증액을 예상하면서도, 외사 중 유일하게 <b>2027년 하반기 20년·30년물 경매 규모 $3bn 감축</b>을 전망. 여기에 10~30년 총발행의 43%에 달하는 바이백과 은행 국채 매수(+$160bn, eSLR 완화)가 결합.",
+      "<b>AI 하이퍼스케일러 채권 공급</b>: WFS IG 신디케이트는 27년 미국 IG 총발행을 <b>$2.25조</b>, 이 중 하이퍼스케일러 발행을 <b>~$250bn</b>(26년 $230bn)으로 추산하며 빅5 딜의 만기 장기화 추세 지적."
+    ],
+    strat: "UST 4Q27 2Y 4.35%, 5Y 4.65%, 10Y 4.85%, 30Y 5.30% · 1Q27까지 2s10s 플래트너(26년 저점 하회 목표) 유지 후 2Q27부터 2s10s·5s30s 스티프너 전환 · 20Y·30Y 스왑스프레드 신고점 확대(국채 강세) 및 27년 10월 X-date 직전 2Y 스왑스프레드 타이튼 베팅"
+  },
+  "CITI": {
+    quote: "“The Global Economy’s Tenuous Balance: 연준이 3.50%까지 내릴 때 왜 10년물은 5.00%에 머무는가?”",
+    points: [
+      "<b>잠재수준 이하 성장(1.8% SAAR)과 완만한 디스인플레</b>: AI Capex가 1H26 연율 $494bn(GDP의 1.5%)에 달했으나 수입 누출이 크고 27년 실질 설비투자 증가율은 +3.8%(26년 +7.2%)로 반토막 날 전망. 실질 GDP는 27년 매 분기 <b>1.8% SAAR(연간 1.9%)</b>에 머물고, 항공유(+100%)·디젤(+110%) 및 컴퓨터/SW 가중치 때문에 CPI보다 높았던 Core PCE도 27년 평균 2.5%(4Q27 2.4%)로 둔화.",
+      "<b>외사 중 가장 도비시한 연준 콜 (27년 말 3.50%)</b>: 신임 워시 의장이 포워드 가이던스를 없애고 5대 TF를 가동 중이나, 인플레 둔화와 긴축적 금융여건이 확인되면서 12월 마지막 인상(4.25%) 및 1Q 동결 후 <b>2Q·3Q·4Q27 매 분기 25bp씩 3회 인하(3.50%)</b>할 것으로 전망(단, 금리전략팀은 1월 건너뛰고 분기별 인상 지속 리스크도 병기).",
+      "<b>글로벌 저축풀(Savings Pool) 압박과 10Y 5.00% 고착</b>: 연준이 3.50%로 인하하더라도 ① 미국 연방적자 연 $2조+(FY27 $2,195bn, 일반정부 -7.4%) ② 비미국 선진국 국채 발행 연 $1조+ ③ 2030년 $3.5조를 돌파할 글로벌 AI Capex가 글로벌 저축풀을 흡수하며 기간·리스크 프리미엄을 밀어 올려 <b>UST 10Y 금리는 1Q27~4Q27 내내 5.00%</b>에 갇힐 전망.",
+      "<b>AI 정치적 역풍 경계</b>: 전력망 부담·전기요금 인상과 일자리 대체 우려로 미국 유권자의 현 속도 AI 개발 지지율이 30% 미만(WSJ 조사)으로 떨어졌으며, 중간선거에서도 데이터센터 반대 공약이 득표력으로 이어짐."
+    ],
+    strat: "UST 10Y 1Q27~4Q27 5.00% 보합(듀레이션 중립) · 연준 인하 수혜가 직접적이고 장기 재정 리스크에서 비켜난 5Y(Belly) 구간 선호 · 재무부의 장기물→T-Bill 발행 전환 및 중간선거 블루웨이브로 재정 테일리스크 완화 시 완만한 불 플래트닝 가능성"
+  },
+  "BARC": {
+    quote: "“A correction, not a collapse: AI는 붕괴가 아닌 중간 조정, 채권 듀레이션은 중립 유지 및 포워드 스티프너 선호”",
+    points: [
+      "<b>1998년 여름과 유사한 AI 중간 조정</b>: 4Q 기술주 급락과 젠슨 황 NVDA CEO 사임에도 클라우드 매출(Azure +48%, GCP +103%)과 데이터센터 수주잔고는 공급 부족 상태. 반도체 EPS가 15% 하향 조정되더라도 S&P 500 전체 EPS는 11% 성장 가능(기본 전망 $434, +15%, SPX 목표 8,700).",
+      "<b>멈춰선 디스인플레와 높아진 금리 하단</b>: 미국 코어 CPI가 3개월 연속 0.3% m/m(연율 3.7%)을 기록하고 Core PCE는 27년 4Q/4Q 2.6%로 목표치를 지속 상회. 연준은 12월·1월 연속 인상으로 <b>4.25~4.50%</b>에 도달한 뒤 2027년 내내 동결할 전망.",
+      "<b>10년물 기대단기금리 적정치는 4.0%</b>: 현재 시장은 향후 10년간 평균 명목 정책금리를 3.7%로 할인 중이나, 긴축에 둔감한 미국 경제 체력을 감안하면 적정 수준은 4.0%에 가까움. 위험회피로 기간프리미엄이 줄어들어도 기대단기금리 상승이 이를 상쇄해 <b>10Y 금리는 1Q27 5.15% → 4Q27 5.00%</b>의 높은 수준 유지.",
+      "<b>국채 듀레이션 공급 -20% 감소 vs 사상 최대 회사채</b>: T-Bill 비중 확대(25%)와 장기물 바이백 확대(연 $431bn)로 27년 이표채 순발행은 $1.03조(-14%), 10년 환산 듀레이션 공급은 $620bn(-20%)으로 축소(8월 리펀딩 증액도 2~10년 집중). 기업채 순발행은 $1.37조로 사상 최대나 1~5년 단기물·비지수 조달 위주라 장기 듀레이션 충격은 제한적."
+    ],
+    strat: "자산배분상 주식 > 채권 비중확대, 듀레이션 중립(UST 10Y 4Q27 5.00%) · 아웃라이트 롱 대신 비대칭성이 우수한 1y-forward 2s10s SOFR 커브 스티프너 · 과도한 인상 확률을 매도하는 6m1y 1x1.5 페이어 스프레드 · 에너지 헤지 2Y TIPS BEI 롱 & 5Y 오프더런 TIPS 아이오타 와이드너"
+  },
+  "MS": {
+    quote: "“Resilient Growth, Reluctant Disinflation: 견조한 AI·소비와 끈적한 디젤·서비스 물가가 만드는 2027년 장기 동결”",
+    points: [
+      "<b>AI 투자 정점과 완만한 성장(4Q/4Q 2.5%)</b>: 하이퍼스케일러 Capex가 27년 $1.6조, 28년 $1.8조로 늘어나며 성장을 지지(단, 칩·장비 수입 차감 시 순 GDP 기여는 총지출보다 작음). 가계 순자산 $195조에 기반한 부유층 소비가 OBBBA 재정 부양 소멸 및 저소득층 메디케이드/SNAP 삭감 충격을 방어.",
+      "<b>‘Slow-hire, Slow-fire’ 노동시장</b>: 이민 제한으로 고용 손익분기점이 월 5만 명으로 낮아진 가운데, 27년 비농업고용은 월 3.5만 명, 실업률은 4.3%로 완만히 상승. AI로 인한 실업률 상승분은 현재까지 15bp 이하로 미시적 수준.",
+      "<b>왜 디스인플레가 더딘가(Reluctant Disinflation)</b>: 국제유가가 진정되어도 정유 설비 병목으로 <b>글로벌 디젤 가격과 정제마진이 2027년 중반까지 타이트</b>하게 유지되며 화학·고무·플라스틱·운송 PPI를 자극. Core PCE는 26년 말 3.2%에서 27년 말 2.6%로 천천히 내려오며 28년 말에야 2% 근접.",
+      "<b>실질 중립금리(r*) 1.5% 상향과 연준 동결</b>: 생산성 향상(추세 2.1%→2.3%) 등으로 실질 중립금리가 1.5%(명목 3.5%)로 약 50bp 상승. 연준은 2차 파급 차단을 위해 12월·3월 2회 인상(4.25~4.50%, 중간값 4.375%) 후 2027년 내내 동결하고 2Q28(6월)에야 첫 인하를 시작해 28년 말 3.50~3.75% 도달.",
+      "<b>재정 지속가능성(DSA)의 단기 착시</b>: 높은 명목 성장률 덕분에 단기적으로는 G≥R(성장률≥유효이자율)이 유지되며 부채비율이 ~125%에서 안정돼 보이나, 재무부의 T-Bill 단기조달 의존이 고금리의 이자비용 전이를 앞당겨 중기 재정 리스크를 키움."
+    ],
+    strat: "기본 시나리오상 Fed 2027년 말 4.375% 동결 · 4대 대안 시나리오(총수요 과열 시 Fed 5.625%, 유가 $125~150 스태그플레이션 시 5.125~5.375% 후 침체, AI 생산성 서프라이즈 시 4.375% 유지, AI 투자 급감 시 1.875% 인하)에 따른 양방향 테일 관리"
+  },
+  "JPM": {
+    quote: "“After the AI High & The Warsh of Times: 워시 체제 연준의 4.75% 인상과 쉽게 내려오지 않을 10년물 금리”",
+    points: [
+      "<b>AI 고점 통과와 소비·투자의 완만한 감속</b>: 하이퍼스케일러 Capex 증가율이 26년 +86% → 27년 +48%로 둔화되며 실질 설비투자 증가율도 10.0% → 8.3%로 감속. 지난 1년간 가계 부(Wealth)가 +$20.6조 폭증하며 저축률 하락을 통해 소비(2.6%)를 지탱했으나, 주가가 9,000선에 가지 않는 한 자산효과가 약화되고 OBBBA 감세 효과도 소멸해 27년 실질 소비는 1.7%, 실질 GDP(4Q/4Q)는 <b>1.9%(하반기 1.5~1.8% SAAR)</b>로 둔화.",
+      "<b>K자형 경제의 숨은 리스크와 노동소득분배율 사상 최저(53.0%)</b>: 고소득층 소비가 노동집약적 서비스에 집중되어 있어 증시 조정 시 고용 수요에 직접 타격을 줄 수 있음. 또한 AI 일자리 대체 우려(보스턴 연은 서베이 5%→10% 2배 증가)가 근로자의 임금 협상력을 약화시켜 생산성 향상(+2.5~2.7%)에도 노동소득분배율이 53.0%로 추락.",
+      "<b>신규 관세(301/232조)와 2.7% Core PCE</b>: 2월 대법원의 IEEPA 관세 무효화 이후 행정부가 11~12월 중 무역법 301·232조 관세(실효관세율 +3%p 복원)를 발표해 1H27 코어 물가에 +0.2%p를 추가할 전망. 에너지·메모리·관세 등 일시적 요인(+50bp)과 연초 잔여 계절성으로 <b>1Q27 Core PCE가 3.2% SAAR</b>에 달한 뒤 하반기 2.5%(연말 YoY 2.7%)로 둔화.",
+      "<b>케빈 워시(Warsh) 신임 연준 의장과 3회 연속 인상(4.50~4.75%)</b>: 워시 의장이 포워드 가이던스를 폐지하고 기자회견을 축소하며 2027년 FOMC 회의까지 축소. 시장을 설득할 정책 내러티브가 없는 상태에서 1Q27 물가가 높게 나오면 인플레 기대 안정을 위해 <b>12월·1월·3월 3회 연속 인상(상단 4.75%)</b>이 불가피. 이후 연말까지 동결 후 2028년 상반기 2회 인하(4.25%)."
+    ],
+    strat: "Fed 최종금리 4.50~4.75% (외사 중 가장 매파적) · JPM 국채 전략팀은 2027년 중 UST 10년물 금리가 현 수준에서 크게 낮아지지 않을 것으로 전망하며, MBS 스프레드도 보합세를 유지해 모기지 등 차입금리가 2027년 내내 높은 수준을 유지할 것으로 판단"
+  }
+};
+
+const f2 = v => v.toFixed(2);
+const bp = v => (v > 0 ? "+" : "") + Math.round(v * 100) + "bp";
+const median = arr => {
+  const s = [...arr].sort((a, b) => a - b);
+  const m = s.length >> 1;
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+};
+
+// 1. 상단 KPI 계산 및 렌더링
+const q4_10List = HOUSES.filter(h => h.q10).map(h => h.q10[3]);
+const med10_4Q = median(q4_10List);
+const q1_10List = HOUSES.filter(h => h.q10).map(h => h.q10[0]);
+const med10_1Q = median(q1_10List);
+
+const kpiData = [
+  {
+    k: "2027 Fed 금리 스펙트럼 (상단)",
+    v: "4.25 ~ 4.75%",
+    d: `고점 중간값 4.50% · 4Q27 3.50%(Citi)~4.75%(JPM)`,
+    cls: "up"
+  },
+  {
+    k: "UST 10년 1Q27 → 4Q27 중간값",
+    v: `${f2(med10_1Q)}% → ${f2(med10_4Q)}%`,
+    d: `4Q27 현재(${f2(NOW.y10)}%) 대비 ${bp(med10_4Q - NOW.y10)} (범위 4.60~5.00%)`,
+    cls: "dn"
+  },
+  {
+    k: "2027 미국 실질 GDP 컨센서스",
+    v: "1.9 ~ 2.5%",
+    d: "연평균 1.9%(Citi)~2.5%(WFS) · 4Q/4Q 1.8~2.5%",
+    cls: ""
+  },
+  {
+    k: "2027 말 Core PCE (4Q/4Q)",
+    v: "2.60%",
+    d: "26년 말 3.0~3.3% → 27년 말 2.4%(GS·Citi)~2.7%(JPM)",
+    cls: "dn"
+  }
+];
+
+document.getElementById("kpis").innerHTML = kpiData.map(item => `
+  <div class="kpi">
+    <span class="k">${item.k}</span>
+    <span class="v">${item.v}</span>
+    <span class="d ${item.cls}">${item.d}</span>
+  </div>
+`).join("");
+
+// 2. 하우스별 총괄표 렌더링
+document.getElementById("houseTbody").innerHTML = HOUSES.map(h => {
+  const p2 = h.q2 ? `${f2(h.q2[0])}% → <b>${f2(h.q2[3])}%</b>` : "–";
+  const p10 = h.q10 ? `${f2(h.q10[0])}% → <b>${f2(h.q10[3])}%</b>` : (h.band10 ? `밴드 ${f2(h.band10[0])}~${f2(h.band10[1])}%` : "–");
+  return `
+    <tr>
+      <td><span class="who">${h.name}</span><span class="an">${h.authors}</span></td>
+      <td><span class="pill ${h.stance}">${h.stanceLabel}</span></td>
+      <td class="n">${h.gdp27}</td>
+      <td class="n">${h.pce27}</td>
+      <td>${h.fedPath}</td>
+      <td class="n">${p2}</td>
+      <td class="n">${p10}</td>
+      <td class="n">${h.curve4Q}</td>
+      <td>${h.summary}</td>
+    </tr>
+  `;
+}).join("");
+
+// 3. 하우스별 전망 근거(WHY) 카드 렌더링
+document.getElementById("whyGrid").innerHTML = HOUSES.map(h => {
+  const w = WHY_DATA[h.id];
+  return `
+    <article class="why ${h.stance}">
+      <div class="hd">
+        <span class="who">${h.name}</span>
+        <span class="an">${h.authors}</span>
+        <span class="pill ${h.stance}">${h.stanceLabel}</span>
+      </div>
+      <p class="v">${w.quote}</p>
+      <ul>${w.points.map(pt => `<li>${pt}</li>`).join("")}</ul>
+      <p class="s"><b>추천 전략</b>${w.strat}</p>
+    </article>
+  `;
+}).join("");
+
+// 4. 인터랙티브 SVG 차트 (3개 탭: UST 10Y 경로 / Fed 기준금리 경로 / 만기별 커브)
+const svg = document.getElementById("mainChart");
+const legendEl = document.getElementById("chartLegend");
+const noteEl = document.getElementById("chartNote");
+
+function drawUST10() {
+  legendEl.innerHTML = `
+    <span><i class="sw" style="border:2px solid var(--accent);background:var(--surface)"></i>1Q27 전망</span>
+    <span><i class="sw" style="background:var(--accent)"></i>4Q27 전망</span>
+    <span><i class="sw" style="background:var(--accent);opacity:.22;border-radius:2px;width:18px"></i>2027 연간 예상 밴드/범위</span>
+    <span><i class="sw" style="background:var(--now)"></i>현재 (5.13%)</span>
+    <span><i class="sw" style="background:var(--muted)"></i>4Q27 중간값 (${f2(med10_4Q)}%)</span>
+  `;
+  noteEl.textContent = "※ 4Q27 강세 순 정렬 · GS(4.60%)·ING(4.63%)·WFS(4.85%)는 하반기 금리 하락을, Citi(5.00% 고정)·Barclays(5.00%)·JPM은 5% 부근 고착을 전망";
+
+  const W = 940, L = 148, R = 235, T = 40, RH = 42, B = 36;
+  const dom = [4.20, 5.70];
+  const rows = HOUSES.filter(h => h.q10 || h.band10);
+  const Ht = T + rows.length * RH + B;
+  const x = v => L + (v - dom[0]) / (dom[1] - dom[0]) * (W - L - R);
+
+  svg.setAttribute("viewBox", `0 0 ${W} ${Ht}`);
+  svg.setAttribute("width", W);
+  svg.setAttribute("height", Ht);
+
+  let s = "";
+  for (let v = 4.2; v <= 5.7001; v += 0.1) {
+    const major = Math.round(v * 10) % 2 === 0;
+    s += `<line x1="${x(v)}" x2="${x(v)}" y1="${T - 8}" y2="${Ht - B + 4}" stroke="var(--line)" stroke-width="${major ? 1 : 0.5}"/>`;
+    if (major) {
+      s += `<text x="${x(v)}" y="${Ht - B + 20}" text-anchor="middle" font-size="11.5" fill="var(--muted)">${v.toFixed(1)}%</text>`;
+    }
+  }
+
+  // 4Q27 중간값 수직선
+  s += `<line x1="${x(med10_4Q)}" x2="${x(med10_4Q)}" y1="${T - 8}" y2="${Ht - B + 4}" stroke="var(--muted)" stroke-dasharray="4 3" stroke-width="1.3"/>`;
+  s += `<text x="${x(med10_4Q)}" y="${T - 14}" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--muted)">4Q27 중간값 ${f2(med10_4Q)}%</text>`;
+
+  // 현재 금리 수직선
+  s += `<line x1="${x(NOW.y10)}" x2="${x(NOW.y10)}" y1="${T - 8}" y2="${Ht - B + 4}" stroke="var(--now)" stroke-width="2"/>`;
+  s += `<text x="${x(NOW.y10)}" y="${T - 26}" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--now)">현재 ${f2(NOW.y10)}%</text>`;
+
+  rows.forEach((h, i) => {
+    const y = T + i * RH + RH / 2;
+    const col = h.stance === "bull" ? "var(--bull)" : h.stance === "bear" ? "var(--bear)" : h.stance === "mix" ? "var(--purple)" : "var(--accent)";
+    s += `<text x="${L - 14}" y="${y + 4}" text-anchor="end" font-size="13" font-weight="700" fill="var(--fg)">${h.name}</text>`;
+
+    if (h.band10) {
+      s += `<rect x="${x(h.band10[0])}" y="${y - 7}" width="${x(h.band10[1]) - x(h.band10[0])}" height="14" rx="4" fill="${col}" opacity="0.20"/>`;
+    }
+    if (h.q10) {
+      const q = h.q10;
+      s += `<line x1="${x(q[0])}" x2="${x(q[3])}" y1="${y}" y2="${y}" stroke="${col}" stroke-width="3.2"/>`;
+      s += `<circle cx="${x(q[0])}" cy="${y}" r="5.5" fill="var(--surface)" stroke="${col}" stroke-width="2.2"><title>${h.name} 1Q27: ${f2(q[0])}%</title></circle>`;
+      s += `<circle cx="${x(q[3])}" cy="${y}" r="5.5" fill="${col}"><title>${h.name} 4Q27: ${f2(q[3])}%</title></circle>`;
+      const maxRight = Math.max(x(q[0]), x(q[3]), h.band10 ? x(h.band10[1]) : 0) + 10;
+      const extra = h.id === "ING" ? " (1Q 고점 5.25~5.50% → 연말 4.50~4.75%)"
+        : h.id === "GS" ? " (4Q28 4.30%)"
+        : h.id === "WFS" ? " (2Y 4.35% · 30Y 5.30%)"
+        : h.id === "CITI" ? " (전 분기 5.00% 동결)" : "";
+      s += `<text x="${maxRight}" y="${y + 4}" font-size="11.5" font-weight="600" fill="var(--fg)">${f2(q[0])}% → ${f2(q[3])}%<tspan fill="var(--muted)" font-weight="400">${extra}</tspan></text>`;
+    } else if (h.band10) {
+      const maxRight = x(h.band10[1]) + 10;
+      s += `<text x="${maxRight}" y="${y + 4}" font-size="11.5" fill="var(--muted)">연간 예상 범위 ${f2(h.band10[0])}~${f2(h.band10[1])}% (보합권 유지)</text>`;
+    }
+  });
+  svg.innerHTML = s;
+}
+
+function drawFedPath() {
+  legendEl.innerHTML = `
+    <span><i class="sw" style="background:var(--bear)"></i>J.P. Morgan (최고 4.75%)</span>
+    <span><i class="sw" style="background:var(--accent)"></i>MS · Barclays (4.50% 동결)</span>
+    <span><i class="sw" style="background:var(--bull)"></i>GS · ING (4.50% 찍고 4Q27 인하)</span>
+    <span><i class="sw" style="background:var(--teal)"></i>WFS (4.25% 동결)</span>
+    <span><i class="sw" style="background:var(--purple)"></i>Citi (4.25% 후 2Q~4Q27 3회 인하→3.50%)</span>
+  `;
+  noteEl.textContent = "※ Fed 기준금리 상단(Top of target range, %) 분기말 경로 · 12월 추가 인상(+25bp, 4.25%)에는 전 하우스가 일치하나, 2027년 말 금리는 JPM(4.75%)부터 Citi(3.50%)까지 125bp 격차 발생";
+
+  const W = 940, L = 70, R = 215, T = 30, B = 40, Ht = 340;
+  const quarters = ["현재", "4Q26", "1Q27", "2Q27", "3Q27", "4Q27", "1Q28", "2Q28", "3Q28", "4Q28"];
+  const domY = [3.25, 5.00];
+  const x = i => L + i / (quarters.length - 1) * (W - L - R);
+  const y = v => T + (domY[1] - v) / (domY[1] - domY[0]) * (Ht - T - B);
+
+  svg.setAttribute("viewBox", `0 0 ${W} ${Ht}`);
+  svg.setAttribute("width", W);
+  svg.setAttribute("height", Ht);
+
+  let s = "";
+  for (let v = 3.25; v <= 5.001; v += 0.25) {
+    s += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" stroke-width="${v === 4.00 ? 1.5 : 0.7}" ${v === 4.00 ? 'stroke-dasharray="4 3"' : ""}/>`;
+    s += `<text x="${L - 10}" y="${y(v) + 4}" text-anchor="end" font-size="11.5" fill="var(--muted)">${v.toFixed(2)}%</text>`;
+  }
+  quarters.forEach((q, i) => {
+    s += `<line x1="${x(i)}" x2="${x(i)}" y1="${T}" y2="${Ht - B}" stroke="var(--line)" stroke-width="0.5"/>`;
+    s += `<text x="${x(i)}" y="${Ht - B + 20}" text-anchor="middle" font-size="11.5" font-weight="${q.includes('27') ? '700' : '400'}" fill="${q.includes('27') ? 'var(--fg)' : 'var(--muted)'}">${q}</text>`;
+  });
+
+  const series = [
+    { name: "J.P. Morgan (27년 4.75%→28년 4.25%)", data: HOUSES.find(h => h.id === "JPM").fedQ, col: "var(--bear)", dy: -9 },
+    { name: "Wells Fargo (12월 인상 후 4.25% 동결)", data: HOUSES.find(h => h.id === "WFS").fedQ, col: "var(--teal)", dy: 8 },
+    { name: "Barclays (27년 4.50% 동결)", data: HOUSES.find(h => h.id === "BARC").fedQ, col: "var(--neutral)", dy: 4 },
+    { name: "Morgan Stanley (27년 4.50%→28년 3.75%)", data: HOUSES.find(h => h.id === "MS").fedQ, col: "var(--accent)", dy: 4 },
+    { name: "Goldman Sachs (27.12월 인하→28년 3.50%)", data: HOUSES.find(h => h.id === "GS").fedQ, col: "var(--bull)", dy: -7 },
+    { name: "Citi (2Q~4Q27 3회 인하→3.50%)", data: HOUSES.find(h => h.id === "CITI").fedQ, col: "var(--purple)", dy: 11 }
+  ];
+
+  series.forEach(sr => {
+    const pts = sr.data.map((v, i) => `${x(i)},${y(v)}`).join(" ");
+    s += `<polyline fill="none" stroke="${sr.col}" stroke-width="2.6" points="${pts}"/>`;
+    sr.data.forEach((v, i) => {
+      s += `<circle cx="${x(i)}" cy="${y(v)}" r="4" fill="${sr.col}"><title>${sr.name} ${quarters[i]}: ${f2(v)}%</title></circle>`;
+    });
+    const lastV = sr.data[sr.data.length - 1];
+    s += `<text x="${W - R + 10}" y="${y(lastV) + sr.dy}" font-size="11.2" font-weight="600" fill="${sr.col}">${sr.name}</text>`;
+  });
+  svg.innerHTML = s;
+}
+
+function drawUSTCurve() {
+  legendEl.innerHTML = `
+    <span><i class="sw" style="background:var(--now)"></i>현재 (2026.11.16)</span>
+    <span><i class="sw" style="background:var(--bear)"></i>WFS 1Q27 전망</span>
+    <span><i class="sw" style="background:var(--teal)"></i>WFS 4Q27 전망 (2s10s +50bp)</span>
+    <span><i class="sw" style="background:var(--accent)"></i>GS 4Q27 전망 (2s10s +50bp)</span>
+    <span><i class="sw" style="background:var(--bull)"></i>GS 4Q28 전망 (2s10s +70bp)</span>
+  `;
+  noteEl.textContent = "※ Goldman Sachs & Wells Fargo 만기별(2Y·5Y·10Y·30Y) 수익률곡선 전망 비교 · 두 하우스 모두 4Q27 2s10s 스프레드를 +50bp(현재 +25bp)로 전망하며 불 스티프닝(Bull Steepening) 제시";
+
+  const W = 940, L = 70, R = 195, T = 30, B = 40, Ht = 330;
+  const tenors = ["UST 2Y", "UST 5Y", "UST 10Y", "UST 30Y"];
+  const domY = [3.40, 5.65];
+  const x = i => L + i / (tenors.length - 1) * (W - L - R);
+  const y = v => T + (domY[1] - v) / (domY[1] - domY[0]) * (Ht - T - B);
+
+  svg.setAttribute("viewBox", `0 0 ${W} ${Ht}`);
+  svg.setAttribute("width", W);
+  svg.setAttribute("height", Ht);
+
+  let s = "";
+  for (let v = 3.50; v <= 5.601; v += 0.25) {
+    s += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" stroke-width="0.7"/>`;
+    s += `<text x="${L - 10}" y="${y(v) + 4}" text-anchor="end" font-size="11.5" fill="var(--muted)">${v.toFixed(2)}%</text>`;
+  }
+  tenors.forEach((t, i) => {
+    s += `<line x1="${x(i)}" x2="${x(i)}" y1="${T}" y2="${Ht - B}" stroke="var(--line)" stroke-width="0.6"/>`;
+    s += `<text x="${x(i)}" y="${Ht - B + 20}" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">${t}</text>`;
+  });
+
+  const curves = [
+    { name: "현재 (2s10s +25bp)", data: [4.88, 4.97, 5.13, 5.46], col: "var(--now)", dash: "5 3", dy: -4, ly: -8 },
+    { name: "WFS 1Q27 (2s10s +45bp)", data: [4.55, 4.80, 5.00, 5.35], col: "var(--bear)", dash: "3 2", dy: 0, ly: -7 },
+    { name: "WFS 4Q27 (2s10s +50bp)", data: [4.35, 4.65, 4.85, 5.30], col: "var(--teal)", dash: "", dy: 8, ly: 14 },
+    { name: "GS 4Q27 (2s10s +50bp)", data: [4.10, 4.25, 4.60, 5.10], col: "var(--accent)", dash: "", dy: 4, ly: -8 },
+    { name: "GS 4Q28 (2s10s +70bp)", data: [3.60, 3.85, 4.30, 4.80], col: "var(--bull)", dash: "", dy: 4, ly: -8 }
+  ];
+
+  curves.forEach(c => {
+    const pts = c.data.map((v, i) => `${x(i)},${y(v)}`).join(" ");
+    s += `<polyline fill="none" stroke="${c.col}" stroke-width="2.6" ${c.dash ? `stroke-dasharray="${c.dash}"` : ""} points="${pts}"/>`;
+    c.data.forEach((v, i) => {
+      s += `<circle cx="${x(i)}" cy="${y(v)}" r="4.2" fill="${c.col}"/>`;
+      s += `<text x="${x(i)}" y="${y(v) + c.ly}" text-anchor="middle" font-size="10.8" font-weight="600" fill="${c.col}">${f2(v)}%</text>`;
+    });
+    const lastV = c.data[c.data.length - 1];
+    s += `<text x="${W - R + 12}" y="${y(lastV) + c.dy}" font-size="11.3" font-weight="600" fill="${c.col}">${c.name}</text>`;
+  });
+  svg.innerHTML = s;
+}
+
+const t10 = document.getElementById("tab10");
+const tFed = document.getElementById("tabFed");
+const tCurve = document.getElementById("tabCurve");
+
+function selectTab(which) {
+  t10.setAttribute("aria-pressed", which === "10");
+  tFed.setAttribute("aria-pressed", which === "fed");
+  tCurve.setAttribute("aria-pressed", which === "curve");
+  if (which === "10") drawUST10();
+  else if (which === "fed") drawFedPath();
+  else drawUSTCurve();
+}
+
+t10.onclick = () => selectTab("10");
+tFed.onclick = () => selectTab("fed");
+tCurve.onclick = () => selectTab("curve");
+
+drawUST10();
+</script>
+</body>
+</html>

@@ -1,0 +1,564 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>2027 원화채 연간전망 (Copy)</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: 단일 컬럼 리포트 — 요약 → 경로 차트 → 하우스 표 → 쟁점 → 수급·크레딧 → 전략 */
+:root{
+  --bg:#f5f7fa; --surface:#ffffff; --fg:#142030; --muted:#5a6779; --line:#dbe1e9; --soft:#eaeef4;
+  --accent:#1d5bb8;
+  --bull:#11805a; --bull-soft:#e1f2ea; --bear:#c2410c; --bear-soft:#fbe9df; --neutral:#6b7686; --neutral-soft:#eceff3;
+  --now:#b8860b;
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f141b; --surface:#161d27; --fg:#e4e9f0; --muted:#97a3b4; --line:#2a3442; --soft:#1d2531;
+  --accent:#6ea2ef;
+  --bull:#4cc596; --bull-soft:#15302a; --bear:#f08a5d; --bear-soft:#3a2219; --neutral:#a1abb9; --neutral-soft:#232b36;
+  --now:#e3b341; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#0f141b; --surface:#161d27; --fg:#e4e9f0; --muted:#97a3b4; --line:#2a3442; --soft:#1d2531;
+  --accent:#6ea2ef;
+  --bull:#4cc596; --bull-soft:#15302a; --bear:#f08a5d; --bear-soft:#3a2219; --neutral:#a1abb9; --neutral-soft:#232b36;
+  --now:#e3b341; color-scheme:dark;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 64px}
+.wrap{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.3}
+h1{font-size:30px;font-weight:700;letter-spacing:-.01em}
+h2{font-size:20px;font-weight:700}
+h3{font-size:15.5px;font-weight:600}
+p{margin:0}
+.eyebrow{font-size:12px;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+header{display:flex;flex-direction:column;gap:8px;border-bottom:1px solid var(--line);padding-bottom:20px}
+header .meta{color:var(--muted);font-size:13.5px}
+section{display:flex;flex-direction:column;gap:14px}
+
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 16px;display:flex;flex-direction:column;gap:2px}
+.kpi .k{font-size:12.5px;color:var(--muted)}
+.kpi .v{font-family:var(--f-mono);font-size:24px;font-weight:600}
+.kpi .d{font-size:12.5px;font-family:var(--f-mono)}
+.up{color:var(--bear)} .dn{color:var(--bull)}
+@media (max-width:760px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.keys{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0;padding:0;list-style:none}
+@media (max-width:760px){.keys{grid-template-columns:1fr}}
+.keys li{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.keys .t{font-size:12px;color:var(--muted);font-weight:600}
+.keys .b{font-weight:600}
+
+.chartcard{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{font:inherit;font-size:13.5px;border:0;background:transparent;color:var(--muted);padding:6px 14px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{display:inline-block;width:10px;height:10px;border-radius:50%}
+.scroll{overflow-x:auto}
+svg text{font-family:var(--f-body)}
+.note{font-size:12.5px;color:var(--muted)}
+
+table{border-collapse:collapse;width:100%;min-width:860px;font-size:13.5px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--muted);font-weight:600;background:var(--soft);position:sticky;top:0}
+td.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td .who{font-weight:600}
+td .an{display:block;font-size:11.5px;color:var(--muted)}
+.tablebox{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow-x:auto}
+.pill{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.pill.bull{background:var(--bull-soft);color:var(--bull)}
+.pill.bear{background:var(--bear-soft);color:var(--bear)}
+.pill.neu{background:var(--neutral-soft);color:var(--neutral)}
+
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:860px){.grid3,.grid2{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.panel ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+.panel .sub{font-size:13px;color:var(--muted)}
+.split{display:flex;flex-direction:column;gap:8px}
+.split .row{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.split .lab{font-size:12px;font-weight:600;min-width:64px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.5px;border:1px solid var(--line);border-radius:4px;padding:1px 7px;background:var(--soft)}
+.chip .num{color:var(--muted);margin-left:4px}
+dl.kv{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
+dl.kv dt{font-weight:600;white-space:nowrap}
+dl.kv dd{margin:0;min-width:0}
+table.ct{min-width:720px}
+table.ct td:first-child{white-space:nowrap}
+table.dt{min-width:640px;font-size:13.5px}
+table.dt td:first-child{font-weight:600;white-space:nowrap;width:1%}
+table.dt th.pos{color:var(--bull)} table.dt th.neg{color:var(--bear)}
+table.dt td:nth-child(2),table.dt td:nth-child(3){width:46%}
+.consensus{font-size:14px;background:var(--soft);border-radius:6px;padding:8px 12px}
+.consensus b{margin-right:8px}
+
+.notes{font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:4px;border-top:1px solid var(--line);padding-top:14px}
+.notes ul{margin:0;padding-left:18px}
+.whygrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:860px){.whygrid{grid-template-columns:1fr}}
+.whyg{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.04em;margin-top:6px}
+.why{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--neutral);border-radius:8px;padding:12px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.why.bull{border-left-color:var(--bull)} .why.bear{border-left-color:var(--bear)}
+.why .hd{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.why .hd .who{font-weight:700;font-size:15px}
+.why .hd .an{font-size:12px;color:var(--muted)}
+.why .hd .pill{margin-left:auto}
+.why .v{font-weight:600;font-size:14px}
+.why ul{margin:0;padding-left:18px;font-size:13.5px;display:flex;flex-direction:column;gap:3px}
+.why .s{font-size:13px;color:var(--muted)}
+.why .s b{color:var(--fg);font-weight:600;margin-right:6px}
+.print-only{display:none}
+@page{size:A4;margin:12mm}
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  :root{--bg:#ffffff}
+  body{font-size:11px;padding:0;background:#ffffff}
+  .wrap{gap:18px;max-width:none}
+  h1{font-size:24px} h2{font-size:16px}
+  h2{break-after:avoid}
+  .seg{display:none}
+  .print-only{display:block}
+  .print-label{font-size:12px;font-weight:600;margin-top:4px}
+  svg{width:100%;height:auto}
+  .scroll,.tablebox{overflow:visible}
+  table{min-width:0;font-size:9.5px}
+  th,td{padding:5px 6px}
+  th{position:static}
+  .kpi,.panel,.keys li,tr{break-inside:avoid}
+  .kpi .v{font-size:18px}
+  dl.kv{font-size:11px}
+  .chart-sec,.supply-sec{break-before:page}
+  table.ct,table.dt{min-width:0}
+  table.dt{font-size:10px}
+  .consensus{font-size:11px}
+  .why-sec{break-before:page}
+  .whygrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .why{break-inside:avoid;padding:8px 10px;gap:4px}
+  .why .v{font-size:11px} .why ul{font-size:9.5px;gap:1px} .why .s{font-size:9.5px}
+  .why .hd .who{font-size:12px}
+  .kpis{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .keys,.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid3{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+.desk-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 14px;margin-bottom:-12px}
+.desk-nav .nav-left,.desk-nav .nav-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.desk-nav a,.desk-nav button{font:inherit;font-size:12.5px;font-weight:600;color:var(--muted);text-decoration:none;padding:5px 11px;border-radius:6px;border:1px solid transparent;background:transparent;cursor:pointer;transition:all .15s}
+.desk-nav a:hover,.desk-nav button:hover{background:var(--soft);color:var(--fg)}
+.desk-nav a.back{color:var(--fg);border-color:var(--line);background:var(--soft)}
+.desk-nav a.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.desk-nav .sep{width:1px;height:18px;background:var(--line);margin:0 2px}
+@media print{.desk-nav{display:none}}
+</style>
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('fitd-theme');
+    if (saved === 'dark' || saved === 'slate') document.documentElement.setAttribute('data-theme', 'dark');
+    else if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  } catch (e) {}
+})();
+function toggleOutlookTheme() {
+  var cur = document.documentElement.getAttribute('data-theme');
+  var isDark = cur === 'dark' || (!cur && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  var next = isDark ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('fitd-theme', next); } catch (e) {}
+}
+</script>
+<div class="wrap">
+<nav class="desk-nav" aria-label="FITD 데스크 및 연간전망 내비게이션">
+  <div class="nav-left">
+    <a href="./index.html#rv" class="back">← FITD Trading Desk</a>
+    <span class="sep"></span>
+    <a href="./ust-2027-outlook.html">🇺🇸 2027 미국채(UST) 연간전망</a>
+    <a href="./krw-2027-outlook.html" class="active">🇰🇷 2027 원화채(KRW) 연간전망</a>
+  </div>
+  <div class="nav-right">
+    <button type="button" onclick="toggleOutlookTheme()">☀️/🌙 테마 전환</button>
+    <button type="button" onclick="window.print()">🖨️ 인쇄 / PDF</button>
+  </div>
+</nav>
+<header>
+  <span class="eyebrow">국내 증권사 22곳 연간전망 종합 · 2026.11.19</span>
+  <h1>2027 원화채 연간전망</h1>
+  <p class="meta">현재 국고3년 <span class="num">3.736%</span> · 국고10년 <span class="num">3.975%</span> · 기준금리 <span class="num">3.00%</span></p>
+</header>
+
+<section>
+  <h2>핵심 요약</h2>
+  <div class="kpis" id="kpis"></div>
+  <ul class="keys">
+    <li><span class="t">기본 시나리오</span><span class="b">1Q 3.50% 인상 종료 → 상반기 고점 → 하반기 완만한 하락</span></li>
+    <li><span class="t">레벨</span><span class="b">하락분 대부분 선반영. 연간 추가 강세 10bp 내외</span></li>
+    <li><span class="t">전략</span><span class="b">연초 반등 때 분할매수 → 2Q 이후 듀레이션 확대</span></li>
+    <li><span class="t">커브</span><span class="b">플랫 소폭 우위 (플랫 7곳 vs 스티프 4곳)</span></li>
+  </ul>
+</section>
+
+<section>
+  <h2>투자 시사점</h2>
+  <div class="panel">
+    <dl class="kv">
+      <dt>지금 매수</dt><dd>한국투자(장기물)·메리츠·하나 / 다수는 연초 반등 대기</dd>
+      <dt>진입 레벨</dt><dd>3년 3.9~4.0%, 10년 4.3%</dd>
+      <dt>확대 신호</dt><dd>삼성전자 목표주가 하향 시작 (NH)</dd>
+      <dt>상방 리스크</dt><dd>터미널 3.75% (삼성), 2~3Q 재상승 (iM)</dd>
+      <dt>하방 리스크</dt><dd>터미널 3.25%·연말 인하 기대 (KB·미래에셋) → 3년 3.3~3.4%</dd>
+    </dl>
+  </div>
+</section>
+
+<section class="chart-sec">
+  <h2>하우스별 2027 경로</h2>
+  <div class="chartcard">
+    <div class="toolbar">
+      <div class="seg" role="group" aria-label="만기 선택">
+        <button type="button" id="b3" aria-pressed="true">국고 3년</button>
+        <button type="button" id="b10" aria-pressed="false">국고 10년</button>
+      </div>
+      <div class="legend">
+        <span><i class="sw" style="border:2px solid var(--accent);background:var(--surface)"></i>1Q27</span>
+        <span><i class="sw" style="background:var(--accent)"></i>4Q27</span>
+        <span><i class="sw" style="background:var(--accent);opacity:.25;border-radius:2px;width:18px"></i>연간 밴드</span>
+        <span><i class="sw" style="background:var(--now)"></i>현재</span>
+        <span><i class="sw" style="background:var(--muted)"></i>4Q 중간값</span>
+      </div>
+    </div>
+    <p class="print-only print-label">국고 3년</p>
+    <div class="scroll"><svg id="chart" role="img" aria-label="하우스별 2027 국고채 금리 경로"></svg></div>
+    <p class="print-only print-label">국고 10년</p>
+    <div class="print-only"><svg id="chart10" role="img" aria-label="하우스별 2027 국고 10년 금리 경로"></svg></div>
+    <p class="note">4Q 강세 순 정렬 · 막대는 원문의 연간 밴드(제시한 곳만, SK는 분기 범위 합산) · 삼성·하나는 분기말, 나머지는 분기 평균 · 미래에셋·한국투자는 밴드만 제시</p>
+  </div>
+</section>
+
+<section>
+  <h2>하우스별 상세</h2>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>하우스</th><th>성향</th><th>기준금리</th><th>3년 1Q→4Q</th><th>10년 1Q→4Q</th><th>4Q 10-3</th><th>연간 밴드 (3년 / 10년)</th><th>한 줄 요약</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>쟁점</h2>
+  <div class="grid3">
+    <div class="panel">
+      <h3>터미널 금리</h3>
+      <div class="split">
+        <div class="row"><span class="lab" style="color:var(--bull)">3.25%</span><div class="chips"><span class="chip">KB</span><span class="chip">미래에셋(3.25~3.50)</span><span class="chip">한양(조기종료)</span></div></div>
+        <div class="row"><span class="lab">3.50%</span><div class="chips"><span class="chip">18곳</span></div></div>
+        <div class="row"><span class="lab" style="color:var(--bear)">3.75%</span><div class="chips"><span class="chip">삼성</span><span class="chip">iM(리스크)</span><span class="chip">LS(시나리오)</span></div></div>
+      </div>
+      <ul class="sub">
+        <li>상방: 성과급·배당의 소비 전이 (삼성)</li>
+        <li>하방: 핵심물가 12월 정점 (KB)</li>
+        <li>첫 인하는 대부분 2028년</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>반등 시점</h3>
+      <dl class="kv">
+        <dt>1Q 고점</dt><dd>신한·키움·한화·대신·교보·NH</dd>
+        <dt>4월 전후</dt><dd>LS, KB (성과급 지급 후)</dd>
+        <dt>2~3Q 재상승</dt><dd>iM·흥국 (3년 4.05%)</dd>
+        <dt>고점 통과</dt><dd>한국투자·하나·메리츠·SK</dd>
+      </dl>
+      <ul class="sub"><li>진입 레벨: 3년 3.9~4.0%, 10년 4.3%</li></ul>
+    </div>
+    <div class="panel">
+      <h3>커브 (4Q 10-3년, bp)</h3>
+      <div class="split" id="curve"></div>
+      <ul class="sub">
+        <li>플랫 근거: 세수·초장기 발행 축소·외국인</li>
+        <li>스티프 근거: 글로벌 공급·보험 수요 불안</li>
+        <li>현재 24bp · 한국투자 20~35bp</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="supply-sec">
+  <h2>국고채 수급</h2>
+  <div class="grid2">
+    <div class="panel">
+      <h3>공급: 물량과 만기 구성</h3>
+      <dl class="kv">
+        <dt>총발행</dt><dd><span class="num">222.8조</span>, 2026년과 비슷 (예산안)</dd>
+        <dt>순증</dt><dd><span class="num">96.3조</span>, 전년비 −13.1조. 실제 발행은 추가 축소 전망 (NH) · 순발행 2026년 99조 → 2027년 95조 (신한)</dd>
+        <dt>초과세수</dt><dd>정부의 초과세수 활용 국채 상환 의지 (KB) · 2028년까지 세수 호조 (신영)</dd>
+        <dt>초장기 비중</dt><dd>20~50년 비중 목표 35±5% → 2027년 30%는 기정사실, 25%까지 가능 (KB·NH)</dd>
+        <dt>30년물</dt><dd>발행 비중 상반기 26% → 3Q 18% → 10월 국발계 15%. 2027년 25% 이하 필요, 약 52조 (한국투자)</dd>
+        <dt>초장기 물량</dt><dd>30% 기준 <span class="num">66.8조</span>로 올해와 비슷, 월 5.5조 (30년만 월 4조) → 부담 잔존 (KB)</dd>
+        <dt>2~3년물</dt><dd>2026년 70조 초중반 → 비중 40%면 <span class="num">78~100조</span>, 45%면 <span class="num">89~111조</span>. 기금 수요가 더 큼 (KB)</dd>
+        <dt>2~10년물</dt><dd>비중 70% (2~3년·5~10년 각 35%), 2027년 추가 확대 (한국투자)</dd>
+        <dt>재정</dt><dd>2027년 관리재정수지 적자 축소, 2030년 부채비율 50% 이하 (한국투자)</dd>
+      </dl>
+    </div>
+    <div class="panel">
+      <h3>수요: 누가 사는가</h3>
+      <dl class="kv">
+        <dt>미래대응기금</dt><dd>재원 <span class="num">162.3조</span> 중 12.5조는 발행 축소, <span class="num">104.4조</span> 여유자금 (초과세수 포함 최대 152.6조). OCIO 운용, 2~3년물 중심 <span class="num">20~75조</span> 수요 (KB). 신한은 여유자금 96.9조로 집계, 2Q경 운용 가시화, 국고 직접 편입 15~35% → <span class="num">10~30조</span>, 3년 이하 중심. 본격 집행은 27년 중반 이후 (미래에셋)</dd>
+        <dt>한은</dt><dd>보유 국고 만기 <span class="num">4.2조</span>, 미매입 시 보유 21조 이하 → 단순매입 재등장 가능 (한국투자)</dd>
+        <dt>외국인</dt><dd>한은 인상 후반부 진입으로 재정차익 유인 회복, 단기채 매수 확대. GPIF 등 WGBI 추종자금이 한국 비중을 벤치마크보다 낮게 유지 중 → 비중 확대 (KB)</dd>
+        <dt>보험</dt><dd>30년 순매수 8월 2.2조 → 9월 2.7조 → 10월 2.1조로 일부 회복 (한국투자). 듀레이션 갭 플러스 전환으로 급한 매수 필요는 낮음 (KB)</dd>
+        <dt>연기금·펀드</dt><dd>국민연금 국내채권 목표 비중 하회 → 유입. 채권형 펀드 잔고 증가, 건보료 수입 증가분 유입 (KB). 정책기금 국내채권 비중 약 40% (유진)</dd>
+        <dt>기업·가계</dt><dd>기업 순금융자산 상반기 87조 순취득, 가계 위험선호 위축 후 채권 선호 강화 (신한)</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="panel">
+    <h3>수급 변수와 리스크</h3>
+    <dl class="kv">
+      <dt>미국 연동</dt><dd>미국 10년 → 국고 10년 민감도 <span class="num">0.43bp</span>로 2003년 이후 최고, 2년→3년은 0.17bp로 하락. 장기물은 미국 커브에 연동 (한국투자)</dd>
+      <dt>기간프리미엄</dt><dd>국고 3년 기간프리미엄이 연초 대비 30~40bp 확대, 2027년 축소 전환 예상 (한국투자)</dd>
+      <dt>장기물 매도</dt><dd>보험·연기금 규제로 금리 급등 시 장기채 매도 → 듀레이션 최소화 (DB)</dd>
+      <dt>하단 제약</dt><dd>글로벌 국채 공급으로 10년 4%가 실질 하단 (한화)</dd>
+    </dl>
+  </div>
+  <div class="panel">
+    <h3>하우스 간 시각 차이</h3>
+    <p class="consensus"><b>공통</b> 2027년 국고채 수급은 2026년보다 개선. 순증 감소·미래대응기금·초장기 비중 축소로 단기 구간이 가장 우호적</p>
+    <div class="scroll">
+      <table class="dt">
+        <thead><tr><th>쟁점</th><th class="pos">우호적 시각</th><th class="neg">신중한 시각</th></tr></thead>
+        <tbody>
+          <tr><td>미래대응기금 효과</td><td>2~3년물 20~75조 수요 (KB) · 2Q부터 국고 10~30조 (신한) · 단기채·크레딧 호재 (NH)</td><td>본격 집행은 27년 중반 이후 (미래에셋) · 경기 둔화 시 재정지출로 전용 가능 (한양)</td></tr>
+          <tr><td>실제 발행 물량</td><td>추가 축소 (NH) · 초과세수로 상환 (KB) · 2028년까지 세수 호조 (신영)</td><td>차환 증가로 총발행 유사 (한양) · 수급 개선 없이 금리 하락 어려움 (한화) · 수급 부담 지속 (대신)</td></tr>
+          <tr><td>초장기물</td><td>비중 축소로 듀레이션 공급 부담 감소 (NH) · 보험 수요 회복, 10/30 10bp 내외 (한국투자)</td><td>물량 66.8조로 부담 잔존, 30-10 확대 (KB) · 보험·연기금 규제성 매도 (DB)</td></tr>
+          <tr><td>외국인</td><td>재정차익·WGBI 비중 확대 (KB) · 환율 안정 시 월 2~4조 (DB) · 중단기 발행을 상쇄 (한국투자)</td><td>WGBI 신규 수요 효과 소멸 (한양) · 재정거래 유인 플러스 전환은 제한적 (신한)</td></tr>
+          <tr><td>글로벌 연동</td><td>재정 건전성으로 차별화, 안전자산 부각 (KB·신영)</td><td>미국 장기물 민감도 2003년 이후 최고 (한국투자) · 글로벌 공급으로 10년 4% 하단 (한화)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>크레딧</h2>
+  <div class="tablebox">
+    <table class="ct">
+      <thead><tr><th>섹터</th><th>2027 발행</th><th>수급 포인트</th><th>하우스 의견</th></tr></thead>
+      <tbody>
+        <tr><td><span class="who">공사채</span></td><td class="n">125조 (한화)<br>110~120조 (SK)</td><td>공급 주체가 한전에서 LH로 이동. LH 순증 20.4조('27) → 35.3조('28), 만기는 3.0조뿐이라 대부분 신규 조달. 한전채 만기 16.7조, MBS 17.8조 (한화) · 올해 1~9월 LH 발행 11.9조, 전년 3.2배 (신영)</td><td>상대 우위: 하나(확대 폭 가장 작음) · 후순위: NH · 경계: 신한(LH 순발행 20조 이상, RW 0% 공급이 수요 초과 우려)</td></tr>
+        <tr><td><span class="who">은행채</span></td><td class="n">250조 (한화)<br>250~290조 (SK)</td><td>순발행 약 40조로 2026년 대비 감소 (신영). 특은채는 생산적금융·첨단전략산업기금으로 순발행 확대, 첨단채 한도 18조 (신한). 시중은행채 발행 압력은 완화 (신한)</td><td>선호: 한화, SK·NH(AAA에서 공사채 대비 우위), 신한(초우량물 중 시중은행채), 하나(확대 폭 작음) · 경계: 한양(물량 부담), 신한(특은채)</td></tr>
+        <tr><td><span class="who">여전채</span></td><td class="n">101조 (한화)<br>110~120조 (SK)</td><td>만기 92~93조로 역대 최대 (+14~16조), 순발행은 +10조로 감소 (신영). AA+ 3년 금리 연초 3.34% → 9월 4.64%. A급 이하 캐피탈은 스프레드 확대 압력</td><td>선호: 신한(상위등급 최선호, 반도체 자금·레포펀드), NH(상·하위 모두 회사채 대비 우위), 한양(우량 캐피탈) · 신중: SK(AA에서는 회사채 우위), 하나(확대 폭 큼)</td></tr>
+        <tr><td><span class="who">회사채</span></td><td class="n">75조 (한화)<br>60~80조 (SK)</td><td>2026년은 대출금리가 회사채를 밑돌고 CP로 이동해 위축. 인상 종료 시 회사채로 복귀 (신영). CP·전단채 쏠림 완화</td><td>SK(AA 강세) · NH(이익 증가로 신용 이벤트 제한) · 신한(발행 증가, 캡티브 영업 규제로 여전채 대비 미진. A+는 하반기 비중 확대) · 점검: 한화(연초 발행 집중, 비우량 심리), 하나(확대 폭 큼)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="grid2">
+    <div class="panel">
+      <h3>스프레드 전망</h3>
+      <dl class="kv">
+        <dt>방향</dt><dd>축소가 다수 (SK·신영·NH·한화) · <b>하나만 확대</b>: 발행 증가와 높은 금리 부담으로 연초효과 후 약세</dd>
+        <dt>시점</dt><dd>3Q 저점 후 4Q 소폭 재확대가 공통 (신한·NH·SK) · 신한은 전강후약, 연초 기관 자금 집행이 강세 주도</dd>
+        <dt>회사채 AA- 3년</dt><dd>NH 67→59bp (3Q 55) · 신한 69→62bp (3Q 59) · 현대차 62bp · iM 60~72bp · BNK 약 55→50bp · 메리츠 약 60→55bp</dd>
+        <dt>섹터별 (신한)</dt><dd>4Q26→4Q27: 공사채 AAA 37→34 · 은행채 AAA 40→35 · 여전채 AA- 75→65 · 회사채 AA- 69→62 · 여전채 A+ 153→145 · 회사채 A+ 108→100bp</dd>
+        <dt>섹터별 (NH)</dt><dd>현재(11/11)→4Q: 공사채 AAA 36→35 · 은행채 AAA 37→33 · 여전채 AA- 71→63 · 회사채 AA- 67→59 · 여전채 A+ 149→131 · 회사채 A+ 106→91bp</dd>
+        <dt>섹터별 (한화)</dt><dd>1Q→4Q: 공사채 AAA 37→34 · 은행채 AAA 39→35 · 여전채 AA+ 60→55 · 여전채 AA- 70→63bp</dd>
+        <dt>등급</dt><dd>고금리 메리트로 하위 등급 축소 폭이 더 큼 (한화) · 하위 등급 차별화 심화 (SK)</dd>
+      </dl>
+    </div>
+    <div class="panel">
+      <h3>수요와 업종</h3>
+      <dl class="kv">
+        <dt>투신</dt><dd>인상 종료 인식 시점에 잔고·듀레이션 선행 확대 (SK)</dd>
+        <dt>연기금</dt><dd>국민연금 국내채권 16.8% → 2027년 목표 21.8% (SK)</dd>
+        <dt>은행·리테일</dt><dd>RWA 부담 완화, 환율 안정 시 AA 매수 · 리테일 크레딧 5%대 만기보유 수요 (SK)</dd>
+        <dt>반도체 머니</dt><dd>여유자금의 채권 투자 확대 (SK·신영·NH). 삼성전자·SK하이닉스 금융자산 416조, 채권형 금전신탁 120조 돌파, 상위 여전채 위탁 투자 재개 (신한)</dd>
+        <dt>규제</dt><dd>증권사 신조정유동성비율·보험 K-ICS 기본자본·은행 SSyRB·종투사 모험자본 → 우량채 선호 (NH)</dd>
+        <dt>차환</dt><dd>크레딧 만기 약 500조, 상반기 집중 (1Q 27.9%, 2Q 27.0%) (NH)</dd>
+        <dt>업종 (+)</dt><dd>반도체·조선·방산·전력장비·건설기계 (신영), 조선·전력기기 신용도 개선 (SK)</dd>
+        <dt>업종 (−)</dt><dd>건설·화학·철강·제지·저축은행·리츠 (신영), 석유화학·지방 PF (SK)</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="panel">
+    <h3>하우스 간 시각 차이</h3>
+    <p class="consensus"><b>공통</b> 인상 종료 → 캐리 수요 → 스프레드 축소가 다수. 공급 부담은 공사채(LH) 중심. 하나만 확대를 전망하고, 선호 섹터는 갈림</p>
+    <div class="scroll">
+      <table class="dt">
+        <thead><tr><th>쟁점</th><th class="pos">우호적 시각</th><th class="neg">신중한 시각</th></tr></thead>
+        <tbody>
+          <tr><td>스프레드 방향</td><td>수요 우위로 선제 축소 (SK) · 캐리 수요로 축소 (NH·신영)</td><td><b>확대</b>, 연초효과 후 약세 (하나) · 상반기 고점 후 소폭 (한화) · 강세지만 초우량물 공급이 강도 제한, 전강후약 (신한)</td></tr>
+          <tr><td>은행채</td><td>발행 유인 약화로 선호 (한화) · AAA에서 공사채 대비 우위 (SK·NH) · 시중은행채 상대 강세 (신한)</td><td>대출 증가로 월 25조 발행 지속 (SK) · 물량 부담 경계 (한양) · 특은채는 첨단채 부담 (신한)</td></tr>
+          <tr><td>여전채</td><td>상위등급 최선호 (신한) · 상·하위 모두 회사채 대비 우위 (NH) · 우량 캐피탈 우호 (한양)</td><td>차환 역대 최대, A급 이하 확대 압력 (신영·한화) · AA는 회사채 우위 (SK) · 확대 폭 큼 (하나)</td></tr>
+          <tr><td>공사채</td><td>확대 폭 가장 작음 (하나)</td><td>LH 신규 조달로 공급 부담 (한화·신영) · 구축효과 (신한) · 선호 후순위 (NH)</td></tr>
+          <tr><td>회사채 공급</td><td>인상 종료 시 발행 회복 (신영) · 단기차입의 장기 치환으로 증가 (신한) · 75조 (한화)</td><td>대출 선호로 순상환·발행 제한적 (SK·NH)</td></tr>
+          <tr><td>하위 등급</td><td>고금리 메리트로 축소 폭 가장 큼 (한화) · 하반기 선별 투자로 캐리 (NH) · 발행어음·IMA로 하반기 비중 확대 (신한)</td><td>차별화 심화 (SK) · 비추천 (하나)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="why-sec">
+  <h2>하우스별 전망 근거</h2>
+  <p class="note">각 사 원문에서 금리 경로를 그렇게 본 이유를 추린 것 · 성향별, 4Q 3년 강세 순 (상단 표와 같은 순서)</p>
+  <div id="why"></div>
+</section>
+
+<div class="notes">
+  <b>출처</b>
+  <ul>
+    <li>각 사 2027 연간전망 원문: 삼성, 신영, 교보, 유진, BNK, 메리츠, 대신, 상상인, SK, 하나, 신한, 한화, iM, 키움, 흥국, 미래에셋, 한양, LS, DB, NH, KB, 한국투자</li>
+    <li>중간값은 분기 경로를 낸 17곳 기준 · 현재 레벨은 11/19 market_data (전일 종가일 수 있음)</li>
+    <li>미래대응기금 여유자금은 NH·KB 104.4조, 신한 96.9조로 집계가 다름</li>
+  </ul>
+</div>
+</div>
+
+<script>
+const NOW={y3:3.736,y10:3.975};
+const H=[
+ {n:"하나",a:"박준우",t:"bull",term:"3.50, 28년 인하",q3:[3.60,3.50,3.60,3.30],q10:[3.70,3.60,3.70,3.50],band:"",note:"연초부터 듀레이션 확대",basis:"end"},
+ {n:"SK",a:"원유승",t:"bull",term:"3.50",q3:[3.75,3.60,3.55,3.45],q10:[4.10,4.00,3.95,3.90],band:"3.30~3.90 / 3.75~4.20 (분기 범위)",note:"상고하저, 커브 스티프"},
+ {n:"BNK",a:"이성경",t:"bull",term:"3.50",q3:[3.75,3.65,3.60,3.50],q10:[3.95,3.80,3.70,3.60],band:"",note:"유가·AI 둔화로 하향"},
+ {n:"메리츠",a:"윤여삼",t:"bull",term:"3.50",q3:[3.75,3.70,3.60,3.50],q10:[3.90,3.80,3.73,3.65],band:"적정 3.7 / 4.0",note:"선제 매수, 커브 플랫"},
+ {n:"KB",a:"임재균",t:"bull",term:"3.25 (11월 후 동결)",q3:[3.61,3.66,3.61,3.43],q10:[3.84,3.87,3.84,3.70],band:"",note:"성과급 후 반등, 연말 재하락"},
+ {n:"신영",a:"조용구",t:"neu",term:"3.50 (4월)",q3:[3.81,3.76,3.70,3.60],q10:[4.13,4.07,4.01,3.90],band:"3.45~4.00 / 3.70~4.30",note:"완만한 하락, 커브 플랫"},
+ {n:"교보",a:"백윤민",t:"neu",term:"3.50",q3:[3.80,3.75,3.70,3.60],q10:[4.15,4.10,4.00,3.90],band:"3.50~4.00 / 3.80~4.40",note:"중립, 연말 듀레이션 확대"},
+ {n:"유진",a:"김지나",t:"neu",term:"3.50",q3:[3.80,3.70,3.65,3.60],q10:[4.00,3.90,3.80,3.75],band:"3.40~4.00 / 3.60~4.30",note:"캐리 후 듀레이션 확대"},
+ {n:"NH",a:"강승원·최성종",t:"neu",term:"3.50, 28년 인하",q3:[3.80,3.75,3.70,3.65],q10:[4.10,4.00,3.90,3.80],band:"",note:"상고하저, 10년 고점 통과"},
+ {n:"한화",a:"김성수·한시화",t:"neu",term:"3.50",q3:[4.00,3.90,3.75,3.63],q10:[4.35,4.30,4.18,4.10],band:"",note:"지루한 박스, 10년 4% 하단"},
+ {n:"상상인",a:"신얼",t:"neu",term:"3.50 (1·2Q 인상)",q3:[3.80,3.77,3.73,3.68],q10:[4.15,4.10,4.05,3.95],band:"3.50~4.10 / 3.70~4.40",note:"상반기 단기, 이후 바벨"},
+ {n:"삼성",a:"김지만",t:"neu",term:"3.75 (2월·5월)",q3:[3.95,3.85,3.75,3.70],q10:[4.25,4.15,4.05,4.00],band:"3.40~4.20 / 3.70~4.50",note:"상반기 고점 후 장기물 확대",basis:"end"},
+ {n:"신한",a:"김찬희",t:"neu",term:"3.50",q3:[4.00,3.80,3.70,3.70],q10:[4.30,4.10,3.90,3.90],band:"3.50~4.20 / 3.70~4.50",note:"3년 4.0·10년 4.3%서 매수"},
+ {n:"iM",a:"김명실",t:"neu",term:"3.50 (3.75 리스크)",q3:[3.77,3.99,4.05,3.70],q10:[4.20,4.39,4.45,4.15],band:"3.60~4.10 / 4.00~4.50",note:"2~3Q 반등 시 매수"},
+ {n:"키움",a:"안예하",t:"neu",term:"3.50",q3:[4.00,3.85,3.80,3.75],q10:[4.35,4.15,4.05,3.95],band:"3.60~4.20 / –",note:"최종금리 확인 후 하락"},
+ {n:"대신",a:"공동락",t:"bear",term:"3.50",q3:[3.95,3.90,3.85,3.85],q10:[4.40,4.35,4.30,4.25],band:"",note:"정점 후에도 더딘 하락"},
+ {n:"흥국",a:"김진성",t:"bear",term:"3.50 (2Q)",q3:[3.95,4.05,3.95,3.90],q10:[4.20,4.30,4.25,4.15],band:"3.80~4.20 / 4.00~4.50",note:"상고하저, 3년 연평균 3.96%로 최고"}
+];
+const RANGE=[
+ {n:"미래에셋",a:"민지희",t:"bull",term:"27년말 인하 전환",r3:[3.0,3.7],r10:[3.1,4.0],band:"3.00~3.70 / 3.10~4.00",note:"성장 2.8%, 하반기 인하 기대"},
+ {n:"한국투자",a:"안재균",t:"neu",term:"3.50, 이후 동결",r3:[3.50,4.00],r10:[3.70,4.45],band:"3.50~4.00 / 3.70~4.45",note:"4Q26부터 장기물 확대, 플랫"}
+];
+// 연간 밴드 [3년, 10년] — 원문에서 제시한 하우스만
+const BANDS={
+ "SK":[[3.30,3.90],[3.75,4.20]], "신영":[[3.45,4.00],[3.70,4.30]], "교보":[[3.50,4.00],[3.80,4.40]],
+ "유진":[[3.40,4.00],[3.60,4.30]], "상상인":[[3.50,4.10],[3.70,4.40]], "삼성":[[3.40,4.20],[3.70,4.50]],
+ "신한":[[3.50,4.20],[3.70,4.50]], "iM":[[3.60,4.10],[4.00,4.50]], "키움":[[3.60,4.20],null],
+ "흥국":[[3.80,4.20],[4.00,4.50]]
+};
+const TEXTONLY=[
+ {n:"한양",a:"김수연",t:"neu",term:"3.50 (3.25 가능)",note:"선반영으로 하락폭 제한"},
+ {n:"LS",a:"우혜영",t:"neu",term:"3.50 (2월)",note:"4월 반등 후 보합"},
+ {n:"DB",a:"문홍철",t:"bear",term:"–",note:"듀레이션 최소화"}
+];
+const TL={bull:"강세",neu:"중립",bear:"약세"};
+const median=a=>{const s=[...a].sort((x,y)=>x-y),m=s.length>>1;return s.length%2?s[m]:(s[m-1]+s[m])/2};
+const f2=v=>v.toFixed(2);
+const bp=v=>(v>0?"+":"")+Math.round(v*100)+"bp";
+const M={q1_3:median(H.map(h=>h.q3[0])),q4_3:median(H.map(h=>h.q3[3])),q1_10:median(H.map(h=>h.q10[0])),q4_10:median(H.map(h=>h.q10[3]))};
+
+const K=[["국고3년 1Q 중간값",M.q1_3,NOW.y3],["국고3년 4Q 중간값",M.q4_3,NOW.y3],["국고10년 1Q 중간값",M.q1_10,NOW.y10],["국고10년 4Q 중간값",M.q4_10,NOW.y10]];
+document.getElementById("kpis").innerHTML=K.map(([k,v,now])=>{const d=v-now;return `<div class="kpi"><span class="k">${k}</span><span class="v">${f2(v)}%</span><span class="d ${d>0?"up":"dn"}">현재 대비 ${bp(d)}</span></div>`}).join("");
+
+const key4=h=>h.q3?h.q3[3]:h.r3?(h.r3[0]+h.r3[1])/2:9;
+const order={bull:0,neu:1,bear:2};
+const rows=[...H,...RANGE,...TEXTONLY].sort((a,b)=>order[a.t]-order[b.t]||key4(a)-key4(b));
+document.getElementById("tbody").innerHTML=rows.map(h=>{
+  const p3=h.q3?`${f2(h.q3[0])} → ${f2(h.q3[3])}`:"–";
+  const p10=h.q10?`${f2(h.q10[0])} → ${f2(h.q10[3])}`:"–";
+  const sp=h.q3?Math.round((h.q10[3]-h.q3[3])*100)+"bp":"–";
+  const basis=h.basis==="end"?'<span class="an">분기말</span>':"";
+  return `<tr><td><span class="who">${h.n}</span><span class="an">${h.a||""}</span></td><td><span class="pill ${h.t}">${TL[h.t]}</span></td><td>${h.term}</td><td class="n">${p3}${basis}</td><td class="n">${p10}</td><td class="n">${sp}</td><td class="n">${h.band||"–"}</td><td>${h.note}</td></tr>`}).join("");
+
+// 하우스별 전망 근거 (원문 요약)
+const WHY={
+ "하나":{v:"한국 금리 사이클이 미국보다 먼저 꺾인다",r:["반도체 호황이 투자 중심으로 내수에 퍼졌지만 경기선행지수와 기업이익 증가율은 이미 정점을 통과","GDP 갭이 플러스로 바뀌어 근원물가 압력이 커짐 → 11월·2월 인상 후 3.50% 동결","과거 인상 후 동결기엔 장단기 스프레드가 급히 좁혀지고 3년물이 기준금리를 밑도는 게 보통 → 27년 말 3년 3.30%","국고채 순발행이 2년 연속 줄어 공급 부담 완화"],s:"듀레이션: 26년 축소 → 현재 중립 → 27년 확대"},
+ "미래에셋":{v:"성장의 이면이 드러나며 27년 말 인하로 전환",r:["27년 성장 2.8%: 반도체 수출 기저효과, 자동차 등 비반도체 수출 증가율 둔화","반도체 소득 개선분이 상당 부분 저축·투자·부채상환으로 흘러 소비로 이어지는 효과 제한","고소득층 자산이 부동산에 쏠려 있어 소비여력 축소와 부채상환 선호를 부름","추가 인상은 1~2회(11월 포함)에 그치고 27년 말 인하 전환"],s:"미래대응기금은 27년 중반 이후 본격 집행 · 상반기 커브 플랫, 하반기 인하 기대 반영"},
+ "SK":{v:"Lower, But Limited: 상고하저 강세, 폭은 제한",r:["한국(2월)·미국(3월)이 같은 1분기에 인상을 끝내고 근원물가는 점진 둔화","국고채 순발행 감소: 정부안 96.3조, 세수 재추계 반영 시 89조 안팎","팬데믹기보다 성장률 갭이 작고 물가 우려도 덜해 최종금리는 당시 고점 3.50%를 넘지 않음","다만 GDP 갭이 플러스여서 인하 기대가 반영되기 어렵고, 외국인 수요는 완만하며, 미국 텀프리미엄 하단이 높아짐","4Q26 급락은 위험회피와 외국인 선물 매수가 만든 수급 강세라 연말 되돌림 후 2분기부터 단기물 주도 하락"],s:"상반기 벤치마크 대비 숏~중립 속 3년 캐리, 하반기 듀레이션 확대 · 10-3년 스티프너"},
+ "BNK":{v:"금리 인상 기대의 정점은 이미 지났다",r:["유가가 내년 80달러 이하로 안정돼 물가 하락이 이어짐. 추가 확전 가능성은 낮게 봄","AI 성장 둔화가 충격보다는 낮아진 성장 기여로 반영되며 하반기 둔화 폭 확대 (GDP 4Q 1.9%)","테일러 준칙(실질 중립 0~1%) 기준 3.50% 동결이 균형 수준","시장금리는 1분기 내외부터 인하 시점을 찾기 시작"],s:"2분기 AI 투자·조달 이슈로 금융불안 재부각, 신용스프레드 확대 가정",k:"리스크"},
+ "메리츠":{v:"터미널 3.50%에서 추가 긴축은 어렵다 → 선제적 강세",r:["반도체 제외 민간소비가 예상보다 부진, 균형 성장을 고려하면 3.50% 긴축 영역에선 추가 인상 제한","WGBI 효과가 끝나도 세수 확대에 따른 재정여력과 미래대응기금 등 채권시장에 우호적. 국가 신용등급 상향 가능성도 주목","적정가치는 3년 3.7%·10년 4.0%, 27년엔 추가로 20bp 정도 하방 여지","미국은 하반기 완화 전환. 미국채 10년 5.3%는 오버슈팅이라 하반기 4.3%까지 하락 여지"],s:"가격 부담에도 ‘밀림 사자’ 관점의 매수 · 커브 플랫 지속"},
+ "KB":{v:"금리는 피크(peak), 채권은 픽(pick)",r:["반도체 낙수효과가 민간소비로 약하게 번짐: 성과급의 소비 파급률 하락, 고용 감소, 증시 하락에 따른 역(-)의 자산효과","핵심물가는 12월이 고점: 유가 2차 파급이 크지 않고 환율 하락이 수입물가를 상쇄 → 11월 인상 후 동결(3.25%)","26년과 반대의 머니무브: 미래대응기금, 국민연금(국내채권 목표 비중 하회), 채권형 펀드, 건보료 자금이 채권으로 유입","외국인 복귀: 한은 인상 후반부라 재정차익 유인 회복, 낮춰 둔 WGBI 비중 확대, 건전한 재정이 안전자산 인식을 높임"],s:"3~4월 성과급 지급 후 반등, 연말로 갈수록 인하 기대로 재하락 · 10-3년 상반기 축소 후 확대, 30-10년 확대"},
+ "신영":{v:"성장 부담에도 고금리 수요와 분산투자 효과로 일정 수준 하락",r:["한은은 인상 사이클 중반: 11월, 내년 4월 인상 후 3.50%. 잠재성장률·중립금리 상향으로 조기 인하는 어려움","27년 성장 3.1%, 물가 2.3%로 둔화","10년 적정 레벨: 성장+물가 중기 추세로 1년 후 4.11%, 장기 추세로는 3.64~4.37%","2028년까지 세수 호조(발행 축소 여지)와 미래대응기금 운용(높은 유동성·국내채권 비중)이 수혜"],s:"금리 상승 시 매수 관점 · 커브 플래트닝 우위"},
+ "교보":{v:"호황이 만든 금리의 저항선",r:["반도체 중심 AI 사이클과 수출·투자 호조로 양호한 성장 지속. IT 수출 증가율은 둔화돼도 수출 금액과 반도체 투자는 높은 수준 유지","물가 상승률은 점차 낮아지지만 상당 기간 목표를 웃돔","물가 신뢰와 기대인플레 재상승 방지를 위해 3.50%를 27년 1분기까지 끌고 가되, 사이클이 길지는 않음","미국은 ‘더 올리기보다 오래 높게’: 재정적자·이자비용과 하이퍼스케일러 회사채 발행으로 하락 폭 제한"],s:"듀레이션 중립, 캐리 매수 · 연 후반 경기 둔화를 확인하며 듀레이션 확대"},
+ "유진":{v:"캐리로 시작해 듀레이션을 늘린다",r:["물가 안정을 위해 11월·1분기(2월경) 인상 후 3.50%에서 연간 동결","추가 인상엔 반도체 업황 상회, 소비 개선, 신용 불안 부재 등 전제가 많음. 한국의 대출·신용 여건은 미국보다 이미 긴축적","반도체 중심 성장은 유지되나 물가 둔화, 인상에 따른 경기 부담과 금융 불안은 점차 누적","인상 사이클 종료, 경기 모멘텀 둔화, 차기 인하 기대로 상고하저"],s:"캐리 매수로 시작해 후반으로 갈수록 듀레이션 확대"},
+ "NH":{v:"중립금리 3% 재추정, 10년은 이미 고점 통과",r:["반도체 호황으로 중립금리 추정치를 3%로 상향 → 3.25%가 상단, 3.50%부터 긴축 영역. 11월·2월 인상 후 3.50%","2분기부터 인상 효과가 나타나고 유가 역기저가 겹쳐 근원물가 전망 하향 → 하반기부터 28년 인하 기대 반영","10년 실질금리는 잠재성장률(2%로 상향 감안)이 상단 역할 → 26년 10년 금리는 고점 통과","순증 13.1조 감소, 미래대응기금 여유자금 104.4조, 초장기 비중 축소로 듀레이션 공급 부담 완화","02년 이후 마지막 인상 30·60일 전후로 시장금리는 대부분 하락"],s:"듀레이션 확대 신호는 삼성전자 목표주가 하향 시작 (지난 빅사이클 경험)"},
+ "한화":{v:"불안한 지루함: 지루한 박스권",r:["3.50%는 기존 중립금리 상단(3.30%)보다 20bp 높을 뿐. 기대인플레 2%대 후반 고착, 성장이 잠재(1.8~1.9%)를 웃돌아 연말까지 GDP 갭 플러스 → 내려줄 이유가 없음","서울 아파트 +15%, 가계대출 증가 등 금융불균형 지속, 미국 추가 인상도 인하를 막음","마지막 인상 후 첫 인하까지 평균 10개월 → 인하 논의는 27년 말 이후","국채 수급 개선 없이 글로벌 금리 하락은 어려움: 정부는 지출을 줄이지 않고 중앙은행은 매입하지 않음 → 10년 4%가 하단"],s:"하방은 두바이유 60달러대·반도체 둔화 조기화·서울 집값 하락(연내 인하), 상방은 유가 재급등·원화 약세(3.75%)",k:"리스크"},
+ "상상인":{v:"인상 국면 마무리, 금리 고점 변곡점 통과",r:["한은 1Q·2Q 인상 후 3.50%. 한은 중립금리 추정 1.8~3.3%에서 3.50%는 상단 초과라 두 번 더 올릴 근거로는 다소 과하지만, 정책여력 확보를 위한 보수적 스탠스","AI발 중립금리 상향은 통계로 입증되기 전이라 최종금리를 더 올릴 근거로는 제한적","우호 요인은 통화정책(상반기 한은, 하반기 연준)·물가·금융안정, 비우호 요인은 재정·AI 성장·AI capex 회사채 발행","금리 방향은 통화정책이, 하락 폭은 물가·재정·수급이 결정"],s:"1Q까지 단기채 캐리, 2Q부터 바벨 · 상반기 플랫, 하반기 스팁 가능"},
+ "삼성":{v:"無見小利: 상반기 고점 확인 후 완만한 하락",r:["성장 26년 3.9%, 27년 3.3%로 컨센서스를 크게 웃돎","반도체 기업의 대규모 성과급·배당과 정부 이전지출이 민간소비로 이어져 인상 기조를 뒷받침 → 11월, 27년 2월·5월 인상으로 3.75%","최종금리 눈높이가 계속 올라가는 상반기 중 금리 고점","인하 전환이 아니라 동결 속 안정이라 하락 폭은 제한적"],s:"상반기 캐리 중심 단기물, 고점 확인 후 장기물 중심으로 듀레이션 확대"},
+ "신한":{v:"AI capex 낙수효과가 금융시장으로 옮겨온다",r:["상반기에 공급차질 시차, 성과급, 재정지출발 인플레가 몰려 1분기 금리 상방 변동성 확대","긴축의 시작은 수출이, 마무리는 근원물가가 결정 → 최종 3.50%","26년엔 AI capex가 실물에 먼저 반영됐다면 27년엔 기업이익·세수·가계소득으로 쌓인 재원이 채권으로 환류: 미래대응기금 10~30조(단기물), 기업·가계 자금, 외국인 안착","금융불안 확산 제한: 거시건전성 규제로 가계부채 확대 제한, 기업 자금 환류로 원/달러 1,300원대"],s:"연말~1Q 중립 이하로 캐리, 3년 4.0%·10년 4.3% 내외에서 중립 이상(5년 이상)으로 확대"},
+ "iM":{v:"음(-)×음(-)=양(+): 악재의 약화가 만드는 전환",r:["성장 기대의 추가 상승 여력 축소와 물가·국채 공급 부담 완화가 겹쳐 2년 연속 이어진 금리 상승의 관성이 약해짐","연초엔 추가 긴축 우려 완화로 소폭 하락, 2~3분기엔 반도체 물량·내수 확산 여부에 따라 성장 상향과 3.75% 가능성을 재평가하며 재상승","4분기엔 28년 반도체 정점 통과 논란이 하락을 이끌지만, 세수 둔화 우려와 높은 지출 기준선이 장기물 하락 폭 제한 (10-3년 40→45bp)","재경부 발행조절·바이백이 급등을 완충하나 확장재정과 차환 공급 부담은 남음"],s:"연초 캐리 확보, 2~3분기 반등 시 듀레이션 점진 확대"},
+ "키움":{v:"긴축 이후의 균형점을 찾아가는 과정",r:["고유가에 따른 인플레 압력과 견조한 성장으로 1분기 추가 인상, 이를 확인하는 동안 1분기까지 상방 압력","이후 긴축 종료로 불확실성이 걷히고 추가 인상 기대가 약해지며 채권 투자심리 회복","수급의 관건은 국내 기관 매수 회복: 26년 보험·투신·기금 순매수 비중이 과거 평균을 밑돌았고, 외국인 잔고는 3월 말 대비 30조 증가에 그침","체크포인트: 인상 마무리 후 금리 반응, 장기채 발행 비중, 고금리 부담 누적"],s:""},
+ "대신":{v:"고(高)금리? 고(苦)금리!",r:["이란 전쟁이 인플레를 다시 불러냄. 20년간 사문화됐던 물가를 금리에 정상적으로 반영하는 과정","국가부채가 본격적으로 인식되며 기간프리미엄 상승, 빅테크의 대규모 AI 회사채 발행으로 구축 우려","중앙은행은 다시 ‘behind the curve’가 되지 않으려 함 → 한국 3.50%(경기 따라 상향 여지), 미국 4.50%","1분기 정점 확인 후에도 높은 기준금리와 수급 불안으로 하락은 더딤. 상반기까지 고금리 부담 유지"],s:""},
+ "흥국":{v:"Debt is the Matter: 상고하저지만 레벨은 높게",r:["성장 27년 3.3%로 잠재 수준 상회, 물가 2.4%. 한·미 인상은 27년 상반기 중 일단락 (최종 3.50%)","선제 대응으로 국내 물가는 안정적이나 글로벌 금리 변동성 확대 영향은 피하기 어려움","시장금리-기준금리 스프레드가 100bp에서 50bp 내외로 좁혀져 추가 인상 반영 여지 제한","선진국 재정·부채 문제가 장기금리를 제약적 수준에 묶어 둠. 경기·물가·정책·수급 여건은 하반기로 갈수록 완화"],s:""},
+ "한양":{v:"긴축 종료는 선반영, 시장은 2028년 이후 성장을 본다",r:["반도체·정제유 수출이 높은 기저로 성장 기여 축소, 자산시장 조정으로 내수 확산 제한 → 1분기 인상 종료 후 중립 전환","과거 인상기엔 3년 금리가 마지막 인상 전에 고점을 형성한 사례가 다수","인상 종료 후 보험·증권·기금 수요 회복, WGBI 효과는 사라져도 미래대응기금이 일부 보완 (단, 경기 둔화 시 재정지출로 전용 가능)","긴축 종료 기대가 이미 상당 부분 반영됐고 재정여력 높은 당국의 대응 여력이 추가 하락을 제약"],s:"AI 우려가 금융불안으로 번지면 1분기 3.25%에서 조기 종료 가능",k:"리스크"},
+ "LS":{v:"인상은 마무리, 금리는 제자리 (상중하중)",r:["수출·내수 중심의 양호한 성장 지속, 근원물가는 당분간 3% 내외로 목표 상회하고 수요측 압력이 점차 가시화","환율·부동산 등 금융안정 과제가 남아 인상 기조는 상반기까지","2월이 마지막 인상이면 4월까지 반등 후 하향 안정, 하반기 동결이 이어지면 국고-기준금리 스프레드상 보합","올해 같은 가파른 금리 하락이 재현될 가능성은 낮음"],s:""},
+ "한국투자":{v:"금리 인상 종료와 수급 안정이 이끄는 커브 플래트닝",r:["27년 성장 3.3%, 근원물가 2.7%. 플러스 GDP 갭과 반도체발 소득 개선으로 수요측 물가 압력 → 1Q27까지 추가 인상 후 3.50% 동결","중립금리를 웃도는 고강도 긴축이 길어지면 성장 희생이 커서 추가 인상 여력은 제한적","반도체 세수 확대, 양호한 재정건전성, 30년 발행 비중 축소, 외국인 수요 유입이 수급 안정 요인","글로벌로는 AI 인프라 투자가 회사채·국채 공급을 늘려 기간프리미엄 중심의 고금리가 뉴노멀"],s:"4Q26부터 장기물 중심 듀레이션 확대, 커브 플랫 대비 포지션"},
+ "DB":{v:"오만과 편견: 듀레이션 최소화",r:["물가 확산, 호르무즈 물동량, 부채 증가 속도, 성장·물가 압력 어디로도 설명되지 않는 글로벌 초장기 금리 급등","원인은 연기금·보험 규제: 금리가 급등하면 장기채를 팔 수밖에 없어 헤지펀드 숏이 상단 없이 몰릴 수 있음","반대로 숏커버로 급락할 수도 있어 변동성이 극단적, 매크로 기반 투자 전략이 통하지 않음","AI의 금리 영향은 답이 없는 질문. 금리 상승기엔 상승 논리로만 쓰일 뿐"],s:"듀레이션 최소화, 위험 대비 · 원/달러는 수출이 결정, 1,320원 1차·1,250원 목표"}
+};
+const groups=[["bull","강세"],["neu","중립"],["bear","약세"]];
+document.getElementById("why").innerHTML=groups.map(([t,lab])=>{
+  const items=rows.filter(h=>h.t===t&&WHY[h.n]);
+  return `<p class="whyg">${lab} ${items.length}곳</p><div class="whygrid">`+items.map(h=>{const w=WHY[h.n];
+    return `<article class="why ${t}"><div class="hd"><span class="who">${h.n}</span><span class="an">${h.a||""}</span><span class="pill ${t}">${TL[t]}</span></div><p class="v">${w.v}</p><ul>${w.r.map(x=>`<li>${x}</li>`).join("")}</ul>${w.s?`<p class="s"><b>${w.k||"전략"}</b>${w.s}</p>`:""}</article>`}).join("")+`</div>`}).join("");
+
+const sp4=H.map(h=>({n:h.n,s:Math.round((h.q10[3]-h.q3[3])*100)}));
+const flat=sp4.filter(x=>x.s<=20).sort((a,b)=>a.s-b.s), steep=sp4.filter(x=>x.s>=40).sort((a,b)=>b.s-a.s), mid=sp4.filter(x=>x.s>20&&x.s<40).sort((a,b)=>a.s-b.s);
+const chip=x=>`<span class="chip">${x.n}<span class="num">${x.s}</span></span>`;
+document.getElementById("curve").innerHTML=
+ `<div class="row"><span class="lab" style="color:var(--bull)">≤20</span><div class="chips">${flat.map(chip).join("")}</div></div>`+
+ `<div class="row"><span class="lab">21~39</span><div class="chips">${mid.map(chip).join("")}</div></div>`+
+ `<div class="row"><span class="lab" style="color:var(--bear)">≥40</span><div class="chips">${steep.map(chip).join("")}</div></div>`;
+
+function draw(key,svg=document.getElementById("chart")){
+  const is3=key==="q3", now=is3?NOW.y3:NOW.y10, med=is3?M.q4_3:M.q4_10;
+  const dom=is3?[2.95,4.25]:[3.05,4.55];
+  const data=[...H].sort((a,b)=>a[key][3]-b[key][3]);
+  const W=900,L=90,R=190,T=34,RH=26,B=30;
+  const rowsAll=[...RANGE.map(r=>({...r,range:is3?r.r3:r.r10})),...data];
+  const Ht=T+rowsAll.length*RH+B;
+  const x=v=>L+(v-dom[0])/(dom[1]-dom[0])*(W-L-R);
+  svg.setAttribute("viewBox",`0 0 ${W} ${Ht}`);svg.setAttribute("width",W);svg.setAttribute("height",Ht);
+  let s="";
+  for(let i=Math.ceil(dom[0]*10);i<=Math.floor(dom[1]*10);i++){
+    const v=i/10, major=i%2===0;
+    s+=`<line x1="${x(v)}" x2="${x(v)}" y1="${T-6}" y2="${Ht-B+4}" stroke="var(--line)" stroke-width="${major?1:0.5}"/>`;
+    if(major) s+=`<text x="${x(v)}" y="${Ht-B+20}" text-anchor="middle" font-size="11" fill="var(--muted)">${v.toFixed(1)}</text>`;
+  }
+  s+=`<line x1="${x(med)}" x2="${x(med)}" y1="${T-6}" y2="${Ht-B+4}" stroke="var(--muted)" stroke-dasharray="4 3" stroke-width="1.2"/>`;
+  s+=`<text x="${x(med)}" y="${T-12}" text-anchor="middle" font-size="11" fill="var(--muted)">4Q 중간값 ${f2(med)}</text>`;
+  s+=`<line x1="${x(now)}" x2="${x(now)}" y1="${T-6}" y2="${Ht-B+4}" stroke="var(--now)" stroke-width="2"/>`;
+  s+=`<text x="${x(now)}" y="${T-24}" text-anchor="middle" font-size="11" font-weight="600" fill="var(--now)">현재 ${f2(now)}</text>`;
+  rowsAll.forEach((h,i)=>{
+    const y=T+i*RH+RH/2;
+    const col=h.t==="bull"?"var(--bull)":h.t==="bear"?"var(--bear)":"var(--accent)";
+    s+=`<text x="${L-12}" y="${y+4}" text-anchor="end" font-size="12.5" font-weight="600" fill="var(--fg)">${h.n}</text>`;
+    if(h.range){
+      s+=`<rect x="${x(h.range[0])}" y="${y-5}" width="${x(h.range[1])-x(h.range[0])}" height="10" rx="3" fill="${col}" opacity="0.28"/>`;
+      s+=`<text x="${x(h.range[1])+6}" y="${y+4}" font-size="11" fill="var(--muted)">연간 밴드 ${f2(h.range[0])}~${f2(h.range[1])}</text>`;
+      return;
+    }
+    const q=h[key], hi=Math.max(...q);
+    const bd=BANDS[h.n], b=bd?(is3?bd[0]:bd[1]):null;
+    if(b) s+=`<rect x="${x(b[0])}" y="${y-6}" width="${x(b[1])-x(b[0])}" height="12" rx="3" fill="${col}" opacity="0.18"><title>${h.n} 연간 밴드 ${f2(b[0])}~${f2(b[1])}</title></rect>`;
+    s+=`<line x1="${x(q[0])}" x2="${x(q[3])}" y1="${y}" y2="${y}" stroke="${col}" stroke-width="3"/>`;
+    s+=`<circle cx="${x(q[0])}" cy="${y}" r="5" fill="var(--surface)" stroke="${col}" stroke-width="2"><title>${h.n} 1Q ${f2(q[0])}</title></circle>`;
+    s+=`<circle cx="${x(q[3])}" cy="${y}" r="5" fill="${col}"><title>${h.n} 4Q ${f2(q[3])}</title></circle>`;
+    const lx=Math.max(x(q[0]),x(hi),b?x(b[1]):0)+9;
+    s+=`<text x="${lx}" y="${y+4}" font-size="11" fill="var(--muted)">${f2(q[0])}→${f2(q[3])}${hi>q[0]+1e-9?" (고점 "+f2(hi)+")":""}</text>`;
+  });
+  svg.innerHTML=s;
+}
+const b3=document.getElementById("b3"),b10=document.getElementById("b10");
+function sel(k){b3.setAttribute("aria-pressed",k==="q3");b10.setAttribute("aria-pressed",k==="q10");draw(k);}
+b3.onclick=()=>sel("q3");b10.onclick=()=>sel("q10");
+draw("q3");
+draw("q10",document.getElementById("chart10"));
+</script>
+
+</body></html>
