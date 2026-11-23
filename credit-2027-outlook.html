@@ -276,15 +276,14 @@ function toggleOutlookTheme() {
 </section>
 
 <section class="chart-sec">
-  <h2>2027 미국 크레딧 5개년 공급 추이 · Net-Net · 스프레드 · 섹터 인터랙티브 차트</h2>
+  <h2>2027 미국 크레딧 공급 · Net-Net · 스프레드 · 섹터 인터랙티브 차트</h2>
   <div class="chartcard">
     <div class="toolbar">
       <div class="seg" role="group" aria-label="차트 지표 선택">
-        <button type="button" id="tabHist5Y" aria-pressed="true">1. 최근 5개년(22~26) vs 27E 공급·Net-Net ($bn)</button>
-        <button type="button" id="tabHouseCompare" aria-pressed="false">2. 하우스별 27E Gross · Net · 쿠폰차감($249B vs $508B)</button>
-        <button type="button" id="tabSpread" aria-pressed="false">3. 하우스별 IG · HY · Loan 스프레드 타겟 (bp)</button>
-        <button type="button" id="tabJpmSectors" aria-pressed="false">4. JPM 15개 섹터 총발행·순발행 ($bn)</button>
-        <button type="button" id="tabAiBreakdown" aria-pressed="false">5. AI 조달 구조(MS·WFS·JPM) &amp; Chip 딜 ($bn)</button>
+        <button type="button" id="tabHouseCompare" aria-pressed="true">1. 하우스별 27E Gross · Net · 쿠폰차감($249B vs $508B)</button>
+        <button type="button" id="tabSpread" aria-pressed="false">2. 하우스별 IG · HY · Loan 스프레드 타겟 (bp)</button>
+        <button type="button" id="tabJpmSectors" aria-pressed="false">3. JPM 15개 섹터 27E 총발행·순발행 ($bn)</button>
+        <button type="button" id="tabAiBreakdown" aria-pressed="false">4. 27E AI 조달 구조(MS·WFS·JPM) &amp; Chip 딜 ($bn)</button>
       </div>
       <div class="legend" id="chartLegend"></div>
     </div>
@@ -296,7 +295,7 @@ function toggleOutlookTheme() {
 <section class="supply-sec">
   <h2>최근 5개년(2022~2026) vs 2027E 미국 크레딧 공급 시계열 &amp; ‘쿠폰 차감 실질 순공급(Net-Net)’ 비교</h2>
   <div class="panel">
-    <h3>1. US IG 최근 5개년(2022~2026E) 및 2027E 총발행 · 상환 · 순발행 · 쿠폰 · Net-Net 시계열 비교 (JPM · MS · BofA · WFS · Barclays)</h3>
+    <h3>US IG 최근 5개년(2022~2026E) 및 2027E 총발행 · 상환 · 순발행 · 쿠폰 · Net-Net 시계열 비교 (JPM · MS · BofA · WFS · Barclays)</h3>
     <p class="consensus"><b>핵심 포인트 (BofA $249bn vs JPM $508bn)</b> 명목 총발행(Gross)은 2022년 $1.20~1.28조에서 2027년 <b>$1.90조(BofA)~2.40조(MS)</b>로 약 1.6~2배 커졌으나, 같은 기간 만기·조기상환($1.04~1.27조)과 <b>연간 쿠폰 이자 유입액(22년 $342bn → 27년 $556bn, +63%)</b>이 함께 급증했습니다. 이에 따라 <b>쿠폰 재투자까지 감안한 실질 순공급(Net-Net Supply)은 BofA $249bn, JPM $508bn(콜·텐더 추가 반영 시 ~$410bn)</b>으로 줄어들어 실제 시장의 흡수 부담은 헤드라인 총발행보다 훨씬 가볍습니다.</p>
     <div class="scroll">
       <table style="min-width:1020px;font-size:12.5px">
@@ -1237,88 +1236,27 @@ document.getElementById("whyGrid").innerHTML = US_CREDIT_HOUSES.map(h => `
   </article>
 `).join("");
 
-// 인터랙티브 SVG 차트 (5개 탭)
+// 인터랙티브 SVG 차트 (4개 탭: 2027년 수치 중심)
 const svg = document.getElementById("mainChart");
 const legendEl = document.getElementById("chartLegend");
 const noteEl = document.getElementById("chartNote");
-
-function drawHist5YChart() {
-  legendEl.innerHTML = `
-    <span><i class="sw" style="background:var(--accent)"></i>JPM 총발행 Gross ($bn)</span>
-    <span><i class="sw" style="background:var(--teal)"></i>MS 총발행 Gross ($bn)</span>
-    <span><i class="sw" style="background:var(--bull)"></i>JPM 순발행 Net ($bn)</span>
-    <span><i class="sw" style="background:var(--purple)"></i>★쿠폰 차감 실질 순공급 Net-Net (JPM $508B / BofA 27E $249B)</span>
-  `;
-  noteEl.textContent = "단위: $bn (십억 달러) · 최근 5개년(2022~2026E) 및 2027E 미국 IG 공급 추이 비교 (출처: J.P. Morgan Fig 3~6, Morgan Stanley Exhibit 61, BofA) · 2027년 명목 총발행은 $1.9~2.4조로 사상 최대이나, 만기·콜 상환 및 쿠폰 수입($556bn)을 차감한 Net-Net 공급은 JPM $508bn, BofA $249bn에 불과";
-
-  const years = [
-    { yr: "2022", jpmG: 1200, msG: 1277, jpmN: 417, msN: 341, jpmC: 342, jpmNN: 74 },
-    { yr: "2023", jpmG: 1200, msG: 1283, jpmN: 500, msN: 448, jpmC: 376, jpmNN: 124 },
-    { yr: "2024", jpmG: 1500, msG: 1619, jpmN: 683, msN: 658, jpmC: 423, jpmNN: 259 },
-    { yr: "2025", jpmG: 1600, msG: 1810, jpmN: 617, msN: 600, jpmC: 470, jpmNN: 147 },
-    { yr: "2026E", jpmG: 2000, msG: 2150, jpmN: 940, msN: 842, jpmC: 496, jpmNN: 444 },
-    { yr: "5Y 평균 (22~26)", jpmG: 1500, msG: 1628, jpmN: 631, msN: 578, jpmC: 421, jpmNN: 210 },
-    { yr: "2027E (전망)", jpmG: 2100, msG: 2400, jpmN: 1064, msN: 1130, jpmC: 556, jpmNN: 508, bofaNN: 249 }
-  ];
-
-  const W = 980, L = 135, R = 295, T = 32, GH = 60, B = 34;
-  const Ht = T + years.length * GH + B;
-  const maxVal = 2500;
-  const x = v => L + (v / maxVal) * (W - L - R);
-  svg.setAttribute("viewBox", `0 0 ${W} ${Ht}`);
-  svg.setAttribute("width", W);
-  svg.setAttribute("height", Ht);
-
-  let s = "";
-  for (let v = 0; v <= 2500; v += 500) {
-    s += `<line x1="${x(v)}" x2="${x(v)}" y1="${T - 10}" y2="${Ht - B + 4}" stroke="var(--line)" stroke-width="1"/>`;
-    s += `<text x="${x(v)}" y="${Ht - B + 20}" text-anchor="middle" font-size="11" fill="var(--muted)">$${v}bn</text>`;
-  }
-
-  years.forEach((it, i) => {
-    const y0 = T + i * GH;
-    const isAvg = it.yr.indexOf("평균") !== -1;
-    const is27 = it.yr.indexOf("2027") !== -1;
-    if (isAvg || is27) {
-      s += `<rect x="4" y="${y0 - 2}" width="${W - 8}" height="${GH - 4}" rx="6" fill="${is27 ? 'var(--accent-soft)' : 'var(--soft)'}" opacity="0.55"/>`;
-    }
-    s += `<text x="${L - 12}" y="${y0 + 28}" text-anchor="end" font-size="12.5" font-weight="700" fill="var(--fg)">${it.yr}</text>`;
-    // JPM Gross & MS Gross
-    s += `<rect x="${x(0)}" y="${y0 + 4}" width="${x(it.jpmG) - x(0)}" height="12" rx="2" fill="var(--accent)"/>`;
-    s += `<rect x="${x(0)}" y="${y0 + 18}" width="${x(it.msG) - x(0)}" height="12" rx="2" fill="var(--teal)"/>`;
-    s += `<text x="${Math.max(x(it.jpmG), x(it.msG)) + 8}" y="${y0 + 16}" font-size="11" font-weight="600" fill="var(--fg)">Gross: JPM $${it.jpmG}B / MS $${it.msG}B${is27 ? " (BofA $1,900B)" : ""}</text>`;
-    // Net & Net-Net
-    s += `<rect x="${x(0)}" y="${y0 + 33}" width="${x(it.jpmN) - x(0)}" height="14" rx="2" fill="var(--bull)" opacity="0.8"/>`;
-    s += `<rect x="${x(0)}" y="${y0 + 33}" width="${x(it.jpmNN) - x(0)}" height="14" rx="2" fill="var(--purple)"/>`;
-    if (it.bofaNN) {
-      s += `<line x1="${x(it.bofaNN)}" x2="${x(it.bofaNN)}" y1="${y0 + 30}" y2="${y0 + 50}" stroke="var(--now)" stroke-width="3"><title>BofA 쿠폰차감 순공급 $249bn</title></line>`;
-    }
-    const subTxt = is27
-      ? `Net $${it.jpmN}B · ★Net-Net: JPM $${it.jpmNN}B / BofA $${it.bofaNN}B (쿠폰 $${it.jpmC}B)`
-      : `Net: JPM $${it.jpmN}B (MS $${it.msN}B) · 쿠폰 $${it.jpmC}B → ★Net-Net $${it.jpmNN}B`;
-    s += `<text x="${x(it.jpmN) + 8}" y="${y0 + 44}" font-size="11" fill="var(--muted)">${subTxt}</text>`;
-  });
-
-  svg.innerHTML = s;
-}
 
 function drawHouseCompareChart() {
   legendEl.innerHTML = `
     <span><i class="sw" style="background:var(--accent)"></i>2027E 총발행 Gross ($bn)</span>
     <span><i class="sw" style="background:var(--bull)"></i>2027E 순발행 Net ($bn)</span>
     <span><i class="sw" style="background:var(--purple)"></i>★2027E 쿠폰 차감 실질 순공급 (Net-Net: JPM $508B vs BofA $249B)</span>
-    <span><i class="sw" style="background:var(--now)"></i>2026E 총발행 기준선</span>
   `;
   noteEl.textContent = "단위: $bn (십억 달러) · 5대 IB(Morgan Stanley · Wells Fargo · Barclays · J.P. Morgan · BofA)의 2027년 US IG 총발행, 순발행 및 쿠폰 차감 후 실질 순공급(Net-Net) 비교";
 
   const items = [
-    { label: "Morgan Stanley (Base)", g26: 2150, g27: 2400, net: 1130, netnet: 574, note: "Gross $2,400B (+12%) / Net $1,130B (+34%, 상환 $1,270B) / DV01 +5%" },
-    { label: "WFS (Bull Case)", g26: 2100, g27: 2225, net: 1390, note: "Gross $2,225B (+6%, AI 자산유동화 가속 시나리오)" },
-    { label: "WFS (Base Case)", g26: 2100, g27: 2150, net: 1394, note: "Gross $2,150B (+2%, 27년 잔여만기 $756B 기준 · Bear $2,075B)" },
-    { label: "Barclays (Base Case)", g26: 1900, g27: 2100, net: 1190, note: "Gross $2,100B (+11%) / Net $1,190B (+23%, 만기 $910B)" },
-    { label: "J.P. Morgan (Base Case)", g26: 2000, g27: 2100, net: 1064, netnet: 508, note: "Gross $2,100B (+5%) / Net $1,064B / ★Net-Net $508B (쿠폰 $556B 차감)" },
-    { label: "BofA (GPU $100B+ 포함)", g26: 2100, g27: 2000, net: 805, netnet: 349, note: "Gross ~$2,000B (GPU 딜 합산 시) / ★쿠폰 차감 후 ~$349B" },
-    { label: "BofA (Base, GPU 제외)", g26: 2100, g27: 1900, net: 705, netnet: 249, note: "Gross $1,900B (-10%) / ★쿠폰 차감 실질 순공급(Net-Net) $249B!" }
+    { label: "Morgan Stanley (Base)", g27: 2400, net: 1130, netnet: 574, note: "27E Gross $2,400B (+12%) / Net $1,130B (+34%, 상환 $1,270B) / DV01 +5%" },
+    { label: "WFS (Bull Case)", g27: 2225, net: 1390, note: "27E Gross $2,225B (+6%, AI 자산유동화 가속 시나리오)" },
+    { label: "WFS (Base Case)", g27: 2150, net: 1394, note: "27E Gross $2,150B (+2%, 27년 잔여만기 $756B 기준 · Bear $2,075B)" },
+    { label: "Barclays (Base Case)", g27: 2100, net: 1190, note: "27E Gross $2,100B (+11%) / Net $1,190B (+23%, 만기 $910B)" },
+    { label: "J.P. Morgan (Base Case)", g27: 2100, net: 1064, netnet: 508, note: "27E Gross $2,100B (+5%) / Net $1,064B / ★Net-Net $508B (쿠폰 $556B 차감)" },
+    { label: "BofA (GPU $100B+ 포함)", g27: 2000, net: 805, netnet: 349, note: "27E Gross ~$2,000B (GPU 딜 합산 시) / ★쿠폰 차감 후 ~$349B" },
+    { label: "BofA (Base, GPU 제외)", g27: 1900, net: 705, netnet: 249, note: "27E Gross $1,900B (-10%) / ★쿠폰 차감 실질 순공급(Net-Net) $249B!" }
   ];
 
   const W = 980, L = 195, R = 295, T = 32, GH = 56, B = 34;
@@ -1339,8 +1277,7 @@ function drawHouseCompareChart() {
     const y0 = T + i * GH;
     s += `<text x="${L - 12}" y="${y0 + 25}" text-anchor="end" font-size="12.5" font-weight="700" fill="var(--fg)">${it.label}</text>`;
     s += `<rect x="${x(0)}" y="${y0 + 5}" width="${x(it.g27) - x(0)}" height="15" rx="3" fill="var(--accent)"/>`;
-    s += `<line x1="${x(it.g26)}" x2="${x(it.g26)}" y1="${y0 + 2}" y2="${y0 + 23}" stroke="var(--now)" stroke-width="2.5"><title>2026E $${it.g26}bn</title></line>`;
-    s += `<text x="${Math.max(x(it.g27), x(it.g26)) + 8}" y="${y0 + 17}" font-size="11.5" font-weight="600" fill="var(--fg)">$${it.g27.toLocaleString()}bn</text>`;
+    s += `<text x="${x(it.g27) + 8}" y="${y0 + 17}" font-size="11.5" font-weight="600" fill="var(--fg)">$${it.g27.toLocaleString()}bn</text>`;
     s += `<rect x="${x(0)}" y="${y0 + 23}" width="${x(it.net) - x(0)}" height="15" rx="3" fill="var(--bull)" opacity="0.8"/>`;
     if (it.netnet) {
       s += `<rect x="${x(0)}" y="${y0 + 23}" width="${x(it.netnet) - x(0)}" height="15" rx="3" fill="var(--purple)"/>`;
@@ -1501,32 +1438,28 @@ function drawAiBreakdownChart() {
   svg.innerHTML = s;
 }
 
-const b1 = document.getElementById("tabHist5Y");
 const b2 = document.getElementById("tabHouseCompare");
 const b3 = document.getElementById("tabSpread");
 const b4 = document.getElementById("tabJpmSectors");
 const b5 = document.getElementById("tabAiBreakdown");
 
 function selectTab(tab) {
-  b1.setAttribute("aria-pressed", tab === "hist");
   b2.setAttribute("aria-pressed", tab === "house");
   b3.setAttribute("aria-pressed", tab === "sp");
   b4.setAttribute("aria-pressed", tab === "sec");
   b5.setAttribute("aria-pressed", tab === "ai");
-  if (tab === "hist") drawHist5YChart();
-  else if (tab === "house") drawHouseCompareChart();
+  if (tab === "house") drawHouseCompareChart();
   else if (tab === "sp") drawSpreadChart();
   else if (tab === "sec") drawJpmSectorsChart();
   else drawAiBreakdownChart();
 }
 
-b1.onclick = () => selectTab("hist");
 b2.onclick = () => selectTab("house");
 b3.onclick = () => selectTab("sp");
 b4.onclick = () => selectTab("sec");
 b5.onclick = () => selectTab("ai");
 
-drawHist5YChart();
+drawHouseCompareChart();
 </script>
 </body>
 </html>
