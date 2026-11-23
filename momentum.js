@@ -2,7 +2,7 @@ import { configureMomentumCta, renderMomentumCta } from './momentum-cta.js?v=12'
 import { renderMomentumSynergy } from './momentum-synergy.js?v=12';
 import { configureMomentumRecipe1Control, renderMomentumRecipe1Control } from './momentum-recipe1-control.js?v=12';
 import { renderMomentumFxV2Monthly } from './momentum-fx-v2-monthly.js?v=12';
-import { renderMomentumV35 } from './momentum-v35.js?v=14';
+import { renderMomentumV35 } from './momentum-v35.js?v=15';
 import { openHoldingDialog } from './holdings.js?v=11';
 import {
   renderRangeControls,
@@ -392,7 +392,7 @@ export function renderMomentum(target) {
     <button data-momentum-view="SYNERGY" class="${momentumView === 'SYNERGY' ? 'on' : ''}">🔥 FX 차익거래 × 모멘텀 시너지 (수익 극대화)</button>
     <button data-momentum-view="RECIPE1" class="${momentumView === 'RECIPE1' ? 'on' : ''}">🎛️ 레시피1 × FX 레짐·DB 통합 컨트롤러</button>
     <button data-momentum-view="FX_V2_MONTHLY" class="${momentumView === 'FX_V2_MONTHLY' ? 'on' : ''}">📐 FX v2.0 배경 & 59개월 월간 손익·방어 분석</button>
-    <button data-momentum-view="V35_MASTER" class="${momentumView === 'V35_MASTER' ? 'on' : ''}">🚀 모멘텀 v3.5 A-to-Z & 59개월 분석</button>
+    <button data-momentum-view="V35_MASTER" class="${momentumView === 'V35_MASTER' ? 'on' : ''}">🚀 FX v2.0(4B) + 모멘텀 v3.5 A-to-Z</button>
   </div>
   <div id="momentum-content"></div>`;
   target.querySelectorAll('[data-momentum-view]').forEach(
