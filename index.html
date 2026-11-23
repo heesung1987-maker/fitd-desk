@@ -18,15 +18,171 @@
       if (!isLocalServer) {
         var origFetch = window.fetch.bind(window);
         var cloudBust = Math.floor(Date.now() / 15000);
+        var useLocalBridgeUntil = 0;
+        var LOCAL_API_BASE = 'http://localhost:8090';
+        var LOCAL_POS_KEY = 'fitd-cloud-local-positions';
+        var lastCloudState = null;
+
+        function loadLocalPositions() {
+          try { return JSON.parse(localStorage.getItem(LOCAL_POS_KEY) || '[]'); } catch (e) { return []; }
+        }
+        function saveLocalPositions(arr) {
+          try { localStorage.setItem(LOCAL_POS_KEY, JSON.stringify(arr)); } catch (e) {}
+        }
+        function makeJsonResp(obj, status) {
+          return new Response(JSON.stringify(obj), {
+            status: status || 200,
+            headers: { 'Content-Type': 'application/json; charset=utf-8' }
+          });
+        }
+        function tryLocalBridge(urlStr, init, timeoutMs) {
+          var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+          var timer = ctrl ? setTimeout(function() { ctrl.abort(); }, timeoutMs || 3000) : null;
+          var opts = Object.assign({}, init || {});
+          if (ctrl) opts.signal = ctrl.signal;
+          return origFetch(LOCAL_API_BASE + urlStr, opts).then(function(r) {
+            if (timer) clearTimeout(timer);
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            useLocalBridgeUntil = Date.now() + 90000;
+            return r;
+          }, function(err) {
+            if (timer) clearTimeout(timer);
+            throw err;
+          });
+        }
+        function handleLocalBrowserPosition(body) {
+          var arr = loadLocalPositions();
+          var act = body && body.action;
+          var nowIso = new Date().toISOString();
+          var st = lastCloudState || {};
+          var asOf = st.as_of || nowIso.slice(0, 10);
+          var assetsMap = {};
+          (st.assets || []).forEach(function(a) { assetsMap[a.id] = a; });
+
+          if (act === 'manual_open') {
+            var leg1 = body.leg1;
+            var leg2 = body.leg2 || null;
+            var a1 = assetsMap[leg1] || { name: leg1, class: 'FX' };
+            var a2 = leg2 ? (assetsMap[leg2] || { name: leg2 }) : null;
+            var cls = a1.class || 'FX';
+            var krw = cls === 'Rates' && (body.rates_currency || 'KRW') === 'KRW';
+            var s1 = cls === 'Rates'
+              ? (Number(krw ? body.total_sensitivity_manwon : body.total_dv01_usd) || 100) * (krw ? 10000 : 1) * (leg2 ? (Number(body.leg1_weight || 50) / 100) : 1)
+              : (Number(body.mio1 || 1) * 1e6);
+            var s2 = !leg2 ? 0 : (cls === 'Rates'
+              ? (Number(krw ? body.total_sensitivity_manwon : body.total_dv01_usd) || 100) * (krw ? 10000 : 1) * (1 - Number(body.leg1_weight || 50) / 100)
+              : (Number(body.mio2 || 1) * 1e6));
+            var pid = 'local_' + Math.random().toString(16).slice(2, 10);
+            var q1 = Number(body.quote1 || 0);
+            var q2 = leg2 ? Number(body.quote2 || 0) : null;
+            var rowMatch = (st.rows || []).find(function(r) { return r.id === (leg1 + '-' + leg2) || r.id === (leg2 + '-' + leg1); });
+            var newPos = {
+              id: pid,
+              schema_version: 2,
+              revision: 1,
+              pair_id: leg2 ? (leg1 + '-' + leg2) : leg1,
+              name: a2 ? (a1.name + ' / ' + a2.name) : a1.name,
+              asset_class: cls,
+              pnl_currency: cls === 'Rates' ? (body.rates_currency || 'KRW') : 'USD',
+              strategy: body.strategy || 'MANUAL',
+              shape: leg2 ? (body.shape || 'PAIR') : 'SINGLE',
+              leg1: leg1,
+              leg2: leg2,
+              node1: a1.name,
+              node2: a2 ? a2.name : null,
+              side1: Number(body.side1 || 1),
+              side2: leg2 ? Number(body.side2 || -1) : 0,
+              entry_date: body.entry_date || asOf,
+              status: 'OPEN',
+              monitor: 'HOLD',
+              monitor_flags: [{ code: 'HOLD', reason: '클라우드 브라우저 로컬 저장 포지션 (전사 공유 등록은 메인 데스크 PC에서 자동 동기화됩니다)' }],
+              leg1_size: s1,
+              leg2_size: s2,
+              current_leg1_size: s1,
+              current_leg2_size: s2,
+              remaining_fraction: 1.0,
+              entry_quote1: q1,
+              entry_quote2: q2,
+              average_entry_quote1: q1,
+              average_entry_quote2: q2,
+              pnl: 0,
+              realized_pnl: 0,
+              unrealized_pnl: 0,
+              fixed_z: rowMatch ? Number(rowMatch.oos_z || 0) : 0,
+              entry_fixed_z: rowMatch ? Number(rowMatch.oos_z || 0) : 0,
+              current_oos_z: rowMatch ? Number(rowMatch.oos_z || 0) : 0,
+              current_refit_z: rowMatch ? Number(rowMatch.refit_z || 0) : 0,
+              exit_z: 0.5,
+              stop_z: 3.7,
+              hardcap: Number(body.hardcap || 0),
+              notes: body.notes || '',
+              lots: [{ id: pid + ':original', entry_date: body.entry_date || asOf, entry_quote1: q1, entry_quote2: q2, leg1_size: s1, leg2_size: s2, remaining_fraction: 1.0, unrealized_pnl: 0 }],
+              events: [{ type: 'OPEN', trade_date: body.entry_date || asOf, quote1: q1, quote2: q2, leg1_size: s1, leg2_size: s2, remaining_fraction: 1.0, notes: body.notes || '', created_at: nowIso }],
+              history_points: [],
+              _browser_local: true
+            };
+            arr.unshift(newPos);
+            saveLocalPositions(arr);
+            return makeJsonResp({ ok: true, id: pid, local_only: true });
+          }
+          if (act === 'delete') {
+            arr = arr.filter(function(p) { return p.id !== body.id; });
+            saveLocalPositions(arr);
+            return makeJsonResp({ ok: true, deleted: body.id, local_only: true });
+          }
+          var idx = arr.findIndex(function(p) { return p.id === body.id; });
+          if (idx === -1) {
+            return makeJsonResp({ error: '이 포지션은 메인 데스크 PC(localhost:8090)에서 관리되는 공유 포지션입니다. 메인 데스크 PC에서 수정/청산하면 클라우드에 자동 반영됩니다.' }, 400);
+          }
+          if (act === 'note') arr[idx].notes = body.notes || '';
+          else if (act === 'close' || act === 'manual_close') {
+            arr[idx].status = 'CLOSED';
+            arr[idx].remaining_fraction = 0;
+            arr[idx].exit_date = body.trade_date || asOf;
+          } else if (act === 'manual_edit') {
+            if (body.quote1 != null) arr[idx].entry_quote1 = arr[idx].average_entry_quote1 = Number(body.quote1);
+            if (body.quote2 != null) arr[idx].entry_quote2 = arr[idx].average_entry_quote2 = Number(body.quote2);
+            if (body.notes != null) arr[idx].notes = body.notes;
+          }
+          saveLocalPositions(arr);
+          return makeJsonResp({ ok: true, id: body.id, local_only: true });
+        }
+
         window.fetch = function(input, init) {
           var urlStr = typeof input === 'string' ? input : (input && input.url ? input.url : String(input));
           var method = (init && init.method ? init.method : 'GET').toUpperCase();
-          var ts = 't=' + cloudBust;
           var modePref = 'live';
           try { modePref = localStorage.getItem('fitd-data-mode') || 'live'; } catch (e) {}
           if (urlStr.indexOf('mode=close') !== -1) modePref = 'close';
           else if (urlStr.indexOf('mode=live') !== -1) modePref = 'live';
 
+          // Bridge write actions (/api/positions, /api/settings) to local server if available on this PC, else browser-local fallback
+          if (urlStr.indexOf('/api/positions') === 0 && method === 'POST') {
+            var reqBody = {};
+            try { reqBody = JSON.parse((init && init.body) || '{}'); } catch (e) {}
+            return tryLocalBridge(urlStr, init, 4000).catch(function() {
+              return handleLocalBrowserPosition(reqBody);
+            });
+          }
+          if (urlStr.indexOf('/api/settings') === 0 && method === 'POST') {
+            return tryLocalBridge(urlStr, init, 4000).catch(function() {
+              return makeJsonResp({ ok: true, local_only: true });
+            });
+          }
+          if (urlStr.indexOf('/api/refresh') === 0) {
+            cloudBust = Date.now();
+            return tryLocalBridge(urlStr, init, 6000).catch(function() {
+              return origFetch('./data/cloud-status.json?t=' + cloudBust, { cache: 'no-store' });
+            });
+          }
+          if (urlStr.indexOf('/api/') === 0 && Date.now() < useLocalBridgeUntil) {
+            return tryLocalBridge(urlStr, init, 3000).catch(function() {
+              useLocalBridgeUntil = 0;
+              return window.fetch(input, init);
+            });
+          }
+
+          var ts = 't=' + cloudBust;
           if (urlStr.indexOf('/api/data-mode') === 0) {
             if (method === 'POST' && init && init.body) {
               try {
@@ -37,12 +193,22 @@
             }
             return origFetch('./data/cloud-status.json?t=' + cloudBust, { cache: 'no-store' });
           }
-          if (urlStr.indexOf('/api/refresh') === 0) {
-            cloudBust = Date.now();
-            return origFetch('./data/cloud-status.json?t=' + cloudBust, { cache: 'no-store' });
-          }
           if (urlStr.indexOf('/api/state') === 0) {
-            return origFetch('./data/state-' + modePref + '.json?' + ts, { cache: 'no-store' });
+            return origFetch('./data/state-' + modePref + '.json?' + ts, { cache: 'no-store' }).then(function(resp) {
+              if (!resp.ok) return resp;
+              return resp.json().then(function(stObj) {
+                lastCloudState = stObj;
+                var lp = loadLocalPositions();
+                if (lp.length) {
+                  var existingIds = {};
+                  (stObj.positions || []).forEach(function(p) { existingIds[p.id] = true; });
+                  var merged = (stObj.positions || []).slice();
+                  lp.forEach(function(p) { if (!existingIds[p.id]) merged.unshift(p); });
+                  stObj.positions = merged;
+                }
+                return makeJsonResp(stObj, 200);
+              });
+            });
           }
           if (urlStr.indexOf('/api/momentum-cta') === 0) {
             return origFetch('./data/momentum-cta-' + modePref + '.json?' + ts, { cache: 'no-store' });
