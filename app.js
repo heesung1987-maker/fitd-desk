@@ -1,5 +1,5 @@
 import { PAIR_SORTS, sortPairs } from './pair-sort.js';
-import { configureTreasury, renderTreasury } from './treasury.js?v=12';
+import { configureTreasury, renderTreasury } from './treasury.js?v=13';
 import { configureMomentum, renderMomentum as renderMomentumView } from './momentum.js?v=12';
 import { configureHoldings, renderHoldings, openHoldingDialog } from './holdings.js?v=12';
 import { configureMomentumStrategy, renderMomentumStrategy } from './momentum-strategy.js?v=12';
@@ -559,7 +559,7 @@ function renderRV() {
         </div>
         <div class="panel below">
           <div class="panel-head">
-            <h2>예정 이벤트 · ${esc(state.event_today)}</h2>
+            <h2>예정 이벤트 · ${esc(getEventTodayKst())}</h2>
             <button class="btn quiet" id="all-events">전체 일정 ↗</button>
           </div>
           <div class="event-strip">${eventCards()}</div>
@@ -608,13 +608,55 @@ function renderRV() {
   renderDetail();
 }
 
+function getEventTodayKst() {
+  try {
+    const parts = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Asia/Seoul',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }).formatToParts(new Date());
+    const liveKst = ['year', 'month', 'day']
+      .map((k) => parts.find((p) => p.type === k)?.value || '')
+      .join('-');
+    if (liveKst.length === 10) return liveKst;
+  } catch {}
+  return state?.event_today || new Date().toISOString().slice(0, 10);
+}
+
+function getEventTomorrowKst(todayStr) {
+  const base = todayStr || getEventTodayKst();
+  return new Date(new Date(base + 'T00:00:00Z').getTime() + 86400000)
+    .toISOString()
+    .slice(0, 10);
+}
+
 function eventStatus(e) {
-  if (e.status) return e.status;
-  return e.date.length > 10
-    ? Date.parse(e.date.replace(' ', 'T') + '+09:00') <= Date.now()
-      ? 'COMPLETED'
-      : 'UPCOMING'
-    : 'TIME_UNKNOWN';
+  const ds = String(e?.date || '').trim();
+  if (ds.length > 10) {
+    const ts = Date.parse(ds.replace(' ', 'T') + '+09:00');
+    if (Number.isFinite(ts)) {
+      return ts <= Date.now() ? 'COMPLETED' : 'UPCOMING';
+    }
+  }
+  if (ds.length === 10) {
+    return ds < getEventTodayKst() ? 'COMPLETED' : 'TIME_UNKNOWN';
+  }
+  return e?.status || 'TIME_UNKNOWN';
+}
+
+function eventWhen(e) {
+  if (eventStatus(e) === 'COMPLETED') return '지난 일정';
+  const d10 = String(e?.date || '').slice(0, 10);
+  const today = getEventTodayKst();
+  const tomorrow = getEventTomorrowKst(today);
+  if (d10 === today) return '오늘';
+  if (d10 === tomorrow) return '내일';
+  return d10 || e?.when || '예정';
+}
+
+function upcomingEvents(list) {
+  return (list || []).filter((e) => eventStatus(e) !== 'COMPLETED');
 }
 
 function eventLocal(e) {
@@ -634,11 +676,9 @@ function eventLocal(e) {
 }
 
 function eventCards() {
-  const today = state.event_today;
-  const tomorrow = new Date(new Date(today + 'T00:00:00Z').getTime() + 86400000)
-    .toISOString()
-    .slice(0, 10);
-  const events = state.events
+  const today = getEventTodayKst();
+  const tomorrow = getEventTomorrowKst(today);
+  const events = (state.events || [])
     .filter(
       (e) =>
         [today, tomorrow].includes(e.date.slice(0, 10)) &&
@@ -797,15 +837,16 @@ function renderTable() {
                   <td class="number">${r.quality}<span class="muted">/4</span></td>
                   <td>${tag(r.status)}</td>
                   <td>
-                    <div class="event-mini" title="${esc(
-                      r.events.map((e) => e.title).join(', ')
-                    )}">
-                      ${
-                        r.events.length
-                          ? '● ' + esc(r.events[0].when) + ' ' + r.events.length + '건'
+                    ${(() => {
+                      const up = upcomingEvents(r.events);
+                      return `<div class="event-mini" title="${esc(
+                        up.map((e) => `${eventWhen(e)} ${e.title}`).join(', ')
+                      )}">${
+                        up.length
+                          ? '● ' + esc(eventWhen(up[0])) + ' ' + up.length + '건'
                           : '—'
-                      }
-                    </div>
+                      }</div>`;
+                    })()}
                   </td>
                 </tr>`
             )
@@ -1053,14 +1094,15 @@ function renderDetail() {
       </div>
       <small class="muted" style="font-size:12px">X의 현재값을 조건으로 한 Y 원시 호가 적정값</small>
     </div>
-    ${
-      r.events.length
-        ? `<div class="detail-event">${r.events
+    ${(() => {
+      const up = upcomingEvents(r.events);
+      return up.length
+        ? `<div class="detail-event">${up
             .slice(0, 3)
-            .map((e) => `${esc(e.when)} · ${esc(e.title)}`)
+            .map((e) => `${esc(eventWhen(e))} ${esc(e.date.slice(11, 16) || '')} · ${esc(e.title)}`)
             .join('<br>')}<br><span class="muted">이벤트 알림 · 자동 진입 제한 없음</span></div>`
-        : ''
-    }
+        : '';
+    })()}
     <div class="record">
       <button id="record" class="btn ${
         ['Rates', 'FX'].includes(r.asset_class) ? 'primary' : ''
@@ -1089,7 +1131,8 @@ function renderMomentum() {
 }
 
 function renderEvents() {
-  const es = state.events.filter(
+  const todayKst = getEventTodayKst();
+  const es = (state.events || []).filter(
     (e) =>
       calendarFilter === 'ALL' ||
       eventStatus(e) === calendarFilter ||
@@ -1100,7 +1143,7 @@ function renderEvents() {
 
   $('#view').innerHTML = `
     <div class="research-banner">
-      캘린더 조회일 <b>${esc(state.event_today)}</b> (KST) · 가격 기준일 ${esc(
+      캘린더 조회일 <b>${esc(todayKst)}</b> (KST) · 가격 기준일 ${esc(
     state.as_of
   )}와 분리합니다. 지난 발표는 예정 알림에서 제외합니다.<br>
       미국 일정은 현지 날짜와 한국시간이 다를 수 있습니다. 현지 날짜와 발표 완료 여부를 함께 표시합니다.
@@ -1132,7 +1175,7 @@ function renderEvents() {
         .map(
           ([date, events]) =>
             `<div class="calendar-date">한국시간 ${date} ${
-              date === state.event_today ? '<span class="tag primary">오늘</span>' : ''
+              date === todayKst ? '<span class="tag primary">오늘</span>' : ''
             }</div>
             <div class="panel">
               <div class="table-scroll">

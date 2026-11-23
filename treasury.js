@@ -480,12 +480,33 @@ function overview(d, state) {
           .join('')}</div>`
     )
     .join('');
-  const events = (state.events || []).filter(
-    (e) =>
-      (e.currency === (d.country?.currency || 'USD') || e.currency === 'USD') &&
-      ['오늘', '내일'].includes(e.when) &&
-      e.status !== 'COMPLETED'
-  );
+  const kstParts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Seoul',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(new Date());
+  const todayKst = ['year', 'month', 'day']
+    .map((k) => kstParts.find((p) => p.type === k)?.value || '')
+    .join('-');
+  const tomorrowKst = new Date(new Date(todayKst + 'T00:00:00Z').getTime() + 86400000)
+    .toISOString()
+    .slice(0, 10);
+  const events = (state.events || [])
+    .filter((e) => {
+      const ds = String(e.date || '').trim();
+      const d10 = ds.slice(0, 10);
+      if (![todayKst, tomorrowKst].includes(d10)) return false;
+      if (ds.length > 10) {
+        const ts = Date.parse(ds.replace(' ', 'T') + '+09:00');
+        if (Number.isFinite(ts) && ts <= Date.now()) return false;
+      }
+      return e.currency === (d.country?.currency || 'USD') || e.currency === 'USD';
+    })
+    .map((e) => ({
+      ...e,
+      _liveWhen: String(e.date || '').startsWith(todayKst) ? '오늘' : '내일',
+    }));
   return `<div class="ust-yield-grid global-grid-${d.levels.length}">${cards}</div><div class="ust-two">${curvePanel(
     d
   )}<div class="panel">${head(
@@ -508,7 +529,7 @@ function overview(d, state) {
       ? events
           .map(
             (e) =>
-              `<div><span class="tag">${esc(e.when)}</span><strong>${esc(
+              `<div><span class="tag">${esc(e._liveWhen)}</span><strong>${esc(
                 e.title
               )}</strong><span class="muted">${esc(e.date)} · 중요도 ${
                 e.importance
