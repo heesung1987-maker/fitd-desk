@@ -2,6 +2,7 @@ import { configureMomentumCta, renderMomentumCta } from './momentum-cta.js?v=12'
 import { renderMomentumSynergy } from './momentum-synergy.js?v=12';
 import { configureMomentumRecipe1Control, renderMomentumRecipe1Control } from './momentum-recipe1-control.js?v=12';
 import { renderMomentumFxV2Monthly } from './momentum-fx-v2-monthly.js?v=12';
+import { renderMomentumV35 } from './momentum-v35.js?v=14';
 import { openHoldingDialog } from './holdings.js?v=11';
 import {
   renderRangeControls,
@@ -360,7 +361,9 @@ function detail(r, state, research) {
 }
 
 let momentumView =
-  location.hash === '#momentum/fx-v2-monthly'
+  location.hash === '#momentum/v35-master'
+    ? 'V35_MASTER'
+    : location.hash === '#momentum/fx-v2-monthly'
     ? 'FX_V2_MONTHLY'
     : location.hash === '#momentum/recipe1'
     ? 'RECIPE1'
@@ -371,7 +374,9 @@ let momentumView =
     : 'LEGACY';
 export function renderMomentum(target) {
   const hashForView = (v) =>
-    v === 'FX_V2_MONTHLY'
+    v === 'V35_MASTER'
+      ? '#momentum/v35-master'
+      : v === 'FX_V2_MONTHLY'
       ? '#momentum/fx-v2-monthly'
       : v === 'RECIPE1'
       ? '#momentum/recipe1'
@@ -387,6 +392,7 @@ export function renderMomentum(target) {
     <button data-momentum-view="SYNERGY" class="${momentumView === 'SYNERGY' ? 'on' : ''}">🔥 FX 차익거래 × 모멘텀 시너지 (수익 극대화)</button>
     <button data-momentum-view="RECIPE1" class="${momentumView === 'RECIPE1' ? 'on' : ''}">🎛️ 레시피1 × FX 레짐·DB 통합 컨트롤러</button>
     <button data-momentum-view="FX_V2_MONTHLY" class="${momentumView === 'FX_V2_MONTHLY' ? 'on' : ''}">📐 FX v2.0 배경 & 59개월 월간 손익·방어 분석</button>
+    <button data-momentum-view="V35_MASTER" class="${momentumView === 'V35_MASTER' ? 'on' : ''}">🚀 모멘텀 v3.5 A-to-Z & 59개월 분석</button>
   </div>
   <div id="momentum-content"></div>`;
   target.querySelectorAll('[data-momentum-view]').forEach(
@@ -398,7 +404,8 @@ export function renderMomentum(target) {
       })
   );
   const content = target.querySelector('#momentum-content');
-  if (momentumView === 'FX_V2_MONTHLY') renderMomentumFxV2Monthly(content);
+  if (momentumView === 'V35_MASTER') renderMomentumV35(content);
+  else if (momentumView === 'FX_V2_MONTHLY') renderMomentumFxV2Monthly(content);
   else if (momentumView === 'RECIPE1') renderMomentumRecipe1Control(content);
   else if (momentumView === 'SYNERGY') renderMomentumSynergy(content);
   else if (momentumView === 'CTA') renderMomentumCta(content);

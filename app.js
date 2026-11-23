@@ -1,6 +1,6 @@
 import { PAIR_SORTS, sortPairs } from './pair-sort.js';
 import { configureTreasury, renderTreasury } from './treasury.js?v=13';
-import { configureMomentum, renderMomentum as renderMomentumView } from './momentum.js?v=12';
+import { configureMomentum, renderMomentum as renderMomentumView } from './momentum.js?v=14';
 import { configureHoldings, renderHoldings, openHoldingDialog } from './holdings.js?v=12';
 import { configureMomentumStrategy, renderMomentumStrategy } from './momentum-strategy.js?v=12';
 import {
