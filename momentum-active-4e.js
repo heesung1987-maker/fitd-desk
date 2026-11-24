@@ -794,12 +794,15 @@ function drawView(target, data) {
           <button data-a4-setting="A" class="${selectedSetting === 'A' ? 'on' : ''}">세팅 A · 제어 OFF</button>
         </div>
       </div>
-      <div class="segmented">
-        <button data-a4-sec="ALL" class="${sectionFilter === 'ALL' ? 'on' : ''}">전체 보기</button>
-        <button data-a4-sec="LIVE" class="${sectionFilter === 'LIVE' ? 'on' : ''}">오늘 시그널 · 순합주문</button>
-        <button data-a4-sec="PERF" class="${sectionFilter === 'PERF' ? 'on' : ''}">5년 월간 · 장기성과</button>
-        <button data-a4-sec="RULES" class="${sectionFilter === 'RULES' ? 'on' : ''}">4엔진 매매 룰북</button>
-        <button data-a4-sec="AUDIT" class="${sectionFilter === 'AUDIT' ? 'on' : ''}">해부 · 스트레스</button>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        <div class="segmented">
+          <button data-a4-sec="ALL" class="${sectionFilter === 'ALL' ? 'on' : ''}">전체 보기</button>
+          <button data-a4-sec="LIVE" class="${sectionFilter === 'LIVE' ? 'on' : ''}">오늘 시그널 · 순합주문</button>
+          <button data-a4-sec="PERF" class="${sectionFilter === 'PERF' ? 'on' : ''}">5년 월간 · 장기성과</button>
+          <button data-a4-sec="RULES" class="${sectionFilter === 'RULES' ? 'on' : ''}">4엔진 매매 룰북</button>
+          <button data-a4-sec="AUDIT" class="${sectionFilter === 'AUDIT' ? 'on' : ''}">해부 · 스트레스</button>
+        </div>
+        <a class="btn primary" href="./FITD_4Engine_Active_FICC_Guide.pdf" target="_blank" rel="noopener" style="text-decoration:none;">↓ 전략 가이드 PDF</a>
       </div>
     </div>
     <div class="muted" style="font-size:12px;margin-top:8px;">
