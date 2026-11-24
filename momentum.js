@@ -4,6 +4,7 @@ import { configureMomentumRecipe1Control, renderMomentumRecipe1Control } from '.
 import { renderMomentumFxV2Monthly } from './momentum-fx-v2-monthly.js?v=16';
 import { renderMomentumV35 } from './momentum-v35.js?v=17';
 import { renderMomentumRadarV3 } from './momentum-radar-v3.js?v=17';
+import { renderMomentumActive4e } from './momentum-active-4e.js?v=18';
 import { openHoldingDialog } from './holdings.js?v=16';
 import {
   renderRangeControls,
@@ -362,7 +363,9 @@ function detail(r, state, research) {
 }
 
 let momentumView =
-  location.hash === '#momentum/radar-v3'
+  location.hash === '#momentum/active-4e'
+    ? 'ACTIVE_4E'
+    : location.hash === '#momentum/radar-v3'
     ? 'RADAR_V3'
     : location.hash === '#momentum/v35-master'
     ? 'V35_MASTER'
@@ -377,7 +380,9 @@ let momentumView =
     : 'LEGACY';
 export function renderMomentum(target) {
   const hashForView = (v) =>
-    v === 'RADAR_V3'
+    v === 'ACTIVE_4E'
+      ? '#momentum/active-4e'
+      : v === 'RADAR_V3'
       ? '#momentum/radar-v3'
       : v === 'V35_MASTER'
       ? '#momentum/v35-master'
@@ -399,6 +404,7 @@ export function renderMomentum(target) {
     <button data-momentum-view="FX_V2_MONTHLY" class="${momentumView === 'FX_V2_MONTHLY' ? 'on' : ''}">FX v2.0 배경 & 59개월 월간 손익·방어 분석</button>
     <button data-momentum-view="V35_MASTER" class="${momentumView === 'V35_MASTER' ? 'on' : ''}">FX v2.0(4B) + 모멘텀 v3.5 A-to-Z</button>
     <button data-momentum-view="RADAR_V3" class="${momentumView === 'RADAR_V3' ? 'on' : ''}">FX v3.0(A3 브레이크) + 모멘텀 v3.5</button>
+    <button data-momentum-view="ACTIVE_4E" class="${momentumView === 'ACTIVE_4E' ? 'on' : ''}">4엔진 풀액티브 (US/DE·FX)</button>
   </div>
   <div id="momentum-content"></div>`;
   target.querySelectorAll('[data-momentum-view]').forEach(
@@ -410,7 +416,8 @@ export function renderMomentum(target) {
       })
   );
   const content = target.querySelector('#momentum-content');
-  if (momentumView === 'RADAR_V3') renderMomentumRadarV3(content);
+  if (momentumView === 'ACTIVE_4E') renderMomentumActive4e(content);
+  else if (momentumView === 'RADAR_V3') renderMomentumRadarV3(content);
   else if (momentumView === 'V35_MASTER') renderMomentumV35(content);
   else if (momentumView === 'FX_V2_MONTHLY') renderMomentumFxV2Monthly(content);
   else if (momentumView === 'RECIPE1') renderMomentumRecipe1Control(content);
