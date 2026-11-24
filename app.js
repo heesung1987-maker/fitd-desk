@@ -1,15 +1,15 @@
 import { PAIR_SORTS, sortPairs } from './pair-sort.js';
-import { configureTreasury, renderTreasury } from './treasury.js?v=13';
-import { configureMomentum, renderMomentum as renderMomentumView } from './momentum.js?v=15';
-import { configureHoldings, renderHoldings, openHoldingDialog } from './holdings.js?v=12';
-import { configureMomentumStrategy, renderMomentumStrategy } from './momentum-strategy.js?v=12';
+import { configureTreasury, renderTreasury } from './treasury.js?v=16';
+import { configureMomentum, renderMomentum as renderMomentumView } from './momentum.js?v=16';
+import { configureHoldings, renderHoldings, openHoldingDialog } from './holdings.js?v=16';
+import { configureMomentumStrategy, renderMomentumStrategy } from './momentum-strategy.js?v=16';
 import {
   renderRangeControls,
   bindRangeControls,
   filterSeriesByRange,
   getChartTheme,
   enhanceInteractiveCharts,
-} from './chart-utils.js?v=11';
+} from './chart-utils.js?v=16';
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => [...document.querySelectorAll(s)];
@@ -189,8 +189,8 @@ function setLiveZBasis(nextBasis) {
     render();
     toast(
       liveZBasis === 'prerefit'
-        ? '🔄 [Refit 전 Z (종가 대체)] 적용: 전일 종가 모형(Refit 전)에 현재 실시간 가격을 대입합니다.'
-        : '📐 [Refit된 Z (모형 갱신)] 적용: 전일 종가까지 70일 모형을 Refit한 뒤 오늘 실시간 가격을 평가합니다.'
+        ? '[Refit 전 Z (종가 대체)] 적용: 전일 종가 모형(Refit 전)에 현재 실시간 가격을 대입합니다.'
+        : '[Refit된 Z (모형 갱신)] 적용: 전일 종가까지 70일 모형을 Refit한 뒤 오늘 실시간 가격을 평가합니다.'
     );
   }
 }
@@ -214,8 +214,8 @@ async function setDataMode(nextMode) {
     await load(true);
     toast(
       dataMode === 'live'
-        ? `⚡ 블룸버그 실시간 모드 활성화 (${liveZBasis === 'prerefit' ? 'Refit 전 · 종가 대체' : 'Refit 후 · 시계열 추가'} · 15분 주기)`
-        : `📊 FITD 전일 종가 기준(${state?.as_of || ''}) 모드로 전환되었습니다.`
+        ? `블룸버그 실시간 모드 활성화 (${liveZBasis === 'prerefit' ? 'Refit 전 · 종가 대체' : 'Refit 후 · 시계열 추가'} · 15분 주기)`
+        : `FITD 전일 종가 기준(${state?.as_of || ''}) 모드로 전환되었습니다.`
     );
   } catch (e) {
     toast('데이터 모드 전환 오류: ' + e.message);
@@ -509,10 +509,10 @@ function renderRV() {
                   ? `<div class="segmented z-basis-inline" role="group" aria-label="실시간 Z-Score 기준 선택">
                       <button type="button" data-z-basis-inline="prerefit" class="${
                         liveZBasis === 'prerefit' ? 'on' : ''
-                      }" title="전일 종가 모형(Refit 전) 유지 · 전일 종가를 현재 실시간 데이터로 대체">🔄 Refit 전 Z (종가 대체)</button>
+                      }" title="전일 종가 모형(Refit 전) 유지 · 전일 종가를 현재 실시간 데이터로 대체">Refit 전 Z (종가 대체)</button>
                       <button type="button" data-z-basis-inline="refit" class="${
                         liveZBasis === 'refit' ? 'on' : ''
-                      }" title="전일 종가까지 70일 모형 Refit 반영 · 오늘 실시간 데이터를 새 점으로 추가">📐 Refit된 Z (모형 갱신)</button>
+                      }" title="전일 종가까지 70일 모형 Refit 반영 · 오늘 실시간 데이터를 새 점으로 추가">Refit된 Z (모형 갱신)</button>
                     </div>`
                   : `<small>OOS · 전일 고정 모형</small>`
               }
@@ -1422,8 +1422,8 @@ $('#refresh').onclick = async () => {
     await load(true);
     toast(
       dataMode === 'live'
-        ? `⚡ 블룸버그 실시간 데이터를 즉시 갱신했습니다. (${state?.as_of || ''})`
-        : '📊 FITD 종가 데이터를 동기화했습니다.'
+        ? `블룸버그 실시간 데이터를 즉시 갱신했습니다. (${state?.as_of || ''})`
+        : 'FITD 종가 데이터를 동기화했습니다.'
     );
   } catch (e) {
     toast(e.message);

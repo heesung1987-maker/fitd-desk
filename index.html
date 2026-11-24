@@ -246,20 +246,20 @@
     <nav aria-label="주 메뉴">
       <button data-tab="treasury" class="nav"><span>⌁</span> 글로벌 금리 <i>GLOBAL</i></button>
       <button data-tab="rv" class="nav active"><span>◫</span> 통계적 차익거래 <i>RV</i></button>
-      <button data-tab="mom_strategy" class="nav"><span>⚡</span> 모멘텀 전략 <i>MOM</i></button>
+      <button data-tab="mom_strategy" class="nav"><span>△</span> 모멘텀 전략 <i>MOM</i></button>
       <button data-tab="book" class="nav"><span>▤</span> 포지션 모니터</button>
       <button data-tab="momentum" class="nav"><span>↗</span> 모멘텀 모니터 <i>LAB</i></button>
       <button data-tab="events" class="nav"><span>▦</span> 이벤트 캘린더</button>
       <button data-tab="data" class="nav"><span>◉</span> 데이터 상태</button>
-      <button data-tab="settings" class="nav"><span>⚙</span> 모델 설정</button>
+      <button data-tab="settings" class="nav"><span></span> 모델 설정</button>
     </nav>
 
     <div class="nav-label" style="margin-top:20px">2027 OUTLOOK</div>
     <nav aria-label="2027 연간전망 리포트">
-      <a href="./krw-2027-outlook.html" class="nav"><span>🇰🇷</span> 원화 전망 <i>KRW</i></a>
-      <a href="./ust-2027-outlook.html" class="nav"><span>🇺🇸</span> 미국 전망 <i>UST</i></a>
-      <a href="./global-2027-outlook.html" class="nav"><span>🌍</span> 주요국 전망 <i>EX-US</i></a>
-      <a href="./credit-2027-outlook.html" class="nav"><span>🏢</span> 크레딧 전망 <i>CREDIT</i></a>
+      <a href="./krw-2027-outlook.html" class="nav"><span>▪</span> 원화 전망 <i>KRW</i></a>
+      <a href="./ust-2027-outlook.html" class="nav"><span>▪</span> 미국 전망 <i>UST</i></a>
+      <a href="./global-2027-outlook.html" class="nav"><span>▪</span> 주요국 전망 <i>EX-US</i></a>
+      <a href="./credit-2027-outlook.html" class="nav"><span>▪</span> 크레딧 전망 <i>CREDIT</i></a>
     </nav>
 
     <div class="sidebar-bottom">
@@ -276,23 +276,23 @@
       </div>
       <div class="top-actions">
         <div class="mode-switcher segmented" role="group" aria-label="데이터 소스 모드 선택">
-          <button type="button" data-mode-btn="close" class="on" title="FITD DB 매일 오전 8시 전일자 종가 기준">📊 종가 기준 (FITD)</button>
-          <button type="button" data-mode-btn="live" title="전일 종가 유지 + 블룸버그 실시간 시계열 추가 (15분 주기 자동 갱신)">⚡ 실시간 (BBG · 15m)</button>
+          <button type="button" data-mode-btn="close" class="on" title="FITD DB 매일 오전 8시 전일자 종가 기준">종가 기준 (FITD)</button>
+          <button type="button" data-mode-btn="live" title="전일 종가 유지 + 블룸버그 실시간 시계열 추가 (15분 주기 자동 갱신)">실시간 (BBG · 15m)</button>
         </div>
         <div class="z-basis-switcher segmented" id="z-basis-switcher" role="group" aria-label="실시간 Z-Score 기준 선택" hidden>
-          <button type="button" data-z-basis-btn="prerefit" class="on" title="전일 종가 모형(Refit 전)을 유지하고 전일 종가를 현재 실시간 가격으로 대체해 평가합니다">🔄 Refit 전 Z (종가 대체)</button>
-          <button type="button" data-z-basis-btn="refit" title="전일 종가까지 70일 모형을 Refit한 뒤 오늘 실시간 가격을 새 시계열 점으로 추가해 평가합니다">📐 Refit된 Z (모형 갱신)</button>
+          <button type="button" data-z-basis-btn="prerefit" class="on" title="전일 종가 모형(Refit 전)을 유지하고 전일 종가를 현재 실시간 가격으로 대체해 평가합니다">Refit 전 Z (종가 대체)</button>
+          <button type="button" data-z-basis-btn="refit" title="전일 종가까지 70일 모형을 Refit한 뒤 오늘 실시간 가격을 새 시계열 점으로 추가해 평가합니다">Refit된 Z (모형 갱신)</button>
         </div>
         <div class="theme-switcher segmented" role="group" aria-label="화면 테마 선택">
-          <button type="button" data-theme-btn="light" title="밝고 선명한 화이트/슬레이트 테마">☀️ 라이트</button>
-          <button type="button" data-theme-btn="slate" title="눈이 편안한 소프트 네이비 테마">🌤️ 네이비</button>
-          <button type="button" data-theme-btn="dark" title="고대비 다크 테마">🌙 다크</button>
+          <button type="button" data-theme-btn="light" title="밝고 선명한 화이트/슬레이트 테마">라이트</button>
+          <button type="button" data-theme-btn="slate" title="눈이 편안한 소프트 네이비 테마">네이비</button>
+          <button type="button" data-theme-btn="dark" title="고대비 다크 테마">다크</button>
         </div>
         <span class="connection" id="connection">연결 확인 중</span>
-        <a class="btn quiet" href="./krw-2027-outlook.html" title="국내 증권사 2027 원화채 연간전망">🇰🇷 원화 전망</a>
-        <a class="btn quiet" href="./ust-2027-outlook.html" title="해외 IB 2027 미국 매크로 & 미국채 연간전망">🇺🇸 미국 전망</a>
-        <a class="btn quiet" href="./global-2027-outlook.html" title="해외 IB 2027 미국 외 주요국 매크로 & 국채 연간전망">🌍 주요국 전망</a>
-        <a class="btn quiet" href="./credit-2027-outlook.html" title="2027 원화·글로벌 크레딧 연간전망">🏢 크레딧 전망</a>
+        <a class="btn quiet" href="./krw-2027-outlook.html" title="국내 증권사 2027 원화채 연간전망">원화 전망</a>
+        <a class="btn quiet" href="./ust-2027-outlook.html" title="해외 IB 2027 미국 매크로 & 미국채 연간전망">미국 전망</a>
+        <a class="btn quiet" href="./global-2027-outlook.html" title="해외 IB 2027 미국 외 주요국 매크로 & 국채 연간전망">주요국 전망</a>
+        <a class="btn quiet" href="./credit-2027-outlook.html" title="2027 원화·글로벌 크레딧 연간전망">크레딧 전망</a>
         <button class="btn quiet" id="export">↓ JSON 내보내기</button>
         <button class="btn primary" id="refresh">↻ 데이터 갱신</button>
       </div>
@@ -330,6 +330,6 @@
   <div id="toast" role="status"></div>
   <dialog id="position-dialog" aria-label="포지션 입력"></dialog>
 
-  <script type="module" src="./app.js?v=15"></script>
+  <script type="module" src="./app.js?v=16"></script>
 </body>
 </html>

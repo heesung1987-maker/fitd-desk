@@ -84,19 +84,19 @@ function renderEquitySvg(rows, mode) {
   const cfg =
     mode === 'COMBO'
       ? {
-          kMain: 'combo_4b_cum', mMain: 'combo_4b', lblMain: '★ 통합 확정 (FX v2.0 4B + 모멘텀 v3.5)',
+          kMain: 'combo_4b_cum', mMain: 'combo_4b', lblMain: '[확정] 통합 데스크 (FX 4B 익일Open + 모멘텀 v3.5)',
           kMid: 'combo_4a_cum', mMid: 'combo_4a', lblMid: '원설계 정적 통합 (FX 4A + v3.5)',
           kBase: 'combo_2a_cum', mBase: 'combo_2a', lblBase: '감속형 통합 (FX 2A + v3.5)',
         }
       : mode === 'FX_ONLY'
       ? {
-          kMain: 'fx_4b_cum', mMain: 'fx_4b', lblMain: '★ FX v2.0 확정 (4B: Z2.2 · BOX · Time20d)',
-          kMid: 'fx_4a_cum', mMid: 'fx_4a', lblMid: 'FX 원설계 정적 (4A: Z2.7 · 1:1 Cap$5M)',
-          kBase: 'fx_2a_cum', mBase: 'fx_2a', lblBase: 'FX 감속형 (2A: Z2.7 · DEF2_CAUSAL)',
+          kMain: 'fx_4b_cum', mMain: 'fx_4b', lblMain: '[확정] FX v2.0 (4B: 전일-$20k → 익일Open)',
+          kMid: 'fx_4a_cum', mMid: 'fx_4a', lblMid: 'FX 원설계 정적 (4A: Z2.7 · 익일Open)',
+          kBase: 'fx_2a_cum', mBase: 'fx_2a', lblBase: 'FX 감속형 (2A: Z2.7 · DEF2)',
         }
       : {
-          kMain: 'mom_cum', mMain: 'mom_v35', lblMain: '★ 모멘텀 v3.5 확정 (단독 · 5년전승)',
-          kMid: 'mom_def1_cum', mMid: 'mom_def1', lblMid: '기존 + 구 방어①',
+          kMain: 'mom_cum', mMain: 'mom_v35', lblMain: '[확정] 모멘텀 v3.5 단독 (5년전승)',
+          kMid: 'mom_def1_cum', mMid: 'mom_def1', lblMid: '기존 + 구 방어1',
           kBase: 'mom_base_cum', mBase: 'mom_base', lblBase: '기존 기본 (R1_V2_CONC)',
         };
 
@@ -142,10 +142,10 @@ function renderEquitySvg(rows, mode) {
     <g transform="translate(${padL}, 18)" style="font-size:11.5px;font-weight:700;fill:${ink};">
       <line x1="0" y1="-4" x2="20" y2="-4" stroke="#0d9488" stroke-width="3.2"/>
       <text x="25" y="0" fill="${ink}">${cfg.lblMain}: ${fmtUsd(last?.main)}</text>
-      <line x1="390" y1="-4" x2="410" y2="-4" stroke="#6366f1" stroke-width="2.1" stroke-dasharray="5 3"/>
-      <text x="415" y="0" fill="${ink}">${cfg.lblMid}: ${fmtUsd(last?.mid)}</text>
-      <line x1="710" y1="-4" x2="730" y2="-4" stroke="#94a3b8" stroke-width="1.8" stroke-dasharray="2 3"/>
-      <text x="735" y="0" fill="${ink}">${cfg.lblBase}: ${fmtUsd(last?.base)}</text>
+      <line x1="425" y1="-4" x2="445" y2="-4" stroke="#6366f1" stroke-width="2.1" stroke-dasharray="5 3"/>
+      <text x="450" y="0" fill="${ink}">${cfg.lblMid}: ${fmtUsd(last?.mid)}</text>
+      <line x1="740" y1="-4" x2="760" y2="-4" stroke="#94a3b8" stroke-width="1.8" stroke-dasharray="2 3"/>
+      <text x="765" y="0" fill="${ink}">${cfg.lblBase}: ${fmtUsd(last?.base)}</text>
     </g>
 
     ${ticks
@@ -168,10 +168,10 @@ function renderEquitySvg(rows, mode) {
         (p, i) => `
       <circle cx="${x(i).toFixed(1)}" cy="${y(p.main).toFixed(1)}" r="4.2" fill="#0d9488" opacity="0.85">
         <title>[${p.ym}] v2.0=${p.v2}점 · ${p.regime} · 진입 FX ${p.fxNew}건 / 모멘텀 ${p.momNew}건
-★ ${cfg.lblMain}: 누적 ${fmtUsd(p.main)} (당월 ${fmtUsd(p.mMain)})
-• ${cfg.lblMid}: 누적 ${fmtUsd(p.mid)} (당월 ${fmtUsd(p.mMid)})
-• ${cfg.lblBase}: 누적 ${fmtUsd(p.base)} (당월 ${fmtUsd(p.mBase)})
-• 구성 당월: FX 4B ${fmtUsd(p.mFx)} + 모멘텀 v3.5 ${fmtUsd(p.mMom)}</title>
+- ${cfg.lblMain}: 누적 ${fmtUsd(p.main)} (당월 ${fmtUsd(p.mMain)})
+- ${cfg.lblMid}: 누적 ${fmtUsd(p.mid)} (당월 ${fmtUsd(p.mMid)})
+- ${cfg.lblBase}: 누적 ${fmtUsd(p.base)} (당월 ${fmtUsd(p.mBase)})
+- 구성 당월: FX 4B ${fmtUsd(p.mFx)} + 모멘텀 v3.5 ${fmtUsd(p.mMom)}</title>
       </circle>
     `
       )
@@ -242,9 +242,9 @@ function renderMonthlyBarSvg(rows, mode) {
           <rect x="${(cx - barW / 2).toFixed(1)}" y="${yTop.toFixed(1)}" width="${barW.toFixed(1)}" height="${bH.toFixed(1)}" fill="${col}" rx="1.5"/>
           <rect x="${(cx - slotW / 2).toFixed(1)}" y="${padT}" width="${slotW.toFixed(1)}" height="${h - padT - padB}" fill="transparent">
             <title>[${r.ym}] v2.0=${r.v2_avg}점 · ${r.regime}
-★ 통합 (FX 4B + 모멘텀 v3.5): ${fmtUsd(r.combo_4b)} (누적 ${fmtUsd(r.combo_4b_cum)})
-• FX v2.0 (4B): ${fmtUsd(r.fx_4b)} (신규 ${r.fx_new_trades}건)
-• 모멘텀 v3.5: ${fmtUsd(r.mom_v35)} (신규 ${r.new_trades}건: ${r.entries_desc})</title>
+- 통합 (FX 4B 익일Open + 모멘텀 v3.5): ${fmtUsd(r.combo_4b)} (누적 ${fmtUsd(r.combo_4b_cum)})
+- FX v2.0 (4B): ${fmtUsd(r.fx_4b)} (신규 ${r.fx_new_trades}건)
+- 모멘텀 v3.5: ${fmtUsd(r.mom_v35)} (신규 ${r.new_trades}건: ${r.entries_desc})</title>
           </rect>
         </g>`;
       })
@@ -306,7 +306,7 @@ function renderDistBar(perf, mode) {
 }
 
 export async function renderMomentumV35(target) {
-  target.innerHTML = `<div class="panel"><p class="muted">FX v2.0 (4B) + 모멘텀 v3.5 통합 A-to-Z 및 59개월 분석 데이터를 불러오는 중입니다...</p></div>`;
+  target.innerHTML = `<div class="panel"><p class="muted">FX v2.0 (4B · 익일 시초가 손절) + 모멘텀 v3.5 통합 리포트를 불러오는 중입니다...</p></div>`;
 
   let data;
   try {
@@ -317,6 +317,7 @@ export async function renderMomentumV35(target) {
   }
 
   const hl = data.headline;
+  const posStats = data.fx_pos_stats || {};
   const activePerf =
     portfolioMode === 'COMBO'
       ? hl.combo
@@ -360,37 +361,41 @@ export async function renderMomentumV35(target) {
 
   const tradeKpiMain =
     portfolioMode === 'COMBO'
-      ? `${hl.fx_trades_entered + hl.mom_trades_total}건 <small style="font-size:13px;">(주 ~1.7건)</small>`
+      ? `${hl.fx_trades_entered + hl.mom_trades_total}건 <small style="font-size:13px;">(FX 평균 ${posStats.avg_all_days ?? '—'}개)</small>`
       : portfolioMode === 'FX_ONLY'
-      ? `${hl.fx_trades_entered}건 <small style="font-size:13px;">(월 ${hl.fx_trades_per_month}건)</small>`
+      ? `${hl.fx_trades_entered}건 <small style="font-size:13px;">(평균보유 ${posStats.avg_all_days ?? '—'}개)</small>`
       : `${hl.mom_trades_total}건 <small style="font-size:13px;">(월 ${hl.mom_trades_per_month}건)</small>`;
 
   const tradeKpiSub =
     portfolioMode === 'COMBO'
-      ? `FX ${hl.fx_trades_entered}건(평균 $${hl.fx_avg_notional_m}M) + 모멘텀 ${hl.mom_trades_total}건 · 일간상관 ${hl.corr_fx_mom}`
+      ? `FX ${hl.fx_trades_entered}건(하드캡 평균 ${fmtUsd(hl.fx_hc_avg_loss)}) + 모멘텀 ${hl.mom_trades_total}건 · 상관 ${hl.corr_fx_mom}`
       : portfolioMode === 'FX_ONLY'
-      ? `1σ=$20k · 1:1 동일금액 · Cap $5M (평균 $${hl.fx_avg_notional_m}M / 중앙 $${hl.fx_med_notional_m}M)`
+      ? `보유일 평균 ${posStats.avg_active_days ?? '—'}개 · 0개 휴식 ${posStats.zero_days_pct ?? '—'}% · 평균 명목 $${hl.fx_avg_notional_m}M`
       : `SHORT ${hl.mom_short_cnt} / LONG ${hl.mom_long_cnt} · 코어 평균보유 ${hl.core_avg_hold_days}일`;
 
+  const fxEv = (k) => (data.fx_evolution || []).find((x) => x.key === k) || {};
+  const ev4a = fxEv('fx_4a');
+  const ev2a = fxEv('fx_2a');
+  const ev2b = fxEv('fx_2b');
+  const ev4b = fxEv('fx_4b');
+
   target.innerHTML = `
-    <!-- ===================================================================== -->
-    <!-- HERO HEADER & TOP CONTROLS                                            -->
-    <!-- ===================================================================== -->
+    <!-- HERO HEADER & TOP CONTROLS -->
     <div class="panel" style="border-left:4px solid #0d9488;">
       <div class="panel-head" style="flex-wrap:wrap;gap:12px;">
         <div>
-          <div class="eyebrow">UNIFIED DESK MASTER · 100% STRICTLY CAUSAL (ZERO LOOKAHEAD · 2022-01 ~ 2026-11 · 59 MONTHS)</div>
-          <h2 style="margin:4px 0 6px;">🚀 FX v2.0 (4B: 1σ=$20k · 1:1 · Cap $5M) + 모멘텀 v3.5 통합 A-to-Z &amp; 59개월 분석</h2>
+          <div class="eyebrow">UNIFIED DESK MASTER · 100% STRICTLY CAUSAL · NEXT-DAY OPEN STOP (ZERO CLAMPING · 2022-01 ~ 2026-11)</div>
+          <h2 style="margin:4px 0 6px;">FX v2.0 (4B · 전일종가 −$20k → 익일 시초가 손절) + 모멘텀 v3.5 통합 A-to-Z</h2>
           <p class="muted" style="margin:0;font-size:12.5px;line-height:1.55;">
-            중앙 레이더 <strong>FX 스트레스 지수 v2.0</strong>이 <strong>FX 통계적 차익 v2.0 (4B: <code>+$2.88M · Shp 1.40</code>)</strong>과 <strong>금리 모멘텀 v3.5 (<code>+$1.48M · Shp 1.84</code>)</strong>를 시소처럼 교대 가동.<br>
-            100% 엄밀 인과(전일 <code>t−1</code> 확정 스케일 고정) 기준 통합 데스크 <strong>+$4,360,231 · MDD −$262,833 · Sharpe 1.99 · Calmar 16.59x · 5년 전승(최장 2연패)</strong> 실증!
+            장중 자동 클램핑을 완전히 제거하고 <strong>전일 종가 기준 −$20,000 초과 또는 |Z| ≥ 4.0 도달 시 다음 영업일 실제 DB 시초가(Open)로 손절</strong>하는 실전 체결 기준입니다.<br>
+            통합 데스크 <strong>${fmtUsd(hl.combo.total_net)} · MDD −$${fmtNum(hl.combo.mdd)} · Sharpe ${hl.combo.sharpe} · Calmar ${hl.combo.calmar}x · 5개년 전승</strong> (FX 4B <code>${fmtUsd(hl.standalone_fx.total_net)}</code> + 모멘텀 v3.5 <code>${fmtUsd(hl.standalone_mom.total_net)}</code>).
           </p>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
           <div class="segmented" role="group" aria-label="분석 대상 선택">
-            <button type="button" data-v35-pmode="COMBO" class="${portfolioMode === 'COMBO' ? 'on' : ''}">🔥 통합 데스크 (+$4.36M)</button>
-            <button type="button" data-v35-pmode="FX_ONLY" class="${portfolioMode === 'FX_ONLY' ? 'on' : ''}">💱 FX v2.0 4B 단독 (+$2.88M)</button>
-            <button type="button" data-v35-pmode="MOM_ONLY" class="${portfolioMode === 'MOM_ONLY' ? 'on' : ''}">🎯 모멘텀 v3.5 단독 (+$1.48M)</button>
+            <button type="button" data-v35-pmode="COMBO" class="${portfolioMode === 'COMBO' ? 'on' : ''}">통합 데스크 (${fmtUsd(hl.combo.total_net)})</button>
+            <button type="button" data-v35-pmode="FX_ONLY" class="${portfolioMode === 'FX_ONLY' ? 'on' : ''}">FX v2.0 4B 단독 (${fmtUsd(hl.standalone_fx.total_net)})</button>
+            <button type="button" data-v35-pmode="MOM_ONLY" class="${portfolioMode === 'MOM_ONLY' ? 'on' : ''}">모멘텀 v3.5 단독 (${fmtUsd(hl.standalone_mom.total_net)})</button>
           </div>
           <button type="button" id="v35-export-csv" class="btn quiet">↓ 59개월 CSV</button>
         </div>
@@ -401,7 +406,7 @@ export async function renderMomentumV35(target) {
         <div class="stat">
           <div class="label">총 누적 순손익 (59개월)</div>
           <div class="num green">${fmtUsd(activePerf.total_net)}</div>
-          <div class="help">✅ 5개년 전 연도 흑자 · 월평균 ${fmtUsd(activePerf.avg_month)}</div>
+          <div class="help">${activePerf.all_5_years_positive ? '5개년 전 연도 흑자' : '일부 연도 적자'} · 월평균 ${fmtUsd(activePerf.avg_month)}</div>
         </div>
         <div class="stat">
           <div class="label">최대 낙폭 (MDD) / Calmar</div>
@@ -421,7 +426,7 @@ export async function renderMomentumV35(target) {
           }</div>
         </div>
         <div class="stat">
-          <div class="label">실거래 빈도 · 리스크 단위</div>
+          <div class="label">실거래 빈도 · 평균 보유</div>
           <div class="num">${tradeKpiMain}</div>
           <div class="help">${tradeKpiSub}</div>
         </div>
@@ -431,11 +436,11 @@ export async function renderMomentumV35(target) {
       <div class="filters" style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border,rgba(148,163,184,0.22));justify-content:space-between;flex-wrap:wrap;gap:8px;">
         <div class="segmented" role="group" aria-label="섹션 필터">
           ${[
-            ['ALL', '📚 전체 보기'],
-            ['SCHEME', '① FX v2.0 지수 & 시소 스킴'],
-            ['RULES', '② FX 4B & 모멘텀 v3.5 A-to-Z'],
-            ['MONTHLY', '③ 59개월 손익 차트 & 표'],
-            ['TRADES', '④ 거래건수·진화·기각 팩터'],
+            ['ALL', '전체 보기'],
+            ['SCHEME', '1. FX v2.0 지수 & 시소 스킴'],
+            ['RULES', '2. FX 4B & 모멘텀 v3.5 A-to-Z'],
+            ['MONTHLY', '3. 59개월 손익 차트 & 표'],
+            ['TRADES', '4. 거래건수·진화·기각 팩터'],
           ]
             .map(([k, l]) => `<button type="button" data-v35-sec="${k}" class="${sectionTab === k ? 'on' : ''}">${l}</button>`)
             .join('')}
@@ -451,9 +456,7 @@ export async function renderMomentumV35(target) {
     ${
       showScheme
         ? `
-    <!-- ===================================================================== -->
-    <!-- PART 1: FX STRESS INDEX v2.0 FORMULAS & SEESAW OPERATING SCHEME       -->
-    <!-- ===================================================================== -->
+    <!-- PART 1: FX STRESS INDEX v2.0 FORMULAS & SEESAW OPERATING SCHEME -->
     <div class="panel below">
       <div class="panel-head">
         <div>
@@ -467,8 +470,7 @@ export async function renderMomentumV35(target) {
         }
       </div>
 
-      <!-- 4-Weather Seesaw Operating Matrix -->
-      <h3 style="margin:6px 0 8px;font-size:14px;">⚖️ 시장 날씨(<code>전일 확정 v2.0</code>)별 두 엔진 자동 교대(시소) 운용 매트릭스</h3>
+      <h3 style="margin:6px 0 8px;font-size:14px;">시장 날씨(<code>전일 확정 v2.0</code>)별 두 엔진 자동 교대(시소) 운용 매트릭스</h3>
       <div class="table-scroll">
         <table>
           <thead>
@@ -481,44 +483,43 @@ export async function renderMomentumV35(target) {
           </thead>
           <tbody>
             <tr>
-              <td><strong style="color:#64748b;">① 초저변동 안개장</strong><div class="pair-sub"><code>v2 &lt; 24점</code></div></td>
-              <td><span class="tag block">🛑 신규 진입 중단</span><div class="pair-sub">보유분만 <code>0.45x</code> 축소 관리</div></td>
-              <td><span class="tag">🛡️ 스나이퍼 극소액 방어</span><div class="pair-sub">4/6 지평 동시 동의 시만 · +0.28R 잠금</div></td>
-              <td style="font-size:12px;">변동성 분모 수축으로 가짜 Z·돌파 신호 다발 — <strong>둘 다 몸 사리는 구간</strong> (예: 2025-07~08)</td>
+              <td><strong style="color:#64748b;">1. 초저변동 안개장</strong><div class="pair-sub"><code>v2 &lt; 24점</code></div></td>
+              <td><span class="tag block">신규 진입 중단</span><div class="pair-sub">보유분만 <code>0.45x</code> 축소 관리</div></td>
+              <td><span class="tag">스나이퍼 극소액 방어</span><div class="pair-sub">4/6 지평 동시 동의 시만 · +0.28R 잠금</div></td>
+              <td style="font-size:12px;">변동성 분모 수축으로 가짜 Z·돌파 신호 다발 — <strong>두 엔진 모두 방어 휴식</strong></td>
             </tr>
             <tr style="background:rgba(13,148,136,0.06);">
-              <td><strong style="color:#0d9488;">② 정상 박스권</strong><div class="pair-sub"><code>24 ≤ v2 &lt; 38점</code></div></td>
-              <td><span class="tag primary">🟢 메인 풀가동 (1.25x)</span><div class="pair-sub">최대 6페어 · <code>|Z|≥2.2</code> · 1σ=$20k (1:1)</div></td>
-              <td><span class="tag">🛡️ 박스 방어 · 수익잠금</span><div class="pair-sub">단, 채권 독자 추세(<code>ER≥0.26</code>)면 고립추세 허용</div></td>
-              <td style="font-size:12px;"><strong>FX v2.0이 꾸준한 현금흐름을 쓸어 담는 메인 무대</strong> (2023~2025 박스 3년 FX +$2.28M)</td>
+              <td><strong style="color:#0d9488;">2. 정상 박스권</strong><div class="pair-sub"><code>24 ≤ v2 &lt; 38점</code></div></td>
+              <td><span class="tag primary">메인 풀가동 (1.25x)</span><div class="pair-sub">최대 6페어 (평균 ${posStats.avg_all_days ?? 2.25}개) · <code>|Z|≥2.2</code> · 1σ=$20k (1:1)</div></td>
+              <td><span class="tag">박스 방어 · 수익잠금</span><div class="pair-sub">단, 채권 독자 추세(<code>ER≥0.26</code>)면 고립추세 허용</div></td>
+              <td style="font-size:12px;"><strong>FX v2.0이 꾸준한 현금흐름을 수확하는 메인 무대</strong> (23~25 박스 3년 FX ${fmtUsd(hl.standalone_fx.box_23_25)})</td>
             </tr>
             <tr>
-              <td><strong style="color:#d97706;">③ 추세 형성·교차장</strong><div class="pair-sub"><code>38 ≤ v2 &lt; 56점</code></div></td>
-              <td><span class="tag hold">🟡 1.25x → 붕괴징후 시 0.65x 감속</span><div class="pair-sub"><code>v2≥44 ∧ (P2≥13.5 ∨ Tail≥24%)</code></div></td>
-              <td><span class="tag hold">🟠 추세 가속 (1.25x ~ 1.48x)</span><div class="pair-sub">멀티테너 동조 가속 · 피로 시 즉시 잠금</div></td>
-              <td style="font-size:12px;"><strong>FX → 모멘텀 바통 터치 구간</strong> — 두 엔진이 보완적으로 병행 가동</td>
+              <td><strong style="color:#d97706;">3. 추세 형성·교차장</strong><div class="pair-sub"><code>38 ≤ v2 &lt; 56점</code></div></td>
+              <td><span class="tag hold">1.25x → 붕괴징후 시 0.65x 감속</span><div class="pair-sub"><code>v2≥44 ∧ (P2≥13.5 ∨ Tail≥24%)</code></div></td>
+              <td><span class="tag hold">추세 가속 (1.25x ~ 1.48x)</span><div class="pair-sub">멀티테너 동조 가속 · 피로 시 즉시 잠금</div></td>
+              <td style="font-size:12px;"><strong>FX → 모멘텀 바통 터치 구간</strong> — 두 엔진 보완 병행</td>
             </tr>
             <tr style="background:rgba(220,38,38,0.05);">
-              <td><strong style="color:#dc2626;">④ 매크로 폭풍장</strong><div class="pair-sub"><code>v2 ≥ 56</code> 또는 <code>P2≥16∧USD동조≥0.44</code></div></td>
-              <td><span class="tag block">🛑 신규 진입 전면 중단</span><div class="pair-sub">보유분 <code>0.35x</code> 축소 + $20k 하드캡 엄수</div></td>
-              <td><span class="tag primary" style="background:#dc2626;color:#fff;border-color:#dc2626;">🔴 최대 화력 (1.58x ~ 1.90x)</span><div class="pair-sub">코어 100% · +0.90R 유예 → +1.35R 러너 연장</div></td>
-              <td style="font-size:12px;"><strong>모멘텀 v3.5 대박 구간</strong> — FX 출혈은 원천 차단 (예: 2022년, 2026-03/09)</td>
+              <td><strong style="color:#dc2626;">4. 매크로 폭풍장</strong><div class="pair-sub"><code>v2 ≥ 56</code> 또는 <code>P2≥16 ∧ USD동조≥0.44</code></div></td>
+              <td><span class="tag block">신규 진입 전면 중단</span><div class="pair-sub">보유분 <code>0.35x</code> 축소 + 전일 −$20k 초과 시 익일 Open 손절</div></td>
+              <td><span class="tag primary" style="background:#dc2626;color:#fff;border-color:#dc2626;">최대 화력 (1.58x ~ 1.90x)</span><div class="pair-sub">코어 100% · +0.90R 유예 → +1.35R 러너 연장</div></td>
+              <td style="font-size:12px;"><strong>모멘텀 v3.5 핵심 수익 구간</strong> — FX 신규 출혈 원천 차단</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <!-- Daily 3-Step Routine -->
-      <h3 style="margin:16px 0 8px;font-size:14px;">🗓️ 매일 아침 실전 데스크 3-Step 운용 루틴 (주당 평균 약 1.7건 저빈도 스윙)</h3>
+      <h3 style="margin:16px 0 8px;font-size:14px;">매일 아침 실전 데스크 3-Step 운용 루틴 (주당 평균 약 1.7건 저빈도 스윙)</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:10px;">
         <div style="border:1px solid var(--border,rgba(148,163,184,0.25));border-radius:10px;padding:12px;font-size:12.5px;line-height:1.6;">
-          <div style="font-weight:800;color:#0d9488;margin-bottom:4px;">Step 1 · 오전 8시 날씨(v2.0) 확정</div>
-          전일(<code>t−1</code>) 확정 종가로 계산된 <strong>FX 스트레스 v2.0 점수 · P2 · Tail · 5D/10D 기울기</strong>를 확인해 오늘 하루의 FX 허용 여부·배수 및 모멘텀 국면을 고정합니다. <em>(장중 변동으로 당일 배수를 소급 변경하지 않는 100% 인과 원칙)</em>
+          <div style="font-weight:800;color:#0d9488;margin-bottom:4px;">Step 1 · 오전 8시 날씨(v2.0) 및 손절 대상 확정</div>
+          전일(<code>t−1</code>) 확정 종가로 계산된 <strong>FX 스트레스 v2.0 점수</strong>로 오늘 국면을 고정하고, 전일 종가 기준 <strong>누적손익 −$20,000 이하 또는 |Z| ≥ 4.0</strong> 도달 FX 포지션은 <strong>당일 시초가(Open)에 즉시 청산</strong>합니다.
         </div>
         <div style="border:1px solid var(--border,rgba(148,163,184,0.25));border-radius:10px;padding:12px;font-size:12.5px;line-height:1.6;">
-          <div style="font-weight:800;color:#2563eb;margin-bottom:4px;">Step 2 · FX v2.0 (4B) 집행 (월 ~5.7건)</div>
-          허용 구간(<code>24≤v2&lt;56</code>) + 빈 슬롯(최대 6개, 통화당 최대 2개)일 때 <code>|Z|≥2.2</code> 후보 중 <code>|Z|×(0.5+0.5|Corr|)</code> 상위 진입.<br>
-          <strong>명목 = min($5M, $20,000 ÷ 1σ%) × 배수</strong> (Leg1=Leg2 1:1 롱숏). 청산: <code>|Z|≤0.5</code> 익절 / <strong>−$20k 하드캡</strong> / <code>|Z|≥4.0</code> / <strong>20일 적자 타임스탑</strong>.
+          <div style="font-weight:800;color:#2563eb;margin-bottom:4px;">Step 2 · FX v2.0 (4B) 신규 진입 (평균 보유 ${posStats.avg_all_days ?? 2.25}개)</div>
+          허용 구간(<code>24≤v2&lt;56</code>) + 빈 슬롯(최대 6개, 통화당 2개)일 때 <code>|Z|≥2.2</code> 후보 중 <code>|Z|×(0.5+0.5|Corr|)</code> 상위 진입.<br>
+          <strong>명목 = min($5M, $20,000 ÷ 1σ%) × 배수</strong> (1:1 롱숏). 청산: <code>|Z|≤0.5</code> 익절 / <strong>전일 −$20k 초과 → 익일 Open</strong> / <strong>20일 적자 타임스탑</strong>.
         </div>
         <div style="border:1px solid var(--border,rgba(148,163,184,0.25));border-radius:10px;padding:12px;font-size:12.5px;line-height:1.6;">
           <div style="font-weight:800;color:#dc2626;margin-bottom:4px;">Step 3 · 모멘텀 v3.5 집행 (월 ~1.4건)</div>
@@ -527,12 +528,11 @@ export async function renderMomentumV35(target) {
         </div>
       </div>
 
-      <!-- 3-Pillar Formula Cards -->
-      <h3 style="margin:16px 0 8px;font-size:14px;">📐 FX 스트레스 지수 v2.0 3대 기둥 계산 공식 (0 ~ 100점)</h3>
+      <h3 style="margin:16px 0 8px;font-size:14px;">FX 스트레스 지수 v2.0 3대 기둥 계산 공식 (0 ~ 100점)</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px;">
         <div style="border:1px solid var(--border,rgba(148,163,184,0.25));border-radius:10px;padding:12px;background:var(--surface-2,rgba(248,250,252,0.5));">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-            <strong style="color:#0d9488;">기둥 ① P1 · 시장 추세 효율성</strong><span class="tag primary">최대 40점</span>
+            <strong style="color:#0d9488;">기둥 1 · P1 시장 추세 효율성</strong><span class="tag primary">최대 40점</span>
           </div>
           <div style="font-family:ui-monospace,Consolas,monospace;font-size:11.5px;background:var(--surface,#fff);padding:8px;border-radius:6px;border:1px solid var(--border,rgba(148,163,184,0.22));line-height:1.55;">
             ER20 = |Close(t)−Close(t−20)| / Σ|ΔClose|<br>
@@ -542,7 +542,7 @@ export async function renderMomentumV35(target) {
         </div>
         <div style="border:1px solid var(--border,rgba(148,163,184,0.25));border-radius:10px;padding:12px;background:var(--surface-2,rgba(248,250,252,0.5));">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-            <strong style="color:#2563eb;">기둥 ② P2 · FX 평균회귀 붕괴도</strong><span class="tag shadow">최대 30점</span>
+            <strong style="color:#2563eb;">기둥 2 · P2 FX 평균회귀 붕괴도</strong><span class="tag shadow">최대 30점</span>
           </div>
           <div style="font-family:ui-monospace,Consolas,monospace;font-size:11.5px;background:var(--surface,#fff);padding:8px;border-radius:6px;border:1px solid var(--border,rgba(148,163,184,0.22));line-height:1.55;">
             정상 페어(<code>0.4≤|β|≤1.6</code>) 한정 (BETA_BLOCK 제외)<br>
@@ -551,7 +551,7 @@ export async function renderMomentumV35(target) {
         </div>
         <div style="border:1px solid var(--border,rgba(148,163,184,0.25));border-radius:10px;padding:12px;background:var(--surface-2,rgba(248,250,252,0.5));">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-            <strong style="color:#d97706;">기둥 ③ P3 · 글로벌 매크로 동조성</strong><span class="tag hold">최대 30점</span>
+            <strong style="color:#d97706;">기둥 3 · P3 글로벌 매크로 동조성</strong><span class="tag hold">최대 30점</span>
           </div>
           <div style="font-family:ui-monospace,Consolas,monospace;font-size:11.5px;background:var(--surface,#fff);padding:8px;border-radius:6px;border:1px solid var(--border,rgba(148,163,184,0.22));line-height:1.55;">
             USD_Coh (7개 FX선물 USD쏠림) + Curve_Coh (US/DE 6만기)<br>
@@ -568,9 +568,7 @@ export async function renderMomentumV35(target) {
     ${
       showRules
         ? `
-    <!-- ===================================================================== -->
-    <!-- PART 2: FX 4A->4B EVOLUTION & MOMENTUM v3.5 EXECUTION RULES A-TO-Z    -->
-    <!-- ===================================================================== -->
+    <!-- PART 2: FX 4A->4B EVOLUTION & MOMENTUM v3.5 EXECUTION RULES A-TO-Z -->
     <div class="panel below">
       <div class="panel-head">
         <div>
@@ -579,8 +577,7 @@ export async function renderMomentumV35(target) {
         </div>
       </div>
 
-      <!-- FX 4A -> 2A -> 2B -> 4B Side-by-Side Comparison -->
-      <h3 style="margin:6px 0 8px;font-size:14px;">💱 FX 통계적 차익 4단계 비교 (공통: 유저 원설계 <code>1σ = $20,000</code> 역산 · 1:1 동일금액 · −$20k 하드캡 · |Z|≤0.5 익절)</h3>
+      <h3 style="margin:6px 0 8px;font-size:14px;">FX 통계적 차익 4단계 비교 (공통: <code>1σ = $20,000</code> 역산 · 1:1 동일금액 · 전일 −$20k 초과 → 익일 Open 손절 · 클램핑 0%)</h3>
       <div class="table-scroll">
         <table>
           <thead>
@@ -589,7 +586,7 @@ export async function renderMomentumV35(target) {
               <th>4A. 원설계 정적</th>
               <th>2A. 원설계 + <code>DEF2_CAUSAL</code></th>
               <th>2B. 원설계 + <code>BOX</code> + <code>Time20d</code></th>
-              <th style="background:rgba(13,148,136,0.12);">★ 4B. FX v2.0 최종 제안</th>
+              <th style="background:rgba(13,148,136,0.12);">[확정] 4B. FX v2.0 (익일 Open)</th>
             </tr>
           </thead>
           <tbody>
@@ -597,7 +594,7 @@ export async function renderMomentumV35(target) {
               <td><strong>한 줄 요약</strong></td>
               <td>원래 설계 그대로 (필터 없음)</td>
               <td>원래 설계 + 위험 시 사이즈만 감속</td>
-              <td>원래 설계 + 안 좋은 장 진입중단·20일컷</td>
+              <td>원래 설계 + 안 좋은 장 차단·20일컷</td>
               <td style="background:rgba(13,148,136,0.06);"><strong>2B에서 진입 기준만 Z 2.2로 개방</strong></td>
             </tr>
             <tr>
@@ -605,14 +602,14 @@ export async function renderMomentumV35(target) {
               <td><code>≥ 2.7</code> / <code>3.7</code></td>
               <td><code>≥ 2.7</code> / <code>3.7</code></td>
               <td><code>≥ 2.7</code> / <code>3.7</code></td>
-              <td style="background:rgba(13,148,136,0.06);"><strong><code>≥ 2.2</code> / <code>4.0</code></strong> <span class="muted">(−$20k 하드캡 동일)</span></td>
+              <td style="background:rgba(13,148,136,0.06);"><strong><code>≥ 2.2</code> / <code>4.0</code></strong> <span class="muted">(전일 −$20k → 익일Open)</span></td>
             </tr>
             <tr>
               <td><strong>최대 슬롯 / 명목 상한</strong></td>
               <td>5개 / <code>$5M</code></td>
               <td>5개 / <code>$8M</code></td>
               <td>6개 / <code>$8M</code></td>
-              <td style="background:rgba(13,148,136,0.06);"><strong>6개 / <code>$5M</code></strong> (실전 체결 상한)</td>
+              <td style="background:rgba(13,148,136,0.06);"><strong>6개 (평균 ${posStats.avg_all_days ?? 2.25}개) / <code>$5M</code></strong></td>
             </tr>
             <tr>
               <td><strong>후보 우선순위</strong></td>
@@ -636,41 +633,38 @@ export async function renderMomentumV35(target) {
               <td style="background:rgba(13,148,136,0.06);"><strong>20영업일</strong> 적자 시 정리</td>
             </tr>
             <tr>
-              <td><strong>59개월 성과 (FX 단독)</strong></td>
-              <td><strong>+$1,429k</strong> · MDD −$469k<br>Shp 0.80 · 316건 ❌</td>
-              <td><strong>+$930k</strong> · MDD −$255k<br>Shp 0.84 · 315건 ❌</td>
-              <td><strong>+$1,304k</strong> · MDD −$467k<br>Shp 0.85 · 179건 ❌</td>
-              <td style="background:rgba(13,148,136,0.08);"><strong class="green">+$2,878k · MDD −$268k</strong><br><strong class="green">Shp 1.40 · Clm 10.75x · 336건 ✅5년전승</strong></td>
+              <td><strong>59개월 성과 (익일 Open)</strong></td>
+              <td><strong>${fmtUsd(ev4a.total_net)}</strong> · MDD −$${fmtNum(ev4a.mdd)}<br>Shp ${ev4a.sharpe} · ${ev4a.entered_trades}건</td>
+              <td><strong>${fmtUsd(ev2a.total_net)}</strong> · MDD −$${fmtNum(ev2a.mdd)}<br>Shp ${ev2a.sharpe} · ${ev2a.entered_trades}건</td>
+              <td><strong>${fmtUsd(ev2b.total_net)}</strong> · MDD −$${fmtNum(ev2b.mdd)}<br>Shp ${ev2b.sharpe} · ${ev2b.entered_trades}건</td>
+              <td style="background:rgba(13,148,136,0.08);"><strong class="green">${fmtUsd(ev4b.total_net)} · MDD −$${fmtNum(ev4b.mdd)}</strong><br><strong class="green">Shp ${ev4b.sharpe} · Clm ${ev4b.calmar}x · ${ev4b.entered_trades}건 (5년전승)</strong></td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="rule-note" style="margin-top:8px;">
-        💡 <strong>왜 <code>Z ≥ 2.7</code>(2B)에서 <code>Z ≥ 2.2</code>(4B)로 완화할 때 수익이 2배(+1.30M → +2.88M)로 뛰는가?</strong><br>
-        과거에는 위기장 필터가 없어 보수적으로 <code>2.7</code>까지 기다려야 했지만, <code>BOX_FOCUS</code>로 데드존(<code>&lt;24</code>)과 위기장(<code>≥56</code>)을 먼저 차단하면 정상 박스권에서 <code>2.7</code>은 신호가 반토막(179건) 나고 오히려 추세 이탈 꼬리만 역선택하게 됩니다. 안전한 박스권 안에서 <code>2.2</code>부터 포착하면 건강한 평균회귀(336건)를 온전히 수확하며, <strong>−$20,000 달러 하드캡</strong>이 생명줄 역할을 해(하드캡 미적용 <code>1B</code>는 22년 −$1.39M 폭사) 손익비 ~2:1을 완성합니다.
+        <strong>실전 체결 현실화 핵심 메모 (클램핑 제거)</strong>: 장중 자동 스프레드 스탑 대신 <strong>전일 종가 −$20k 초과 확인 → 익일 실제 DB 시초가(Open) 손절</strong>을 적용하면 당일 종가 오버슈트가 그대로 반영되어 하드캡 발동 시 건당 실제 손실이 평균 <strong>${fmtUsd(hl.fx_hc_avg_loss)}</strong>(전일종가→익일시초가 갭 평균 ${fmtUsd(hl.fx_hc_avg_gap)})로 현실화됩니다. 이상적 장중 클램핑 대비 거품 약 $1.1M을 모두 덜어내고도 <strong>5개년 전 연도 흑자(FX ${fmtUsd(ev4b.total_net)} · 통합 ${fmtUsd(hl.combo.total_net)})</strong>를 유지합니다.
       </div>
 
-      <!-- Momentum v3.5 3 Core Innovations -->
-      <h3 style="margin:18px 0 8px;font-size:14px;">🎯 모멘텀 v3.5 핵심 혁신 3가지 &amp; 8대 국면별 통합 실적 기여</h3>
+      <h3 style="margin:18px 0 8px;font-size:14px;">모멘텀 v3.5 핵심 혁신 3가지 &amp; 8대 국면별 통합 실적 기여</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px;margin-bottom:12px;">
         <div style="border:1px solid rgba(13,148,136,0.35);border-radius:10px;padding:12px;font-size:12.5px;line-height:1.55;">
-          <div style="font-weight:800;color:#0d9488;margin-bottom:4px;">① 방향 비대칭 라우팅</div>
+          <div style="font-weight:800;color:#0d9488;margin-bottom:4px;">1. 방향 비대칭 라우팅</div>
           • <strong>SHORT(금리상승)</strong> → <code>W3 고속</code> (62건 WR 59.7%, +$969k)<br>
           • <strong>LONG(금리하락)</strong> → <code>W7 65% + Sniper 35%</code> (기존 W3 LONG −$72k 적자 → 흑자 전환)
         </div>
         <div style="border:1px solid rgba(37,99,235,0.35);border-radius:10px;padding:12px;font-size:12.5px;line-height:1.55;">
-          <div style="font-weight:800;color:#2563eb;margin-bottom:4px;">② 테너 품질 분리 (<code>TY → W7</code>)</div>
+          <div style="font-weight:800;color:#2563eb;margin-bottom:4px;">2. 테너 품질 분리 (<code>TY → W7</code>)</div>
           • <strong>TU·DU·FV·RX</strong>: W3 고속 SHORT 주력 (TU+DU가 수익 69%)<br>
           • <strong>TY(미 10Y)</strong>: W3 유일 적자 테너(−$20k) → <code>W7 완속 전용</code> 이관 (+$38k)
         </div>
         <div style="border:1px solid rgba(124,58,237,0.35);border-radius:10px;padding:12px;font-size:12.5px;line-height:1.55;">
-          <div style="font-weight:800;color:#7c3aed;margin-bottom:4px;">③ 2024 과민반응 교정 방어①</div>
+          <div style="font-weight:800;color:#7c3aed;margin-bottom:4px;">3. 2024 과민반응 교정 방어1</div>
           • 이중 기간 피로(<code>Δ5D&lt;−4.5 ∧ Δ10D&lt;−3.0</code>)로 건전한 숨고르기 보호<br>
           • <strong>고립 채권 추세(<code>IsoTrend</code>)</strong> 예외(<code>ER≥0.26 ∧ |S0|≥0.55</code>) → 2024년 −$77k → +$40k 반전
         </div>
       </div>
 
-      <!-- 8-Regime Matrix with BOTH Mom & FX PnL! -->
       <div class="table-scroll">
         <table>
           <thead>
@@ -702,26 +696,25 @@ export async function renderMomentumV35(target) {
         </table>
       </div>
 
-      <!-- Momentum Lifecycle 6-Step Cards -->
-      <h3 style="margin:16px 0 8px;font-size:14px;">⚙️ 모멘텀 v3.5 포지션 라이프사이클 6단계 (진입 → 증액 → 감액 → 손절 → 잠금/익절 → 청산)</h3>
+      <h3 style="margin:16px 0 8px;font-size:14px;">모멘텀 v3.5 포지션 라이프사이클 6단계 (진입 → 증액 → 감액 → 손절 → 잠금/익절 → 청산)</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:10px;">
         <div style="border:1px solid var(--border,rgba(148,163,184,0.25));border-radius:10px;padding:11px;font-size:12px;line-height:1.58;">
-          <strong>1️⃣ 진입</strong>: <code>S0 = 0.70×Disp + 0.30×MA</code> · 10D 돌파 + MA20/60/120 정배열 · 1차 선발대 <strong>1/3 ($11.7k)</strong> · <span style="color:#d97706;">FOMC/CPI/NFP D-1 신규진입 1/3 상한</span>
+          <strong>01. 진입</strong>: <code>S0 = 0.70×Disp + 0.30×MA</code> · 10D 돌파 + MA20/60/120 정배열 · 1차 선발대 <strong>1/3 ($11.7k)</strong> · <span style="color:#d97706;">FOMC/CPI/NFP D-1 신규진입 1/3 상한</span>
         </div>
         <div style="border:1px solid var(--border,rgba(148,163,184,0.25));border-radius:10px;padding:11px;font-size:12px;line-height:1.58;">
-          <strong>2️⃣ 증액</strong>: 20D 돌파+수익권 → <strong>2/3 ($23.3k)</strong> · 멀티테너 동조(<code>|S0|≥0.48</code>) → <strong>3/3 ($35k)</strong> × 국면배수 (L2 <code>1.25~1.48x</code> / L3 <code>1.58~1.90x</code>)
+          <strong>02. 증액</strong>: 20D 돌파+수익권 → <strong>2/3 ($23.3k)</strong> · 멀티테너 동조(<code>|S0|≥0.48</code>) → <strong>3/3 ($35k)</strong> × 국면배수 (L2 <code>1.25~1.48x</code> / L3 <code>1.58~1.90x</code>)
         </div>
         <div style="border:1px solid var(--border,rgba(148,163,184,0.25));border-radius:10px;padding:11px;font-size:12px;line-height:1.58;">
-          <strong>3️⃣ 감액</strong>: <code>|S0|</code> 둔화 시 1/3 축소 · L2/L3 추세 피로(<code>Fatigue</code>) 감지 시 공격배수 해제 → <code>Fast 3-Beat + Sniper</code> 수익잠금 모드 전환
+          <strong>03. 감액</strong>: <code>|S0|</code> 둔화 시 1/3 축소 · L2/L3 추세 피로(<code>Fatigue</code>) 감지 시 공격배수 해제 → <code>Fast 3-Beat + Sniper</code> 수익잠금 모드 전환
         </div>
         <div style="border:1px solid var(--border,rgba(148,163,184,0.25));border-radius:10px;padding:11px;font-size:12px;line-height:1.58;">
-          <strong>4️⃣ 손절</strong>: 진입가 대비 <strong>2.5 × SD20</strong> 장중 하드스탑 · <strong>3~5영업일</strong>(국면별 4~7일) 내 최고 평가익 <code>+0.16R</code> 미달 시 타임스탑
+          <strong>04. 손절</strong>: 진입가 대비 <strong>2.5 × SD20</strong> 장중 하드스탑 · <strong>3~5영업일</strong>(국면별 4~7일) 내 최고 평가익 <code>+0.16R</code> 미달 시 타임스탑
         </div>
         <div style="border:1px solid var(--border,rgba(148,163,184,0.25));border-radius:10px;padding:11px;font-size:12px;line-height:1.58;">
-          <strong>5️⃣ 잠금·익절</strong>: 박스/피로장 <strong>+0.28R → +0.14R 잠금</strong> · L2 추세장 <strong>+0.90R 50% 반익절+BE</strong> · L3 폭풍장 <strong>+0.90R 유예(BE) → +1.35R 연장</strong>
+          <strong>05. 잠금·익절</strong>: 박스/피로장 <strong>+0.28R → +0.14R 잠금</strong> · L2 추세장 <strong>+0.90R 50% 반익절+BE</strong> · L3 폭풍장 <strong>+0.90R 유예(BE) → +1.35R 연장</strong>
         </div>
         <div style="border:1px solid var(--border,rgba(148,163,184,0.25));border-radius:10px;padding:11px;font-size:12px;line-height:1.58;">
-          <strong>6️⃣ 청산·재진입</strong>: 잔여 러너 <strong>10D 반대채널</strong> 종가 이탈 시 청산 · MA60 대추세 유지 + MA20 지지 반등 시 <strong>2/3 눌림목 재진입</strong> (L2/L3 허용)
+          <strong>06. 청산·재진입</strong>: 잔여 러너 <strong>10D 반대채널</strong> 종가 이탈 시 청산 · MA60 대추세 유지 + MA20 지지 반등 시 <strong>2/3 눌림목 재진입</strong> (L2/L3 허용)
         </div>
       </div>
     </div>
@@ -732,15 +725,13 @@ export async function renderMomentumV35(target) {
     ${
       showMonthly
         ? `
-    <!-- ===================================================================== -->
-    <!-- PART 3: 59-MONTH CHARTS, MUTUAL HEDGE & FULL MONTHLY TABLE            -->
-    <!-- ===================================================================== -->
+    <!-- PART 3: 59-MONTH CHARTS, MUTUAL HEDGE & FULL MONTHLY TABLE -->
     <div class="panel below">
       <div class="panel-head" style="flex-wrap:wrap;gap:10px;">
         <div>
-          <div class="eyebrow">PART 3 · 59-MONTH PNL TRAJECTORY (100% STRICTLY CAUSAL · 2022-01 ~ 2026-11)</div>
+          <div class="eyebrow">PART 3 · 59-MONTH PNL TRAJECTORY (REALISTIC NEXT-DAY OPEN STOP · 2022-01 ~ 2026-11)</div>
           <h2>3. 59개월 누적·월별 손익 추이 (${yearFilter === 'ALL' ? '전체 59개월' : yearFilter + '년'} · ${
-            portfolioMode === 'COMBO' ? '통합 FX 4B + 모멘텀 v3.5' : portfolioMode === 'FX_ONLY' ? 'FX v2.0 (4B) 단독' : '모멘텀 v3.5 단독'
+            portfolioMode === 'COMBO' ? '통합 FX 4B 익일Open + 모멘텀 v3.5' : portfolioMode === 'FX_ONLY' ? 'FX v2.0 (4B · 익일Open) 단독' : '모멘텀 v3.5 단독'
           })</h2>
         </div>
       </div>
@@ -748,19 +739,18 @@ export async function renderMomentumV35(target) {
       <div style="margin-top:6px;">${renderEquitySvg(chartMonths, portfolioMode)}</div>
       <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border,rgba(148,163,184,0.2));">${renderMonthlyBarSvg(chartMonths, portfolioMode)}</div>
 
-      <!-- Distribution, Mutual Hedge & Extreme Months -->
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-top:14px;">
         <div style="border:1px solid var(--border,rgba(148,163,184,0.25));border-radius:10px;padding:12px;">
-          <div style="font-weight:800;font-size:13px;">📊 월간 손익 분포 &amp; 상호 헤지 실증</div>
+          <div style="font-weight:800;font-size:13px;">월간 손익 분포 &amp; 상호 헤지 실증</div>
           ${renderDistBar(activePerf, portfolioMode)}
           <div style="font-size:11.5px;margin-top:8px;line-height:1.6;" class="muted">
-            • <strong>모멘텀 손실월 ${mh.mom_loss_months}개월 중 ${mh.mom_rescued_by_fx}개월</strong>을 FX 4B가 흑자 전환 (24-12·24-06은 통합 Top 3·4로 역전)<br>
-            • <strong>FX 손실월 ${mh.fx_loss_months}개월 중 ${mh.fx_rescued_by_mom}개월</strong>을 모멘텀이 흑자 전환 (2022년 통합 11승 1패!)
+            • <strong>모멘텀 손실월 ${mh.mom_loss_months}개월 중 ${mh.mom_rescued_by_fx}개월</strong>을 FX 4B가 흑자 전환<br>
+            • <strong>FX 손실월 ${mh.fx_loss_months}개월 중 ${mh.fx_rescued_by_mom}개월</strong>을 모멘텀이 흑자 전환
           </div>
         </div>
 
         <div style="border:1px solid rgba(13,148,136,0.3);border-radius:10px;padding:12px;">
-          <div style="font-weight:800;font-size:13px;color:#0d9488;margin-bottom:6px;">🏆 최우수 5개월 (${portfolioMode === 'COMBO' ? '통합 기준' : portfolioMode === 'FX_ONLY' ? 'FX 4B 기준' : '모멘텀 v3.5 기준'})</div>
+          <div style="font-weight:800;font-size:13px;color:#0d9488;margin-bottom:6px;">최우수 5개월 (${portfolioMode === 'COMBO' ? '통합 기준' : portfolioMode === 'FX_ONLY' ? 'FX 4B 기준' : '모멘텀 v3.5 기준'})</div>
           <div style="font-size:12px;line-height:1.7;">
             ${(top5List || [])
               .map(
@@ -775,7 +765,7 @@ export async function renderMomentumV35(target) {
         </div>
 
         <div style="border:1px solid rgba(225,29,72,0.3);border-radius:10px;padding:12px;">
-          <div style="font-weight:800;font-size:13px;color:#e11d48;margin-bottom:6px;">🛡️ 최악 5개월 (${portfolioMode === 'COMBO' ? '통합 기준' : portfolioMode === 'FX_ONLY' ? 'FX 4B 기준' : '모멘텀 v3.5 기준'})</div>
+          <div style="font-weight:800;font-size:13px;color:#e11d48;margin-bottom:6px;">최악 5개월 (${portfolioMode === 'COMBO' ? '통합 기준' : portfolioMode === 'FX_ONLY' ? 'FX 4B 기준' : '모멘텀 v3.5 기준'})</div>
           <div style="font-size:12px;line-height:1.7;">
             ${(bot5List || [])
               .map(
@@ -790,15 +780,14 @@ export async function renderMomentumV35(target) {
         </div>
       </div>
 
-      <!-- Full 59-Month Matrix Table -->
       <div class="panel-head" style="margin-top:18px;flex-wrap:wrap;gap:8px;">
-        <h3 style="margin:0;font-size:14.5px;">📅 59개월 월별 손익추이 &amp; 거래건수 전체 매트릭스 (${tableMonths.length}개월 표시)</h3>
+        <h3 style="margin:0;font-size:14.5px;">59개월 월별 손익추이 &amp; 거래건수 전체 매트릭스 (${tableMonths.length}개월 표시)</h3>
         <div class="segmented" role="group" aria-label="월별 상세 필터">
           ${[
             ['ALL', '전체'],
-            ['BIG_WIN', portfolioMode === 'MOM_ONLY' ? '★ 대승(+$50k↑)' : '★ 대승(+$150k↑)'],
+            ['BIG_WIN', portfolioMode === 'MOM_ONLY' ? '대승 (+$50k↑)' : '대승 (+$150k↑)'],
             ['LOSS', '적자월'],
-            ['SEVERE', portfolioMode === 'MOM_ONLY' ? '▼ −$20k↓' : '▼ −$50k↓'],
+            ['SEVERE', portfolioMode === 'MOM_ONLY' ? '하락 (−$20k↓)' : '하락 (−$50k↓)'],
             ['FX_ZERO', 'FX 휴식(0건)'],
             ['MOM_ZERO', '모멘텀 0건'],
           ]
@@ -838,7 +827,7 @@ export async function renderMomentumV35(target) {
                 <td class="number ${clsPnl(r.fx_4b)}"><strong>${fmtUsd(r.fx_4b)}</strong></td>
                 <td class="number muted">${fmtUsd(r.fx_4b_cum)}</td>
                 <td class="number ${clsPnl(r.mom_v35)}">${fmtUsd(r.mom_v35)}</td>
-                <td class="number ${clsPnl(r.combo_4b)}"><strong>${fmtUsd(r.combo_4b)}</strong>${r.combo_4b >= 150000 ? ' ★' : r.combo_4b <= -50000 ? ' ▼' : ''}</td>
+                <td class="number ${clsPnl(r.combo_4b)}"><strong>${fmtUsd(r.combo_4b)}</strong></td>
                 <td class="number"><strong>${fmtUsd(r.combo_4b_cum)}</strong></td>
                 <td class="number ${r.combo_4b_dd < 0 ? 'red' : 'muted'}">${r.combo_4b_dd === 0 ? '$0' : fmtUsd(r.combo_4b_dd)}</td>
               </tr>`
@@ -869,9 +858,7 @@ export async function renderMomentumV35(target) {
     ${
       showTrades
         ? `
-    <!-- ===================================================================== -->
-    <!-- PART 4: ANNUAL SUMMARY, EVOLUTION TABLES, TENORS & REJECTED ARCHIVE   -->
-    <!-- ===================================================================== -->
+    <!-- PART 4: ANNUAL SUMMARY, EVOLUTION TABLES, TENORS & REJECTED ARCHIVE -->
     <div class="panel below">
       <div class="panel-head">
         <div>
@@ -880,20 +867,20 @@ export async function renderMomentumV35(target) {
         </div>
       </div>
 
-      <!-- Annual Summary -->
-      <h3 style="margin:6px 0 8px;font-size:14px;">📆 연도별 거래건수 &amp; 손익 요약 (매년 통합 최소 +$656k ~ +$1,199k · 5년 전승)</h3>
+      <h3 style="margin:6px 0 8px;font-size:14px;">연도별 평균 보유 · 거래건수 · 손익 요약 (FX 4B 익일 Open 기준 · 5개년 전승)</h3>
       <div class="table-scroll">
         <table>
           <thead>
             <tr>
               <th>연도</th>
               <th class="number">v2 평균</th>
+              <th class="number">FX 평균보유</th>
               <th class="number">FX 신규 (월)</th>
-              <th class="number">FX 원설계(4A)</th>
-              <th class="number">★ FX v2.0(4B)</th>
+              <th class="number">FX 4A 정적</th>
+              <th class="number">FX v2.0 (4B)</th>
               <th class="number">모멘 신규 (S/L)</th>
-              <th class="number">★ 모멘텀 v3.5</th>
-              <th class="number">★ 통합 (4B+v3.5)</th>
+              <th class="number">모멘텀 v3.5</th>
+              <th class="number">통합 (4B+v3.5)</th>
               <th class="number">통합 승월</th>
             </tr>
           </thead>
@@ -903,6 +890,7 @@ export async function renderMomentumV35(target) {
                 (a) => `<tr>
                 <td><strong>${a.year}년</strong> ${a.year === '2026' ? '<span class="muted" style="font-size:11px;">(~11월)</span>' : ''}</td>
                 <td class="number">${fmtNum(a.v2_avg, 1)}점</td>
+                <td class="number">${fmtNum(a.fx_avg_pos, 2)}개</td>
                 <td class="number"><strong>${a.fx_new_trades}건</strong> <span class="muted">(${a.fx_per_month})</span></td>
                 <td class="number ${clsPnl(a.fx_4a)}">${fmtUsd(a.fx_4a)}</td>
                 <td class="number ${clsPnl(a.fx_4b)}"><strong>${fmtUsd(a.fx_4b)}</strong></td>
@@ -917,8 +905,7 @@ export async function renderMomentumV35(target) {
         </table>
       </div>
 
-      <!-- Full Evolution Comparison: FX + Momentum + Integrated -->
-      <h3 style="margin:18px 0 8px;font-size:14px;">📈 100% 엄밀 인과 진화 비교표 (FX 1σ=$20k 1:1 기준 · 모멘텀 v3.5 · 통합 포트폴리오)</h3>
+      <h3 style="margin:18px 0 8px;font-size:14px;">100% 엄밀 인과 · 익일 시초가 손절(클램핑 0%) 진화 비교표 (FX · 모멘텀 · 통합)</h3>
       <div class="table-scroll">
         <table>
           <thead>
@@ -945,7 +932,7 @@ export async function renderMomentumV35(target) {
                   <td class="number">${ev.calmar}x</td>
                   <td class="number">${ev.win_months}/59 (${ev.win_months_pct}%)</td>
                   <td class="number ${clsPnl(ev.box_23_25)}">${fmtUsd(ev.box_23_25)}</td>
-                  <td>${ev.all_5_years_positive ? '<span class="tag primary">✅ 5년 전승</span>' : '<span class="tag block">일부 적자</span>'}</td>
+                  <td>${ev.all_5_years_positive ? '<span class="tag primary">5년 전승</span>' : '<span class="tag block">일부 적자</span>'}</td>
                 </tr>`;
               })
               .join('')}
@@ -953,10 +940,9 @@ export async function renderMomentumV35(target) {
         </table>
       </div>
 
-      <!-- Momentum Core Routes & Tenor Forensics -->
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:16px;">
         <div style="border:1px solid var(--border,rgba(148,163,184,0.25));border-radius:10px;padding:12px;">
-          <h3 style="margin:0 0 8px;font-size:13.5px;">🧭 모멘텀 v3.5 코어 비대칭 라우팅 (${hl.core_trades_total}건 · 승률 ${hl.core_win_rate_pct}%)</h3>
+          <h3 style="margin:0 0 8px;font-size:13.5px;">모멘텀 v3.5 코어 비대칭 라우팅 (${hl.core_trades_total}건 · 승률 ${hl.core_win_rate_pct}%)</h3>
           <div class="table-scroll">
             <table>
               <thead><tr><th>라우팅 경로</th><th class="number">건수</th><th class="number">승률</th><th class="number">보유</th><th class="number">원시 순손익</th></tr></thead>
@@ -981,7 +967,7 @@ export async function renderMomentumV35(target) {
         </div>
 
         <div style="border:1px solid var(--border,rgba(148,163,184,0.25));border-radius:10px;padding:12px;">
-          <h3 style="margin:0 0 8px;font-size:13.5px;">🎯 금리 5대 핵심 테너별 건수 &amp; W3 vs W7 실증</h3>
+          <h3 style="margin:0 0 8px;font-size:13.5px;">금리 5대 핵심 테너별 건수 &amp; W3 vs W7 실증</h3>
           <div class="table-scroll">
             <table>
               <thead><tr><th>테너</th><th class="number">v3.5 (S/L)</th><th class="number">W3(R1) 순손익</th><th class="number">W7(R2) 순손익</th></tr></thead>
@@ -1002,8 +988,7 @@ export async function renderMomentumV35(target) {
         </div>
       </div>
 
-      <!-- Rejected Factors Archive -->
-      <h3 style="margin:18px 0 8px;font-size:14px;">🧪 실증 검증 후 기각·교정한 팩터 아카이브 (과최적화 &amp; 선행 오류 방지 기록)</h3>
+      <h3 style="margin:18px 0 8px;font-size:14px;">실증 검증 후 기각·교정한 팩터 아카이브 (과최적화 &amp; 체결 환상 방지 기록)</h3>
       <div class="table-scroll">
         <table>
           <thead><tr><th>테스트 항목</th><th>실증 결과</th><th>판정</th><th>기각·교정 사유</th></tr></thead>
@@ -1057,7 +1042,7 @@ export async function renderMomentumV35(target) {
   const expBtn = target.querySelector('#v35-export-csv');
   if (expBtn) {
     expBtn.onclick = () => {
-      downloadCsv('fx-v2-4b-plus-momentum-v35-59months.csv', [
+      downloadCsv('fx-v2-4b-next-open-plus-momentum-v35-59months.csv', [
         [
           'year_month', 'v2_avg', 'regime',
           'fx_new_trades', 'mom_new_trades', 'mom_entries',

@@ -320,11 +320,11 @@ export async function renderMomentumSynergy(target) {
   const rangeCtrl = renderRangeControls('fx-mom-synergy', 'ALL', true);
 
   const partnerButtons = [
-    ['CTA_RECIPE1', '🔥 ⑧ 수익극대화 레시피1 (최적 파트너)'],
-    ['FAST_3BEAT', '⚡ ⑤ 빠른 3박자 (단독 표준)'],
-    ['SNIPER_S3', '🎯 ⑥ 하이브리드 스나이퍼 (방어형)'],
+    ['CTA_RECIPE1', '⑧ 수익극대화 레시피1 (최적 파트너)'],
+    ['FAST_3BEAT', '⑤ 빠른 3박자 (단독 표준)'],
+    ['SNIPER_S3', '⑥ 하이브리드 스나이퍼 (방어형)'],
     ['METHOD_3', '⑦ 확장A · 눌림목 재진입'],
-    ['CTA_RECIPE2', '④ 🎯 CTA 레시피2'],
+    ['CTA_RECIPE2', '④ CTA 레시피2'],
     ['TIER', '② 기존 CTA (20일 고정)'],
     ['BASE', '① 기본 20일 돌파 (무필터)']
   ];
@@ -369,7 +369,7 @@ export async function renderMomentumSynergy(target) {
           <div class="segmented">
             <button data-syn-scale="COMBO_1TO1" class="${scaleMode === 'COMBO_1TO1' ? 'on' : ''}">기본 1:1 결합 (1x:1x)</button>
             <button data-syn-scale="COMBO_HALF_FX" class="${scaleMode === 'COMBO_HALF_FX' ? 'on' : ''}">리스크 균형 (FX 0.5x:1x)</button>
-            <button data-syn-scale="TARGET_2M" class="${scaleMode === 'TARGET_2M' ? 'on' : ''}">💰 연 $200만 목표 스케일</button>
+            <button data-syn-scale="TARGET_2M" class="${scaleMode === 'TARGET_2M' ? 'on' : ''}">연 $200만 목표 스케일</button>
           </div>
         </div>
       </div>
@@ -518,14 +518,14 @@ export async function renderMomentumSynergy(target) {
 
     <div class="panel below" style="margin-bottom:14px;">
       <div class="panel-head">
-        <h2>3. 최적 파트너 전략 심층 해부: ⑧ 🔥 수익 극대화 레시피1 (눌림목 재진입 + k=1.05 공격형 시그널)</h2>
+        <h2>3. 최적 파트너 전략 심층 해부: ⑧ 수익 극대화 레시피1 (눌림목 재진입 + k=1.05 공격형 시그널)</h2>
         <span class="muted">왜 FX 평균회귀가 뒤를 받쳐줄 때는 방어형(⑤·⑥번)보다 수익 극대화형(⑧ 레시피1)이 압도적 1위인가?</span>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(460px, 1fr));gap:14px;padding:14px 16px;align-items:stretch;">
         <div style="min-width:0;overflow:hidden;background:var(--panel-subtle);border:1px solid rgba(249,115,22,0.4);border-radius:10px;padding:16px;box-sizing:border-box;">
-          <h3 style="margin:0 0 8px 0;color:#f97316;font-size:15px;line-height:1.4;">⚡ 엔진 ①: k=1.05 공격형 CTA 레시피1 — 추세 초입 3/3 풀사이즈 초고속 증액</h3>
+          <h3 style="margin:0 0 8px 0;color:#f97316;font-size:15px;line-height:1.4;">엔진 ①: k=1.05 공격형 CTA 레시피1 — 추세 초입 3/3 풀사이즈 초고속 증액</h3>
           <p class="muted" style="margin:0 0 12px 0;line-height:1.6;white-space:normal;word-break:keep-all;">
-            방어형 모델(<code>⑤ 빠른 3박자</code>·<code>⑥ 스나이퍼</code>)은 단독 운용 시 박스권 휩소를 피하기 위해 <code>k=0.70</code>과 <code>중장기 주기 85%(28·56·112일)</code>를 사용하여 추세가 한참 진행될 때까지 <code>1/3~2/3</code> 물량에 머뭅니다. 반면 <strong><code>🔥 레시피1</code>은 박스권 수익을 FX 평균회귀에 맡기고 추세 초기 반응 속도를 극대화</strong>합니다.
+            방어형 모델(<code>⑤ 빠른 3박자</code>·<code>⑥ 스나이퍼</code>)은 단독 운용 시 박스권 휩소를 피하기 위해 <code>k=0.70</code>과 <code>중장기 주기 85%(28·56·112일)</code>를 사용하여 추세가 한참 진행될 때까지 <code>1/3~2/3</code> 물량에 머뭅니다. 반면 <strong><code>레시피1</code>은 박스권 수익을 FX 평균회귀에 맡기고 추세 초기 반응 속도를 극대화</strong>합니다.
           </p>
           <table style="width:100%;min-width:0;table-layout:fixed;border-collapse:collapse;white-space:normal;">
             <colgroup>
@@ -537,8 +537,8 @@ export async function renderMomentumSynergy(target) {
             <thead>
               <tr>
                 <th style="position:static;white-space:normal;word-break:keep-all;padding:8px 8px;line-height:1.35;">CTA 내부 변수</th>
-                <th style="position:static;white-space:normal;word-break:keep-all;padding:8px 8px;line-height:1.35;">🎯 방어형 레시피2<br/><small>(⑤·⑥번)</small></th>
-                <th style="position:static;white-space:normal;word-break:keep-all;padding:8px 8px;line-height:1.35;">🔥 공격형 레시피1<br/><small>(⑧번 최적)</small></th>
+                <th style="position:static;white-space:normal;word-break:keep-all;padding:8px 8px;line-height:1.35;">방어형 레시피2<br/><small>(⑤·⑥번)</small></th>
+                <th style="position:static;white-space:normal;word-break:keep-all;padding:8px 8px;line-height:1.35;">공격형 레시피1<br/><small>(⑧번 최적)</small></th>
                 <th style="position:static;white-space:normal;word-break:keep-all;padding:8px 8px;line-height:1.35;">실전 증액 속도 차이</th>
               </tr>
             </thead>
@@ -580,7 +580,7 @@ export async function renderMomentumSynergy(target) {
       </div>
 
       <div style="padding:4px 16px 8px;">
-        <h3 style="margin:6px 0 8px 0;font-size:14px;">📊 대시보드 10대 금리 모멘텀 전 모델 × FX 차익거래 결합 성과 비교 (행 클릭 시 상단 차트 즉시 전환)</h3>
+        <h3 style="margin:6px 0 8px 0;font-size:14px;">대시보드 10대 금리 모멘텀 전 모델 × FX 차익거래 결합 성과 비교 (행 클릭 시 상단 차트 즉시 전환)</h3>
       </div>
       <div class="table-scroll">
         <table>
@@ -632,7 +632,7 @@ export async function renderMomentumSynergy(target) {
     <div class="panel below" style="margin-bottom:14px;">
       <div class="panel-head">
         <h2>4. 연 $2,000,000 (200만 달러) 기대수익 달성을 위한 실전 포지션 규모 및 손실한도(Risk Limit) 가이드</h2>
-        <span class="muted">FX 평균회귀 × ⑧ 🔥 수익 극대화 레시피1 병행 운용 기준</span>
+        <span class="muted">FX 평균회귀 × ⑧ 수익 극대화 레시피1 병행 운용 기준</span>
       </div>
       <div class="table-scroll">
         <table style="width:100%;table-layout:fixed;white-space:normal;">
@@ -646,7 +646,7 @@ export async function renderMomentumSynergy(target) {
             <tr>
               <th style="white-space:normal;word-break:keep-all;">리스크 관리 단계</th>
               <th style="white-space:normal;word-break:keep-all;">① FX 페어 평균회귀 차익거래 (55쌍)</th>
-              <th style="white-space:normal;word-break:keep-all;">② 금리 선물 모멘텀 (⑧ 🔥 수익 극대화 레시피1)</th>
+              <th style="white-space:normal;word-break:keep-all;">② 금리 선물 모멘텀 (⑧ 수익 극대화 레시피1)</th>
               <th style="white-space:normal;word-break:keep-all;">★ 통합 데스크 전체 (Total Desk Portfolio)</th>
             </tr>
           </thead>

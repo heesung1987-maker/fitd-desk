@@ -1222,10 +1222,10 @@ export async function renderMomentumStrategy(target) {
           <div class="segmented">
             ${[
               ['ALL', '전체 커브 (13종목)'],
-              ['US', '🇺🇸 미국 국채'],
-              ['DE', '🇩🇪 독일 국채'],
-              ['KR', '🇰🇷 한국 국채'],
-              ['EU', '🇪🇺 유럽(이탈리아·프랑스)'],
+              ['US', '미국 국채'],
+              ['DE', '독일 국채'],
+              ['KR', '한국 국채'],
+              ['EU', '유럽(이탈리아·프랑스)'],
             ]
               .map(
                 ([k, label]) =>

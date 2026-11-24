@@ -12,9 +12,9 @@ export function renderMomentumRecipe1Control(target) {
 
 (function () {
   const WEIGHT_PROFILES = {
-    W3: { id: 'W3', label: '🔥 W3 단·중기 66% 집중 (레시피1)', weights: [0.14, 0.24, 0.28, 0.18, 0.10, 0.06] },
-    W7: { id: 'W7', label: '🎯 W7 중장기 85% 집중 (레시피2)', weights: [0.03, 0.05, 0.07, 0.20, 0.30, 0.35] },
-    W0: { id: 'W0', label: '⚖️ W0 6주기 균등 (기본형)', weights: [1 / 6, 1 / 6, 1 / 6, 1 / 6, 1 / 6, 1 / 6] },
+    W3: { id: 'W3', label: 'W3 단·중기 66% 집중 (레시피1)', weights: [0.14, 0.24, 0.28, 0.18, 0.10, 0.06] },
+    W7: { id: 'W7', label: 'W7 중장기 85% 집중 (레시피2)', weights: [0.03, 0.05, 0.07, 0.20, 0.30, 0.35] },
+    W0: { id: 'W0', label: 'W0 6주기 균등 (기본형)', weights: [1 / 6, 1 / 6, 1 / 6, 1 / 6, 1 / 6, 1 / 6] },
   };
 
   const state = {
@@ -173,12 +173,12 @@ export function renderMomentumRecipe1Control(target) {
           <div>
             <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px;">
               <span class="badge" style="background:rgba(234,88,12,0.14);color:#ea580c;border:1px solid rgba(234,88,12,0.35);font-weight:700;">
-                🎛️ DUAL MODEL INTEGRATED CONTROLLER
+                DUAL MODEL INTEGRATED CONTROLLER
               </span>
               <span class="badge badge-flat mono">
-                🗄️ fitd DB (${esc(dbInfo.host || '175.193.255.215:3306/fitd')}) · 선물 ${int(dbInfo.total_db_futures || 20)}종 직결 (${num(dbInfo.elapsed_ms, 0)}ms)
+                fitd DB (${esc(dbInfo.host || '175.193.255.215:3306/fitd')}) · 선물 ${int(dbInfo.total_db_futures || 20)}종 직결 (${num(dbInfo.elapsed_ms, 0)}ms)
               </span>
-              <span class="badge badge-flat mono">기준일 ${esc(d.as_of)} (${esc(d.data_mode === 'live' ? '⚡ BBG 실시간 연동' : '📊 종가 기준')})</span>
+              <span class="badge badge-flat mono">기준일 ${esc(d.as_of)} (${esc(d.data_mode === 'live' ? 'BBG 실시간 연동' : '종가 기준')})</span>
             </div>
             <div class="panel-title">확장 B · 레시피 1 (CTA_RECIPE1) × FX 차익거래 레짐 이탈 · fitd DB 통합 워크벤치</div>
             <div class="panel-sub">
@@ -209,7 +209,7 @@ export function renderMomentumRecipe1Control(target) {
           <div class="mc-kpi" style="border-left:4px solid #0284c7;">
             <div class="mc-kpi-label">② fitd DB 7대 통화선물 달러 모멘텀 (FX Impulse)</div>
             <div class="mc-kpi-value mono ${fxr.avg_usd_impulse >= 0 ? 'pos' : 'neg'}">
-              ${fxr.avg_usd_impulse >= 0.2 ? '▲ 강달러 추세' : fxr.avg_usd_impulse <= -0.2 ? '▼ 약달러 추세' : '⚖️ 중립'}
+              ${fxr.avg_usd_impulse >= 0.2 ? '▲ 강달러 추세' : fxr.avg_usd_impulse <= -0.2 ? '▼ 약달러 추세' : '중립'}
               <span style="font-size:14px;">(${signedNum(fxr.avg_usd_impulse, 3)})</span>
             </div>
             <div class="mc-kpi-sub">
@@ -341,7 +341,7 @@ export function renderMomentumRecipe1Control(target) {
                   <tr>
                     <th>DB 통화선물 / 근월물</th>
                     <th class="num">최근 종가 (전일비)</th>
-                    <th class="num">🔥 레시피1 CTA</th>
+                    <th class="num">레시피1 CTA</th>
                     <th class="num">타 레시피 비교</th>
                     <th>10D / 20D</th>
                     <th>국채금리 동조 방향</th>
@@ -423,7 +423,7 @@ export function renderMomentumRecipe1Control(target) {
               ★ 핵심 5대 국채선물 (TU·FV·TY·DU·RX)
             </button>
             <button type="button" class="btn ${state.universeMode === 'ALL13' ? 'active' : ''}" data-r1-univ="ALL13">
-              🌐 fitd DB 전체 13종 국채선물 (US·DE·IT·FR·KR)
+              fitd DB 전체 13종 국채선물 (US·DE·IT·FR·KR)
             </button>
           </div>
         </div>
@@ -630,13 +630,13 @@ export function renderMomentumRecipe1Control(target) {
           </div>
           <div style="display:flex;gap:6px;flex-wrap:wrap;">
             <button type="button" class="btn ${state.presetId === 'CTA_RECIPE1' ? 'active' : ''}" data-r1-preset="CTA_RECIPE1" style="border-color:#ea580c;">
-              🔥 레시피 1 (70:30 · k=1.05 · W3 단중기66%)
+              레시피 1 (70:30 · k=1.05 · W3 단중기66%)
             </button>
             <button type="button" class="btn ${state.presetId === 'CTA_RECIPE2' ? 'active' : ''}" data-r1-preset="CTA_RECIPE2" style="border-color:#9333ea;">
-              🎯 레시피 2 (65:35 · k=0.70 · W7 중장기85%)
+              레시피 2 (65:35 · k=0.70 · W7 중장기85%)
             </button>
             <button type="button" class="btn ${state.presetId === 'BASE_W0' ? 'active' : ''}" data-r1-preset="BASE_W0">
-              ⚖️ 기본 W0 (55:45 · k=0.85 · 균등)
+              기본 W0 (55:45 · k=0.85 · 균등)
             </button>
           </div>
         </div>
@@ -682,7 +682,7 @@ export function renderMomentumRecipe1Control(target) {
             </div>
             <input type="range" id="r1-slider-bmult" min="0.50" max="1.50" step="0.05" value="${state.budgetMult}" style="width:100%;">
             <div class="muted" style="font-size:11px;">
-              ${state.autoRegimeGate && inst.triple_aligned ? '⚡ 3중 동조 감지 → 권고 배수 자동 반영 중' : '수동 예산 배수 적용 중'}
+              ${state.autoRegimeGate && inst.triple_aligned ? '3중 동조 감지 → 권고 배수 자동 반영 중' : '수동 예산 배수 적용 중'}
             </div>
           </div>
         </div>
@@ -802,7 +802,7 @@ export function renderMomentumRecipe1Control(target) {
 
         <div class="mc-kpi-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-bottom:14px;">
           <div class="mc-kpi-card" style="border-top:3px solid #10b981;">
-            <div class="mc-kpi-label">🛡️ 수렴 · 박스권 (I_stress &lt; 36)</div>
+            <div class="mc-kpi-label">수렴 · 박스권 (I_stress &lt; 36)</div>
             <div class="mc-kpi-val">${int(rc.MEAN_REVERSION_BOX)}거래일 (${num(rp.MEAN_REVERSION_BOX, 1)}%)</div>
             <div class="mc-kpi-sub">
               FX 단독: <strong class="pos">${usd(rb.MEAN_REVERSION_BOX?.FX)}</strong> ·
@@ -812,7 +812,7 @@ export function renderMomentumRecipe1Control(target) {
             </div>
           </div>
           <div class="mc-kpi-card" style="border-top:3px solid #f59e0b;">
-            <div class="mc-kpi-label">⚡ 레짐 균열 · 전환 경보 (36 ≤ I_stress &lt; 55)</div>
+            <div class="mc-kpi-label">레짐 균열 · 전환 경보 (36 ≤ I_stress &lt; 55)</div>
             <div class="mc-kpi-val">${int(rc.TRANSITION_ALERT)}거래일 (${num(rp.TRANSITION_ALERT, 1)}%)</div>
             <div class="mc-kpi-sub">
               FX 단독: <strong>${usd(rb.TRANSITION_ALERT?.FX)}</strong> ·
@@ -822,7 +822,7 @@ export function renderMomentumRecipe1Control(target) {
             </div>
           </div>
           <div class="mc-kpi-card" style="border-top:3px solid #dc2626;">
-            <div class="mc-kpi-label">🔥 추세 발산 · RV 경보 (I_stress ≥ 55)</div>
+            <div class="mc-kpi-label">추세 발산 · RV 경보 (I_stress ≥ 55)</div>
             <div class="mc-kpi-val">${int(rc.TREND_EXPANSION)}거래일 (${num(rp.TREND_EXPANSION, 1)}%)</div>
             <div class="mc-kpi-sub">
               고정R1: <strong>${usd(rb.TREND_EXPANSION?.R1_BASE)} (+$1,082/일)</strong> →

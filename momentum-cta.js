@@ -270,8 +270,8 @@ export function renderMomentumCta(target) {
           <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
             <div style="display:flex;flex-wrap:wrap;gap:5px;">${stepButtons}</div>
             <div style="display:flex;gap:4px;">${costButtons}</div>
-            <button type="button" class="btn active" id="mc-jump-recipe1-ctrl" style="border-color:#ea580c;font-weight:700;">🎛️ 레시피1 × FX 레짐·DB 컨트롤러 열기</button>
-            <a class="btn" href="/FITD_모멘텀_모니터_10대_모델_상세_해설_보고서.pdf" target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;">📄 10대 모델 해설 PDF</a>
+            <button type="button" class="btn active" id="mc-jump-recipe1-ctrl" style="border-color:#ea580c;font-weight:700;">레시피1 × FX 레짐·DB 컨트롤러 열기</button>
+            <a class="btn" href="/FITD_모멘텀_모니터_10대_모델_상세_해설_보고서.pdf" target="_blank" rel="noopener" style="text-decoration:none;font-weight:700;">10대 모델 해설 PDF</a>
           </div>
         </div>
 
@@ -322,9 +322,9 @@ export function renderMomentumCta(target) {
 
     const axisKeys = ['axis1_cta_params', 'axis2_entry_timing', 'axis3_exit_management'];
     const axisIcons = {
-      axis1_cta_params: '🎛️ 축 ① · 진입 기술 (CTA 파라미터 변수)',
-      axis2_entry_timing: '📅 축 ② · 진입·증액 일자 (선발대 → 본대)',
-      axis3_exit_management: '⚡ 축 ③ · 익절 & 시간제한 손절 (승률·PF·MDD)',
+      axis1_cta_params: '축 ① · 진입 기술 (CTA 파라미터 변수)',
+      axis2_entry_timing: '축 ② · 진입·증액 일자 (선발대 → 본대)',
+      axis3_exit_management: '축 ③ · 익절 & 시간제한 손절 (승률·PF·MDD)',
     };
     const axisColors = {
       axis1_cta_params: '#9333ea',
@@ -353,10 +353,10 @@ export function renderMomentumCta(target) {
     const curCol = axisColors[state.activeAxis] || '#059669';
 
     const varHeaders = state.activeAxis === 'axis1_cta_params'
-      ? ['조정 파라미터 변수', '현행 기본값 (W0)', '🎯 방어·고승률 최적 (레시피 2)', '🔥 누적수익 극대화 (레시피 1)']
+      ? ['조정 파라미터 변수', '현행 기본값 (W0)', '방어·고승률 최적 (레시피 2)', '누적수익 극대화 (레시피 1)']
       : state.activeAxis === 'axis2_entry_timing'
       ? ['진입·증액 타이밍 변수', '기존 모형 (20일 단일)', '★ 최적 2단 분할 (10일→20일)', '대안 · 대조군 비교']
-      : ['청산·리스크 관리 변수', '기본 청산 (0단계)', '⚡ 빠른 3박자 (거래수 67건 유지)', '🎯 하이브리드 스나이퍼 (초고승률)'];
+      : ['청산·리스크 관리 변수', '기본 청산 (0단계)', '빠른 3박자 (거래수 67건 유지)', '하이브리드 스나이퍼 (초고승률)'];
 
     const varRows = (curAxis.variables || []).map(v => {
       const c2 = v.recipe2 || v.optimal || v.fast3 || '';
@@ -419,7 +419,7 @@ export function renderMomentumCta(target) {
             </div>
           </div>
           <div class="mc-insight-box" style="border-left:4px solid ${curCol};">
-            💡 <strong>핵심 검증 결론:</strong> ${esc(curAxis.key_insight)}
+            <strong>핵심 검증 결론:</strong> ${esc(curAxis.key_insight)}
           </div>
 
           <div style="display:grid;grid-template-columns:1fr;gap:12px;">
@@ -739,8 +739,8 @@ export function renderMomentumCta(target) {
 
     const modelsToCompare = [
       { key: 'CTA_RECIPE2', label: '④ CTA 레시피2 (1단계 관리)', color: COLORS.CTA_RECIPE2 },
-      { key: 'FAST_3BEAT', label: '⑤ ⚡ 빠른 3박자 (기본형 후보 · 67건)', color: COLORS.FAST_3BEAT },
-      { key: 'SNIPER_S3', label: '⑥ 🎯 하이브리드 스나이퍼 (방어형 후보 · 47건)', color: COLORS.SNIPER_S3 },
+      { key: 'FAST_3BEAT', label: '⑤ 빠른 3박자 (기본형 후보 · 67건)', color: COLORS.FAST_3BEAT },
+      { key: 'SNIPER_S3', label: '⑥ 하이브리드 스나이퍼 (방어형 후보 · 47건)', color: COLORS.SNIPER_S3 },
     ];
 
     const rRows = [];
@@ -781,12 +781,12 @@ export function renderMomentumCta(target) {
       <div class="panel">
         <div class="panel-head">
           <div>
-            <div class="panel-title">3-B. 🔬 3대 핵심 모델 보수적 체결 엔진 & R-기준(Fixed $35k vs Active R) 정밀 재검증</div>
+            <div class="panel-title">3-B. 3대 핵심 모델 보수적 체결 엔진 & R-기준(Fixed $35k vs Active R) 정밀 재검증</div>
             <div class="panel-sub">연속선물(sig_px) 신호와 실제 근월물(contract OHLC) 체결 분리 · 일별 EURUSD(usd_fx) 환산 · 미결제 포함 일별 MTM MDD · 스나이퍼 필터 탈락 20건의 가상 손익(Counterfactual) 대조</div>
           </div>
           <div>
             <button type="button" class="btn active" data-mc-open-rejected="1" style="font-size:12px;padding:6px 12px;">
-              🚫 하단 원장에서 탈락 신호 20건 가상 손익 바로 보기
+              하단 원장에서 탈락 신호 20건 가상 손익 바로 보기
             </button>
           </div>
         </div>
@@ -933,15 +933,15 @@ export function renderMomentumCta(target) {
       const netVal = Number(t.net || 0);
       const isAvoidedLoss = netVal <= 0;
       const badgeHtml = isAvoidedLoss
-        ? `<span class="mc-badge mc-badge-ok">🛡️ 손실 회피 (+${usd(Math.abs(netVal)).replace('+','')})</span>`
-        : `<span class="mc-badge mc-badge-warn">⚠️ 놓친 수익 (-${usd(netVal).replace('+','')})</span>`;
+        ? `<span class="mc-badge mc-badge-ok">손실 회피 (+${usd(Math.abs(netVal)).replace('+','')})</span>`
+        : `<span class="mc-badge mc-badge-warn">놓친 수익 (-${usd(netVal).replace('+','')})</span>`;
       return `
         <tr>
           <td class="mono">${esc(t.entry_date)} → ${esc(t.exit_date)} (${int(t.hold_days)}일)</td>
           <td><strong>${esc(t.id)}</strong> <span class="mono muted">${esc(t.entry_contract || '')}</span></td>
           <td>${dirBadge(t.direction === 'LONG' || t.direction > 0 ? 1 : -1, String(t.direction))}</td>
           <td class="mono" style="font-size:11.5px;">${num(t.entry_price, 3)} → ${num(t.exit_price, 3)}</td>
-          <td style="font-size:12px;color:#b45309;font-weight:600;">🚫 ${esc(t.reject_reason || '4/6 주기 동의 미달')}</td>
+          <td style="font-size:12px;color:#b45309;font-weight:600;">${esc(t.reject_reason || '4/6 주기 동의 미달')}</td>
           <td class="num mono ${clsPnl(netVal)}">
             <strong>${usd(netVal)}</strong><br>
             <span class="muted" style="font-size:11px;">고정R: ${rFmt(t.fixed_r)} / 실투입R: ${rFmt(t.active_peak_r)}</span>
@@ -991,10 +991,10 @@ export function renderMomentumCta(target) {
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
               <div style="display:flex;gap:6px;flex-wrap:wrap;">
                 <button type="button" class="btn ${state.ledgerTab !== 'REJECTED' ? 'active' : ''}" data-mc-ledger-tab="EXECUTED" style="padding:6px 12px;font-size:12.5px;font-weight:700;">
-                  📋 체결 거래 라이프사이클 로그 (${int(filteredTrades.length)}건 / 전체 ${int(allTrades.length)}건)
+                  체결 거래 라이프사이클 로그 (${int(filteredTrades.length)}건 / 전체 ${int(allTrades.length)}건)
                 </button>
                 <button type="button" class="btn ${state.ledgerTab === 'REJECTED' ? 'active' : ''}" data-mc-ledger-tab="REJECTED" style="padding:6px 12px;font-size:12.5px;font-weight:700;">
-                  🚫 스나이퍼 필터 탈락 신호의 가상 손익 로그 (${int(filteredRejected.length)}건 / 전체 ${int(cfAll.length)}건)
+                  스나이퍼 필터 탈락 신호의 가상 손익 로그 (${int(filteredRejected.length)}건 / 전체 ${int(cfAll.length)}건)
                 </button>
               </div>
               <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;">

@@ -264,7 +264,7 @@ export async function renderMomentumFxV2Monthly(target) {
   target.innerHTML = `
     <div class="research-banner" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
       <div>
-        <strong>📐 FX 스트레스 지수 v2.0 개편의 기술적 배경 & 59개월(2022.01~2026.11) 월간 손익·비침습 방어 분석</strong>
+        <strong>FX 스트레스 지수 v2.0 개편의 기술적 배경 & 59개월(2022.01~2026.11) 월간 손익·비침습 방어 분석</strong>
         <div style="font-size:12px;opacity:0.88;margin-top:2px;">
           구버전(v1.0)의 구조적 왜곡(BETA_BLOCK 상시 오염 · 일간 휩쏘 착시) 해결 원리, 신버전(v2.0) 3대 축 수식 명세, 그리고 59개월 손실 월(23개월)의 3대 매크로·기술적 원인과 비침습 방어 기제(방어 ①+②) 검증 리포트입니다.
         </div>
@@ -289,7 +289,7 @@ export async function renderMomentumFxV2Monthly(target) {
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:10px;">
         <!-- Old v1.0 Limitations -->
         <div style="border:1px solid var(--line,#cbd5e1);border-radius:10px;padding:14px;background:var(--surface-2,rgba(248,250,252,0.7));">
-          <div style="font-size:12px;font-weight:700;color:#e11d48;letter-spacing:0.03em;">🚨 구버전(v1.0) 산식의 3가지 구조적 한계</div>
+          <div style="font-size:12px;font-weight:700;color:#e11d48;letter-spacing:0.03em;">구버전(v1.0) 산식의 3가지 구조적 한계</div>
           <h3 style="margin:6px 0 8px;font-size:15px;">왜 기존 1~3번 조건은 '추세 형성 vs 박스권 등락'을 구분하지 못했나?</h3>
           <ol style="margin:0;padding-left:18px;font-size:13px;line-height:1.65;">
             <li>
@@ -309,7 +309,7 @@ export async function renderMomentumFxV2Monthly(target) {
 
         <!-- New v2.0 3-Pillar Architecture -->
         <div style="border:1px solid #0d9488;border-radius:10px;padding:14px;background:rgba(13,148,136,0.04);">
-          <div style="font-size:12px;font-weight:700;color:#0d9488;letter-spacing:0.03em;">✅ 신버전(v2.0) 3대 축(3-Pillar) 아키텍처 (100점 만점 · 3일 EMA 평활화)</div>
+          <div style="font-size:12px;font-weight:700;color:#0d9488;letter-spacing:0.03em;">신버전(v2.0) 3대 축(3-Pillar) 아키텍처 (100점 만점 · 3일 EMA 평활화)</div>
           <h3 style="margin:6px 0 8px;font-size:15px;">'일방향 추세 지속성'과 '평균회귀 정상 작동'을 직관적·수학적으로 분리</h3>
           <ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.65;">
             <li>
@@ -338,7 +338,7 @@ export async function renderMomentumFxV2Monthly(target) {
 
       <!-- Regime Comparison Table: v1.0 vs v2.0 across 2022~2026 -->
       <div style="margin-top:16px;">
-        <h3 style="font-size:14px;margin:0 0 8px;">📊 구버전(v1.0) vs 신버전(v2.0) 5개년(2022~2026) 레짐 판별 분별력 비교</h3>
+        <h3 style="font-size:14px;margin:0 0 8px;">구버전(v1.0) vs 신버전(v2.0) 5개년(2022~2026) 레짐 판별 분별력 비교</h3>
         <div class="table-scroll">
           <table>
             <thead>
@@ -390,7 +390,7 @@ export async function renderMomentumFxV2Monthly(target) {
           </table>
         </div>
         <div class="rule-note" style="margin-top:8px;">
-          💡 <strong>단일 만기 DV01 집중(Single Best-Tenor DV01 Concentration) 결합 원리</strong>:
+          <strong>단일 만기 DV01 집중(Single Best-Tenor DV01 Concentration) 결합 원리</strong>:
           미국(<code>TU·FV·TY</code>)이나 독일(<code>DU·OE·RX</code>)에서 여러 만기가 동시에 신호를 낼 때 만기별로 어중간하게 분산(Uncap)하면 신호가 약한 만기가 수익률을 희석합니다. 대신 <strong>복수 만기 동조를 '추세 신뢰도 확증 신호'로만 사용하고, 실제 계약과 DV01은 신호 대 잡음비(SNR)가 가장 강한 1종목에 집중(<code>1.48x ~ 1.90x</code>)</strong>할 때 누적 수익과 Sharpe·Calmar가 모두 우월함을 확인했습니다.
         </div>
       </div>
@@ -447,19 +447,19 @@ export async function renderMomentumFxV2Monthly(target) {
 
       <!-- Cumulative Equity Curve SVG -->
       <div style="margin-top:14px;border:1px solid var(--line,#cbd5e1);border-radius:10px;padding:12px;background:var(--surface,#fff);">
-        <div style="font-size:13px;font-weight:700;margin-bottom:6px;">📈 59개월 누적 손익 추이 비교 (방어 전 기본 vs ★ 비침습 방어 ①+② vs 인위적 월간 손절 ③ 대조군)</div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:6px;">59개월 누적 손익 추이 비교 (방어 전 기본 vs ★ 비침습 방어 ①+② vs 인위적 월간 손절 ③ 대조군)</div>
         ${renderCumulativeEquitySvg(filteredChartMonths, universeMode)}
       </div>
 
       <!-- Monthly Bar Chart SVG -->
       <div style="margin-top:14px;border:1px solid var(--line,#cbd5e1);border-radius:10px;padding:12px;background:var(--surface,#fff);">
-        <div style="font-size:13px;font-weight:700;margin-bottom:6px;">📊 월별 손익(Monthly PnL) 방어 전 vs ★ 방어 ①+② 직접 비교 (막대에 마우스를 올리면 월별 상세 원인이 표시됩니다)</div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:6px;">월별 손익(Monthly PnL) 방어 전 vs ★ 방어 ①+② 직접 비교 (막대에 마우스를 올리면 월별 상세 원인이 표시됩니다)</div>
         ${renderMonthlyBarChartSvg(filteredChartMonths, universeMode)}
       </div>
 
       <!-- Ablation Table & Annual Breakdown -->
       <div style="margin-top:16px;">
-        <h3 style="font-size:14px;margin:0 0 8px;">🔬 방어 기제 단계별 적용 비교 (Ablation Study: 2022.01 ~ 2026.11, 59개월)</h3>
+        <h3 style="font-size:14px;margin:0 0 8px;">방어 기제 단계별 적용 비교 (Ablation Study: 2022.01 ~ 2026.11, 59개월)</h3>
         <div class="table-scroll">
           <table>
             <thead>
@@ -497,7 +497,7 @@ export async function renderMomentumFxV2Monthly(target) {
 
       <!-- Annual Win Rate & Net PnL Comparison -->
       <div style="margin-top:16px;">
-        <h3 style="font-size:14px;margin:0 0 8px;">📅 연도별 월간 승률 및 순수익 변화 (방어 전 vs ★ 비침습 방어 ①+②)</h3>
+        <h3 style="font-size:14px;margin:0 0 8px;">연도별 월간 승률 및 순수익 변화 (방어 전 vs ★ 비침습 방어 ①+②)</h3>
         <div class="table-scroll">
           <table>
             <thead>
@@ -563,7 +563,7 @@ export async function renderMomentumFxV2Monthly(target) {
             <strong>발생 메커니즘</strong>: 미·독 국채 금리와 대다수 통화가 조용하면 글로벌 평균인 <code>v2.0</code> 지수는 <code>25~45점</code>(안정~중립)에 머뭅니다. 이때 FX 차익거래가 <code>1.00x~1.10x</code> 풀사이즈로 진입했는데, 실제로는 <strong>BOJ 정책 이벤트(엔화 단독 발작)나 캐리 청산으로 특정 통화 노드만 공적분 궤도를 이탈(<code>P2 ≥ 11.5점</code> 또는 <code>Pure Tail ≥ 22%</code>)</strong>하며 연쇄 손절이 발생했습니다.
           </p>
           <div style="font-size:12px;background:var(--surface-2,rgba(241,245,249,0.8));padding:10px;border-radius:8px;line-height:1.6;">
-            <strong>🛡️ [방어 ②] FX 국소 통화 쇼크 캡 & 역방향 확산 조기 감쇠</strong><br>
+            <strong>[방어 ②] FX 국소 통화 쇼크 캡 & 역방향 확산 조기 감쇠</strong><br>
             1) 글로벌 총점이 낮아도 <code>P2 ≥ 11.5점</code>, <code>Pure Tail ≥ 22%</code>, 또는 5일 지수 급등(<code>Δ5 Iv2 ≥ +6.5점</code>) 시 국소 통화 쇼크로 판정하여 신규 진입 배율을 <code>0.45x</code>로 캡핑합니다.<br>
             2) 보유 중인 FX 페어가 평가손실(<code>-$5,000</code> 이하) 상태에서 <code>|Z_OOS|</code>가 진입 시점보다 <code>+0.25σ</code> 이상 더 바깥으로 벌어지면 하드캡(<code>-$20k</code>) 도달 전 노출을 <code>0.35x</code>로 조기 감쇠합니다.<br>
             <strong style="color:#0d9488;">→ 개선 실적: 23-04(-$91.8k→-$48.9k), 26-01(-$58.1k→-$14.8k), 26-02(-$26.2k→-$1.4k), 22-11(-$20.6k→+$4.2k 흑자전환)</strong>
@@ -581,7 +581,7 @@ export async function renderMomentumFxV2Monthly(target) {
             <strong>발생 메커니즘</strong>: 대추세 폭등(예: <code>2026-09 +$278.7k</code>) 직후 다음 달(<code>2026-10</code>)이나 <code>2023-03 SVB 파산 사태</code>처럼 급격한 되돌림이 올 때, 20일 윈도우 특성상 <strong>지수 절대 레벨(Level)은 여전히 45~59점으로 높지만 지수 기울기(<code>Δ5 Iv2 &lt; -2.5</code>)와 효율성 기울기(<code>Δ5 ER20 &lt; -0.03</code>)는 이미 급락</strong>하고 있습니다. 이때 <code>1.48x~1.90x</code> 집중 배율을 그대로 유지하다가 수익을 반납했습니다.
           </p>
           <div style="font-size:12px;background:var(--surface-2,rgba(241,245,249,0.8));padding:10px;border-radius:8px;line-height:1.6;">
-            <strong>🛡️ [방어 ①-A] 모멘텀 추세 피로 디레버리징 (Slope De-escalation)</strong><br>
+            <strong>[방어 ①-A] 모멘텀 추세 피로 디레버리징 (Slope De-escalation)</strong><br>
             1) 지수 가속 상승 구간(<code>Δ5 Iv2 ≥ -2.5</code> &amp; <code>Δ5 ER20 ≥ -0.03</code>)에서는 기존 <code>1.48x~1.90x</code> 최강 1종목 DV01 집중을 100% 그대로 가동합니다.<br>
             2) 반면 지수나 추세 효율성이 5일 전 대비 꺾이는 <strong>추세 피로 구간에서는 즉시 집중 레버리지를 해제하고 스나이퍼 방어 모드(6개 중 4개 타임프레임 동의 + <code>+0.28R</code> 조기 반익절 잠금)</strong>로 전환합니다.<br>
             <strong style="color:#0d9488;">→ 개선 실적: 23-03 SVB 사태(-$28.6k→+$33.8k 흑자전환), 26-10(-$36.6k→-$0.4k 완벽 본전 방어)</strong>
@@ -599,7 +599,7 @@ export async function renderMomentumFxV2Monthly(target) {
             <strong>발생 메커니즘</strong>: 2025년 여름(<code>6~8월</code>, 지수 <code>7.5~23.5점</code>)이나 <code>2024-03/05</code>처럼 시장이 극단적 수면 장세에 빠지면, <strong>20일 가격 채널과 70일 잔차 표준편차(σ) 분모가 바닥까지 수축</strong>합니다. 그 결과 금리가 3~4bp만 움직여도 가짜 채널 돌파가 켜지고, 미세한 환율 노이즈에도 <code>|Z| ≥ 2.7</code>이 찍혀 양쪽 슬리브가 동시에 잔손실을 입었습니다.
           </p>
           <div style="font-size:12px;background:var(--surface-2,rgba(241,245,249,0.8));padding:10px;border-radius:8px;line-height:1.6;">
-            <strong>🛡️ [방어 ①-B &amp; ②-B] 극저변동성 데드존 스나이퍼 필터 &amp; 스케일 감산</strong><br>
+            <strong>[방어 ①-B &amp; ②-B] 극저변동성 데드존 스나이퍼 필터 &amp; 스케일 감산</strong><br>
             1) <code>Iv2 &lt; 26점</code> 또는 <code>ER20 &lt; 0.20</code>인 데드존에서는 모멘텀을 6개 지평 중 최소 4개 이상이 일치할 때만 진입하는 스나이퍼 모드(<code>0.70x</code>)로 제한합니다.<br>
             2) FX 차익거래 역시 <code>Iv2 &lt; 24점</code> 극저변동성 구간에서는 분모 수축 착시를 감안해 진입 배율을 <code>0.55x</code>로 낮춥니다.<br>
             <strong style="color:#0d9488;">→ 개선 실적: 24-05(-$47.7k→-$6.4k), 25-06(-$29.5k→-$3.3k), 25-08(-$12.8k→-$2.6k), 23-11(-$0.9k→+$11.8k)</strong>
@@ -608,7 +608,7 @@ export async function renderMomentumFxV2Monthly(target) {
       </div>
 
       <div class="rule-note" style="margin-top:12px;">
-        ⚠️ <strong>왜 인위적인 달력 기준 월간 손절 가드(방어 ③: 월간 누적 손익 <code>MTD ≤ -$12,000</code> 도달 시 그 달 남은 기간 배율 <code>0.30x</code> 축소)는 채택하지 않는가?</strong><br>
+        <strong>왜 인위적인 달력 기준 월간 손절 가드(방어 ③: 월간 누적 손익 <code>MTD ≤ -$12,000</code> 도달 시 그 달 남은 기간 배율 <code>0.30x</code> 축소)는 채택하지 않는가?</strong><br>
         백테스트 검증 결과(위 표 3번 대조군), 월초(1~2주 차)에 일시적으로 <code>-$12k</code> 눌렸다가 월중·월말에 강한 추세가 터지며 <code>+$60k ~ +$80k</code> 대수익으로 뒤집는 달들까지 월초 손절 가드가 레버리지를 강제로 묶어버려 <strong>5년간 <code>-$413,615</code>의 막대한 기회비용</strong>이 발생하고 월간 승률도 오히려 <code>72.9% → 66.1%</code>로 하락했습니다. 따라서 인위적 달력 손절(방어 ③)은 배제하고, 매크로·기술적 원인에 직결된 <strong>시그널 기반 비침습 방어(방어 ① + ②)만 적용하는 것이 총수익(<code>+$1.75M</code>)과 월간 승률(<code>72.9%</code>) 양면에서 최적</strong>입니다.
       </div>
     </div>
@@ -665,9 +665,9 @@ export async function renderMomentumFxV2Monthly(target) {
 
                 let badge = '';
                 if (cB < 0 && cD >= 0) {
-                  badge = '<span class="tag primary">✅ 흑자 전환</span>';
+                  badge = '<span class="tag primary">흑자 전환</span>';
                 } else if (cB < 0 && diff > 2000) {
-                  badge = '<span class="tag shadow">🛡️ 손실 대폭 축소</span>';
+                  badge = '<span class="tag shadow">손실 대폭 축소</span>';
                 } else if (cD >= 0) {
                   badge = '<span class="tag" style="color:#0d9488;border-color:#0d9488;">흑자 유지</span>';
                 } else {
