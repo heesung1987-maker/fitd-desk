@@ -200,35 +200,35 @@ function toggleOutlookTheme() {
   <div class="nav-left">
     <a href="./index.html#rv" class="back">← FITD Trading Desk</a>
     <span class="sep"></span>
-    <a href="./krw-2027-outlook.html">원화 (KRW)</a>
-    <a href="./ust-2027-outlook.html" class="active">미국 (UST)</a>
-    <a href="./global-2027-outlook.html">주요국 (Ex-US)</a>
-    <a href="./credit-2027-outlook.html">크레딧 (US Credit)</a>
+    <a href="./krw-2027-outlook.html">🇰🇷 원화 (KRW)</a>
+    <a href="./ust-2027-outlook.html" class="active">🇺🇸 미국 (UST)</a>
+    <a href="./global-2027-outlook.html">🌍 주요국 (Ex-US)</a>
+    <a href="./credit-2027-outlook.html">🏢 크레딧 (US Credit)</a>
   </div>
   <div class="nav-right">
-    <button type="button" onclick="toggleOutlookTheme()">테마 전환</button>
-    <button type="button" onclick="window.print()">인쇄 / PDF</button>
+    <button type="button" onclick="toggleOutlookTheme()">☀️/🌙 테마 전환</button>
+    <button type="button" onclick="window.print()">🖨️ 인쇄 / PDF</button>
   </div>
 </nav>
 
 <header>
   <div class="hdr-top">
-    <span class="eyebrow">해외 주요 IB 8곳(12개 리포트) 2027 연간전망 종합 · GS · MS · JPM · Barclays · WFS · Citi · SG · ING</span>
-    <span class="badge-draft">초안 v4 · SG Multi-Asset & Barclays Weekly 추가 반영</span>
+    <span class="eyebrow">해외 주요 IB 8곳(13개 리포트) 2027 연간전망 종합 · GS · MS · JPM · Barclays · WFS · Citi · SG · ING</span>
+    <span class="badge-draft">초안 v5 · JPM US Fixed Income 2027 Outlook (11/24) 반영</span>
   </div>
   <h1>2027 미국 매크로 & 미국채(UST) 연간전망</h1>
   <div class="meta">
-    <span>기준일: <b class="num">2026.10.29~11.20</b></span>
+    <span>기준일: <b class="num">2026.10.29~11.24</b></span>
     <span>현재 Fed 기준금리 <b class="num">3.75~4.00%</b> (상단 <span class="num">4.00%</span>)</span>
-    <span>UST 2Y <b class="num">4.88%</b></span>
-    <span>UST 5Y <b class="num">4.97%</b></span>
-    <span>UST 10Y <b class="num">5.13%</b> (SG <span class="num">5.02%</span>)</span>
-    <span>UST 30Y <b class="num">5.46%</b></span>
-    <span>2s10s <b class="num">+25bp</b></span>
+    <span>UST 2Y <b class="num">4.88%</b> (JPM 11/20 <span class="num">4.61%</span>)</span>
+    <span>UST 5Y <b class="num">4.97%</b> (<span class="num">4.70%</span>)</span>
+    <span>UST 10Y <b class="num">5.13%</b> (JPM 11/20 <span class="num">4.91%</span>)</span>
+    <span>UST 30Y <b class="num">5.46%</b> (<span class="num">5.30%</span>)</span>
+    <span>2s10s <b class="num">+25~30bp</b></span>
   </div>
   <div class="context-bar">
-    <span><b>2026년 말 배경:</b> ① 2월 이란 전쟁 발발(호르무즈 차질·유가 급등)로 인플레 재점화 → 연준 9월 금리 인상 재개(+25bp, 3.75~4.00%) 및 케빈 워시(Warsh) 신임 연준 의장 취임(SF 연은 컨퍼런스서 시나리오 기반 SEP 개편 시사)</span>
-    <span>② AI Capex 급증(2025~32년 GDP의 3.2%)이 성장을 견인했으나 4Q 전력·조달비용 우려 및 미 중간선거(민주당 상·하원 장악, 지방 주민투표 47건 중 46건 데이터센터 반대)로 AI 기술주 조정 발생</span>
+    <span><b>2026년 말 배경:</b> ① 2월 이란 전쟁 발발(호르무즈 차질·유가 급등)로 인플레 재점화 → 연준 9월 금리 인상 재개(+25bp, 3.75~4.00%) 및 케빈 워시(Warsh) 신임 연준 의장 취임(시나리오 기반 SEP 개편 및 대차대조표 축소 TF 가동)</span>
+    <span>② AI Capex 급증(2025~32년 GDP의 3.2%)이 성장을 견인했으나 4Q 전력·조달비용 우려 및 미 중간선거(민주당 상·하원 장악, 지방 주민투표 47건 중 46건 데이터센터 반대)로 AI 기술주 조정 및 국채 금리 반락(10Y 5.13%→4.91%) 발생</span>
   </div>
 </header>
 
@@ -239,22 +239,22 @@ function toggleOutlookTheme() {
     <li>
       <span class="t">통화정책 (Fed)</span>
       <span class="b">12월~1Q27 마지막 인상(4.25~4.75%) 후 동결 vs Citi 2Q27부터 3회 인하(3.50%)</span>
-      <span class="desc">8개 하우스 모두 12월 추가 인상에는 일치(10월 FOMC 의사록도 광범위한 인상 지지 확인). 최종 상단은 WFS·Citi(4.25%) vs GS·MS·Barclays·SG(4.50%) vs JPM(4.75%)으로 분화.</span>
+      <span class="desc">8개 하우스 모두 12월 추가 인상에는 일치(10월 FOMC 의사록도 광범위한 인상 지지 확인). 최종 상단은 WFS·Citi(4.25%) vs GS·MS·Barclays·SG(4.50%) vs JPM(4.75%, 12·1·3월 인상 후 동결)으로 분화.</span>
     </li>
     <li>
       <span class="t">매크로 & 인플레이션</span>
       <span class="b">AI Capex 증가율 둔화(Peak Growth) 속 성장 둔화(SG 1.7% ~ WFS·MS 2.5%), 끈적한 물가</span>
-      <span class="desc">1Q27까지는 에너지·정제마진(디젤)·항공료·컴퓨터/메모리 가격 및 관세 시차 효과로 Core PCE 2.8~3.2% 유지 후 4Q27 2.4%(GS·Citi)~2.9%(SG)로 분화. AI 주식-장기금리 동조화 심화(WFS).</span>
+      <span class="desc">1Q27까지는 에너지·정제마진(디젤)·항공료·컴퓨터/메모리 가격 및 관세 시차 효과로 Core PCE 2.8~3.2%(JPM 3월 Core CPI 3.0% 피크) 유지 후 4Q27 2.4%(GS·Citi)~2.9%(SG)로 분화.</span>
     </li>
     <li>
       <span class="t">미국채 금리 경로</span>
-      <span class="b">1Q27 고비 후 강세(SG 4.25% · GS 4.60% · ING 4.63% · WFS 4.85%) vs 5.00% 보합 대립</span>
-      <span class="desc">SG(4.25%, 분점정부·유가 $80 하락·AI 헤지)·GS(4.60%)·ING(4.63%)·WFS(4.85%)는 듀레이션 강세를, Citi(5.00% 고정)·Barclays(5.00%)·JPM은 저축풀 경쟁 및 높은 단기금리로 5%대 유지를 전망.</span>
+      <span class="b">1Q27 고점(JPM 5.10%·ING 5.35%) 후 반락(SG 4.25%·GS 4.60%·WFS 4.85%·JPM 4.95%) vs 5.00% 보합</span>
+      <span class="desc">JPM 채권전략(11/24)은 공식 분기 전망으로 <b>10Y 1Q27 5.10% → 2Q 5.05% → 3Q 5.00% → 4Q27 4.95% (2Y 4.90% → 4.60%)</b>를 제시하며 연준 마지막 인상 직후 완만한 금리 반락을 전망.</span>
     </li>
     <li>
       <span class="t">수급 & 커브 전략</span>
-      <span class="b">T-Bill 확대·장기물 바이백으로 듀레이션 부담 완화 · 2s10s 스팁(GS·WFS) vs 플랫(SG)</span>
-      <span class="desc">재무부 T-Bill 순발행 확대($845bn~$1.1조)와 장기물 바이백(총발행의 43%)으로 쿠폰 공급 부담 완화(WFS는 2H27 20·30년 경매 $3bn 감축 전망). GS·WFS는 2s10s 스티프너를, SG는 2s10s 플래트너를 추천.</span>
+      <span class="b">대민 장기국채 순공급 -$257bn 감소($1.04조, JPM) · 20·30Y 경매 유지(JPM) vs $3bn 감축(WFS)</span>
+      <span class="desc">2027년 장기채(>1Y) 전체 순공급은 -$419bn 감소한 $3.01조(장기 UST $1.29조→$1.04조, JPM). WFS는 2H27 20·30년 경매 $3bn 감축을 본 반면 JPM은 20·30년 경매 동결 및 국채 수급 불균형 확대를 전망.</span>
     </li>
   </ul>
 </section>
@@ -264,15 +264,15 @@ function toggleOutlookTheme() {
   <div class="panel">
     <dl class="kv">
       <dt>듀레이션 콜</dt>
-      <dd><b>SG(매수/YE27 <span class="num">4.25%</span>, 최강세)</b>: 미 중간선거 분점정부(추가 재정 차단) + 이란전 출구 압력(유가 <span class="num">$101→$80</span>) + AI 투자 리스크 헤지로 국채 비중 <span class="num">+8%p</span> 확대(10Y UST <span class="num">+4%p</span>, TIPS <span class="num">+2%p</span>) · <b>GS(매수/YE27 <span class="num">4.60%</span>)</b>: 높은 시작 금리 버퍼 + 도비시 연준 · <b>WFS(1Q 신중 → 2Q+ 강세/YE27 <span class="num">4.85%</span>)</b>: 1Q27 연초 물가 통과 후 매수 · <b>ING(1Q 관망 → 2H 매수/YE27 <span class="num">4.63%</span>)</b>: 1Q <span class="num">5.25~5.50%</span> 고점 확인 후 매수 · <b>Citi·Barclays·JPM(중립/YE27 <span class="num">5.00%</span>)</b>: 글로벌 저축풀 부족·높은 중립금리로 10Y <span class="num">5.00%</span> 횡보</dd>
+      <dd><b>SG(매수/YE27 <span class="num">4.25%</span>, 최강세)</b>: 미 중간선거 분점정부(추가 재정 차단) + 이란전 출구 압력(유가 <span class="num">$101→$80</span>) + AI 투자 리스크 헤지로 국채 비중 <span class="num">+8%p</span> 확대 · <b>GS(매수/YE27 <span class="num">4.60%</span>)</b>: 높은 시작 금리 버퍼 + 도비시 연준 · <b>ING(1Q 관망 → 2H 매수/YE27 <span class="num">4.63%</span>)</b> · <b>WFS(1Q 신중 → 2Q+ 강세/YE27 <span class="num">4.85%</span>)</b> · <b>JPM(1Q27 <span class="num">5.10%</span> 소폭 상승 → 4Q27 <span class="num">4.95%</span> 완만한 반락)</b>: 과거 긴축 사이클(99·04·16·22·26.9월) 분석상 금리 상승의 대부분은 첫 인상 전후에 이미 반영됨 · <b>Citi·Barclays(중립/YE27 <span class="num">5.00%</span>)</b></dd>
       <dt>커브 포지션</dt>
-      <dd><b>2s10s 스티프너(GS·WFS·Barc) vs 2s10s 플래트너(SG)</b>: <b>WFS</b>는 1Q27까지 2s10s가 26년 저점 아래로 플래트닝된 뒤 2Q27부터 <b>2s10s(+50bp)·5s30s 스티프너</b> 전환 권고 · <b>GS·Citi</b>는 캐리·롤다운이 우수한 <b>5Y(Belly) 매수</b> 선호 · <b>Barclays</b>는 <b>1y-forward 2s10s SOFR 스티프너</b> 추천 · 반면 <b>SG</b>는 연준이 <span class="num">4.38%</span>에서 동결하는 동안 성장·유가 둔화로 10Y가 <span class="num">4.25%</span>까지 빠져 <b>US 2s10s 플래트너</b>가 유리하다고 분석</dd>
+      <dd><b>JPM(전천후 2s5s 플래트너 + 2s5s10s 벨리 리치닝 플라이)</b>: <b>JPM</b>은 추가 인상 리스크와 동결 전환 모두에서 유리한 <b>전천후(All-weather) 2s5s 플래트너</b>와 5년 구간을 매수하는 <b>2s5s10s 벨리 플라이</b>를 핵심 추천(4Q27 2Y <span class="num">4.60%</span>, 5Y <span class="num">4.75%</span>, 10Y <span class="num">4.95%</span>로 2s10s <span class="num">+35bp</span>) · <b>WFS</b>는 1Q27까지 2s10s 플랫 후 2Q27부터 <b>2s10s(+50bp)·5s30s 스티프너</b> 전환 · <b>GS·Citi</b>는 <b>5Y(Belly) 매수</b> 선호 · <b>Barclays</b>는 <b>1y-forward 2s10s SOFR 스티프너</b> · <b>SG</b>는 <b>US 2s10s 플래트너</b> 추천</dd>
       <dt>물가채 (TIPS)</dt>
-      <dd><b>GS·SG(10Y TIPS 매수)</b>: 2026년 금리 상승의 100%(5y5y 기준)가 실질금리 급등으로 나타나 실질금리(~<span class="num">3.0%</span>)가 정점에 도달했다고 판단(SG는 멀티에셋 내 US TIPS 비중을 <span class="num">5% → 7%</span>로 확대) · <b>Barclays(2Y BEI 에너지 헤지 매수 & Off-the-run 5Y TIPS 스프레드 확대)</b></dd>
+      <dd><b>JPM(1Q27 인플레이션 스왑 매도 · 10Y BEI <span class="num">210bp</span> 전망) vs GS·SG(10Y TIPS 매수)</b>: <b>JPM</b>은 연준의 추가 인상으로 인플레 리스크 프리미엄이 축소되며 1H27 5Y BEI가 좁혀지고 10Y BEI가 <span class="num">210bp</span> 부근에서 등락할 것으로 전망하되, 국채 내 TIPS 발행 비중 축소가 현물 TIPS를 지지하므로 <b>현물 BEI 대신 1Q27 인플레이션 스왑 매도(Short inflation swaps)</b>를 권고. 반면 <b>GS·SG</b>는 실질금리(~<span class="num">3.0%</span>) 정점 도달을 근거로 10Y TIPS 매수 추천</dd>
       <dt>스왑스프레드·머니마켓</dt>
-      <dd><b>WFS(20Y·30Y 스왑스프레드 사상 최고치 확대 vs ING 10Y·30Y 축소/국채 약세 대립)</b>: WFS는 2H27 재무부의 <b>20·30년 경매 $3bn 축소</b> + <b>장기물 바이백(총발행의 43%)</b> + 은행 규제 완화(eSLR/G-SIB)로 초장기 스왑스프레드(국채 강세)가 신고점을 경신하고, <b>27년 10월 부채한도 X-date(SG는 3월 $41.1조 한도 도달 추산)</b> 직전 T-Bill 감축으로 2Y 스왑스프레드가 타이튼될 것으로 전망. 반면 <b>ING</b>는 스왑스프레드 역전(국채 약세)에 베팅</dd>
+      <dd><b>JPM(단기·중기 스왑스프레드 확대 vs 장기 스왑스프레드 커브 플래트너 &amp; 3월 SOFR/FF 베이시스 확대)</b>: <b>JPM</b>은 규제 완화와 캐리 매력이 집중된 <b>단기·중기(Front/Intermediate) 스왑스프레드 와이드너</b>가 위험조정 캐리 최고 전략이며, 리스크오프 헤지용으로는 <b>장기 스왑스프레드 커브 플래트너</b>가 유리하다고 제시. 또한 <b>2월 말 부채한도($41.1조) 봉착 → 1H27 T-Bill 순상환·지준 증가($3.51조) → 11월 X-date</b> 경로에 따라 <b>3월물 SOFR/FF 베이시스(`SERFFH7`, 현재 -3bp) 확대</b> 및 <b>1H27 에이전시 할인채(DN) 대비 T-Bill 매수</b> 추천 (<b>WFS</b>는 20·30Y 스왑스프레드 신고점 확대, <b>ING</b>는 10·30Y 축소 베팅)</dd>
       <dt>변동성 & AI 헤지</dt>
-      <dd><b>SG(Long 10Y UST + 하이퍼스케일러 CDS 매수)</b>: 데이터센터 건설 지연(중간선거 주민투표 47건 중 46건 반대)·잉여현금흐름(FCF) 적자 전환·부외부채 급증에 대비해 10Y UST와 하이퍼스케일러 CDS 바스켓 매수 권고 · <b>GS(6m~1y 만기 2y~5y 저행사가 리시버)</b> · <b>Barclays(6m1y 1x1.5 페이어 스프레드)</b></dd>
+      <dd><b>JPM(좌상단[Upper-left] 변동성 비중확대 vs 우상단[Upper-right] 비중축소)</b>: 연준 정책경로 불확실성으로 단기물 변동성이 장기물 대비 아웃퍼폼 전망 · <b>SG(Long 10Y UST + 하이퍼스케일러 CDS 매수)</b> · <b>GS(6m~1y 만기 2y~5y 저행사가 리시버)</b> · <b>Barclays(6m1y 1x1.5 페이어 스프레드)</b></dd>
     </dl>
   </div>
 </section>
@@ -284,7 +284,7 @@ function toggleOutlookTheme() {
       <div class="seg" role="group" aria-label="차트 지표 선택">
         <button type="button" id="tab10" aria-pressed="true">UST 10년 금리 경로</button>
         <button type="button" id="tabFed" aria-pressed="false">Fed 기준금리(상단) 경로</button>
-        <button type="button" id="tabCurve" aria-pressed="false">UST 만기별 커브 (GS · WFS vs 현재)</button>
+        <button type="button" id="tabCurve" aria-pressed="false">UST 만기별 커브 (GS · WFS · JPM vs 현재)</button>
       </div>
       <div class="legend" id="chartLegend"></div>
     </div>
@@ -295,7 +295,7 @@ function toggleOutlookTheme() {
 
 <section>
   <h2>하우스별 매크로 & 미국채 전망 총괄표</h2>
-  <p class="sec-sub">현재 폴더에 수록된 해외 주요 IB 8곳(12개 리포트) 기준 · 4Q27 UST 10Y 강세 순 정렬</p>
+  <p class="sec-sub">현재 폴더에 수록된 해외 주요 IB 8곳(13개 리포트) 기준 · 4Q27 UST 10Y 강세 순 정렬</p>
   <div class="tablebox">
     <table>
       <thead>
@@ -503,55 +503,55 @@ function toggleOutlookTheme() {
   <h2>미국채(UST) 및 달러 채권 수급 심층 분석</h2>
   <div class="grid2">
     <div class="panel">
-      <h3>미 재무부 발행: “T-Bill 확대 + 장기물 바이백 + 2H27 초장기 감축(WFS)”</h3>
+      <h3>미 재무부 발행: “장기 국채 순공급 -$257bn 감소($1.04조, JPM) · 20·30Y 경매 동결(JPM) vs 감축(WFS)”</h3>
       <dl class="kv">
         <dt>핵심 구조 변화</dt>
-        <dd>2027년 재정적자($2.0~2.2조) 조달은 막대하나, <b>T-Bill 순발행 확대($845bn~$1.1조)</b>와 <b>장기물 바이백 3배 증액</b>을 통해 민간이 흡수해야 할 <b>10년물 환산 듀레이션 공급은 전년 대비 20% 감소</b>($781bn → $620bn, Barclays).</dd>
+        <dd>2027년 재정적자($2.0~2.2조, 대민 총차입 $2.2조)는 막대하나, <b>T-Bill 순발행 확대($845bn~$1.16조)</b>와 <b>장기물 바이백 3배 증액</b>을 통해 <b>연준 매입 차감 후 장기 국채(&gt;1Y) 순발행은 26년 $1,293bn → 27년 $1,036bn(-$257bn, -20%)으로 감소</b>(JPM Fig 14)하고, 10년 환산 듀레이션 공급도 -20% 축소($781bn → $620bn, Barclays).</dd>
         <dt>쿠폰채 vs T-Bill</dt>
-        <dd><b>Barclays·GS 추산</b>: 이표채(Coupon) 대민 순발행은 26년 ~$1.2조 → 27년 <b>$1.03~1.10조(-10~14%)</b>로 감소하고 T-Bill 비중이 <b>23.1% → 25.0%</b>로 상승.<br><b>WFS 추산</b>: 2027년 <b>T-Bill 순발행이 $1.1조</b>에 달하며, 특히 <b>2027년 10월로 예상되는 부채한도 X-date</b> 전후로 1Q27과 4Q27에 T-Bill 발행이 집중될 전망.</dd>
-        <dt>8월 리펀딩 & 초장기 감축</dt>
-        <dd><b>GS·Barclays·WFS 공통</b>: 2027년 8월 리펀딩부터 <b>2년~10년물 이표채 경매 증액</b> 재개 전망.<br><b>WFS의 차별화된 콜</b>: 재무부가 장기 조달비용 절감을 위해 <b>2027년 하반기 중 20년물과 30년물 경매 규모를 각각 $3bn씩 전격 감축</b>할 것으로 전망!</dd>
+        <dd><b>JPM·Barclays·GS 추산</b>: 이표채(Coupon) 대민 순발행은 26년 ~$1.2~1.29조 → 27년 <b>$1.03~1.10조(-10~20%)</b>로 감소하고 T-Bill 비중이 <b>23.1% → 25.0%</b>로 상승. 미국 장기 채권(&gt;1Y) 전체 순발행 역시 국채 감소에 힘입어 <b>$3.43조 → $3.01조(-$419bn, -12%)</b>로 둔화(JPM).<br><b>WFS 추산</b>: 2027년 <b>T-Bill 순발행이 $1.1조</b>에 달하며 1Q27과 4Q27에 T-Bill 발행이 집중될 전망.</dd>
+        <dt>8월 리펀딩 &amp; 20·30Y 논쟁</dt>
+        <dd><b>GS·Barclays·WFS·JPM 공통</b>: 2027년 8월 리펀딩까지는 명목 이표채 경매 규모 동결 후 8월부터 증액 재개 전망.<br><b>JPM vs WFS 초장기 경매 대립</b>: <b>WFS</b>는 2H27 중 <b>20년·30년물 경매 규모를 각각 $3bn씩 전격 감축</b>할 것으로 본 반면, <b>JPM(Jay Barry)</b>은 8월 리펀딩 증액 시에도 <b>20년물과 30년물 경매 규모는 동결(Unchanged)</b>될 것으로 전망!</dd>
         <dt>장기물 바이백 위력</dt>
         <dd>유동성 지원 바이백 한도가 회당 $2bn → <b>$6bn(분기 $32bn, 연간 총 바이백 $431bn)</b>으로 3배 확대(Barclays). <b>WFS 분석</b>에 따르면 현재 10년~30년 구간 바이백 규모가 <b>해당 구간 국채 총발행(Gross issuance)의 무려 43%</b>에 달해 초장기 수급을 강력하게 지지.</dd>
       </dl>
     </div>
 
     <div class="panel">
-      <h3>은행 국채 매수 · 부채한도($41.1조) · AI 회사채 수급</h3>
+      <h3>2027 미국채 주체별 수요(JPM) · 부채한도($41.1조) · 워시 연준 대차대조표 TF</h3>
       <dl class="kv">
-        <dt>부채한도 & 2Y 스프레드</dt>
-        <dd><b>2027.3월 $41.1조 부채한도 도달 (SG·GS·WFS)</b>: <b>SG</b>는 미 재무부가 <b>2027년 3월경 $41.1조 법정 부채한도에 도달</b>하며 달러 약세(Peak USD)와 금($5,000/oz) 강세의 촉매가 될 것으로 분석. GS는 1Q27 TGA 방출(-$400bn)로 SOFR가 -4bp 하락한 뒤 타결 후 급등하는 변동성을 경고하며, <b>WFS</b>는 <b>10월 X-date 직전 63일 동안 2Y 스왑스프레드가 중간값 -4.7bp 타이튼(국채 강세)</b>될 것으로 전망.</dd>
-        <dt>은행 규제 완화 & 수요</dt>
-        <dd><b>미국 은행권 수요 복귀 (WFS)</b>: 미국 상업은행들이 2026년 들어 이미 <b>국채 보유량을 +$160bn 확대</b>했으며, <b>eSLR(보완적 레버리지비율) 및 G-SIB 자본규제 완화</b>로 2027년 벨리(5~10년) 구간 국채 매수 및 딜러 대차대조표 여력이 한층 확대될 전망. 연준 또한 2Q27부터 <b>월 $25bn 지준관리매입(RMP)</b>으로 T-Bill을 흡수(GS).</dd>
-        <dt>AI 회사채 & 부외부채</dt>
-        <dd><b>WFS IG 신디케이트 vs Barclays·SG 추산</b>: 2027년 미국 IG 총발행은 <b>WFS $2.25조</b>(Barclays $2.10조)로 사상 최대이며, 이 중 <b>하이퍼스케일러 발행이 26년 $230bn → 27년 ~$250bn</b>에 달하고 빅5 딜의 평균 만기가 장기화(WFS). <b>SG·ECB 금융안정보고서</b>는 하이퍼스케일러의 부외금융(Off-balance-sheet) 및 순환 출자 구조에 따른 레버리지 누적을 경고하며 <b>하이퍼스케일러 CDS 매수</b>를 추천.</dd>
-        <dt>MBS·유동화 축소</dt>
-        <dd><b>Securitized 순발행 -22% 감소 ($548bn → $426bn, Barclays)</b>: 7%대 모기지 금리와 은행 직접보유 확대로 2H27 에이전시 MBS 순공급이 제로(0) 수준으로 급감해 채권시장 전체 듀레이션 부담을 상쇄.</dd>
+        <dt>부채한도 &amp; 머니마켓</dt>
+        <dd><b>2027.2월 말 $41.1조 부채한도 봉착 → 11월 X-date (JPM·SG·WFS)</b>: <b>JPM(11/24)</b>은 미 재무부가 11/16 기준 법정 부채한도($41.1조)까지 $640bn만을 남겨두어 <b>2027년 2월 말 부채한도가 구속력을 발휘(특별조치 $600bn + TGA $900bn)</b>하고 <b>X-date는 2027년 11월(WFS는 10월)</b>이 될 것으로 추산. 이 과정에서 1H27 T-Bill 순상환 및 TGA 방출(3월 $700bn → 9월 $300bn)로 <b>은행 지준이 3월 $3.16조 → 9월 $3.51조로 오히려 증가</b>해 상반기 자금시장이 풍부해질 전망(<b>3월 SOFR/FF 베이시스 `SERFFH7` 확대 &amp; 1H27 T-Bill &gt; Agency DN 선호</b>).</dd>
+        <dt>워시 의장 B/S 축소 TF</dt>
+        <dd><b>연준 대차대조표($6.81조) 축소 한계는 최대 $0.5~1.0조 (JPM)</b>: 케빈 워시 의장이 대차대조표 축소 TF를 가동 중이나, <b>JPM</b>은 지준 수요를 줄이려면 <b>① LCR(유동성커버리지비율) 개편 ② 재할인창구 낙인효과 해소 ③ 연준 상설레포(SRP) 중앙청산 ④ 지준 차등부리(Tiering)</b>가 선행되어야 하며, 이를 감안해도 대차대조표 축소는 <b>장기간에 걸쳐 최대 $500bn~$1조</b>에 그칠 것으로 분석(서베이 응답자의 39%는 27년 중 조치 없음, 27%는 LCR 개편 예상). <b>2027년 연준의 국채 수요는 $180bn(전액 MBS 상환금의 T-Bill 재투자, 1H27 RMP 불필요)</b>으로 추산.</dd>
+        <dt>2027 주체별 국채 수요</dt>
+        <dd><b>JPM 2027 UST 수요 추정 (Fig 15)</b>: 가격 비탄력적 매수 주체(연준+외국인+은행, 과거 66%) 비중이 급감한 가운데, 2027년 주체별 국채 순매수는 <b>① 외국인 $550bn</b>(26년 월 $88bn 미국 채권 매수 중 국채 월 $40bn·회사채 월 $40bn·MBS 월 $7bn; 27년 엔화 조달 민간 수요는 둔화되나 해외 외환보유고의 T-Bill 재비축 유입) <b>② MMF $250bn</b>(전액 T-Bill, AUM +$500bn/+6% 증가) <b>③ 연준 $180bn</b>(T-Bill) <b>④ 미국 은행 $100bn + MBS $50bn</b>(예금 +$840bn 증가분 중 일부; 26년 국채 -$32bn 순매도에서 순매수 전환, WFS는 eSLR 완화 수혜 강조) <b>⑤ 연기금·보험 $100bn</b>(단, 26년 P-STRIPS 스트리핑은 연율 $45bn으로 22년 이후 최저) 및 <b>채권형 펀드</b>(26년 YTD +$579bn/+11%로 2012년 이후 최대 유입)가 흡수할 전망.</dd>
+        <dt>MBS·크레딧 수급</dt>
+        <dd><b>2026년 US IG 시장 규모가 1986년 이후 최초로 Agency MBS 추월 (JPM)</b>: 2027년 Agency MBS 순공급은 $290bn(오가닉 $110bn + 연준 런오프 $175bn, JPM; Barclays는 2H27 순공급 ~0), US IG 순공급은 $966bn(EM 제외, JULI 전체는 총발행 $2.1조 / 순발행 $1.064조 / 쿠폰 차감 Net-Net $508bn)으로 **국채 수급 불균형은 확대되는 반면 크레딧 등 스프레드 섹터의 기술적 수급은 한층 개선**될 전망(JPM).</dd>
       </dl>
     </div>
   </div>
 
   <div class="panel">
     <h3>미국채 수급 & 크레딧 시장에 대한 하우스 간 시각 차이</h3>
-    <p class="consensus"><b>공통 인식</b> 2027년 미 재무부의 이표채(Coupon) 순공급과 듀레이션 부담은 T-Bill 활용 및 바이백 확대로 2026년보다 완화(2027년 8월 리펀딩부터 2~10년물 증액 시작). 다만 <b>초장기 스왑스프레드 방향성·글로벌 저축풀 압박·AI 회사채 구축효과</b>를 두고는 해석이 뚜렷하게 갈림.</p>
+    <p class="consensus"><b>공통 인식</b> 2027년 미 재무부의 이표채(Coupon) 순공급($1.04~1.10조)과 듀레이션 부담은 T-Bill 활용 및 바이백 확대로 2026년보다 약 20% 완화(2027년 8월 리펀딩부터 이표채 증액 시작). 다만 <b>20·30Y 경매 감축 여부(WFS vs JPM)·스왑스프레드 방향성·국채 vs 크레딧 상대 수급</b>을 두고는 해석이 뚜렷하게 갈림.</p>
     <div class="scroll">
       <table class="dt">
         <thead><tr><th>핵심 쟁점</th><th class="pos">우호적 / 수급 안정 시각</th><th class="neg">신중한 / 수급 경계 시각</th></tr></thead>
         <tbody>
           <tr>
             <td>국채 듀레이션 & 초장기 공급</td>
-            <td>10년 환산 듀레이션 공급 <b>-20% 감소($781bn→$620bn)</b> (Barclays) · 10~30Y 바이백이 총발행의 <b>43%</b>에 달하고 <b>2H27 20Y·30Y 경매 $3bn 감축</b> 전망 (WFS) · 중간선거 분점정부로 추가 재정팽창 차단 (SG)</td>
-            <td>미국 국채($2조+) + 비미국 국채($1조+) + AI Capex($3.5조)가 <b>글로벌 저축풀을 압박</b>해 연준 인하에도 10Y 5.0% 고착 (Citi) · T-Bill 단기조달 의존이 고금리의 이자비용 전이를 가속화 (MS)</td>
+            <td>연준 차감 장기국채 순공급 <b>-$257bn 감소($1,293bn→$1,036bn)</b> (JPM) · 10년 환산 듀레이션 공급 <b>-20% 감소($781bn→$620bn)</b> (Barclays) · 10~30Y 바이백이 총발행의 <b>43%</b>에 달하고 <b>2H27 20Y·30Y 경매 $3bn 감축</b> 전망 (WFS)</td>
+            <td><b>JPM은 20Y·30Y 경매 동결 전망</b> 및 가격 비탄력적 수요(연준·외국인·은행) 감소와 P-STRIPS 스트리핑 둔화($45bn)로 <b>2027년 국채 시장의 수급 불균형은 오히려 확대</b>된다고 진단 · 글로벌 저축풀 압박으로 10Y 5.0% 고착 (Citi)</td>
           </tr>
           <tr>
-            <td>USD 스왑스프레드<br>(WFS vs ING 정면 대립)</td>
-            <td><b>WFS(20Y·30Y 스프레드 신고점 확대 = 국채 상대 강세)</b>: 장기 바이백(43%) + 2H27 20·30Y 경매 감축 + 은행 국채 매수(+$160bn) 및 eSLR 규제 완화가 초장기 국채 수급을 지지 (1H27 벨리도 우호적)</td>
+            <td>USD 스왑스프레드<br>(WFS·JPM vs ING)</td>
+            <td><b>JPM(단기·중기 스왑스프레드 확대가 최고 캐리 전략, 장기 스왑스프레드 커브 플래트너로 리스크오프 헤지)</b> · <b>WFS(20Y·30Y 스프레드 신고점 확대 = 국채 상대 강세)</b>: 장기 바이백(43%) + 은행 규제 완화가 지지</td>
             <td><b>ING(10Y·30Y 스프레드 축소/역전 = 국채 상대 약세)</b>: 베센트 장관의 바이백에 기댄 패스트머니 포지션이 과도하게 쏠려 있어, 재정적자 현실화 시 1Q27 중 국채가 스왑 대비 약세로 되돌릴 것</td>
           </tr>
           <tr>
             <td>AI 회사채와 구축효과</td>
-            <td>AI 조달이 데이터센터·칩 파이낸싱(1~5년 단기)·사모·선수금으로 분산되어 10년+ IG 발행은 +5%에 불과, 듀레이션 발작 요인 아님 (Barclays)</td>
-            <td>27년 IG 총발행 <b>$2.25조(하이퍼스케일러 $250bn)</b> 및 만기 장기화 (WFS) · 누적 AI 부채의 <b>구축효과(Crowding-out)</b> 경계 (ING·Citi) · FCF 적자 전환 및 부외부채 위험에 대비해 <b>하이퍼스케일러 CDS 매수</b> (SG)</td>
+            <td><b>JPM(국채보다 IG 크레딧·스프레드 섹터 수급이 우월 — HG 109→90bp 축소)</b>: 7.1% 기대수익률이 AUM의 9%에 달하는 사상 최대 리테일 자금 유입을 견인하며 쿠폰($556bn) 환류로 Net-Net 공급은 $508bn뿐 · 10Y+ 발행은 +5%에 불과 (Barclays)</td>
+            <td>27년 IG 총발행 <b>$2.15~2.40조</b> 사상 최대 (MS·WFS) · 누적 AI 부채의 <b>비AI 기업 구축효과(Crowding-out)</b>로 IG 105bp 확대 경계 (GS·ING) · FCF 적자 전환 및 부외부채 위험에 대비해 <b>하이퍼스케일러 CDS 매수</b> (SG)</td>
           </tr>
           <tr>
             <td>채권의 주식 헤지 기능</td>
@@ -571,8 +571,10 @@ function toggleOutlookTheme() {
 </section>
 
 <div class="notes">
-  <b>분석 대상 원문 리스트 (`C:\Users\Administrator\.gemini\antigravity\scratch\2027 outlook`) — 총 8개 하우스 / 12개 리포트</b>
+  <b>분석 대상 원문 리스트 (`C:\Users\Administrator\.gemini\antigravity\scratch\2027 outlook`) — 총 8개 하우스 / 13개 리포트</b>
   <ul>
+    <li><b>J.P. Morgan (Fixed Income Strategy)</b>: <i>US Fixed Income 2027 Outlook Overview: Don't call it a comeback</i> (2026.11.24, Jay Barry, Molly Herckis)</li>
+    <li><b>J.P. Morgan (Economics)</b>: <i>North America Economic Research — 2027 US Economic Outlook: After the AI High</i> (2026.11.19, Michael Feroli, Abiel Reinhart, Bennett Parrish, Tushar Komali)</li>
     <li><b>Société Générale (Multi-Asset & Rates)</b>: <i>Multi Asset Portfolio — US growth cools, keep equity exposure high, more bonds and less oil</i> (2026.11.20, Alain Bokobza, Adam Kurpiel, Charles De Boissezon, Phoenix Kalen, Wei Yao, Kit Juckes, Dr Mike Haigh)</li>
     <li><b>Société Générale (Economics)</b>: <i>Global Economic Outlook: Shortened sails, shifting winds</i> (2026.11.20, Wei Yao, Jan Groen, Michel Martinez, Michelle Lam, Anatoli Annenkov 외)</li>
     <li><b>Goldman Sachs (Rates)</b>: <i>2027 Global Rates Outlook: A Better Buffer</i> (2026.11.16, William Marshall, Simon Freycenet, Isabella Rosenberg, Friedrich Schaper, Loic Mathys)</li>
@@ -584,7 +586,6 @@ function toggleOutlookTheme() {
     <li><b>Barclays (Economics Weekly)</b>: <i>Global Economics Weekly: Grand Heft AI</i> (2026.11.20, Christian Keller, Marc Giannoni, Jonathan Millar, Pooja Sriram, Colin Johanson 외)</li>
     <li><b>ING</b>: <i>Rates Outlook 2027: The Good, the Bad and the Ugly</i> (2026.11, Padhraic Garvey, Benjamin Schroeder, Michiel Tukker)</li>
     <li><b>Morgan Stanley</b>: <i>Global Insight: 2027 Global Economic Outlook (Year Ahead)</i> (2026.11.15, Seth Carpenter, Michael Gapen, Sam Coffin, Diego Anzoategui 외)</li>
-    <li><b>J.P. Morgan</b>: <i>North America Economic Research — 2027 US Economic Outlook: After the AI High</i> (2026.11.19, Michael Feroli, Abiel Reinhart, Bennett Parrish, Tushar Komali)</li>
     <li><b>확장 안내</b>: 폴더에 추가 IB 리포트(BofA, DB, UBS, HSBC 등)가 업로드되면 상단 KPI 중간값, 인터랙티브 차트, 총괄표 및 하우스별 근거 카드에 즉시 통합 반영됩니다.</li>
   </ul>
 </div>
@@ -671,6 +672,24 @@ const HOUSES = [
     summary: "1Q27 2s10s 플랫 후 2Q+ 듀레이션 매수·스티프너 전환. 2H27 20·30Y 경매 $3bn 감축 및 초장기 스왑스프레드 신고점 전망"
   },
   {
+    id: "JPM",
+    name: "J.P. Morgan",
+    authors: "Jay Barry · Molly Herckis · Michael Feroli (11/19, 11/24)",
+    stance: "mix",
+    stanceLabel: "1Q 고점(5.10%) → 4Q 완만한 반락(4.95%)",
+    gdp27: "1.9% (4Q) / 2.2% (연간)",
+    pce27: "2.7% (4Q/4Q)",
+    fedPath: "12·1·3월 3회 인상(4.50~4.75%, 중간 4.63%) → 27년 동결 → 1H28 2회 인하(4.00~4.25%)",
+    fedQ: [4.00, 4.25, 4.75, 4.75, 4.75, 4.75, 4.50, 4.25, 4.25, 4.25],
+    q2: [4.90, 4.85, 4.75, 4.60],   // 공식 분기 전망 (Fig 4: 4Q26=4.80%)
+    q5: [4.95, 4.90, 4.85, 4.75],   // 공식 분기 전망 (Fig 4: 4Q26=4.85%)
+    q10: [5.10, 5.05, 5.00, 4.95],  // 공식 분기 전망 (Fig 4: 4Q26=5.00%)
+    q30: [5.40, 5.35, 5.35, 5.35],  // 공식 분기 전망 (Fig 4: 4Q26=5.35%, 20Y는 5.55→5.40%)
+    band10: [4.90, 5.15],
+    curve4Q: "+35bp (2s5s 플랫·5Y 벨리)",
+    summary: "1Q27 마지막 인상(4.75%)까지 10Y 5.10% 소폭 상승 후 동결기에 4.95%로 반락. 2s5s 플래트너·2s5s10s 벨리 플라이·단기/중기 스왑스프레드 확대 및 MBS 대비 IG 크레딧(90bp) 강력 선호"
+  },
+  {
     id: "CITI",
     name: "Citi",
     authors: "Nathan Sheets · Andrew Hollenhorst 외 (10/29)",
@@ -717,22 +736,6 @@ const HOUSES = [
     band10: null,
     curve4Q: "–",
     summary: "AI 투자·부유층 소비로 성장 견조, 디젤·PPI로 더딘 디스인플레. 실질 중립금리(r*) 1.5%로 상승"
-  },
-  {
-    id: "JPM",
-    name: "J.P. Morgan",
-    authors: "Michael Feroli · Abiel Reinhart 외 (11/19)",
-    stance: "bear",
-    stanceLabel: "약세~중립 (Fed 최고 4.75%)",
-    gdp27: "1.9% (4Q) / 2.2% (연간)",
-    pce27: "2.7% (4Q/4Q)",
-    fedPath: "12·1·3월 3회 인상(4.50~4.75%) → 27년 동결 → 1H28 2회 인하(4.00~4.25%)",
-    fedQ: [4.00, 4.25, 4.75, 4.75, 4.75, 4.75, 4.50, 4.25, 4.25, 4.25],
-    q2: null,
-    q10: null,
-    band10: [4.90, 5.30], // "do not anticipate much easing in 10Y over next year"
-    curve4Q: "플랫 후 스팁",
-    summary: "워시 의장의 가이던스 폐기로 1Q 물가(3.2%)에 반응해 4.75%까지 인상. 27년 10Y 금리 하락 여력 제한적"
   }
 ];
 
@@ -809,14 +812,14 @@ const WHY_DATA = {
     strat: "기본 시나리오상 Fed 2027년 말 4.375% 동결 · 4대 대안 시나리오(총수요 과열 시 Fed 5.625%, 유가 $125~150 스태그플레이션 시 5.125~5.375% 후 침체, AI 생산성 서프라이즈 시 4.375% 유지, AI 투자 급감 시 1.875% 인하)에 따른 양방향 테일 관리"
   },
   "JPM": {
-    quote: "“After the AI High & The Warsh of Times: 워시 체제 연준의 4.75% 인상과 쉽게 내려오지 않을 10년물 금리”",
+    quote: "“Don't Call It a Comeback & After the AI High: 1Q27 마지막 인상(4.75%)까지 10Y 5.10% 상승 후 연말 4.95% 완만한 반락 · 국채보다 크레딧(IG 90bp)이 우위”",
     points: [
-      "<b>AI 고점 통과와 소비·투자의 완만한 감속</b>: 하이퍼스케일러 Capex 증가율이 26년 +86% → 27년 +48%로 둔화되며 실질 설비투자 증가율도 10.0% → 8.3%로 감속. 지난 1년간 가계 부(Wealth)가 +$20.6조 폭증하며 저축률 하락을 통해 소비(2.6%)를 지탱했으나, 주가가 9,000선에 가지 않는 한 자산효과가 약화되고 OBBBA 감세 효과도 소멸해 27년 실질 소비는 1.7%, 실질 GDP(4Q/4Q)는 <b>1.9%(하반기 1.5~1.8% SAAR)</b>로 둔화.",
-      "<b>K자형 경제의 숨은 리스크와 노동소득분배율 사상 최저(53.0%)</b>: 고소득층 소비가 노동집약적 서비스에 집중되어 있어 증시 조정 시 고용 수요에 직접 타격을 줄 수 있음. 또한 AI 일자리 대체 우려(보스턴 연은 서베이 5%→10% 2배 증가)가 근로자의 임금 협상력을 약화시켜 생산성 향상(+2.5~2.7%)에도 노동소득분배율이 53.0%로 추락.",
-      "<b>신규 관세(301/232조)와 2.7% Core PCE</b>: 2월 대법원의 IEEPA 관세 무효화 이후 행정부가 11~12월 중 무역법 301·232조 관세(실효관세율 +3%p 복원)를 발표해 1H27 코어 물가에 +0.2%p를 추가할 전망. 에너지·메모리·관세 등 일시적 요인(+50bp)과 연초 잔여 계절성으로 <b>1Q27 Core PCE가 3.2% SAAR</b>에 달한 뒤 하반기 2.5%(연말 YoY 2.7%)로 둔화.",
-      "<b>케빈 워시(Warsh) 신임 연준 의장과 3회 연속 인상(4.50~4.75%)</b>: 워시 의장이 포워드 가이던스를 폐지하고 기자회견을 축소하며 2027년 FOMC 회의까지 축소. 시장을 설득할 정책 내러티브가 없는 상태에서 1Q27 물가가 높게 나오면 인플레 기대 안정을 위해 <b>12월·1월·3월 3회 연속 인상(상단 4.75%)</b>이 불가피. 이후 연말까지 동결 후 2028년 상반기 2회 인하(4.25%)."
+      "<b>공식 미국채 분기 금리 전망 (Fig 4, Jay Barry 11/24)</b>: 2026년 1y1y OIS가 +127bp 급등하며 10Y 적정가치를 +71bp 밀어 올렸으나, 과거 5차례 긴축 사이클(99·04·16·22·26.9월) 분석상 금리 상승과 플래트닝의 대부분은 첫 인상 전후에 이미 달성됨. 이에 따라 <b>UST 10Y는 `4Q26 5.00% → 1Q27 5.10% → 2Q27 5.05% → 3Q27 5.00% → 4Q27 4.95%`</b>로 1Q27 소폭 상승 후 연준 동결기에 완만히 반락할 전망(<b>2Y `4.80→4.90→4.85→4.75→4.60%`, 5Y `4.85→4.95→4.90→4.85→4.75%`, 20Y `5.45→5.55→5.50→5.45→5.40%`, 30Y `5.35→5.40→5.35→5.35→5.35%`</b>).",
+      "<b>워시 체제 연준의 3회 연속 인상(4.50~4.75%)과 대차대조표 TF</b>: 워시 의장이 포워드 가이던스를 폐지한 가운데 1Q27 물가(Core PCE 3.2% SAAR, 3월 Core CPI 3.0% 피크)에 대응해 <b>12·1·3월 3회 연속 인상(상단 4.75%)</b> 후 연말까지 동결(1H28 2회 인하). 워시 의장의 대차대조표 축소 TF는 <b>LCR 유동성 규제 개편·재할인창구 활성화·SRP 중앙청산·지준 차등부리</b>를 모색 중이나 실제 축소 한계는 <b>최대 $500bn~$1조</b>에 불과(27년 연준 국채 수요는 MBS 상환 재투자 <b>T-Bill $180bn</b>, 1H27 RMP 불필요).",
+      "<b>2월 말 부채한도($41.1조) 봉착 → 11월 X-date & 국채 수급 불균형</b>: 2027년 2월 말 $41.1조 법정 부채한도가 바인딩되며 1H27 T-Bill 순상환 및 TGA 방출(9월 $300bn)로 지준이 $3.51조까지 증가해 상반기 자금시장이 완화될 전망. 27년 장기 국채(>1Y) 순공급은 $1,293bn→<b>$1,036bn(-$257bn)</b>으로 줄고 8월 리펀딩 전까지 이표채 경매가 동결되나(<b>20Y·30Y 경매는 8월 이후에도 동결 전망 — WFS의 $3bn 감축 콜과 대립</b>), 가격 비탄력적 수요 감소(연준 $180bn·외국인 $550bn·은행 $100bn·연기금 $100bn·MMF $250bn)로 국채 수급 불균형은 확대.",
+      "<b>크레딧 & 섹터 상대가치: 왜 MBS보다 IG 회사채(109→90bp)인가?</b>: 2026년 US IG 시장 규모가 <b>1986년 이후 40년 만에 처음으로 Agency MBS를 추월</b>. 콜옵션(OAS)과 부도위험(CDS) 조정 시 IG가 MBS보다 저렴하며 <b>3개월 듀레이션 헤지 캐리+롤다운도 IG(33bp)가 MBS(13bp)를 압도</b>. 27년 JULI 총수익 7.1%와 사상 최대 리테일 유입(AUM의 9%)에 힘입어 <b>HG 스프레드는 109→90bp(-19bp), HY는 399→365bp(-34bp, 부도율 2.75%), EM 소버린/기업은 185/170bp(-49/-53bp)</b>로 타이튼될 전망(반면 레버리지론은 부도·LME $70bn[+170%] 급증으로 525bp에 머물며 HY-Loan 역전 폭이 사상 최대인 160bp로 확대)."
     ],
-    strat: "Fed 최종금리 4.50~4.75% (외사 중 가장 매파적) · JPM 국채 전략팀은 2027년 중 UST 10년물 금리가 현 수준에서 크게 낮아지지 않을 것으로 전망하며, MBS 스프레드도 보합세를 유지해 모기지 등 차입금리가 2027년 내내 높은 수준을 유지할 것으로 판단"
+    strat: "금리: 전천후 2s5s 플래트너 & 2s5s10s 벨리 리치닝 플라이 · 단기/중기 스왑스프레드 확대(최고 위험조정 캐리) vs 장기 스왑스프레드 커브 플래트너(리스크오프 헤지) · 3월 SOFR/FF 베이시스(SERFFH7) 확대 & 1H27 T-Bill > Agency DN · 1Q27 인플레이션 스왑 매도(10Y BEI 210bp) · 좌상단(Upper-left) 변동성 OW · 섹터: IG 회사채(90bp) > Agency MBS(25bp, +4bp 확대·HPA 0%), 단기물은 ABS(30bp), 모기지 크레딧은 Non-QM(130bp), EM 채권 강세"
   }
 };
 
@@ -965,6 +968,7 @@ function drawUST10() {
         : h.id === "ING" ? " (1Q 고점 5.25~5.50% → 연말 4.50~4.75%)"
         : h.id === "GS" ? " (4Q28 4.30%)"
         : h.id === "WFS" ? " (2Y 4.35% · 30Y 5.30%)"
+        : h.id === "JPM" ? " (2Y 4.60% · 5Y 4.75% · 30Y 5.35%)"
         : h.id === "CITI" ? " (전 분기 5.00% 동결)" : "";
       s += `<text x="${maxRight}" y="${y + 4}" font-size="11.5" font-weight="600" fill="var(--fg)">${f2(q[0])}% → ${f2(q[3])}%<tspan fill="var(--muted)" font-weight="400">${extra}</tspan></text>`;
     } else if (h.band10) {
@@ -1030,14 +1034,15 @@ function drawFedPath() {
 function drawUSTCurve() {
   legendEl.innerHTML = `
     <span><i class="sw" style="background:var(--now)"></i>현재 (2026.11.16)</span>
-    <span><i class="sw" style="background:var(--bear)"></i>WFS 1Q27 전망</span>
+    <span><i class="sw" style="background:var(--bear)"></i>JPM 1Q27 전망 (2s10s +20bp)</span>
+    <span><i class="sw" style="background:var(--purple)"></i>JPM 4Q27 전망 (2s10s +35bp)</span>
     <span><i class="sw" style="background:var(--teal)"></i>WFS 4Q27 전망 (2s10s +50bp)</span>
     <span><i class="sw" style="background:var(--accent)"></i>GS 4Q27 전망 (2s10s +50bp)</span>
     <span><i class="sw" style="background:var(--bull)"></i>GS 4Q28 전망 (2s10s +70bp)</span>
   `;
-  noteEl.textContent = "※ Goldman Sachs & Wells Fargo 만기별(2Y·5Y·10Y·30Y) 수익률곡선 전망 비교 · 두 하우스 모두 4Q27 2s10s 스프레드를 +50bp(현재 +25bp)로 전망하며 불 스티프닝(Bull Steepening) 제시";
+  noteEl.textContent = "※ Goldman Sachs · Wells Fargo · J.P. Morgan 만기별(2Y·5Y·10Y·30Y) 수익률곡선 전망 비교 · JPM은 1Q27(4.90/4.95/5.10/5.40%) 고점 후 4Q27(4.60/4.75/4.95/5.35%, 20Y는 5.55→5.40%) 반락 전망";
 
-  const W = 940, L = 70, R = 195, T = 30, B = 40, Ht = 330;
+  const W = 940, L = 70, R = 195, T = 30, B = 40, Ht = 340;
   const tenors = ["UST 2Y", "UST 5Y", "UST 10Y", "UST 30Y"];
   const domY = [3.40, 5.65];
   const x = i => L + i / (tenors.length - 1) * (W - L - R);
@@ -1058,9 +1063,10 @@ function drawUSTCurve() {
   });
 
   const curves = [
-    { name: "현재 (2s10s +25bp)", data: [4.88, 4.97, 5.13, 5.46], col: "var(--now)", dash: "5 3", dy: -4, ly: -8 },
-    { name: "WFS 1Q27 (2s10s +45bp)", data: [4.55, 4.80, 5.00, 5.35], col: "var(--bear)", dash: "3 2", dy: 0, ly: -7 },
-    { name: "WFS 4Q27 (2s10s +50bp)", data: [4.35, 4.65, 4.85, 5.30], col: "var(--teal)", dash: "", dy: 8, ly: 14 },
+    { name: "현재 (2s10s +25bp)", data: [4.88, 4.97, 5.13, 5.46], col: "var(--now)", dash: "5 3", dy: -6, ly: -8 },
+    { name: "JPM 1Q27 (2s10s +20bp)", data: [4.90, 4.95, 5.10, 5.40], col: "var(--bear)", dash: "3 2", dy: 4, ly: 13 },
+    { name: "JPM 4Q27 (2s10s +35bp)", data: [4.60, 4.75, 4.95, 5.35], col: "var(--purple)", dash: "", dy: -3, ly: -7 },
+    { name: "WFS 4Q27 (2s10s +50bp)", data: [4.35, 4.65, 4.85, 5.30], col: "var(--teal)", dash: "", dy: 10, ly: 14 },
     { name: "GS 4Q27 (2s10s +50bp)", data: [4.10, 4.25, 4.60, 5.10], col: "var(--accent)", dash: "", dy: 4, ly: -8 },
     { name: "GS 4Q28 (2s10s +70bp)", data: [3.60, 3.85, 4.30, 4.80], col: "var(--bull)", dash: "", dy: 4, ly: -8 }
   ];
