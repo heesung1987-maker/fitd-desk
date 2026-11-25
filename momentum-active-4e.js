@@ -1,7 +1,7 @@
 import { getChartTheme } from './chart-utils.js?v=16';
 
 let a4Data = null;
-let selectedSetting = 'B'; // 'B' (Soft Hybrid default) | 'C' (Annual LoS) | 'A' (No DD Control)
+let selectedSetting = 'A'; // 'A' (Pure Vol-Targeting default) | 'B' (Soft Hybrid) | 'C' (Annual LoS)
 let sectionFilter = 'ALL'; // 'ALL' | 'LIVE' | 'PERF' | 'RULES' | 'AUDIT'
 let perfPeriod = '11Y'; // '11Y' | '26Y' | 'REGIMES'
 
@@ -114,27 +114,27 @@ function renderMonthlyEquitySvg(data, activeKey) {
 
   const mainArr = data.settings[activeKey].monthly_5y;
   const styles = {
-    B: { col: '#0d9488', lbl: '세팅 B · 소프트 하이브리드' },
-    C: { col: '#2563eb', lbl: '세팅 C · 연간 LoS 하드스탑' },
-    A: { col: '#94a3b8', lbl: '세팅 A · 제어 OFF' },
+    A: { col: '#0d9488', lbl: '세팅 A · 순수 변동성 타깃팅 (추천)' },
+    B: { col: '#2563eb', lbl: '세팅 B · 소프트 하이브리드' },
+    C: { col: '#94a3b8', lbl: '세팅 C · 연간 LoS 하드스탑' },
   };
 
   return `<svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;display:block;" role="img" aria-label="최근 5년 누적 손익 곡선">
     <g transform="translate(${padL}, 18)" style="font-size:11.5px;font-weight:700;fill:${ink};">
-      <line x1="0" y1="-4" x2="20" y2="-4" stroke="${styles.B.col}" stroke-width="${activeKey === 'B' ? 3.2 : 1.8}" ${activeKey === 'B' ? '' : 'stroke-dasharray="5 3"'}/>
-      <text x="25" y="0" fill="${ink}">세팅 B (추천): ${fmtM(mB.at(-1)?.cum)}</text>
-      <line x1="290" y1="-4" x2="310" y2="-4" stroke="${styles.C.col}" stroke-width="${activeKey === 'C' ? 3.2 : 1.8}" ${activeKey === 'C' ? '' : 'stroke-dasharray="5 3"'}/>
-      <text x="315" y="0" fill="${ink}">세팅 C (연간LoS): ${fmtM(mC.at(-1)?.cum)}</text>
-      <line x1="600" y1="-4" x2="620" y2="-4" stroke="${styles.A.col}" stroke-width="${activeKey === 'A' ? 3.2 : 1.8}" ${activeKey === 'A' ? '' : 'stroke-dasharray="2 3"'}/>
-      <text x="625" y="0" fill="${ink}">세팅 A (무제어): ${fmtM(mA.at(-1)?.cum)}</text>
+      <line x1="0" y1="-4" x2="20" y2="-4" stroke="${styles.A.col}" stroke-width="${activeKey === 'A' ? 3.2 : 1.8}" ${activeKey === 'A' ? '' : 'stroke-dasharray="5 3"'}/>
+      <text x="25" y="0" fill="${ink}">세팅 A (추천·무제어): ${fmtM(mA.at(-1)?.cum)}</text>
+      <line x1="305" y1="-4" x2="325" y2="-4" stroke="${styles.B.col}" stroke-width="${activeKey === 'B' ? 3.2 : 1.8}" ${activeKey === 'B' ? '' : 'stroke-dasharray="5 3"'}/>
+      <text x="330" y="0" fill="${ink}">세팅 B (소프트감속): ${fmtM(mB.at(-1)?.cum)}</text>
+      <line x1="600" y1="-4" x2="620" y2="-4" stroke="${styles.C.col}" stroke-width="${activeKey === 'C' ? 3.2 : 1.8}" ${activeKey === 'C' ? '' : 'stroke-dasharray="2 3"'}/>
+      <text x="625" y="0" fill="${ink}">세팅 C (연간LoS): ${fmtM(mC.at(-1)?.cum)}</text>
     </g>
     ${ticks.map((tv) => `
       <line x1="${padL}" x2="${w - padR}" y1="${y(tv).toFixed(1)}" y2="${y(tv).toFixed(1)}" stroke="${ct.grid}" stroke-dasharray="3 3"/>
       <text x="${padL - 8}" y="${(y(tv) + 4).toFixed(1)}" text-anchor="end" fill="${ink}" font-size="11" font-weight="600">$${fmtNum(tv / 1e6, 1)}M</text>`).join('')}
     <line x1="${padL}" x2="${w - padR}" y1="${y(0).toFixed(1)}" y2="${y(0).toFixed(1)}" stroke="${ct.zero}" stroke-width="1.2"/>
-    <path d="${makePath(mA)}" fill="none" stroke="${styles.A.col}" stroke-width="${activeKey === 'A' ? 3.2 : 1.7}" ${activeKey === 'A' ? '' : 'stroke-dasharray="2 3"'}/>
-    <path d="${makePath(mC)}" fill="none" stroke="${styles.C.col}" stroke-width="${activeKey === 'C' ? 3.2 : 1.9}" ${activeKey === 'C' ? '' : 'stroke-dasharray="5 3"'}/>
+    <path d="${makePath(mC)}" fill="none" stroke="${styles.C.col}" stroke-width="${activeKey === 'C' ? 3.2 : 1.7}" ${activeKey === 'C' ? '' : 'stroke-dasharray="2 3"'}/>
     <path d="${makePath(mB)}" fill="none" stroke="${styles.B.col}" stroke-width="${activeKey === 'B' ? 3.2 : 1.9}" ${activeKey === 'B' ? '' : 'stroke-dasharray="5 3"'}/>
+    <path d="${makePath(mA)}" fill="none" stroke="${styles.A.col}" stroke-width="${activeKey === 'A' ? 3.2 : 1.9}" ${activeKey === 'A' ? '' : 'stroke-dasharray="5 3"'}/>
     ${mainArr.map((r, i) => `
       <circle cx="${x(i).toFixed(1)}" cy="${y(r.cum).toFixed(1)}" r="4.0" fill="${styles[activeKey].col}" opacity="0.88">
         <title>[${r.ym}] ${styles[activeKey].lbl}
@@ -251,7 +251,7 @@ function renderLiveNettingAndEngines(data, st) {
           독일 5년(OE) 완전 제외 · 현재 감속배수 <b>${sc.dd_scale}x</b> (YTD ${fmtUsd(sc.ytd_pnl)}, 고점대비 −$${fmtNum(sc.peak_dd)}) · 실효배수: ①금리 ${sc.eff_e1}x · ②커브 ${sc.eff_e2}x · ③FX4 ${sc.eff_e3}x · ④FX돌파 ${sc.eff_e4}x
         </p>
       </div>
-      <div>${pill(st.label, selectedSetting === 'B' ? 'green' : selectedSetting === 'C' ? 'blue' : 'neutral')}</div>
+      <div>${pill(st.label, selectedSetting === 'A' ? 'green' : selectedSetting === 'B' ? 'blue' : 'neutral')}</div>
     </div>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px;margin-top:12px;">
@@ -619,9 +619,9 @@ function renderRulebookSection(st) {
     </div>
 
     <div style="margin-top:14px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:rgba(13,148,136,0.05);font-size:12.5px;line-height:1.65;">
-      <b>공통 포트폴리오 결합 & 손절 감속 레이어 (추천: 세팅 B 소프트 하이브리드)</b><br>
-      1) <b>2단계 인과적 변동성 타깃팅</b>: 4개 엔진을 각각 최근 60일 변동성으로 정규화한 뒤 <b>30% : 15% : 45% : 10%</b>로 결합하고, 포트폴리오 전체 60일 변동성을 목표 연 변동성(세팅 B <b>$1.5M/yr</b>, 세팅 C <b>$1.6M/yr</b>, 세팅 A <b>$1.2M/yr</b>)에 맞춥니다.<br>
-      2) <b>세팅 B 소프트 하이브리드 감속</b>: ① 연간 손실(1월 1일 리셋, 한도 $95만) −$36만 → 0.65x, −$62만 → 0.35x, −$86만 → 당해 정지(0x), ② 다년 최고점 대비 −$80만 → 0.65x, −$120만 → 0.40x (완전 0x로 잠그지 않아 2025년 하반기 같은 대반등 회복 가능), ③ 정상 상태에서 올해 +$35만 이상 안전마진 확보 시 1.20x.<br>
+      <b>공통 포트폴리오 결합 & 리스크 관리 레이어 (기본 추천: 세팅 A · 감속/가속기 OFF)</b><br>
+      1) <b>2단계 인과적 변동성 타깃팅</b>: 4개 엔진을 각각 최근 60일 변동성으로 정규화한 뒤 <b>30% : 15% : 45% : 10%</b>로 결합하고, 포트폴리오 전체 60일 변동성을 목표 연 변동성(기본 세팅 A <b>$1.2M/yr</b>, 일간 1σ 약 $76k)에 일정하게 맞춥니다.<br>
+      2) <b>외부 감속·가속기를 끈 이유 (역박자 제거)</b>: 개별 거래 하드손절·트레일링 스탑 + 60일 변동성 타깃팅 + FX S4 매크로 브레이크만으로도 11.1년 최악 1년 손실이 −$958k 이내로 자연 통제됩니다. 인위적 계좌 감속·가속기(세팅 B/C)는 손실 직후 반등 수익을 깎고 고점 직후 1.2x로 맞을 위험이 있어 기본 모델에서는 제거했습니다(상단 버튼으로 B/C 비교 가능).<br>
       3) <b>엔진 간 순합(Netting)</b>: ①+②의 국채선물 계약수와 ③+④의 FX 통화별 명목을 매일 순합하여 차액만 거래소/은행간 시장에 집행합니다.
     </div>
   </div>`;
@@ -673,15 +673,15 @@ function renderAuditAndStressSection(data) {
           <thead>
             <tr>
               <th style="text-align:left;">조건</th>
-              <th style="text-align:right;">세팅 B (26Y / 11Y)</th>
-              <th style="text-align:right;">세팅 C (26Y / 11Y)</th>
+              <th style="text-align:right;">세팅 A · 무제어 (26Y / 11Y)</th>
+              <th style="text-align:right;">세팅 B · 소프트감속 (26Y / 11Y)</th>
             </tr>
           </thead>
           <tbody>
             ${data.stress_table.map((r, idx) => `<tr ${idx === 0 ? 'style="font-weight:700;"' : ''}>
               <td>${esc(r.label)}</td>
+              <td style="text-align:right;">${fmtK(r.a_26_ann)} (${r.a_26_shp}) / <b>${fmtK(r.a_11_ann)} (${r.a_11_shp})</b></td>
               <td style="text-align:right;">${fmtK(r.b_26_ann)} (${r.b_26_shp}) / <b>${fmtK(r.b_11_ann)} (${r.b_11_shp})</b></td>
-              <td style="text-align:right;">${fmtK(r.c_26_ann)} (${r.c_26_shp}) / <b>${fmtK(r.c_11_ann)} (${r.c_11_shp})</b></td>
             </tr>`).join('')}
           </tbody>
         </table>
@@ -770,7 +770,7 @@ function renderAuditAndStressSection(data) {
 }
 
 function drawView(target, data) {
-  const st = data.settings[selectedSetting] || data.settings.B;
+  const st = data.settings[selectedSetting] || data.settings.A;
   const s5 = st.summary_5y;
   const s11 = st.summary_11y;
   const s26 = st.summary_26y;
@@ -789,9 +789,9 @@ function drawView(target, data) {
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
         <span style="font-size:12px;font-weight:700;">운용 세팅:</span>
         <div class="segmented">
-          <button data-a4-setting="B" class="${selectedSetting === 'B' ? 'on' : ''}">세팅 B · 소프트 하이브리드 (추천)</button>
+          <button data-a4-setting="A" class="${selectedSetting === 'A' ? 'on' : ''}">세팅 A · 순수 변동성 타깃팅 (추천)</button>
+          <button data-a4-setting="B" class="${selectedSetting === 'B' ? 'on' : ''}">세팅 B · 소프트 하이브리드</button>
           <button data-a4-setting="C" class="${selectedSetting === 'C' ? 'on' : ''}">세팅 C · 연간 LoS 하드스탑</button>
-          <button data-a4-setting="A" class="${selectedSetting === 'A' ? 'on' : ''}">세팅 A · 제어 OFF</button>
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
