@@ -354,7 +354,7 @@ function renderLiveNettingAndEngines(data, st) {
     <div class="panel">
       <div class="panel-head">
         <h3>엔진 ② US/DE 커브·박스 스프레드 (비중 ${Math.round(st.weights[1] * 100)}%)</h3>
-        <span class="muted" style="font-size:11.5px;">변동성 중립 4스프레드 · 50D/8σ 청산</span>
+        <span class="muted" style="font-size:11.5px;">핵심 2스프레드 (US 2s10s · 미-독 2Y) · 50D/8σ 청산</span>
       </div>
       <div style="overflow-x:auto;">
         <table class="tbl" style="width:100%;font-variant-numeric:tabular-nums;font-size:12px;">
@@ -440,7 +440,7 @@ function renderLiveNettingAndEngines(data, st) {
     <div class="panel">
       <div class="panel-head">
         <h3>엔진 ④ FX 10→20일 추세돌파 (비중 ${Math.round(st.weights[3] * 100)}%)</h3>
-        <span class="muted" style="font-size:11.5px;">최대 5통화 · |Net USD|≤3 · 50D/7σ 청산</span>
+        <span class="muted" style="font-size:11.5px;">슬림 헤지 · 최대 3통화 · |Net USD|≤2 · 50D/7σ 청산</span>
       </div>
       <div style="overflow-x:auto;">
         <table class="tbl" style="width:100%;font-variant-numeric:tabular-nums;font-size:12px;">
@@ -596,10 +596,10 @@ function renderRulebookSection(st) {
         ['손절 · 청산', '조기 익절 없음. ① 누적손실 −1R (7σ₆₀) 하드손절, ② 최고가 대비 8σ₆₀ 샹들리에 트레일링, ③ 50일 반대 채널 돌파, ④ 보유방향 × CTA < −0.20 중 먼저 도달 시 전량 청산.'],
       ])}
 
-      ${card('엔진 ② US/DE 커브 · 국가간 박스 스프레드', pill(`비중 ${Math.round(st.weights[1] * 100)}%`, 'blue'), [
-        ['유니버스', '4개 변동성 중립 스프레드: 미국 2s10s (TY−TU), 독일 2s10s (RX−DU), 미-독 10Y (TY−RX), 미-독 2Y (TU−DU).'],
+      ${card('엔진 ② US 커브 · 미-독 2Y 스프레드', pill(`비중 ${Math.round(st.weights[1] * 100)}%`, 'blue'), [
+        ['유니버스', '장기 알파가 검증된 핵심 2개 변동성 중립 스프레드만 운용: ① 미국 2s10s (TY−TU, 26Y Shp +0.71), ② 미-독 2Y 정책금리 스프레드 (TU−DU, 26Y Shp +0.49). 알파가 미미했던 독일 2s10s·미-독 10Y는 제외.'],
         ['시그널 산출', '두 선물의 일간 가격변화를 전일 기준 60일 변동성(σ₆₀A, σ₆₀B)으로 각각 나눈 스프레드 지수 ΔS = ΔP_A/σ_A − ΔP_B/σ_B 를 누적한 뒤, 엔진 ①과 동일한 CTA W7 + 10/20/50일 채널 계산.'],
-        ['진입 · 레그분해', '4개 스프레드 독립 진입. 10일 돌파 + |CTA| ≥ 0.25 + 3/6주기 이상 동의 시 10→20일 분할 진입(7σ_S = 1R). 주문 시 레그 A/B로 분해하여 엔진 ① 계약수와 순합(Netting).'],
+        ['진입 · 레그분해', '2개 스프레드 독립 진입. 10일 돌파 + |CTA| ≥ 0.25 + 3/6주기 이상 동의 시 10→20일 분할 진입(7σ_S = 1R). 주문 시 레그 A/B로 분해하여 엔진 ① 계약수와 순합(Netting).'],
         ['손절 · 청산', '합성 스프레드 지수 기준 ① −1R (7σ_S) 하드손절, ② 8σ_S 트레일링 스탑, ③ 50일 반대 채널 돌파, ④ CTA < −0.20 반전.'],
       ])}
 
@@ -610,17 +610,17 @@ function renderRulebookSection(st) {
         ['익절 · 엄밀 손절', '① 익절(TP) |2F-Z| ≤ 0.2 당일 청산, ② 가격손실 ≤ −$20k(HC) 또는 |2F-Z| ≥ 4.0(SZ) 시 다음 영업일 종가 강제 손절 + 20일 쿨다운, ③ 20일 손실 시간컷(TF) + 20일 쿨다운, ④ 최대 45일(MH).'],
       ])}
 
-      ${card('엔진 ④ FX 10→20일 추세돌파 모멘텀', pill(`비중 ${Math.round(st.weights[3] * 100)}%`, 'green'), [
-        ['유니버스 · 역할', '10통화 대달러(EUR, GBP, AUD, NZD, CAD, JPY, CHF, BRL, MXN, KRW). 환율이 추세로 폭발해 엔진 ③(평균회귀)이 손절 맞을 때 정반대에서 수익을 내는 음(-)의 상관(−0.13) 자연 헤지 엔진.'],
-        ['시그널 · 진입', '각 통화 로그가격지수에 CTA W7 적용. 10일 돌파 + |CTA| ≥ 0.25 + 3/6주기 이상 동의 시 10→20일 분할 진입. 동시 최대 5통화, 순 달러 방향 |Net USD| ≤ 3 제한.'],
-        ['사이징 · 캐리', '6σ₆₀ 역행 = −1R이 되도록 명목금액 min($3.5M, 예산 / 6σ₆₀) 산출. 보유 중 실제 양국 금리차 스왑 캐리 매일 반영.'],
+      ${card('엔진 ④ FX 10→20일 추세돌파 모멘텀 (슬림 헤지)', pill(`비중 ${Math.round(st.weights[3] * 100)}%`, 'green'), [
+        ['유니버스 · 역할', '10통화 대달러(EUR, GBP, AUD, NZD, CAD, JPY, CHF, BRL, MXN, KRW). 환율이 추세로 폭발해 엔진 ③(평균회귀)이 손절 맞을 때 정반대에서 방어하는 보조 자연 헤지 엔진(비중 10% 슬림 운용).'],
+        ['시그널 · 진입', '각 통화 로그가격지수에 CTA W7 적용. 10일 돌파 + |CTA| ≥ 0.25 + 3/6주기 이상 동의 시 10→20일 분할 진입. 동시 최대 3통화, 순 달러 방향 |Net USD| ≤ 2 제한으로 FX 익스포저 과대 방지.'],
+        ['사이징 · 캐리', '6σ₆₀ 역행 = −1R이 되도록 명목금액 min($2.0M, 예산 / 6σ₆₀) 산출. 보유 중 실제 양국 금리차 스왑 캐리 매일 반영.'],
         ['손절 · 청산', '① 누적손실 −1R (6σ₆₀) 하드손절, ② 최고 유리 가격 대비 7σ₆₀ 샹들리에 트레일링, ③ 50일 반대 채널 돌파, ④ CTA < −0.20 반전.'],
       ])}
     </div>
 
     <div style="margin-top:14px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:rgba(13,148,136,0.05);font-size:12.5px;line-height:1.65;">
       <b>공통 포트폴리오 결합 & 손절 감속 레이어 (추천: 세팅 B 소프트 하이브리드)</b><br>
-      1) <b>2단계 인과적 변동성 타깃팅</b>: 4개 엔진을 각각 최근 60일 변동성으로 정규화한 뒤 <b>25% : 15% : 35% : 25%</b>로 결합하고, 포트폴리오 전체 60일 변동성을 목표 연 변동성(세팅 B <b>$1.5M/yr</b>, 세팅 C <b>$1.6M/yr</b>, 세팅 A <b>$1.2M/yr</b>)에 맞춥니다.<br>
+      1) <b>2단계 인과적 변동성 타깃팅</b>: 4개 엔진을 각각 최근 60일 변동성으로 정규화한 뒤 <b>30% : 15% : 45% : 10%</b>로 결합하고, 포트폴리오 전체 60일 변동성을 목표 연 변동성(세팅 B <b>$1.5M/yr</b>, 세팅 C <b>$1.6M/yr</b>, 세팅 A <b>$1.2M/yr</b>)에 맞춥니다.<br>
       2) <b>세팅 B 소프트 하이브리드 감속</b>: ① 연간 손실(1월 1일 리셋, 한도 $95만) −$36만 → 0.65x, −$62만 → 0.35x, −$86만 → 당해 정지(0x), ② 다년 최고점 대비 −$80만 → 0.65x, −$120만 → 0.40x (완전 0x로 잠그지 않아 2025년 하반기 같은 대반등 회복 가능), ③ 정상 상태에서 올해 +$35만 이상 안전마진 확보 시 1.20x.<br>
       3) <b>엔진 간 순합(Netting)</b>: ①+②의 국채선물 계약수와 ③+④의 FX 통화별 명목을 매일 순합하여 차액만 거래소/은행간 시장에 집행합니다.
     </div>
