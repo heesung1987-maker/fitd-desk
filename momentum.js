@@ -4,7 +4,7 @@ import { configureMomentumRecipe1Control, renderMomentumRecipe1Control } from '.
 import { renderMomentumFxV2Monthly } from './momentum-fx-v2-monthly.js?v=16';
 import { renderMomentumV35 } from './momentum-v35.js?v=17';
 import { renderMomentumRadarV3 } from './momentum-radar-v3.js?v=17';
-import { renderMomentumActive4e } from './momentum-active-4e.js?v=21';
+import { renderMomentumActive4e } from './momentum-active-4e.js?v=22';
 import { openHoldingDialog } from './holdings.js?v=16';
 import {
   renderRangeControls,
