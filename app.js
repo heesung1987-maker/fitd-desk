@@ -1,8 +1,8 @@
 import { PAIR_SORTS, sortPairs } from './pair-sort.js';
 import { configureTreasury, renderTreasury } from './treasury.js?v=16';
-import { configureMomentum, renderMomentum as renderMomentumView } from './momentum.js?v=18';
+import { configureMomentum, renderMomentum as renderMomentumView } from './momentum.js?v=19';
 import { configureHoldings, renderHoldings, openHoldingDialog } from './holdings.js?v=16';
-import { configureMomentumStrategy, renderMomentumStrategy } from './momentum-strategy.js?v=16';
+import { configureMomentumStrategy, renderMomentumStrategy } from './momentum-strategy.js?v=23';
 import {
   renderRangeControls,
   bindRangeControls,
@@ -53,7 +53,7 @@ let calendarFilter = 'UPCOMING';
 let state = null;
 let tab = location.hash.startsWith('#treasury')
   ? 'treasury'
-  : location.hash === '#mom-strategy' || location.hash === '#mom_strategy'
+  : location.hash === '#mom-strategy' || location.hash === '#mom_strategy' || location.hash === '#momentum/active-4e'
   ? 'mom_strategy'
   : location.hash === '#book'
   ? 'book'
@@ -268,6 +268,7 @@ async function api(path, body) {
   if (
     !body &&
     (reqPath.startsWith('/api/state') ||
+      reqPath.startsWith('/api/active-4e') ||
       reqPath.startsWith('/api/momentum-strategy') ||
       reqPath.startsWith('/api/momentum-cta') ||
       reqPath.startsWith('/api/cta-monitor')) &&
@@ -376,10 +377,10 @@ const titles = {
     'Relative Value',
   ],
   mom_strategy: [
-    'MOMENTUM STRATEGY & FX STRESS REGIME',
-    '모멘텀 전략',
-    'FX 스트레스 지수 기반 국면별 동적 파라미터 운용 · 국가 커브 대표 테너 DV01 배분 · 보유 포지션 규모 조정 및 포지션 모니터 연동',
-    'Momentum Strategy',
+    '4-ENGINE ACTIVE FICC · LIVE EXECUTION DESK',
+    '모멘텀 전략 (4엔진 풀액티브)',
+    'W4 확정본 (30/15/35/20 · Vol $0.8M/yr · 실BBG 2Y/3M캐리) 실시간 BBG 가격·청산선 모니터링 · 모델 vs 실보유 주문표 · 원클릭 포지션 등록 연동',
+    'Momentum Strategy · 4E Active',
   ],
   book: [
     'POSITION MONITOR',

@@ -219,6 +219,9 @@
           if (urlStr.indexOf('/api/recipe1-control') === 0) {
             return origFetch('./data/recipe1-control.json?' + ts, { cache: 'no-store' });
           }
+          if (urlStr.indexOf('/api/active-4e') === 0) {
+            return origFetch('./data/active-4e-' + modePref + '.json?' + ts, { cache: 'no-store' });
+          }
           if (urlStr.indexOf('/api/momentum-strategy') === 0) {
             return origFetch('./data/momentum-strategy.json?' + ts, { cache: 'no-store' });
           }
@@ -330,6 +333,6 @@
   <div id="toast" role="status"></div>
   <dialog id="position-dialog" aria-label="포지션 입력"></dialog>
 
-  <script type="module" src="./app.js?v=18"></script>
+  <script type="module" src="./app.js?v=19"></script>
 </body>
 </html>
