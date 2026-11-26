@@ -518,12 +518,15 @@ function renderAnalogTrajectoriesSvg(analog, selRank) {
     [12, 'M+3 (60D)'],
   ];
 
+  const winCnt = top8.filter((t) => (t.fwd_3m?.pnl || 0) >= 0).length;
+  const lossCnt = top8.length - winCnt;
+
   return `<svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;display:block;" role="img" aria-label="TOP 8 유사 국면 직후 3개월 2엔진 누적 손익 궤적">
     <g transform="translate(${padL}, 17)" style="font-size:11.5px;font-weight:700;fill:${ink};">
       <line x1="0" y1="-4" x2="20" y2="-4" stroke="#0d9488" stroke-width="2.2"/>
-      <text x="25" y="0" fill="${ink}">3M 흑자 국면 (4개)</text>
+      <text x="25" y="0" fill="${ink}">3M 흑자 국면 (${winCnt}개)</text>
       <line x1="160" y1="-4" x2="180" y2="-4" stroke="#dc2626" stroke-width="2.2"/>
-      <text x="185" y="0" fill="${ink}">3M 조정 국면 (4개)</text>
+      <text x="185" y="0" fill="${ink}">3M 조정 국면 (${lossCnt}개)</text>
       <line x1="320" y1="-4" x2="344" y2="-4" stroke="#1e293b" stroke-width="3.2" stroke-dasharray="6 4"/>
       <text x="349" y="0" fill="${ink}">TOP 8 평균 궤적 (${fmtK(avgCurve.at(-1))})</text>
       <line x1="560" y1="-4" x2="582" y2="-4" stroke="#2563eb" stroke-width="3.6"/>
@@ -1323,7 +1326,7 @@ function renderRulesView(data) {
         <div style="border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--panel2);">
           <div style="font-weight:900;font-size:13.5px;margin-bottom:6px;">엔진 ① US/DE 국채 방향성 추세돌파 (50%)</div>
           <ul style="margin:0;padding-left:16px;font-size:12px;line-height:1.7;color:var(--muted);">
-            <li><b>유니버스</b>: TU, FV, TY, DU, RX (독일 5Y OE 제외 · US 1개 + DE 1개 대표 만기)</li>
+            <li><b>유니버스</b>: TU, FV, UXY, DU, RX (미 10Y는 Ultra 10Y UXY 적용 · 독일 5Y OE 제외 · US 1개 + DE 1개 대표 만기)</li>
             <li><b>진입</b>: CTA_RECIPE2 (W7) · 4/6 합의 · |CTA| ≥ 0.35 · 10D 돌파 1/3 → 20D 돌파 2/3 추가</li>
             <li><b>청산</b>: 50D 채널 이탈 · 7σ 하드스탑 · 8σ 트레일링 · CTA 반전(-0.20)</li>
             <li><b>역할</b>: 중앙은행 금리 사이클·대형 위기(2016·2019·2020·2022) 수익 창출</li>
