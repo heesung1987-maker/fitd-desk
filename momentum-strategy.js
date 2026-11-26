@@ -1499,6 +1499,7 @@ export async function renderMomentumStrategy(target) {
             : ''
         }
 
+        <a href="./FITD_2Engine_Active_FICC_Guide.pdf" target="_blank" rel="noopener" class="btn quiet" style="text-decoration:none;">설명자료 PDF</a>
         <button type="button" class="btn quiet" id="a4-live-refresh" ${loading ? 'disabled' : ''}>BBG 즉시 갱신</button>
       </div>
     </div>

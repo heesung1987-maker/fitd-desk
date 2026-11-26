@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>FITD 2엔진 50/50 액티브 FICC 전략 운용 가이드</title>
+<style>
+  @page { size: A4 portrait; margin: 9mm 10.5mm 9mm 10.5mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Segoe UI', sans-serif;
+    color: #0f172a; margin: 0; padding: 0; font-size: 8.4pt; line-height: 1.42;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .page { page-break-after: always; position: relative; min-height: 274mm; display: flex; flex-direction: column; }
+  .page:last-child { page-break-after: auto; }
+  .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%); color: #fff; padding: 14px 18px; border-radius: 9px; margin-bottom: 9px; }
+  .hero .eyebrow { font-size: 7.8pt; letter-spacing: 1.2px; color: #5eead4; font-weight: 700; text-transform: uppercase; }
+  .hero h1 { margin: 4px 0 4px; font-size: 16pt; line-height: 1.2; font-weight: 800; }
+  .hero p { margin: 0; font-size: 8.5pt; color: #cbd5e1; }
+  .page-hdr { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #0f172a; padding-bottom: 4px; margin-bottom: 8px; }
+  .page-hdr .sec-num { font-size: 7.8pt; font-weight: 800; color: #0d9488; letter-spacing: 0.6px; }
+  .page-hdr h2 { margin: 0; font-size: 11.8pt; font-weight: 800; color: #0f172a; }
+  .page-hdr .pg-tag { font-size: 7.5pt; color: #64748b; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 8px; }
+  .kpi { border: 1px solid #cbd5e1; border-top: 3px solid #0d9488; border-radius: 7px; padding: 7px 9px; background: #fff; }
+  .kpi.blue { border-top-color: #2563eb; }
+  .kpi.navy { border-top-color: #0f172a; }
+  .kpi.amber { border-top-color: #d97706; }
+  .kpi .lbl { font-size: 7.4pt; color: #475569; font-weight: 700; }
+  .kpi .val { font-size: 12.6pt; font-weight: 800; margin: 2px 0; font-variant-numeric: tabular-nums; }
+  .kpi .sub { font-size: 7.1pt; color: #64748b; line-height: 1.3; }
+  .box { border: 1px solid #cbd5e1; border-radius: 7px; padding: 8px 10px; margin-bottom: 8px; background: #fff; }
+  .box.soft { background: #f8fafc; border-color: #e2e8f0; }
+  .box.teal { background: #f0fdfa; border-color: #99f6e4; }
+  .box.amber { background: #fffbeb; border-color: #fde68a; }
+  .box h3 { margin: 0 0 5px; font-size: 9.3pt; font-weight: 800; color: #0f172a; display: flex; justify-content: space-between; align-items: center; }
+  .badge { display: inline-block; padding: 1px 6px; border-radius: 999px; font-size: 7.1pt; font-weight: 700; background: #e2e8f0; color: #334155; }
+  .badge.teal { background: #ccfbf1; color: #115e59; }
+  .badge.blue { background: #dbeafe; color: #1e40af; }
+  .badge.red { background: #fee2e2; color: #991b1b; }
+  .badge.amber { background: #fef3c7; color: #92400e; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  table { width: 100%; border-collapse: collapse; font-size: 7.6pt; font-variant-numeric: tabular-nums; }
+  th { background: #f1f5f9; color: #334155; font-weight: 700; padding: 3.6px 4.5px; border-bottom: 1.5px solid #cbd5e1; text-align: left; }
+  td { padding: 3.2px 4.5px; border-bottom: 1px solid #e2e8f0; }
+  th.num, td.num { text-align: right; }
+  .bold { font-weight: 700; }
+  .pos { color: #0d9488; font-weight: 700; }
+  .neg { color: #dc2626; font-weight: 700; }
+  .muted { color: #64748b; }
+  ul.clean { margin: 3px 0 0; padding-left: 15px; }
+  ul.clean li { margin-bottom: 2.4px; }
+  .formula { background: #0f172a; color: #e2e8f0; padding: 6px 9px; border-radius: 6px; font-family: Consolas, monospace; font-size: 7.7pt; margin: 4px 0 6px; line-height: 1.45; }
+  .formula b { color: #5eead4; }
+  .footer { margin-top: auto; padding-top: 5px; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; font-size: 7.1pt; color: #64748b; }
+  .cal-tbl { font-size: 7pt; }
+  .cal-tbl th, .cal-tbl td { padding: 2.8px 3px; }
+</style>
+</head>
+<body>
+
+<!-- ==================== PAGE 1: EXECUTIVE SUMMARY ==================== -->
+<div class="page">
+  <div class="hero">
+    <div class="eyebrow">FITD Trading Desk · Definitive 2-Engine 50/50 Active FICC Strategy Report</div>
+    <h1>2엔진 50/50 액티브 FICC 운용 모델 가이드</h1>
+    <p>엔진 ① US/DE 국채 방향성 (TU·FV·UXY·DU·RX) 50% + 엔진 ② FX4 양캐리 평균회귀 (실BBG 2Y OLS · 3M 캐리 ≥ +1.0%) 50% · Vol $0.8M/yr · 100% USD 중립</p>
+  </div>
+
+  <div class="box soft">
+    <h3>핵심 전략 요약 — 왜 기존 4엔진에서 2엔진 50/50으로 진화했는가 <span class="badge teal">기준일 2026-11-25 · UXY 적용 · 실BBG 캐리</span></h3>
+    <p style="margin:0;font-size:8.6pt;">
+      본 모델은 금리와 환율에서 본질적 알파가 가장 강력하고 서로 독립적인(26년 일간 상관 <b>-0.02</b>) 두 핵심 엔진만 <b>50 : 50 동일 리스크 비중</b>으로 결합한 확정 운용 시스템입니다.
+      기존 4엔진(W4) 대비 커브(E2)와 FX 추세돌파(E4)를 제거함으로써 <b>① 최근 5년·11.1년 실선물 수익성과 샤프를 동시 상향</b>하고, <b>② FX 포트폴리오를 100% USD 중립(달러 방향성 베팅 제로)</b>으로 정제했으며,
+      <b>③ 미 10년 선물을 실무 듀레이션 매칭에 적합한 울트라 10년(UXY)</b>으로 교체했습니다. 모든 성과는 거래비용과 실제 블룸버그 3M Forward/NDF 캐리를 차감한 순손익 기준입니다.
+    </p>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="lbl">최근 5년 누적 순손익 (세팅 A)</div>
+      <div class="val pos">+$6.24M</div>
+      <div class="sub">연평균 +$1.23M · Shp <b>1.37</b><br><b>5/5년 흑자</b> · 월승률 <b>69.5%</b></div>
+    </div>
+    <div class="kpi blue">
+      <div class="lbl">11.1년 실선물 성과 (15~26)</div>
+      <div class="val" style="color:#1e40af;">+$615k/y</div>
+      <div class="sub">누적 +$7.10M · Shp <b>0.68</b><br>MDD −$2.58M · 월승률 56.7%</div>
+    </div>
+    <div class="kpi navy">
+      <div class="lbl">26년 최장기 성과 (01~26)</div>
+      <div class="val">+$515k/y</div>
+      <div class="sub">누적 +$13.81M · Shp <b>0.58</b><br>17/26년 흑자 · 월승률 53.1%</div>
+    </div>
+    <div class="kpi amber">
+      <div class="lbl">운용 효율 · 리스크 특성</div>
+      <div class="val" style="color:#b45309;">연 27.8건</div>
+      <div class="sub">목표 Vol <b>$0.8M/yr</b> (일 1σ 약 $50k)<br><b>FX 100% USD 중립</b> · 감속기 OFF</div>
+    </div>
+  </div>
+
+  <div class="box">
+    <h3>2엔진 50/50 포트폴리오 전체 아키텍처</h3>
+    
+<svg viewBox="0 0 760 218" style="width:100%;height:auto;display:block;">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <!-- 2 Core Engine boxes -->
+  <rect x="14" y="8" width="350" height="76" rx="9" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="189" y="28" text-anchor="middle" font-size="12" font-weight="800" fill="#1e3a8a">엔진 ① US/DE 국채 방향성 추세돌파 (50%)</text>
+  <text x="189" y="45" text-anchor="middle" font-size="9.5" fill="#334155">미국 TU · FV · UXY (울트라 10Y) · 독일 DU · RX (OE 제외)</text>
+  <text x="189" y="60" text-anchor="middle" font-size="9" fill="#475569">CTA W7 (4/6 합의 · |CTA|≥0.35) + 10→20D 돌파 · 7σ 손절 / 8σ 트레일 / 50D 청산</text>
+  <text x="189" y="74" text-anchor="middle" font-size="8.6" font-weight="700" fill="#2563eb">국가당 1종목 집중 · 중앙은행 금리 사이클 및 위기 구간 알파 창출</text>
+
+  <rect x="396" y="8" width="350" height="76" rx="9" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.5"/>
+  <text x="571" y="28" text-anchor="middle" font-size="12" font-weight="800" fill="#115e59">엔진 ② FX4 금리반영 양캐리 평균회귀 (50%)</text>
+  <text x="571" y="45" text-anchor="middle" font-size="9.5" fill="#334155">글로벌 10통화 45페어 · 70D 2요인 OLS (실제 BBG 2Y 금리차 반영)</text>
+  <text x="571" y="60" text-anchor="middle" font-size="9" fill="#475569">2.4≤|2F-Z|&lt;3.85 · 실BBG 3M Forward 캐리 ≥ +1.0%/yr · S4 스트레스 브레이크</text>
+  <text x="571" y="74" text-anchor="middle" font-size="8.6" font-weight="700" fill="#0d9488">100% USD 중립 · 금리 박스권·고금리차 장세 꾸준한 현금흐름</text>
+
+  <!-- Zero-correlation badge cleanly centered between Layer 1 & Layer 2 -->
+  <rect x="305" y="87" width="150" height="17" rx="8.5" fill="#0f172a"/>
+  <text x="380" y="98.5" text-anchor="middle" font-size="8.2" font-weight="700" fill="#5eead4">두 엔진 일간 상관 -0.02 (독립)</text>
+
+  <!-- Arrows down -->
+  <line x1="189" y1="84" x2="189" y2="106" stroke="#475569" stroke-width="1.3" marker-end="url(#arr)"/>
+  <line x1="571" y1="84" x2="571" y2="106" stroke="#475569" stroke-width="1.3" marker-end="url(#arr)"/>
+
+  <!-- Layer 2 -->
+  <rect x="26" y="108" width="708" height="42" rx="8" fill="#f8fafc" stroke="#334155" stroke-width="1.3"/>
+  <text x="380" y="126" text-anchor="middle" font-size="11" font-weight="800" fill="#0f172a">2단계 인과적 변동성 타깃팅 (각 엔진 60일 변동성 정규화 → 50:50 결합 → 포트폴리오 연 $0.8M 맞춤)</text>
+  <text x="380" y="141" text-anchor="middle" font-size="9" fill="#475569">기존 4엔진 대비 저효율·반전 취약 엔진(E2 커브 · E4 FX돌파) 제거로 구조 단순화 및 5Y·11Y Sharpe 동시 개선</text>
+
+  <line x1="380" y1="150" x2="380" y2="168" stroke="#475569" stroke-width="1.3" marker-end="url(#arr)"/>
+
+  <!-- Layer 3 -->
+  <rect x="26" y="170" width="344" height="42" rx="8" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3"/>
+  <text x="198" y="188" text-anchor="middle" font-size="10.5" font-weight="800" fill="#115e59">세팅 A · 순수 변동성 타깃팅 (감속기 OFF · 추천)</text>
+  <text x="198" y="203" text-anchor="middle" font-size="8.8" fill="#0f766e">개별 손절·트레일링 + S4 브레이크만으로 역박자 없는 선형 방어</text>
+
+  <line x1="370" y1="191" x2="390" y2="191" stroke="#475569" stroke-width="1.3" marker-end="url(#arr)"/>
+
+  <rect x="392" y="170" width="342" height="42" rx="8" fill="#0f172a" stroke="#0f172a" stroke-width="1.3"/>
+  <text x="563" y="188" text-anchor="middle" font-size="10.5" font-weight="800" fill="#ffffff">NY 종가 T → 서울 아침 T+1 실행 &amp; CME 선물 환산</text>
+  <text x="563" y="203" text-anchor="middle" font-size="8.8" fill="#cbd5e1">국채선물(TU/FV/UXY/DU/RX) · FX선물(6E/6B/6A/6C/6S 등) 즉시 집행</text>
+</svg>
+
+  </div>
+
+  <div class="grid2">
+    <div class="box">
+      <h3>2엔진 50/50 (확정) vs 기존 4엔진 W4 정밀 비교 <span class="badge blue">Vol $0.8M 동일</span></h3>
+      <table>
+        <thead><tr><th>비교 지표</th><th class="num">2엔진 50/50 (확정)</th><th class="num">기존 4엔진 W4</th><th class="num">개선 폭</th></tr></thead>
+        <tbody>
+          <tr><td class="bold">5Y 총손익 (22~26)</td><td class="num pos">+$6.24M</td><td class="num">+$5.19M</td><td class="num pos">+$1.05M</td></tr>
+          <tr><td class="bold">5Y Sharpe / 월승률</td><td class="num pos">1.37 / 69.5%</td><td class="num">1.19 / 61.0%</td><td class="num pos">+0.18</td></tr>
+          <tr><td class="bold">11.1Y 실선물 연평균</td><td class="num pos">+$615k/y</td><td class="num">+$496k/y</td><td class="num pos">+$119k</td></tr>
+          <tr><td class="bold">11.1Y 실선물 Sharpe</td><td class="num pos">0.68</td><td class="num">0.57</td><td class="num pos">+0.11</td></tr>
+          <tr><td class="bold">26Y 장기 Sharpe</td><td class="num">0.58</td><td class="num">0.7</td><td class="num muted">-0.12</td></tr>
+          <tr><td class="bold">FX 순달러 노출</td><td class="num pos">0% (USD 중립)</td><td class="num muted">방향성 노출 존재</td><td class="num pos">단순·명확</td></tr>
+          <tr><td class="bold">유사국면 TOP8 3M 평균</td><td class="num pos">+$84k (5/8)</td><td class="num neg">−$11k (4/8)</td><td class="num pos">+$94k</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box teal">
+      <h3>2엔진 상호 보완 실증 (26년 일간 상관 -0.02) <span class="badge teal">위기 방어</span></h3>
+      <p style="margin:0 0 6px;font-size:8pt;">
+        국채 추세(E1)는 <b>금리 방향성이 터지는 위기·정책 전환기(2008·2016·2020·2022)</b>에 폭발적 수익을 내고,
+        FX4 평균회귀(E2)는 <b>금리 박스권·고금리차 장세(2023~2026)</b>에 꾸준한 현금흐름을 제공합니다.
+      </p>
+      <table>
+        <thead><tr><th>26년 FX4 최악 20개월 평균</th><th class="num">월간 평균 손익 (정규화)</th><th>역할</th></tr></thead>
+        <tbody>
+          <tr><td class="bold">엔진 ② FX4 평균회귀</td><td class="num neg">−$101,512</td><td>변동성 급등 손실 구간</td></tr>
+          <tr><td class="bold">엔진 ① US/DE 국채 방향성</td><td class="num neg">−$2,253</td><td>자연 헤지 · 손실 완충</td></tr>
+        </tbody>
+      </table>
+      <p style="margin:6px 0 0;font-size:7.6pt;color:#0f766e;">
+        * 별도의 인위적 감속기 없이도 두 엔진의 상관관계가 <b>사실상 0 (-0.02)</b>이기 때문에 포트폴리오 전체 변동성이 개별 엔진 대비 약 <b>30% 자동 절감</b>됩니다.
+      </p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>FITD Trading Desk · 2-Engine 50/50 Active FICC Strategy Guide (as of 2026-11-25)</span>
+    <span>Page 1 / 7</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 2: ENGINE 1 (US/DE RATES + UXY) ==================== -->
+<div class="page">
+  <div class="page-hdr">
+    <div><div class="sec-num">SECTION 01 · ENGINE 1 (WEIGHT 50%)</div><h2>엔진 ① US/DE 국채 방향성 추세돌파 (UXY 울트라 10년 적용)</h2></div>
+    <span class="pg-tag">10→20D 돌파 · 7σ 하드스탑 · 8σ 트레일링 · 50D 채널 청산</span>
+  </div>
+
+  <div class="box soft">
+    <h3>유니버스 선정 및 UXY (울트라 10년) 교체 근거 <span class="badge blue">5종목 · 국가당 1종목 대표 만기 집중</span></h3>
+    <ul class="clean" style="font-size:8.2pt;">
+      <li><b>미국 국채선물 (US 슬롯 1개)</b>: <b>TU (2Y · DV01 $38/bp)</b>, <b>FV (5Y · $46/bp)</b>, <b>UXY (울트라 10Y · $88/bp)</b> — 기존 TY(CTD 만기 약 6.5년) 대신 실제 현물 10년 벤치마크 듀레이션에 정확히 부합하는 <b>UXY(CTD 약 9.5년)</b>를 채택했습니다.</li>
+      <li><b>독일 국채선물 (DE 슬롯 1개)</b>: <b>DU (Schatz 2Y · DV01 $21/bp)</b>, <b>RX (Bund 10Y · $115/bp)</b> — 26년 검증에서 저알파·중복 리스크로 확인된 독일 5년(OE)은 제외했습니다.</li>
+      <li><b>국가당 1종목 집중 규칙</b>: 미국 3종목 중 추세 합의도와 |CTA|가 가장 강한 1개, 독일 2종목 중 1개만 보유해 동일 국가 커브 내 불필요한 중복 베팅을 원천 차단합니다.</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h3>추세 진입 → 피라미딩 → 청산 생명주기 (Trend Lifecycle)</h3>
+    
+<svg viewBox="0 0 760 148" style="width:100%;height:auto;display:block;">
+  <rect x="4" y="4" width="752" height="140" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <polyline points="35,108 90,104 145,100 185,84 235,70 300,58 380,41 455,28 515,40 565,61 625,81 715,93"
+            fill="none" stroke="#1e3a8a" stroke-width="2.5"/>
+  <line x1="35" y1="90" x2="210" y2="90" stroke="#2563eb" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="40" y="86" font-size="8.5" fill="#2563eb" font-weight="700">10일 돌파선</text>
+  <line x1="120" y1="74" x2="265" y2="74" stroke="#0d9488" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="125" y="70" font-size="8.5" fill="#0d9488" font-weight="700">20일 돌파선</text>
+  <polyline points="185,121 235,110 300,98 380,81 455,68 565,68"
+            fill="none" stroke="#dc2626" stroke-width="1.6" stroke-dasharray="5 3"/>
+  <text x="360" y="94" font-size="8.5" fill="#dc2626" font-weight="700">샹들리에 트레일링 스탑 (고점 − 8σ)</text>
+  <circle cx="176" cy="90" r="5" fill="#2563eb"/>
+  <text x="176" y="132" text-anchor="middle" font-size="8.8" font-weight="700" fill="#1e3a8a">① 정찰 진입 (1/3R)</text>
+  <text x="176" y="142" text-anchor="middle" font-size="7.8" fill="#475569">10D 돌파 + CTA≥0.35 + 4/6동의</text>
+  <circle cx="228" cy="74" r="5" fill="#0d9488"/>
+  <text x="292" y="132" text-anchor="middle" font-size="8.8" font-weight="700" fill="#0f766e">② 본진 증액 (총 3/3R)</text>
+  <text x="292" y="142" text-anchor="middle" font-size="7.8" fill="#475569">20D 돌파 또는 |CTA|≥0.55</text>
+  <circle cx="455" cy="28" r="4.5" fill="#0f172a"/>
+  <text x="455" y="19" text-anchor="middle" font-size="8.8" font-weight="700" fill="#0f172a">추세 지속 (조기 익절 없음 · 수익 극대화)</text>
+  <circle cx="576" cy="68" r="5.5" fill="#dc2626"/>
+  <text x="645" y="132" text-anchor="middle" font-size="8.8" font-weight="700" fill="#b91c1c">③ 전량 추세 청산</text>
+  <text x="645" y="142" text-anchor="middle" font-size="7.8" fill="#475569">7σ 손절 / 8σ 트레일 / 50D / CTA반전</text>
+</svg>
+
+  </div>
+
+  <div class="grid2">
+    <div class="box">
+      <h3>실제 숫자로 이해하는 핵심 산식 (CTA W7 &amp; 7σ 역산 사이징)</h3>
+      <div class="formula">
+        <b>① CTA_RECIPE2 (W7)</b> = tanh(k · [w·Z_disp + (1−w)·Z_ma])<br>
+        6개 반감기(21·42·63·84·105·126D) 중 <b>4개 이상 같은 방향</b> &amp; <b>|CTA| ≥ 0.35</b><br><br>
+        <b>② 7σ 손절 역산 계약수 (1x 원시 기준)</b><br>
+        1R 리스크 예산 = <b>$35,000</b> (정찰 1/3R = $11,667 → 본진 3/3R = $35,000)<br>
+        목표 계약수(1x) = <b>$35,000 ÷ (7 × 60일 일간변동성 σ × 포인트가치 PV)</b>
+      </div>
+      <p style="margin:0;font-size:7.8pt;color:#334155;line-height:1.48;">
+        <b>예시 (UXY 기준)</b>: UXY의 60일 일간 가격 표준편차가 <code>0.45pt</code>(약 5.1bp)라면 7σ 손절폭은 <code>3.15pt</code>(약 36bp)입니다.
+        1계약당 7σ 손실은 <code>3.15 × $1,000 = $3,150</code>이므로 원시 계약수는 <code>$35,000 ÷ $3,150 ≈ 11계약</code>이 됩니다.
+        여기에 포트폴리오 Vol $0.8M 실효 배율(예: 2.7x)을 곱하면 최종 약 <b>30계약</b>이 산출됩니다.
+        <b>왜 7σ인가?</b> 3~4σ로 좁히면 정상적 CPI/FOMC 노이즈에 조기 손절(Whipsaw)이 급증하고, 7σ 손절 + 8σ 트레일링 조합이 26년 및 11년 백테스트 고원(Plateau)에서 손익비와 샤프를 극대화합니다.
+      </p>
+    </div>
+
+    <div class="box">
+      <h3>11.1년 실선물 종목별 귀속 성과 (2015~2026 · 1x 원시 기준)</h3>
+      <table>
+        <thead><tr><th>종목</th><th class="num">거래수</th><th class="num">승률</th><th class="num">PF</th><th class="num">평균보유</th><th class="num">11Y 원시손익</th></tr></thead>
+        <tbody>
+          <tr><td class="bold">미 국채 2Y (TU)</td><td class="num">15건</td><td class="num">46.7%</td><td class="num bold">2.37</td><td class="num">79일</td><td class="num pos">+$142,789</td></tr><tr><td class="bold">미 국채 5Y (FV)</td><td class="num">10건</td><td class="num">30.0%</td><td class="num bold">0.56</td><td class="num">46일</td><td class="num neg">−$58,091</td></tr><tr><td class="bold">미 울트라 10Y (UXY)</td><td class="num">12건</td><td class="num">41.7%</td><td class="num bold">1.40</td><td class="num">62일</td><td class="num pos">+$48,932</td></tr><tr><td class="bold">독 국채 2Y (DU)</td><td class="num">15건</td><td class="num">53.3%</td><td class="num bold">1.70</td><td class="num">76일</td><td class="num pos">+$88,469</td></tr><tr><td class="bold">독 국채 10Y (RX)</td><td class="num">19건</td><td class="num">31.6%</td><td class="num bold">1.48</td><td class="num">73일</td><td class="num pos">+$84,135</td></tr>
+          <tr style="background:#f8fafc;font-weight:700;">
+            <td>합계 / 가중평균</td><td class="num">71건</td><td class="num">40.9%</td>
+            <td class="num">1.57</td><td class="num">69일</td>
+            <td class="num pos">+$306,234</td>
+          </tr>
+        </tbody>
+      </table>
+      <ul class="clean" style="font-size:7.6pt;margin-top:6px;">
+        <li><b>청산 4대 조건 (하나라도 충족 시 전량 청산)</b>: ① 누적손실 −1R 도달(7σ 하드스탑), ② 고점/저점 대비 8σ 트레일링 이탈, ③ 50일 반대 채널 이탈, ④ CTA 반전(보유방향 기준 −0.20 하회).</li>
+        <li><b>실무 실행 시점</b>: 전일 뉴욕 종가(T)에 돌파 확정 시 다음날 한국 아침(T+1) 즉시 진입합니다.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>FITD Trading Desk · Engine 1: US/DE Rates Directional Trend-Following (UXY Upgraded)</span>
+    <span>Page 2 / 7</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 3: ENGINE 2 (FX4 POSITIVE-CARRY MR) ==================== -->
+<div class="page">
+  <div class="page-hdr">
+    <div><div class="sec-num">SECTION 02 · ENGINE 2 (WEIGHT 50%)</div><h2>엔진 ② FX4 금리반영 양캐리 평균회귀 (100% USD 중립)</h2></div>
+    <span class="pg-tag">70D 2요인 OLS · 실BBG 3M 캐리 ≥ +1.0% · S4 스트레스 브레이크</span>
+  </div>
+
+  <div class="box soft">
+    <h3>70일 2요인 OLS 적정가 모델 — 실제 숫자로 이해하는 2F-Z 계산 <span class="badge teal">45개 교차페어 전수 탐색</span></h3>
+    <div class="formula">
+      <b>Y_t = 100·ln(CCY1_t)</b>,  <b>X_t = 100·ln(CCY2_t)</b>,  <b>r_diff,t = (CCY1 2Y 국채금리) − (CCY2 2Y 국채금리)</b><br>
+      직전 70영업일 회귀(Ridge λ=0.05 안정화):  <b>Y_t = α + β₁·X_t + β₂·r_diff,t + ε_t</b>   →   <b>2F-Z = ε_t ÷ σ(ε)</b>
+    </div>
+    <p style="margin:0;font-size:8pt;line-height:1.48;">
+      단순 환율 비율이 아니라 <b>두 나라의 실제 블룸버그 2년 국채금리차(<code>r_diff</code>)가 설명하는 펀더멘털 적정 환율</b>을 먼저 계산한 뒤,
+      실제 시장 환율이 적정가에서 몇 표준편차(σ) 과도하게 이탈했는지(<code>2F-Z</code>)를 측정합니다.
+      예를 들어 <code>EUR/CHF</code>의 70일 잔차 표준편차가 <code>0.95%</code>인데 금리차 변동 없이 EUR가 적정가보다 <code>−2.69%</code> 싸졌다면 <code>2F-Z = −2.83σ</code>가 되어
+      <b>EUR 매수 / CHF 매도</b> 평균회귀 신호가 발생합니다. (USD는 양쪽 레그에서 정확히 상쇄되므로 <b>순달러 노출 $0</b>입니다.)
+    </p>
+  </div>
+
+  <div class="grid2">
+    <div class="box">
+      <h3>진입 8대 필터 &amp; 청산/리스크 규칙 <span class="badge blue">26Y 승률 47.3% · PF 1.13</span></h3>
+      <ul class="clean" style="font-size:7.9pt;">
+        <li><b>① 괴리 구간</b>: <code>2.40 ≤ |2F-Z| &lt; 3.85</code> (너무 약한 노이즈와 3.85σ 이상 펀더멘털 붕괴 구간 모두 제외)</li>
+        <li><b>② 급변 차단</b>: 전일 대비 <code>|Δ|Z|| ≤ 1.0σ</code> (이벤트 당일 떨어지는 칼날 진입 방지)</li>
+        <li><b>③ 공적분 품질</b>: 회귀 계수 <code>0.4 ≤ |β₁| ≤ 1.6</code> 및 70일 상관계수 <code>|corr| ≥ 0.35</code></li>
+        <li><b>④ 양(+)캐리 필수</b>: 진입 방향의 <b>실제 BBG 3M Forward/NDF 캐리 ≥ +1.0%/yr</b></li>
+        <li><b>⑤ 비용 대비 엣지</b>: 기대 회귀폭 <code>(|Z|−0.2)·σ ≥ 8 × 왕복거래비용</code> (G10 2bp / EM 5bp)</li>
+        <li><b>⑥ 포트폴리오 한도</b>: 최대 <b>6페어</b> · 통화당 최대 2회 · <code>|순 리스크 베타| ≤ 2.0</code></li>
+        <li><b>⑦ S4 매크로 브레이크</b>: <code>Stress = 0.5·(RV10/RV60) + 0.5·(MOVE/MA60)</code>가 <b>1.25 이상</b>이면 신규 진입 전면 중단 + 기존 포지션 0.35x 축소</li>
+        <li><b>⑧ 청산 5원칙</b>: <b>익절(TP)</b> |Z| ≤ 0.20σ / <b>손절</b> |Z| ≥ 4.0σ 또는 원시 −$20k (익일 청산 + 20일 쿨다운) / <b>시간청산</b> 20일 적자(TF) · 최대 45일(MH)</li>
+      </ul>
+    </div>
+
+    <div class="box teal">
+      <h3>왜 보유기간이 짧은데도 '캐리 ≥ +1.0%' 필터가 필수인가?</h3>
+      <p style="margin:0 0 6px;font-size:8pt;">
+        FX4 평균 보유기간은 약 9.8영업일로 스왑 이자 자체 금액은 제한적입니다. 그럼에도 캐리 필터를 제거하면 성과가 급락합니다.
+        실증 분석 결과, <b>캐리 필터는 단순 이자 벌이가 아니라 '금리차 역행 함정'을 거르는 핵심 레짐 필터</b>로 작동합니다.
+      </p>
+      <table>
+        <thead><tr><th>FX4 단독 비교 (26년 검증)</th><th class="num">26Y Shp</th><th class="num">5Y 총손익</th><th class="num">역캐리 거래 손익</th></tr></thead>
+        <tbody>
+          <tr><td class="bold">캐리 ≥ +1.0% ON (확정)</td><td class="num pos">0.71</td><td class="num pos">+$5.85M</td><td class="num pos">원천 차단</td></tr>
+          <tr><td>캐리 필터 OFF (제한 없음)</td><td class="num neg">0.25</td><td class="num muted">+$2.72M</td><td class="num neg">718건 · −$827k 손실</td></tr>
+        </tbody>
+      </table>
+      <p style="margin:6px 0 0;font-size:7.7pt;color:#0f766e;">
+        고금리 통화가 강세 추세를 탈 때 저금리 통화를 매수(역캐리)해 평균회귀를 노리면 캐리 자금 유입에 밀려 손절로 직결됩니다.
+        <b>양캐리 방향만 허용</b>함으로써 구조적 자금 흐름과 같은 편에서만 평균회귀를 집행합니다.
+      </p>
+      <div style="margin-top:6px;padding-top:6px;border-top:1px dashed #99f6e4;font-size:7.6pt;">
+        <b>레그 사이징 공식</b>: <code>n1 = min($1.5M, $20,000 ÷ σ_pct) × S4배율 × eff_e3</code> (잔차 변동성이 클수록 레그 축소, 1x 원시 손절 한도 $20k 균등화)
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <h3>글로벌 10통화 유니버스 및 CME / KRX FX 선물 매핑 표준</h3>
+    <table>
+      <thead><tr><th>구분</th><th>통화 (BBG 티커)</th><th>리스크 베타</th><th>거래소 FX 선물 코드</th><th>1계약 기준 단위</th><th>편도 비용 가정</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge blue">G10 (7종)</span></td><td>EUR · GBP · AUD · NZD · CAD · JPY · CHF</td><td>CHF(−0.9), JPY(−1.0), AUD/NZD(+0.8) 등</td><td class="bold">CME 6E · 6B · 6A · 6N · 6C · 6J · 6S</td><td>125k EUR / 62.5k GBP / 100k AUD·NZD·CAD / 12.5M JPY / 125k CHF</td><td class="num">2.0 bp</td></tr>
+        <tr><td><span class="badge amber">EM (3종)</span></td><td>BRL · MXN · KRW</td><td>모두 +1.0 (리스크온 통화)</td><td class="bold">CME 6L · 6M · KRX USD</td><td>100k BRL / 500k MXN / $10,000 USD(KRX 역방향)</td><td class="num">5.0 bp</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span>FITD Trading Desk · Engine 2: FX4 Rates-Adjusted Positive-Carry Mean-Reversion</span>
+    <span>Page 3 / 7</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 4: 5Y PERFORMANCE & MONTHLY CALENDAR ==================== -->
+<div class="page">
+  <div class="page-hdr">
+    <div><div class="sec-num">SECTION 03 · 5-YEAR PERFORMANCE &amp; SETTINGS</div><h2>최근 5년(59개월) 정밀 성과 · 월간 캘린더 · 세팅 비교</h2></div>
+    <span class="pg-tag">2022-01 ~ 2026-11-25 · 100% 실제 국채선물(UXY) &amp; 실BBG 3M 캐리</span>
+  </div>
+
+  <div class="box">
+    <h3>최근 5년 누적 손익 곡선 (세팅 A 2엔진 추천 vs 세팅 B 감속 vs 세팅 C 4엔진 W4) &amp; 월간 손익 막대</h3>
+    
+<svg viewBox="0 0 760 162" style="width:100%;height:auto;display:block;">
+  <g transform="translate(60, 14)" font-size="9.2" font-weight="700">
+    <line x1="0" y1="-3" x2="16" y2="-3" stroke="#0d9488" stroke-width="2.8"/>
+    <text x="20" y="0" fill="#0f172a">세팅 A · 2엔진 50/50 추천: +$6.24M</text>
+    <line x1="252" y1="-3" x2="268" y2="-3" stroke="#2563eb" stroke-width="1.8" stroke-dasharray="5 3"/>
+    <text x="272" y="0" fill="#334155">세팅 B · 2엔진 감속(Vol$1M): +$5.07M</text>
+    <line x1="504" y1="-3" x2="520" y2="-3" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="2 3"/>
+    <text x="524" y="0" fill="#64748b">세팅 C · 4엔진 W4: +$5.19M</text>
+  </g>
+  <line x1="60" x2="744" y1="140.0" y2="140.0" stroke="#e2e8f0" stroke-dasharray="3 3"/><text x="54" y="143.0" text-anchor="end" font-size="8.8" fill="#475569">$0.0M</text><line x1="60" x2="744" y1="111.0" y2="111.0" stroke="#e2e8f0" stroke-dasharray="3 3"/><text x="54" y="114.0" text-anchor="end" font-size="8.8" fill="#475569">$1.7M</text><line x1="60" x2="744" y1="82.0" y2="82.0" stroke="#e2e8f0" stroke-dasharray="3 3"/><text x="54" y="85.0" text-anchor="end" font-size="8.8" fill="#475569">$3.3M</text><line x1="60" x2="744" y1="53.0" y2="53.0" stroke="#e2e8f0" stroke-dasharray="3 3"/><text x="54" y="56.0" text-anchor="end" font-size="8.8" fill="#475569">$5.0M</text><line x1="60" x2="744" y1="24.0" y2="24.0" stroke="#e2e8f0" stroke-dasharray="3 3"/><text x="54" y="27.0" text-anchor="end" font-size="8.8" fill="#475569">$6.7M</text>
+  <line x1="60" x2="744" y1="140.0" y2="140.0" stroke="#64748b" stroke-width="1"/>
+  <path d="M60.0,137.3 L71.8,134.6 L83.6,123.3 L95.4,118.9 L107.2,115.2 L119.0,113.1 L130.8,110.0 L142.6,109.2 L154.3,102.4 L166.1,97.9 L177.9,96.5 L189.7,94.8 L201.5,97.4 L213.3,89.5 L225.1,96.9 L236.9,98.8 L248.7,97.8 L260.5,82.1 L272.3,78.4 L284.1,78.7 L295.9,74.4 L307.7,64.9 L319.4,68.8 L331.2,66.0 L343.0,71.5 L354.8,70.5 L366.6,63.3 L378.4,50.0 L390.2,51.3 L402.0,57.4 L413.8,63.7 L425.6,61.7 L437.4,60.1 L449.2,65.5 L461.0,59.3 L472.8,52.4 L484.6,54.3 L496.3,58.2 L508.1,54.2 L519.9,62.5 L531.7,63.1 L543.5,64.2 L555.3,70.2 L567.1,58.6 L578.9,54.2 L590.7,47.2 L602.5,44.1 L614.3,47.2 L626.1,52.8 L637.9,50.3 L649.7,51.4 L661.4,51.4 L673.2,50.7 L685.0,48.6 L696.8,52.4 L708.6,52.2 L720.4,44.2 L732.2,46.4 L744.0,49.8" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="2 3"/>
+  <path d="M60.0,138.6 L71.8,136.2 L83.6,135.0 L95.4,134.3 L107.2,131.3 L119.0,131.3 L130.8,130.6 L142.6,129.9 L154.3,128.6 L166.1,123.7 L177.9,122.6 L189.7,120.2 L201.5,126.0 L213.3,117.8 L225.1,125.3 L236.9,127.8 L248.7,127.3 L260.5,115.3 L272.3,110.9 L284.1,109.5 L295.9,96.4 L307.7,86.3 L319.4,89.8 L331.2,88.4 L343.0,90.3 L354.8,85.7 L366.6,81.1 L378.4,53.1 L390.2,51.8 L402.0,60.2 L413.8,64.7 L425.6,65.1 L437.4,64.5 L449.2,67.3 L461.0,65.3 L472.8,61.6 L484.6,61.3 L496.3,62.4 L508.1,57.9 L519.9,65.1 L531.7,65.2 L543.5,66.0 L555.3,66.2 L567.1,56.8 L578.9,52.2 L590.7,38.8 L602.5,36.4 L614.3,39.9 L626.1,47.4 L637.9,46.7 L649.7,51.7 L661.4,51.7 L673.2,51.7 L685.0,51.7 L696.8,51.7 L708.6,51.7 L720.4,51.7 L732.2,51.7 L744.0,51.7" fill="none" stroke="#2563eb" stroke-width="1.7" stroke-dasharray="5 3"/>
+  <path d="M60.0,137.2 L71.8,132.4 L83.6,130.0 L95.4,128.6 L107.2,122.6 L119.0,122.0 L130.8,120.6 L142.6,119.2 L154.3,115.5 L166.1,109.0 L177.9,107.3 L189.7,104.4 L201.5,109.7 L213.3,102.0 L225.1,108.9 L236.9,111.9 L248.7,110.9 L260.5,99.0 L272.3,95.8 L284.1,94.8 L295.9,86.0 L307.7,79.4 L319.4,81.7 L331.2,80.7 L343.0,82.2 L354.8,78.6 L366.6,74.6 L378.4,56.0 L390.2,55.1 L402.0,60.7 L413.8,66.1 L425.6,64.1 L437.4,61.9 L449.2,67.0 L461.0,61.1 L472.8,55.2 L484.6,54.8 L496.3,56.2 L508.1,49.3 L519.9,57.1 L531.7,57.3 L543.5,59.0 L555.3,59.3 L567.1,44.0 L578.9,41.0 L590.7,32.0 L602.5,30.5 L614.3,32.8 L626.1,39.1 L637.9,36.6 L649.7,37.6 L661.4,37.5 L673.2,37.1 L685.0,36.0 L696.8,35.7 L708.6,34.8 L720.4,24.0 L732.2,25.9 L744.0,31.5" fill="none" stroke="#0d9488" stroke-width="2.7"/>
+  <text x="60.0" y="155" text-anchor="start" font-size="8.8" fill="#475569">2022-01</text><text x="201.5" y="155" text-anchor="middle" font-size="8.8" fill="#475569">2023-01</text><text x="343.0" y="155" text-anchor="middle" font-size="8.8" fill="#475569">2024-01</text><text x="484.6" y="155" text-anchor="middle" font-size="8.8" fill="#475569">2025-01</text><text x="626.1" y="155" text-anchor="middle" font-size="8.8" fill="#475569">2026-01</text><text x="744.0" y="155" text-anchor="end" font-size="8.8" fill="#475569">2026-11</text>
+</svg>
+    <div style="margin-top:4px;"><svg viewBox="0 0 760 104" style="width:100%;height:auto;display:block;"><line x1="60" x2="744" y1="84.0" y2="84.0" stroke="#e2e8f0" stroke-dasharray="3 3"/><text x="54" y="87.0" text-anchor="end" font-size="8.3" fill="#475569">−$500k</text><line x1="60" x2="744" y1="60.5" y2="60.5" stroke="#64748b" stroke-dasharray=""/><text x="54" y="63.5" text-anchor="end" font-size="8.3" fill="#475569">$0k</text><line x1="60" x2="744" y1="36.9" y2="36.9" stroke="#e2e8f0" stroke-dasharray="3 3"/><text x="54" y="39.9" text-anchor="end" font-size="8.3" fill="#475569">$500k</text><line x1="60" x2="744" y1="13.4" y2="13.4" stroke="#e2e8f0" stroke-dasharray="3 3"/><text x="54" y="16.4" text-anchor="end" font-size="8.3" fill="#475569">$1,000k</text><rect x="61.9" y="53.0" width="7.9" height="7.5" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="73.4" y="47.4" width="7.9" height="13.1" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="85.0" y="54.0" width="7.9" height="6.4" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="96.6" y="56.6" width="7.9" height="3.9" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="108.2" y="44.3" width="7.9" height="16.2" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="119.8" y="58.8" width="7.9" height="1.7" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="131.4" y="56.6" width="7.9" height="3.8" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="143.0" y="56.8" width="7.9" height="3.7" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="154.6" y="50.5" width="7.9" height="10.0" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="166.2" y="42.7" width="7.9" height="17.8" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="177.8" y="55.9" width="7.9" height="4.5" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="189.4" y="52.6" width="7.9" height="7.9" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="201.0" y="60.5" width="7.9" height="14.4" rx="1.5" fill="#dc2626" opacity="0.88"/><rect x="212.6" y="39.5" width="7.9" height="20.9" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="224.2" y="60.5" width="7.9" height="18.7" rx="1.5" fill="#dc2626" opacity="0.88"/><rect x="235.8" y="60.5" width="7.9" height="8.1" rx="1.5" fill="#dc2626" opacity="0.88"/><rect x="247.3" y="57.8" width="7.9" height="2.7" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="258.9" y="28.4" width="7.9" height="32.0" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="270.5" y="51.6" width="7.9" height="8.9" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="282.1" y="57.8" width="7.9" height="2.7" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="293.7" y="36.9" width="7.9" height="23.6" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="305.3" y="42.4" width="7.9" height="18.1" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="316.9" y="60.5" width="7.9" height="6.3" rx="1.5" fill="#dc2626" opacity="0.88"/><rect x="328.5" y="57.8" width="7.9" height="2.6" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="340.1" y="60.5" width="7.9" height="4.1" rx="1.5" fill="#dc2626" opacity="0.88"/><rect x="351.7" y="50.5" width="7.9" height="10.0" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="363.3" y="49.8" width="7.9" height="10.7" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="374.9" y="10.0" width="7.9" height="50.5" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="386.5" y="58.0" width="7.9" height="2.4" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="398.1" y="60.5" width="7.9" height="15.1" rx="1.5" fill="#dc2626" opacity="0.88"/><rect x="409.7" y="60.5" width="7.9" height="14.8" rx="1.5" fill="#dc2626" opacity="0.88"/><rect x="421.2" y="54.9" width="7.9" height="5.6" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="432.8" y="54.5" width="7.9" height="6.0" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="444.4" y="60.5" width="7.9" height="13.9" rx="1.5" fill="#dc2626" opacity="0.88"/><rect x="456.0" y="44.4" width="7.9" height="16.1" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="467.6" y="44.6" width="7.9" height="15.9" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="479.2" y="59.4" width="7.9" height="1.2" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="490.8" y="60.5" width="7.9" height="3.9" rx="1.5" fill="#dc2626" opacity="0.88"/><rect x="502.4" y="41.8" width="7.9" height="18.7" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="514.0" y="60.5" width="7.9" height="21.0" rx="1.5" fill="#dc2626" opacity="0.88"/><rect x="525.6" y="60.5" width="7.9" height="1.2" rx="1.5" fill="#dc2626" opacity="0.88"/><rect x="537.2" y="60.5" width="7.9" height="4.7" rx="1.5" fill="#dc2626" opacity="0.88"/><rect x="548.8" y="60.5" width="7.9" height="1.2" rx="1.5" fill="#dc2626" opacity="0.88"/><rect x="560.4" y="19.0" width="7.9" height="41.5" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="572.0" y="52.2" width="7.9" height="8.3" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="583.5" y="36.3" width="7.9" height="24.2" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="595.1" y="56.3" width="7.9" height="4.2" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="606.7" y="60.5" width="7.9" height="6.2" rx="1.5" fill="#dc2626" opacity="0.88"/><rect x="618.3" y="60.5" width="7.9" height="17.2" rx="1.5" fill="#dc2626" opacity="0.88"/><rect x="629.9" y="53.8" width="7.9" height="6.7" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="641.5" y="60.5" width="7.9" height="2.7" rx="1.5" fill="#dc2626" opacity="0.88"/><rect x="653.1" y="60.1" width="7.9" height="1.2" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="664.7" y="59.4" width="7.9" height="1.2" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="676.3" y="57.5" width="7.9" height="3.0" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="687.9" y="59.7" width="7.9" height="1.2" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="699.5" y="58.1" width="7.9" height="2.4" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="711.1" y="31.2" width="7.9" height="29.2" rx="1.5" fill="#0d9488" opacity="0.88"/><rect x="722.7" y="60.5" width="7.9" height="5.2" rx="1.5" fill="#dc2626" opacity="0.88"/><rect x="734.3" y="60.5" width="7.9" height="15.2" rx="1.5" fill="#dc2626" opacity="0.88"/><text x="65.8" y="98" text-anchor="start" font-size="8.3" fill="#475569">2022-01</text><text x="204.9" y="98" text-anchor="middle" font-size="8.3" fill="#475569">2023-01</text><text x="344.0" y="98" text-anchor="middle" font-size="8.3" fill="#475569">2024-01</text><text x="483.2" y="98" text-anchor="middle" font-size="8.3" fill="#475569">2025-01</text><text x="622.3" y="98" text-anchor="middle" font-size="8.3" fill="#475569">2026-01</text><text x="738.2" y="98" text-anchor="end" font-size="8.3" fill="#475569">2026-11</text></svg></div>
+  </div>
+
+  <div class="box">
+    <h3>세팅 A (2엔진 50/50 · Vol $0.8M) 최근 59개월 월간 손익표 <span class="badge teal">월승률 69.5% (41/59) · 최대연속손실 4개월</span></h3>
+    <table class="cal-tbl">
+      <thead>
+        <tr><th>연도</th><th class="num">1월</th><th class="num">2월</th><th class="num">3월</th><th class="num">4월</th><th class="num">5월</th><th class="num">6월</th><th class="num">7월</th><th class="num">8월</th><th class="num">9월</th><th class="num">10월</th><th class="num">11월</th><th class="num">12월</th><th class="num">연간 합계</th><th class="num">적자월</th></tr>
+      </thead>
+      <tbody><tr><td class="bold">2022</td><td class="num pos" style="">+$159k</td><td class="num pos" style="">+$278k</td><td class="num pos" style="">+$136k</td><td class="num pos" style="">+$82k</td><td class="num pos" style="">+$344k</td><td class="num pos" style="">+$35k</td><td class="num pos" style="">+$82k</td><td class="num pos" style="">+$78k</td><td class="num pos" style="">+$212k</td><td class="num pos" style="">+$378k</td><td class="num pos" style="">+$96k</td><td class="num pos" style="">+$168k</td><td class="num bold pos">+$2,048,594</td><td class="num bold neg">0회</td></tr><tr><td class="bold">2023</td><td class="num neg" style="background:#fef2f2;">−$307k</td><td class="num pos" style="background:#ecfdf5;">+$445k</td><td class="num neg" style="background:#fef2f2;">−$397k</td><td class="num neg" style="">−$173k</td><td class="num pos" style="">+$58k</td><td class="num pos" style="background:#ecfdf5;">+$681k</td><td class="num pos" style="">+$189k</td><td class="num pos" style="">+$57k</td><td class="num pos" style="background:#ecfdf5;">+$502k</td><td class="num pos" style="">+$384k</td><td class="num neg" style="">−$134k</td><td class="num pos" style="">+$56k</td><td class="num bold pos">+$1,360,165</td><td class="num bold neg">4회</td></tr><tr><td class="bold">2024</td><td class="num neg" style="">−$88k</td><td class="num pos" style="">+$212k</td><td class="num pos" style="">+$227k</td><td class="num pos" style="background:#ecfdf5;">+$1,072k</td><td class="num pos" style="">+$52k</td><td class="num neg" style="background:#fef2f2;">−$322k</td><td class="num neg" style="background:#fef2f2;">−$315k</td><td class="num pos" style="">+$118k</td><td class="num pos" style="">+$127k</td><td class="num neg" style="">−$295k</td><td class="num pos" style="">+$341k</td><td class="num pos" style="">+$338k</td><td class="num bold pos">+$1,467,342</td><td class="num bold neg">4회</td></tr><tr><td class="bold">2025</td><td class="num pos" style="">+$23k</td><td class="num neg" style="">−$83k</td><td class="num pos" style="">+$397k</td><td class="num neg" style="background:#fef2f2;">−$446k</td><td class="num neg" style="">−$11k</td><td class="num neg" style="">−$99k</td><td class="num neg" style="">−$18k</td><td class="num pos" style="background:#ecfdf5;">+$881k</td><td class="num pos" style="">+$175k</td><td class="num pos" style="background:#ecfdf5;">+$514k</td><td class="num pos" style="">+$90k</td><td class="num neg" style="">−$132k</td><td class="num bold pos">+$1,290,362</td><td class="num bold neg">6회</td></tr><tr><td class="bold">2026</td><td class="num neg" style="background:#fef2f2;">−$365k</td><td class="num pos" style="">+$143k</td><td class="num neg" style="">−$57k</td><td class="num pos" style="">+$8k</td><td class="num pos" style="">+$22k</td><td class="num pos" style="">+$64k</td><td class="num pos" style="">+$17k</td><td class="num pos" style="">+$51k</td><td class="num pos" style="background:#ecfdf5;">+$621k</td><td class="num neg" style="">−$111k</td><td class="num neg" style="background:#fef2f2;">−$323k</td><td class="num muted">—</td><td class="num bold pos">+$69,721</td><td class="num bold neg">4회</td></tr></tbody>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div class="box">
+      <h3>운용 세팅 A / B / C 정밀 비교표</h3>
+      <table>
+        <thead><tr><th>세팅</th><th class="num">5Y 총손익 (Shp)</th><th class="num">11Y 연평균 (Shp)</th><th class="num">11Y MDD</th><th class="num">26Y Shp</th></tr></thead>
+        <tbody>
+          <tr style="background:#f0fdfa;"><td class="bold">A · 2엔진 순수 ($0.8M)</td><td class="num pos">+$6.24M (1.37)</td><td class="num pos">+$615k (0.68)</td><td class="num neg">−$2.58M</td><td class="num bold">0.58</td></tr>
+          <tr><td class="bold">B · 2엔진 감속 ($1.0M)</td><td class="num">+$5.07M (1.15)</td><td class="num">+$548k (0.67)</td><td class="num neg">−$1.91M</td><td class="num">0.64</td></tr>
+          <tr><td class="bold">C · 4엔진 W4 ($0.8M)</td><td class="num">+$5.19M (1.19)</td><td class="num">+$496k (0.57)</td><td class="num neg">−$1.94M</td><td class="num">0.7</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box soft">
+      <h3>데스크 리스크 한도별 목표 변동성 체급 스케일링 (세팅 A 선형 비례)</h3>
+      <table>
+        <thead><tr><th>목표 연변동성</th><th class="num">일간 1σ</th><th class="num">5Y 연평균</th><th class="num">11Y 연평균</th><th class="num">5Y MDD</th></tr></thead>
+        <tbody>
+          <tr style=""><td>Vol $0.4M/yr</td><td class="num">$25k</td><td class="num pos">+$0.61M</td><td class="num">+$307k/y</td><td class="num neg">−$0.48M</td></tr><tr style=""><td>Vol $0.6M/yr</td><td class="num">$38k</td><td class="num pos">+$0.92M</td><td class="num">+$461k/y</td><td class="num neg">−$0.72M</td></tr><tr style="background:#f0fdfa;font-weight:700;"><td>Vol $0.8M/yr (기본)</td><td class="num">$50k</td><td class="num pos">+$1.23M</td><td class="num">+$615k/y</td><td class="num neg">−$0.96M</td></tr><tr style=""><td>Vol $1.0M/yr</td><td class="num">$63k</td><td class="num pos">+$1.54M</td><td class="num">+$769k/y</td><td class="num neg">−$1.19M</td></tr><tr style=""><td>Vol $1.2M/yr</td><td class="num">$76k</td><td class="num pos">+$1.84M</td><td class="num">+$922k/y</td><td class="num neg">−$1.43M</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>FITD Trading Desk · 5-Year Performance &amp; Volatility Sizing Guide</span>
+    <span>Page 4 / 7</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 5: 26Y REGIMES & STRESS AUDIT ==================== -->
+<div class="page">
+  <div class="page-hdr">
+    <div><div class="sec-num">SECTION 04 · 26-YEAR REGIMES &amp; ROBUSTNESS AUDIT</div><h2>26년 9대 매크로 국면 · 11.1년 실선물 연도별 · 비용 스트레스 검증</h2></div>
+    <span class="pg-tag">2001~2026 장기 검증 · 비용 2.0배 스트레스 통과</span>
+  </div>
+
+  <div class="box">
+    <h3>26년(2001~2026) 9대 매크로 국면별 연평균 손익 &amp; Sharpe (세팅 A · 2엔진 50/50 · Vol $0.8M)</h3>
+    <svg viewBox="0 0 760 152" style="width:100%;height:auto;display:block;"><line x1="341.0" x2="341.0" y1="8" y2="142" stroke="#475569" stroke-width="1.1"/><text x="137" y="18.4" text-anchor="end" font-size="8.8" font-weight="600" fill="#1e293b">2001~2002 닷컴·침체</text><rect x="341.0" y="10.8" width="278.7" height="9.2" rx="2" fill="#0d9488" opacity="0.88"/><text x="624.7" y="18.4" text-anchor="start" font-size="8.3" font-weight="700" fill="#0d9488">+$1,637k/y (Shp +1.89)</text><text x="137" y="33.3" text-anchor="end" font-size="8.8" font-weight="600" fill="#1e293b">2003~2007 캐리 호황</text><rect x="341.0" y="25.7" width="89.3" height="9.2" rx="2" fill="#0d9488" opacity="0.88"/><text x="435.3" y="33.3" text-anchor="start" font-size="8.3" font-weight="700" fill="#0d9488">+$524k/y (Shp +0.62)</text><text x="137" y="48.2" text-anchor="end" font-size="8.8" font-weight="600" fill="#1e293b">2008~2009 글로벌 금융위기</text><rect x="240.5" y="40.6" width="100.5" height="9.2" rx="2" fill="#dc2626" opacity="0.88"/><text x="235.5" y="48.2" text-anchor="end" font-size="8.3" font-weight="700" fill="#dc2626">−$590k/y (Shp -0.67)</text><text x="137" y="63.1" text-anchor="end" font-size="8.8" font-weight="600" fill="#1e293b">2010~2012 유로존 위기</text><rect x="341.0" y="55.5" width="131.0" height="9.2" rx="2" fill="#0d9488" opacity="0.88"/><text x="477.0" y="63.1" text-anchor="start" font-size="8.3" font-weight="700" fill="#0d9488">+$769k/y (Shp +0.91)</text><text x="137" y="78.0" text-anchor="end" font-size="8.8" font-weight="600" fill="#1e293b">2013~2014 테이퍼·달러강세</text><rect x="323.5" y="70.4" width="17.5" height="9.2" rx="2" fill="#dc2626" opacity="0.88"/><text x="318.5" y="78.0" text-anchor="end" font-size="8.3" font-weight="700" fill="#dc2626">−$103k/y (Shp -0.11)</text><text x="137" y="92.9" text-anchor="end" font-size="8.8" font-weight="600" fill="#1e293b">2015~2016 CHF·브렉시트</text><rect x="314.9" y="85.3" width="26.0" height="9.2" rx="2" fill="#dc2626" opacity="0.88"/><text x="309.9" y="92.9" text-anchor="end" font-size="8.3" font-weight="700" fill="#dc2626">−$153k/y (Shp -0.16)</text><text x="137" y="107.8" text-anchor="end" font-size="8.8" font-weight="600" fill="#1e293b">2017~2019 저변동·무역전쟁</text><rect x="290.8" y="100.2" width="50.2" height="9.2" rx="2" fill="#dc2626" opacity="0.88"/><text x="285.8" y="107.8" text-anchor="end" font-size="8.3" font-weight="700" fill="#dc2626">−$295k/y (Shp -0.35)</text><text x="137" y="122.7" text-anchor="end" font-size="8.8" font-weight="600" fill="#1e293b">2020~2021 코로나·리플레</text><rect x="341.0" y="115.1" width="68.5" height="9.2" rx="2" fill="#0d9488" opacity="0.88"/><text x="414.4" y="122.7" text-anchor="start" font-size="8.3" font-weight="700" fill="#0d9488">+$402k/y (Shp +0.41)</text><text x="137" y="137.6" text-anchor="end" font-size="8.8" font-weight="600" fill="#1e293b">2022~2026 인플레·재변동</text><rect x="341.0" y="129.9" width="240.3" height="9.2" rx="2" fill="#0d9488" opacity="0.88"/><text x="586.3" y="137.6" text-anchor="start" font-size="8.3" font-weight="700" fill="#0d9488">+$1,412k/y (Shp +1.57)</text></svg>
+  </div>
+
+  <div class="grid2">
+    <div class="box">
+      <h3>11.1년 실선물 연도별 성과 분해 (2015~2026)</h3>
+      <table>
+        <thead><tr><th>연도</th><th>구간</th><th class="num">합산 손익</th><th class="num">연중 DD</th><th class="num">E1 국채</th><th class="num">FX4 회귀</th></tr></thead>
+        <tbody>
+          <tr><td class="bold">2026</td><td><span class="badge blue">5Y</span></td><td class="num bold pos">+$69,721</td><td class="num neg">−$858,406</td><td class="num neg">−$229k</td><td class="num pos">+$299k</td></tr><tr><td class="bold">2025</td><td><span class="badge blue">5Y</span></td><td class="num bold pos">+$1,290,362</td><td class="num neg">−$741,701</td><td class="num neg">−$419k</td><td class="num pos">+$1,710k</td></tr><tr><td class="bold">2024</td><td><span class="badge blue">5Y</span></td><td class="num bold pos">+$1,467,340</td><td class="num neg">−$890,064</td><td class="num pos">+$18k</td><td class="num pos">+$1,449k</td></tr><tr><td class="bold">2023</td><td><span class="badge blue">5Y</span></td><td class="num bold pos">+$1,360,164</td><td class="num neg">−$828,920</td><td class="num pos">+$1k</td><td class="num pos">+$1,360k</td></tr><tr><td class="bold">2022</td><td><span class="badge blue">5Y</span></td><td class="num bold pos">+$2,048,594</td><td class="num neg">−$510,899</td><td class="num pos">+$1,118k</td><td class="num pos">+$931k</td></tr><tr><td class="bold">2021</td><td><span class="badge ">OOS</span></td><td class="num bold neg">−$601,808</td><td class="num neg">−$1,051,071</td><td class="num neg">−$412k</td><td class="num neg">−$190k</td></tr><tr><td class="bold">2020</td><td><span class="badge ">OOS</span></td><td class="num bold pos">+$518,760</td><td class="num neg">−$1,188,504</td><td class="num pos">+$593k</td><td class="num neg">−$75k</td></tr><tr><td class="bold">2019</td><td><span class="badge ">OOS</span></td><td class="num bold pos">+$1,541,876</td><td class="num neg">−$658,900</td><td class="num pos">+$1,138k</td><td class="num pos">+$403k</td></tr><tr><td class="bold">2018</td><td><span class="badge ">OOS</span></td><td class="num bold neg">−$1,152,671</td><td class="num neg">−$1,770,632</td><td class="num pos">+$14k</td><td class="num neg">−$1,167k</td></tr><tr><td class="bold">2017</td><td><span class="badge ">OOS</span></td><td class="num bold neg">−$657,544</td><td class="num neg">−$1,529,896</td><td class="num pos">+$325k</td><td class="num neg">−$983k</td></tr><tr><td class="bold">2016</td><td><span class="badge ">OOS</span></td><td class="num bold pos">+$1,259,200</td><td class="num neg">−$436,712</td><td class="num pos">+$942k</td><td class="num pos">+$317k</td></tr><tr><td class="bold">2015</td><td><span class="badge ">OOS</span></td><td class="num bold neg">−$44,285</td><td class="num neg">−$234,092</td><td class="num neg">−$91k</td><td class="num pos">+$47k</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <div class="box">
+        <h3>거래비용 스트레스 (1.5x / 2.0x) 및 청산 파라미터 고원 검증</h3>
+        <table>
+          <thead><tr><th>시나리오 (세팅 A)</th><th class="num">26Y Shp</th><th class="num">11Y Shp</th><th class="num">5Y 총손익</th><th>판정</th></tr></thead>
+          <tbody>
+            <tr><td class="bold" style="font-size:7.2pt;">기준 비용 (1.0x: G10 2bp / EM 5bp · 출구 50D)</td><td class="num bold">0.58</td><td class="num bold">0.68</td><td class="num pos">+$6.24M</td><td><span class="badge teal">기준선</span></td></tr><tr><td class="bold" style="font-size:7.2pt;">비용 스트레스 1.5x (G10 3bp / EM 7.5bp)</td><td class="num bold">0.46</td><td class="num bold">0.51</td><td class="num pos">+$4.94M</td><td><span class="badge teal">통과</span></td></tr><tr><td class="bold" style="font-size:7.2pt;">비용 스트레스 2.0x (G10 4bp / EM 10bp)</td><td class="num bold">0.30</td><td class="num bold">0.34</td><td class="num pos">+$3.68M</td><td><span class="badge teal">주의</span></td></tr><tr><td class="bold" style="font-size:7.2pt;">추세 출구 단축 (40D · 6σ/7σ)</td><td class="num bold">0.56</td><td class="num bold">0.58</td><td class="num pos">+$6.12M</td><td><span class="badge teal">통과</span></td></tr><tr><td class="bold" style="font-size:7.2pt;">추세 출구 확대 (60D · 8σ/9σ)</td><td class="num bold">0.68</td><td class="num bold">0.74</td><td class="num pos">+$6.43M</td><td><span class="badge teal">통과</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="box soft">
+        <h3>장기 검증에서 확인된 핵심 강건성 포인트</h3>
+        <ul class="clean" style="font-size:7.8pt;">
+          <li><b>비용 2배(G10 4bp / EM 10bp) 스트레스 통과</b>: 체결 슬리피지를 보수적으로 2배로 올려도 26년·11.1년·5년 모든 구간에서 뚜렷한 양(+)의 샤프를 유지합니다.</li>
+          <li><b>파라미터 고원(Plateau) 확인</b>: 추세 출구를 40D(6σ/7σ)로 단축하거나 60D(8σ/9σ)로 늘려도 성과가 거의 흔들리지 않아 과최적화 위험이 매우 낮습니다.</li>
+          <li><b>저변동 구간(2017~2019) 유의</b>: 초저금리·저변동 박스권에서는 E1의 손절 빈도가 늘며 부진할 수 있으므로 장기 기대 샤프는 <b>0.55~0.70</b>으로 보수적 설정이 적절합니다.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>FITD Trading Desk · 26-Year Regimes, Real-Futures Attribution &amp; Stress Audit</span>
+    <span>Page 5 / 7</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 6: 26Y ANALOG SIMILARITY TOP 8 ==================== -->
+<div class="page">
+  <div class="page-hdr">
+    <div><div class="sec-num">SECTION 05 · 26-YEAR HISTORICAL REGIME SIMILARITY (TOP 8)</div><h2>현재 FICC 국면 싱크로율 분석 (TOP 8) 및 직후 3개월 성과 궤적</h2></div>
+    <span class="pg-tag">16팩터 60영업일 DNA (2026-09-02 ~ 2026-11-25) · 방향 55% + 강도 45%</span>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="lbl">TOP 8 직후 3M 2엔진 평균</div>
+      <div class="val pos">+$83,670</div>
+      <div class="sub">중앙값 <b>+$54,530</b> · 승률 <b>5/8</b><br>vs 4엔진 W4 −$11k (4/8)</div>
+    </div>
+    <div class="kpi blue">
+      <div class="lbl">직후 1개월(M+1) &amp; 해당월</div>
+      <div class="val" style="color:#1e40af;">M+1 5/8승</div>
+      <div class="sub">M+1 평균 −$1k<br>해당월 평균 +$6k (3/8승)</div>
+    </div>
+    <div class="kpi navy">
+      <div class="lbl">3M 엔진 기여 &amp; 평균 3M MDD</div>
+      <div class="val" style="font-size:11.2pt;">E1 +$140k · FX −$56k</div>
+      <div class="sub">평균 3개월 최대낙폭 <b class="neg">−$314,856</b><br>추세 전환기 E1 주도 수익 구조</div>
+    </div>
+    <div class="kpi amber">
+      <div class="lbl">직후 3M 시장 공통 경향</div>
+      <div class="val" style="font-size:11.2pt;color:#b45309;">플래트닝 6/8</div>
+      <div class="sub">2s10s 평균 <b>−11bp</b><br>US10Y 하락 4/8 · 중앙 +5bp</div>
+    </div>
+  </div>
+
+  <div class="box">
+    <h3>TOP 8 유사 국면 직후 60영업일(3개월) 2엔진 누적 손익 궤적 (세팅 A · Vol $0.8M)</h3>
+    
+<svg viewBox="0 0 760 178" style="width:100%;height:auto;display:block;">
+  <g transform="translate(58, 14)" font-size="8.8" font-weight="700">
+    <line x1="0" y1="-3" x2="15" y2="-3" stroke="#2563eb" stroke-width="2.6"/>
+    <text x="19" y="0" fill="#1e3a8a">1위 최유사 (#1 2021-11)</text>
+    <line x1="168" y1="-3" x2="183" y2="-3" stroke="#0d9488" stroke-width="1.8"/>
+    <text x="187" y="0" fill="#0f766e">3M 흑자 (5개)</text>
+    <line x1="290" y1="-3" x2="305" y2="-3" stroke="#dc2626" stroke-width="1.8"/>
+    <text x="309" y="0" fill="#b91c1c">3M 조정 (3개)</text>
+    <line x1="412" y1="-3" x2="430" y2="-3" stroke="#0f172a" stroke-width="2.4" stroke-dasharray="5 3"/>
+    <text x="434" y="0" fill="#0f172a">TOP 8 평균 (+$84k)</text>
+  </g>
+  <line x1="58" x2="688" y1="156.0" y2="156.0" stroke="#e2e8f0" stroke-dasharray="3 3"/><text x="52" y="159.0" text-anchor="end" font-size="8.4" fill="#475569">−$506k</text><line x1="58" x2="688" y1="106.1" y2="106.1" stroke="#475569" stroke-dasharray=""/><text x="52" y="109.1" text-anchor="end" font-size="8.4" fill="#475569">$0k</text><line x1="58" x2="688" y1="65.1" y2="65.1" stroke="#e2e8f0" stroke-dasharray="3 3"/><text x="52" y="68.1" text-anchor="end" font-size="8.4" fill="#475569">+$417k</text><line x1="58" x2="688" y1="24.0" y2="24.0" stroke="#e2e8f0" stroke-dasharray="3 3"/><text x="52" y="27.0" text-anchor="end" font-size="8.4" fill="#475569">+$833k</text>
+  <line x1="58.0" x2="58.0" y1="24" y2="156" stroke="#e2e8f0" stroke-dasharray="2 3"/><text x="58.0" y="171" text-anchor="middle" font-size="8.5" font-weight="700" fill="#475569">D+0</text><line x1="268.0" x2="268.0" y1="24" y2="156" stroke="#e2e8f0" stroke-dasharray="2 3"/><text x="268.0" y="171" text-anchor="middle" font-size="8.5" font-weight="700" fill="#475569">M+1 (20D)</text><line x1="478.0" x2="478.0" y1="24" y2="156" stroke="#e2e8f0" stroke-dasharray="2 3"/><text x="478.0" y="171" text-anchor="middle" font-size="8.5" font-weight="700" fill="#475569">M+2 (40D)</text><line x1="688.0" x2="688.0" y1="24" y2="156" stroke="#e2e8f0" stroke-dasharray="2 3"/><text x="688.0" y="171" text-anchor="middle" font-size="8.5" font-weight="700" fill="#475569">M+3 (60D)</text>
+  <path d="M58.0,106.1 L110.5,99.1 L163.0,95.8 L215.5,95.8 L268.0,93.3 L320.5,90.7 L373.0,81.8 L425.5,75.1 L478.0,74.2 L530.5,63.2 L583.0,36.1 L635.5,24.0 L688.0,30.2" fill="none" stroke="#2563eb" stroke-width="2.6" opacity="0.98"/><text x="692.0" y="33.2" font-size="7.8" font-weight="700" fill="#2563eb">#1 21-11 (+$771k)</text><path d="M58.0,106.1 L110.5,107.7 L163.0,107.3 L215.5,102.8 L268.0,102.9 L320.5,106.2 L373.0,104.9 L425.5,100.4 L478.0,81.9 L530.5,105.9 L583.0,104.3 L635.5,104.0 L688.0,95.7" fill="none" stroke="#0d9488" stroke-width="1.25" opacity="0.45"/><text x="692.0" y="98.7" font-size="7.8" font-weight="700" fill="#0d9488">#2 16-01 (+$106k)</text><path d="M58.0,106.1 L110.5,106.5 L163.0,111.5 L215.5,106.4 L268.0,105.3 L320.5,102.3 L373.0,95.1 L425.5,100.7 L478.0,92.5 L530.5,95.7 L583.0,102.2 L635.5,98.2 L688.0,105.8" fill="none" stroke="#0d9488" stroke-width="1.25" opacity="0.45"/><path d="M58.0,106.1 L110.5,103.1 L163.0,104.4 L215.5,109.2 L268.0,110.1 L320.5,110.6 L373.0,122.8 L425.5,110.8 L478.0,120.3 L530.5,107.8 L583.0,109.0 L635.5,86.3 L688.0,85.8" fill="none" stroke="#0d9488" stroke-width="1.25" opacity="0.45"/><path d="M58.0,106.1 L110.5,115.0 L163.0,103.0 L215.5,92.7 L268.0,89.0 L320.5,88.1 L373.0,81.1 L425.5,86.0 L478.0,79.2 L530.5,67.1 L583.0,48.1 L635.5,52.9 L688.0,43.3" fill="none" stroke="#0d9488" stroke-width="1.25" opacity="0.45"/><text x="692.0" y="46.3" font-size="7.8" font-weight="700" fill="#0d9488">#5 22-07 (+$637k)</text><path d="M58.0,106.1 L110.5,99.7 L163.0,88.6 L215.5,100.8 L268.0,103.0 L320.5,111.9 L373.0,106.8 L425.5,100.9 L478.0,98.3 L530.5,96.9 L583.0,106.6 L635.5,116.8 L688.0,119.5" fill="none" stroke="#dc2626" stroke-width="1.25" opacity="0.45"/><path d="M58.0,106.1 L110.5,100.5 L163.0,103.6 L215.5,119.2 L268.0,131.6 L320.5,128.2 L373.0,124.3 L425.5,105.2 L478.0,109.6 L530.5,138.3 L583.0,144.3 L635.5,154.9 L688.0,156.0" fill="none" stroke="#dc2626" stroke-width="1.25" opacity="0.45"/><text x="692.0" y="159.0" font-size="7.8" font-weight="700" fill="#dc2626">#7 15-02 (−$506k)</text><path d="M58.0,106.1 L110.5,100.6 L163.0,111.6 L215.5,128.7 L268.0,114.4 L320.5,121.8 L373.0,117.6 L425.5,123.0 L478.0,121.7 L530.5,126.9 L583.0,149.5 L635.5,148.3 L688.0,146.5" fill="none" stroke="#dc2626" stroke-width="1.25" opacity="0.45"/><text x="692.0" y="149.5" font-size="7.8" font-weight="700" fill="#dc2626">#8 19-09 (−$410k)</text>
+  <path d="M58.0,106.1 L110.5,104.0 L163.0,103.2 L215.5,106.9 L268.0,106.2 L320.5,107.5 L373.0,104.3 L425.5,100.3 L478.0,97.2 L530.5,100.2 L583.0,100.0 L635.5,98.2 L688.0,97.9" fill="none" stroke="#0f172a" stroke-width="2.4" stroke-dasharray="5 3"/>
+</svg>
+  </div>
+
+  <div class="box">
+    <h3>과거 고(高)싱크로율 TOP 8 국면 — 당시 2엔진 포지션 · 해당월 성과 · M+1/M+2/M+3 변화</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>순위 / 과거 국면</th><th class="num">싱크로</th><th>당시 2엔진 보유 포지션</th>
+          <th class="num">해당월</th><th class="num">M+1</th><th class="num">M+2</th><th class="num">M+3</th>
+          <th class="num">3M 합계 (DD)</th><th class="num">W4 (3M)</th>
+        </tr>
+      </thead>
+      <tbody><tr><td class="bold">#1 2021-11<div class="muted" style="font-size:6.8pt;font-weight:400;">파월 매파전환(일시적 폐기)·오미크론</div></td><td class="num bold" style="color:#1e40af;">87.6%<div class="muted" style="font-size:6.7pt;">R84/F93</div></td><td style="font-size:7pt;"><b>E1:</b> US2Y SHORT (S2, 45d), DE2Y LONG (S2, 5d)<br><span class="muted">FX4: 2페어</span></td><td class="num pos">+$39k</td><td class="num pos">+$130k</td><td class="num pos">+$194k</td><td class="num pos">+$447k</td><td class="num bold pos">+$771k<div class="neg" style="font-size:6.7pt;">DD −$107k</div></td><td class="num pos">+$596k</td></tr><tr><td class="bold">#2 2016-01<div class="muted" style="font-size:6.8pt;font-weight:400;">연준 첫 금리인상 직후·중국 쇼크</div></td><td class="num bold" style="color:#1e40af;">86.6%<div class="muted" style="font-size:6.7pt;">R74/F94</div></td><td style="font-size:7pt;"><b>E1:</b> US2Y SHORT (S2, 47d), DE2Y LONG (S2, 14d)<br><span class="muted">FX4: 2페어</span></td><td class="num neg">−$55k</td><td class="num pos">+$32k</td><td class="num pos">+$213k</td><td class="num neg">−$140k</td><td class="num bold pos">+$106k<div class="neg" style="font-size:6.7pt;">DD −$265k</div></td><td class="num neg">−$24k</td></tr><tr><td class="bold">#3 2018-06<div class="muted" style="font-size:6.8pt;font-weight:400;">2018년 6월 긴축·강달러 국면</div></td><td class="num bold" style="color:#1e40af;">83.1%<div class="muted" style="font-size:6.7pt;">R76/F93</div></td><td style="font-size:7pt;"><b>E1:</b> DE10Y LONG (S2, 4d)<br><span class="muted">FX4: 0페어</span></td><td class="num neg">−$26k</td><td class="num pos">+$8k</td><td class="num pos">+$130k</td><td class="num neg">−$135k</td><td class="num bold pos">+$3k<div class="neg" style="font-size:6.7pt;">DD −$223k</div></td><td class="num pos">+$63k</td></tr><tr><td class="bold">#4 2015-09<div class="muted" style="font-size:6.8pt;font-weight:400;">2015년 9월 긴축·강달러 국면</div></td><td class="num bold" style="color:#1e40af;">82.6%<div class="muted" style="font-size:6.7pt;">R59/F86</div></td><td style="font-size:7pt;"><b>E1:</b> US2Y SHORT (S2, 75d), DE2Y LONG (S2, 21d)<br><span class="muted">FX4: 0페어</span></td><td class="num neg">−$23k</td><td class="num neg">−$40k</td><td class="num neg">−$104k</td><td class="num pos">+$349k</td><td class="num bold pos">+$206k<div class="neg" style="font-size:6.7pt;">DD −$255k</div></td><td class="num pos">+$223k</td></tr><tr><td class="bold">#5 2022-07<div class="muted" style="font-size:6.8pt;font-weight:400;">연준 75bp 자이언트스텝·강달러</div></td><td class="num bold" style="color:#1e40af;">82.4%<div class="muted" style="font-size:6.7pt;">R83/F81</div></td><td style="font-size:7pt;"><b>E1:</b> US2Y SHORT (S2, 210d), DE10Y SHORT (S2, 91d)<br><span class="muted">FX4: 1페어</span></td><td class="num pos">+$113k</td><td class="num pos">+$173k</td><td class="num pos">+$99k</td><td class="num pos">+$364k</td><td class="num bold pos">+$637k<div class="neg" style="font-size:6.7pt;">DD −$162k</div></td><td class="num pos">+$540k</td></tr><tr><td class="bold">#6 2012-05<div class="muted" style="font-size:6.8pt;font-weight:400;">2012년 5월 긴축·강달러 국면</div></td><td class="num bold" style="color:#1e40af;">80.3%<div class="muted" style="font-size:6.7pt;">R36/F96</div></td><td style="font-size:7pt;"><b>E1:</b> US5Y LONG (S2, 30d), DE10Y LONG (S2, 39d)<br><span class="muted">FX4: 1페어</span></td><td class="num pos">+$224k</td><td class="num pos">+$32k</td><td class="num pos">+$48k</td><td class="num neg">−$216k</td><td class="num bold neg">−$136k<div class="neg" style="font-size:6.7pt;">DD −$349k</div></td><td class="num neg">−$201k</td></tr><tr><td class="bold">#7 2015-02<div class="muted" style="font-size:6.8pt;font-weight:400;">2015년 2월 긴축·강달러 국면</div></td><td class="num bold" style="color:#1e40af;">79.6%<div class="muted" style="font-size:6.7pt;">R62/F89</div></td><td style="font-size:7pt;"><b>E1:</b> DE10Y LONG (S2, 280d)<br><span class="muted">FX4: 1페어</span></td><td class="num neg">−$145k</td><td class="num neg">−$259k</td><td class="num pos">+$223k</td><td class="num neg">−$471k</td><td class="num bold neg">−$506k<div class="neg" style="font-size:6.7pt;">DD −$648k</div></td><td class="num neg">−$523k</td></tr><tr><td class="bold">#8 2019-09<div class="muted" style="font-size:6.8pt;font-weight:400;">2019년 9월 긴축·강달러 국면</div></td><td class="num bold" style="color:#1e40af;">78.6%<div class="muted" style="font-size:6.7pt;">R68/F94</div></td><td style="font-size:7pt;"><b>E1:</b> US10Y LONG (S2, 2d), DE10Y LONG (S2, 2d)<br><span class="muted">FX4: 0페어</span></td><td class="num neg">−$77k</td><td class="num neg">−$84k</td><td class="num neg">−$75k</td><td class="num neg">−$252k</td><td class="num bold neg">−$410k<div class="neg" style="font-size:6.7pt;">DD −$510k</div></td><td class="num neg">−$760k</td></tr></tbody>
+    </table>
+    <p class="muted" style="margin:5px 0 0;font-size:7.4pt;">
+      * 26년(2001~2026) 중 최근 6개월을 제외하고 서로 최소 80영업일(약 4개월) 이상 떨어진 독립 국면만 추출했습니다.
+      대시보드 <b>[싱크로율 분석 (TOP 8)]</b> 탭에서 각 국면 행을 클릭하면 당시 금리/FX 레벨 및 월별 상세 해부 카드를 실시간으로 확인할 수 있습니다.
+    </p>
+  </div>
+
+  <div class="footer">
+    <span>FITD Trading Desk · 26-Year 16-Factor FICC Regime Analog Analysis (TOP 8)</span>
+    <span>Page 6 / 7</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 7: DAILY EXECUTION & CME FUTURES TICKET ==================== -->
+<div class="page">
+  <div class="page-hdr">
+    <div><div class="sec-num">SECTION 06 · LIVE EXECUTION PROTOCOL &amp; CME FUTURES TICKET</div><h2>실전 운용 루틴 (NY 종가 T → 서울 아침 T+1) · CME FX 선물 주문표</h2></div>
+    <span class="pg-tag">기준일 2026-11-25 · 실시간 2026-11-26 · 세팅 A Vol $0.8M</span>
+  </div>
+
+  <div class="box teal">
+    <h3>매일 아침 09:00 KST 실무 실행 프로토콜 (4-Step Daily Routine)</h3>
+    <div class="grid2" style="font-size:7.9pt;">
+      <div>
+        <p style="margin:0 0 4px;"><b>STEP 1 · 전일 뉴욕 종가(T) 신호 확인</b>: 대시보드 상단 <b>[오늘의 운용 액션 · 경보 큐]</b>에서 신규 진입(<code>오늘 신규 0d</code>)과 청산 임박/돌파 경보를 우선 점검합니다.</p>
+        <p style="margin:0;"><b>STEP 2 · ±15% 리밸런싱 데드밴드 적용</b>: 기존 보유 포지션은 실보유(<code>#book</code>) 대비 모델 목표 괴리가 ±15% 이내면 미세 주문을 생략해 불필요한 수수료를 절감합니다.</p>
+      </div>
+      <div>
+        <p style="margin:0 0 4px;"><b>STEP 3 · 서울 아침(T+1) 신규 집행 &amp; #book 등록</b>: 경보 큐 또는 주문표의 원클릭 <b>[신규 등록]</b> 버튼으로 체결 계약수/명목금액을 입력하면 <code>#book</code>과 자동 동기화됩니다.</p>
+        <p style="margin:0;"><b>STEP 4 · 장중 15분 BBG 실시간 감시</b>: 50D 채널·8σ 트레일링 여유(σ/bp)와 FX4 실시간 2F-Z 게이지를 확인하며, 손절/익절선 돌파 시 원칙대로 청산합니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <h3>최신 실전 실행 주문표 (2026-11-25 뉴욕 종가 확정 → 2026-11-26 아침 실행 · 세팅 A Vol $0.8M)</h3>
+    <div class="grid2">
+      <div>
+        <div style="font-size:8pt;font-weight:800;margin-bottom:4px;">① 국채선물 주문표 (E1 단독 · 총 |DV01| $5,372/bp)</div>
+        <table>
+          <thead><tr><th>종목</th><th class="num">목표 계약</th><th class="num">DV01/bp</th><th>상태</th></tr></thead>
+          <tbody>
+            <tr><td class="bold">미 국채 2Y (TU)</td><td class="num bold neg">-64 ct</td><td class="num neg">−$2,432</td><td>보유/실행</td></tr><tr><td class="bold">미 국채 5Y (FV)</td><td class="num bold muted">+0 ct</td><td class="num muted">$0</td><td>FLAT</td></tr><tr><td class="bold">미 울트라 10Y (UXY)</td><td class="num bold muted">+0 ct</td><td class="num muted">$0</td><td>FLAT</td></tr><tr><td class="bold">독 국채 2Y (DU)</td><td class="num bold neg">-140 ct</td><td class="num neg">−$2,940</td><td>보유/실행</td></tr><tr><td class="bold">독 국채 10Y (RX)</td><td class="num bold muted">+0 ct</td><td class="num muted">$0</td><td>FLAT</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div style="font-size:8pt;font-weight:800;margin-bottom:4px;">② FX 통화별 네팅 + CME 선물 환산 (Net USD $0 · Gross $14.48M)</div>
+        <table>
+          <thead><tr><th>통화 (선물)</th><th class="num">스팟</th><th class="num">1계약 USD</th><th class="num">목표 USD</th><th class="num">FX 선물 주문</th></tr></thead>
+          <tbody><tr><td class="bold">GBP <span class="muted">(6B)</span></td><td class="num">1.3112</td><td class="num">$81,950</td><td class="num bold pos">+$3.71M</td><td class="num bold pos">6B 매수 +45 ct</td></tr><tr><td class="bold">CAD <span class="muted">(6C)</span></td><td class="num">1.4217</td><td class="num">$70,338</td><td class="num bold neg">−$3.71M</td><td class="num bold neg">6C 매도 -53 ct</td></tr><tr><td class="bold">AUD <span class="muted">(6A)</span></td><td class="num">0.6638</td><td class="num">$66,380</td><td class="num bold pos">+$3.52M</td><td class="num bold pos">6A 매수 +53 ct</td></tr><tr><td class="bold">CHF <span class="muted">(6S)</span></td><td class="num">0.8316</td><td class="num">$150,313</td><td class="num bold neg">−$3.32M</td><td class="num bold neg">6S 매도 -22 ct</td></tr><tr><td class="bold">EUR <span class="muted">(6E)</span></td><td class="num">1.0967</td><td class="num">$137,088</td><td class="num bold neg">−$0.21M</td><td class="num bold neg">6E 매도 -2 ct</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="margin-top:8px;">
+      <div style="font-size:8pt;font-weight:800;margin-bottom:4px;">③ FX4 개별 페어 구성 (보유 3/6페어 · 전일 종가 신규 포함)</div>
+      <table>
+        <thead><tr><th>페어 (방향)</th><th>상태</th><th class="num">진입 → 현재 2F-Z</th><th class="num">3M 캐리</th><th class="num">목표 레그</th><th class="num">CME FX 선물 환산</th></tr></thead>
+        <tbody><tr><td class="bold">EUR/CHF <span class="muted">(L EUR / S CHF)</span></td><td>17일차</td><td class="num">−2.83σ → <b>−1.88σ</b></td><td class="num pos">+2.91%</td><td class="num bold">$3.32M</td><td class="num">6E +24 / 6S -22 ct</td></tr><tr><td class="bold">AUD/EUR <span class="muted">(L AUD / S EUR)</span></td><td>5일차</td><td class="num">−2.42σ → <b>−2.35σ</b></td><td class="num pos">+2.18%</td><td class="num bold">$3.53M</td><td class="num">6A +53 / 6E -26 ct</td></tr><tr><td class="bold">GBP/CAD <span class="muted">(L GBP / S CAD)</span></td><td><span class="badge teal">오늘 신규</span></td><td class="num">−2.49σ → <b>−2.52σ</b></td><td class="num pos">+1.63%</td><td class="num bold">$3.72M</td><td class="num">6B +45 / 6C -53 ct</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="box amber">
+    <h3>실전 운용 전 반드시 인지해야 할 3가지 핵심 유의사항</h3>
+    <ul class="clean" style="font-size:8pt;">
+      <li><b>최근 5년 성과(Shp 1.37 · 연 $1.23M)를 미래 고정 기대치로 두지 말 것</b>: 2022~2026년은 금리 추세와 국가별 금리차가 모두 선명했던 최적 환경이었습니다. 향후 저변동 장세 회귀를 감안한 Vol $0.8M 기준 합리적 중장기 기대치는 <b>Sharpe 0.55 ~ 0.70, 연 $45만 ~ $60만</b> 수준입니다.</li>
+      <li><b>시스템 규율 유지 (연속 적자월 대응)</b>: 5년 월승률이 69.5%로 높지만 최대 4개월 연속 적자 구간은 언제든 재현될 수 있습니다. 손실 구간에서 임의로 엔진을 끄면 직후 반등 추세를 놓치므로 규칙적 운용이 최우선입니다.</li>
+      <li><b>선물 분기 롤오버 &amp; FX 유동성 관리</b>: 국채선물(TU/FV/UXY/DU/RX) 및 CME FX 선물(6E/6B/6A/6N/6C/6J/6S)은 분기 만기 1~2주 전 롤오버 집행이 필요하며, EM(BRL·MXN·KRW) 체결 시 장중 스프레드 및 NDF 유동성을 병행 점검합니다.</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <span>FITD Trading Desk · 2-Engine 50/50 Active FICC Strategy · Generated 2026-11-26 10:22:29</span>
+    <span>Page 7 / 7</span>
+  </div>
+</div>
+
+</body>
+</html>
