@@ -2,7 +2,7 @@ import { PAIR_SORTS, sortPairs } from './pair-sort.js';
 import { configureTreasury, renderTreasury } from './treasury.js?v=16';
 import { configureMomentum, renderMomentum as renderMomentumView } from './momentum.js?v=19';
 import { configureHoldings, renderHoldings, openHoldingDialog } from './holdings.js?v=16';
-import { configureMomentumStrategy, renderMomentumStrategy } from './momentum-strategy.js?v=23';
+import { configureMomentumStrategy, renderMomentumStrategy } from './momentum-strategy.js?v=24';
 import {
   renderRangeControls,
   bindRangeControls,
@@ -377,10 +377,10 @@ const titles = {
     'Relative Value',
   ],
   mom_strategy: [
-    '4-ENGINE ACTIVE FICC · LIVE EXECUTION DESK',
-    '모멘텀 전략 (4엔진 풀액티브)',
-    'W4 확정본 (30/15/35/20 · Vol $0.8M/yr · 실BBG 2Y/3M캐리) 실시간 BBG 가격·청산선 모니터링 · 모델 vs 실보유 주문표 · 원클릭 포지션 등록 연동',
-    'Momentum Strategy · 4E Active',
+    '2-ENGINE 50/50 ACTIVE FICC · LIVE EXECUTION DESK',
+    '모멘텀 전략 (2엔진 50/50)',
+    'E1 국채 방향성 50% + FX4 평균회귀(실BBG 2Y OLS + 3M 캐리>=1%) 50% · USD 중립 · Vol $0.8M/yr · 실시간 주문표 · 26년 과거 국면 싱크로율 분석',
+    'Momentum Strategy · 2E 50/50',
   ],
   book: [
     'POSITION MONITOR',
