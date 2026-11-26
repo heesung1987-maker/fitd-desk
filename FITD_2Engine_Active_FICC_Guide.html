@@ -324,10 +324,10 @@
         실증 분석 결과, <b>캐리 필터는 단순 이자 벌이가 아니라 '금리차 역행 함정'을 거르는 핵심 레짐 필터</b>로 작동합니다.
       </p>
       <table>
-        <thead><tr><th>FX4 단독 비교 (26년 검증)</th><th class="num">26Y Shp</th><th class="num">5Y 총손익</th><th class="num">역캐리 거래 손익</th></tr></thead>
+        <thead><tr><th>FX4 단독 비교 (Vol 정규화 · 26년)</th><th class="num">26Y Shp</th><th class="num">11Y / 5Y Shp</th><th class="num">저캐리·역캐리 거래</th></tr></thead>
         <tbody>
-          <tr><td class="bold">캐리 ≥ +1.0% ON (확정)</td><td class="num pos">0.71</td><td class="num pos">+$5.85M</td><td class="num pos">원천 차단</td></tr>
-          <tr><td>캐리 필터 OFF (제한 없음)</td><td class="num neg">0.25</td><td class="num muted">+$2.72M</td><td class="num neg">718건 · −$827k 손실</td></tr>
+          <tr><td class="bold">캐리 ≥ +1.0% ON (확정)</td><td class="num pos">0.35</td><td class="num pos">0.49 / 1.61</td><td class="num pos">원천 차단 (0건)</td></tr>
+          <tr><td>캐리 필터 OFF (제한 없음)</td><td class="num neg">0.01</td><td class="num muted">0.25 / 0.53</td><td class="num neg">898건 · −$450k 손실</td></tr>
         </tbody>
       </table>
       <p style="margin:6px 0 0;font-size:7.7pt;color:#0f766e;">
@@ -589,7 +589,7 @@
         <div style="font-size:8pt;font-weight:800;margin-bottom:4px;">② FX 통화별 네팅 + CME 선물 환산 (Net USD $0 · Gross $14.48M)</div>
         <table>
           <thead><tr><th>통화 (선물)</th><th class="num">스팟</th><th class="num">1계약 USD</th><th class="num">목표 USD</th><th class="num">FX 선물 주문</th></tr></thead>
-          <tbody><tr><td class="bold">GBP <span class="muted">(6B)</span></td><td class="num">1.3112</td><td class="num">$81,950</td><td class="num bold pos">+$3.71M</td><td class="num bold pos">6B 매수 +45 ct</td></tr><tr><td class="bold">CAD <span class="muted">(6C)</span></td><td class="num">1.4217</td><td class="num">$70,338</td><td class="num bold neg">−$3.71M</td><td class="num bold neg">6C 매도 -53 ct</td></tr><tr><td class="bold">AUD <span class="muted">(6A)</span></td><td class="num">0.6638</td><td class="num">$66,380</td><td class="num bold pos">+$3.52M</td><td class="num bold pos">6A 매수 +53 ct</td></tr><tr><td class="bold">CHF <span class="muted">(6S)</span></td><td class="num">0.8316</td><td class="num">$150,313</td><td class="num bold neg">−$3.32M</td><td class="num bold neg">6S 매도 -22 ct</td></tr><tr><td class="bold">EUR <span class="muted">(6E)</span></td><td class="num">1.0967</td><td class="num">$137,088</td><td class="num bold neg">−$0.21M</td><td class="num bold neg">6E 매도 -2 ct</td></tr></tbody>
+          <tbody><tr><td class="bold">GBP <span class="muted">(6B)</span></td><td class="num">1.3098</td><td class="num">$81,862</td><td class="num bold pos">+$3.71M</td><td class="num bold pos">6B 매수 +45 ct</td></tr><tr><td class="bold">CAD <span class="muted">(6C)</span></td><td class="num">1.4222</td><td class="num">$70,314</td><td class="num bold neg">−$3.71M</td><td class="num bold neg">6C 매도 -53 ct</td></tr><tr><td class="bold">AUD <span class="muted">(6A)</span></td><td class="num">0.6641</td><td class="num">$66,410</td><td class="num bold pos">+$3.52M</td><td class="num bold pos">6A 매수 +53 ct</td></tr><tr><td class="bold">CHF <span class="muted">(6S)</span></td><td class="num">0.8319</td><td class="num">$150,258</td><td class="num bold neg">−$3.32M</td><td class="num bold neg">6S 매도 -22 ct</td></tr><tr><td class="bold">EUR <span class="muted">(6E)</span></td><td class="num">1.0959</td><td class="num">$136,988</td><td class="num bold neg">−$0.21M</td><td class="num bold neg">6E 매도 -2 ct</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -598,7 +598,7 @@
       <div style="font-size:8pt;font-weight:800;margin-bottom:4px;">③ FX4 개별 페어 구성 (보유 3/6페어 · 전일 종가 신규 포함)</div>
       <table>
         <thead><tr><th>페어 (방향)</th><th>상태</th><th class="num">진입 → 현재 2F-Z</th><th class="num">3M 캐리</th><th class="num">목표 레그</th><th class="num">CME FX 선물 환산</th></tr></thead>
-        <tbody><tr><td class="bold">EUR/CHF <span class="muted">(L EUR / S CHF)</span></td><td>17일차</td><td class="num">−2.83σ → <b>−1.88σ</b></td><td class="num pos">+2.91%</td><td class="num bold">$3.32M</td><td class="num">6E +24 / 6S -22 ct</td></tr><tr><td class="bold">AUD/EUR <span class="muted">(L AUD / S EUR)</span></td><td>5일차</td><td class="num">−2.42σ → <b>−2.35σ</b></td><td class="num pos">+2.18%</td><td class="num bold">$3.53M</td><td class="num">6A +53 / 6E -26 ct</td></tr><tr><td class="bold">GBP/CAD <span class="muted">(L GBP / S CAD)</span></td><td><span class="badge teal">오늘 신규</span></td><td class="num">−2.49σ → <b>−2.52σ</b></td><td class="num pos">+1.63%</td><td class="num bold">$3.72M</td><td class="num">6B +45 / 6C -53 ct</td></tr></tbody>
+        <tbody><tr><td class="bold">EUR/CHF <span class="muted">(L EUR / S CHF)</span></td><td>17일차</td><td class="num">−2.83σ → <b>−1.91σ</b></td><td class="num pos">+2.91%</td><td class="num bold">$3.32M</td><td class="num">6E +24 / 6S -22 ct</td></tr><tr><td class="bold">AUD/EUR <span class="muted">(L AUD / S EUR)</span></td><td>5일차</td><td class="num">−2.42σ → <b>−2.22σ</b></td><td class="num pos">+2.18%</td><td class="num bold">$3.53M</td><td class="num">6A +53 / 6E -26 ct</td></tr><tr><td class="bold">GBP/CAD <span class="muted">(L GBP / S CAD)</span></td><td><span class="badge teal">오늘 신규</span></td><td class="num">−2.49σ → <b>−2.75σ</b></td><td class="num pos">+1.63%</td><td class="num bold">$3.72M</td><td class="num">6B +45 / 6C -53 ct</td></tr></tbody>
       </table>
     </div>
   </div>
