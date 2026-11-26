@@ -92,7 +92,40 @@ function bandPill(st) {
   return pill('무포지션', 'neutral');
 }
 
+const FX_FUT_SPEC = {
+  EUR: { code: '6E', mult: 125000, quote: 'XXXUSD', desc: 'CME 125k EUR' },
+  GBP: { code: '6B', mult: 62500, quote: 'XXXUSD', desc: 'CME 62.5k GBP' },
+  AUD: { code: '6A', mult: 100000, quote: 'XXXUSD', desc: 'CME 100k AUD' },
+  NZD: { code: '6N', mult: 100000, quote: 'XXXUSD', desc: 'CME 100k NZD' },
+  CAD: { code: '6C', mult: 100000, quote: 'USDXXX', desc: 'CME 100k CAD' },
+  JPY: { code: '6J', mult: 12500000, quote: 'USDXXX', desc: 'CME 12.5M JPY' },
+  CHF: { code: '6S', mult: 125000, quote: 'USDXXX', desc: 'CME 125k CHF' },
+  BRL: { code: '6L', mult: 100000, quote: 'USDXXX', desc: 'CME 100k BRL' },
+  MXN: { code: '6M', mult: 500000, quote: 'USDXXX', desc: 'CME 500k MXN' },
+  KRW: { code: 'KRX USD', mult: 10000, quote: 'USD_FIXED_INV', desc: 'KRX $10k (역방향)' },
+};
+
+function calcFxFut(ccy, signedUsd, spot) {
+  const sp = FX_FUT_SPEC[ccy];
+  const s = Number(spot);
+  if (!sp || !Number.isFinite(s) || s <= 0) return { code: sp?.code || ccy, usdPerCt: 0, ct: 0, desc: sp?.desc || '' };
+  let usdPerCt = 0;
+  let ct = 0;
+  if (sp.quote === 'XXXUSD') {
+    usdPerCt = sp.mult * s;
+    ct = Math.round(Number(signedUsd || 0) / Math.max(1, usdPerCt));
+  } else if (sp.quote === 'USDXXX') {
+    usdPerCt = sp.mult / s;
+    ct = Math.round(Number(signedUsd || 0) / Math.max(1, usdPerCt));
+  } else {
+    usdPerCt = sp.mult;
+    ct = Math.round(-Number(signedUsd || 0) / Math.max(1, usdPerCt));
+  }
+  return { code: sp.code, usdPerCt: Math.round(usdPerCt), ct, desc: sp.desc };
+}
+
 function liveStatusPill(st) {
+  if (st === 'NEW_ENTRY') return pill('오늘 신규', 'green');
   if (st === 'EXIT_ALERT') return pill('청산선 돌파', 'red');
   if (st === 'STOP_ALERT') return pill('손절 경보', 'red');
   if (st === 'TP_REACHED') return pill('익절 도달', 'green');
@@ -289,13 +322,16 @@ function openFxOrderDialog({ mode = 'SINGLE', ccy1, ccy2 = null, side1 = 1, side
   const px1 = Number(q1.fitd_quote || q1.live_spot || 1.0);
   const px2 = isPair ? Number(q2.fitd_quote || q2.live_spot || 1.0) : null;
 
+  const f1 = calcFxFut(ccy1, side1 * mio1 * 1e6, q1.live_spot);
+  const f2 = isPair ? calcFxFut(ccy2, side2 * mio2 * 1e6, q2.live_spot) : null;
   const form = openDialogShell(
     isPair ? '2-ENGINE 50/50 · FX4 PAIR EXECUTION' : '2-ENGINE 50/50 · FX NET EXECUTION',
     isPair ? `FX4 페어 체결 등록 · ${esc(ccy1)}/${esc(ccy2)}` : `FX 통화 체결 등록 · ${esc(ccy1)} (vs USD)`,
     '실제 체결 명목금액(USD mio)과 환율을 입력하면 <b>포지션 모니터(#book)</b>에 등록되어 모델 vs 실보유 델타에 즉시 반영됩니다.',
     `
-    <div style="background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:12.5px;">
-      실시간 BBG 스팟: <b>${esc(ccy1)} ${fmtNum(q1.live_spot, 4)}</b> (${fmtSigned(q1.chg_pct, 2)}%)${isPair ? ` · <b>${esc(ccy2)} ${fmtNum(q2.live_spot, 4)}</b> (${fmtSigned(q2.chg_pct, 2)}%)` : ''}
+    <div style="background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:12.5px;line-height:1.55;">
+      <div>실시간 BBG 스팟: <b>${esc(ccy1)} ${fmtNum(q1.live_spot, 4)}</b> (${fmtSigned(q1.chg_pct, 2)}%)${isPair ? ` · <b>${esc(ccy2)} ${fmtNum(q2.live_spot, 4)}</b> (${fmtSigned(q2.chg_pct, 2)}%)` : ''}</div>
+      <div style="color:#0d9488;font-weight:700;margin-top:3px;">FX 선물 환산: ${esc(f1.code)} ${fmtSigned(f1.ct, 0)} ct (1계약 약 $${fmtNum(f1.usdPerCt, 0)})${isPair && f2 ? ` / ${esc(f2.code)} ${fmtSigned(f2.ct, 0)} ct (1계약 약 $${fmtNum(f2.usdPerCt, 0)})` : ''}</div>
     </div>
     <div class="form-grid">
       <label>체결일
@@ -654,7 +690,7 @@ function renderCockpit(data, s, scaleMul) {
         <div style="font-size:21px;font-weight:900;margin:4px 0;color:${urgentCnt > 0 ? '#dc2626' : 'var(--ink)'};">
           긴급 ${urgentCnt}건 · 주문 ${pendingOrders}건
         </div>
-        <div style="font-size:11.5px;color:var(--muted);">${is2E ? '2엔진 50/50 · 국채 2종 + FX G10 3페어' : '참고 4엔진 W4 (30/15/35/20)'}</div>
+        <div style="font-size:11.5px;color:var(--muted);">${is2E ? `2엔진 50/50 · 국채 ${(le.e1_rows || []).filter((r) => r.open).length}종 + FX ${le.e3_open?.length || 0}페어 (오늘 신규 포함)` : '참고 4엔진 W4 (30/15/35/20)'}</div>
       </div>
 
       <div class="panel" style="padding:13px 15px;border-left:4px solid #2563eb;">
@@ -710,8 +746,33 @@ function renderCockpit(data, s, scaleMul) {
               ${actions
                 .map((a) => {
                   const bcol = a.level === 'URGENT' ? '#dc2626' : a.level === 'WARN' ? '#d97706' : a.level === 'SIGNAL' ? '#0d9488' : '#2563eb';
-                  const tagTxt = a.level === 'URGENT' ? '긴급 액션' : a.level === 'WARN' ? '청산 임박' : a.level === 'SIGNAL' ? '신규 신호' : '모니터링';
+                  const tagTxt = a.level === 'URGENT' ? '긴급 액션' : a.level === 'WARN' ? '청산 임박' : a.level === 'SIGNAL' ? '오늘 신규 진입' : '모니터링';
                   const tone = a.level === 'URGENT' ? 'red' : a.level === 'WARN' ? 'amber' : a.level === 'SIGNAL' ? 'green' : 'blue';
+                  let extraLine = '';
+                  let actionBtn = '';
+                  if (a.action_type === 'OPEN_FX4' && a.c1 && a.c2 && a.raw_leg_1x) {
+                    const legUsd = Math.round(Number(a.raw_leg_1x) * eff3);
+                    const f1 = calcFxFut(a.c1, (a.s1 || 1) * legUsd, lo.fx_quotes?.[a.c1]?.live_spot);
+                    const f2 = calcFxFut(a.c2, (a.s2 || -1) * legUsd, lo.fx_quotes?.[a.c2]?.live_spot);
+                    extraLine = `<div style="margin-top:6px;padding:6px 8px;border-radius:7px;background:rgba(13,148,136,0.08);font-size:11.5px;font-weight:700;color:var(--ink);">
+                      목표 규모(Vol $${fmtNum(selectedSetting === 'A' ? customVolM : (s.target_vol || 800000) / 1e6, 1)}M): 레그당 <b>${fmtM(legUsd, false)}</b> · FX선물 <b style="color:#0d9488;">${esc(f1.code)} ${fmtSigned(f1.ct, 0)} ct / ${esc(f2.code)} ${fmtSigned(f2.ct, 0)} ct</b>
+                    </div>`;
+                    actionBtn = `<div style="margin-top:8px;display:flex;justify-content:flex-end;">
+                      <button type="button" class="btn primary a4-open-fx-pair"
+                        data-c1="${esc(a.c1)}" data-c2="${esc(a.c2)}" data-s1="${a.s1 || 1}" data-s2="${a.s2 || -1}" data-mio="${(legUsd / 1e6).toFixed(2)}"
+                        style="padding:5px 11px;font-size:11.5px;">신규 페어 등록 (${esc(a.pair)})</button>
+                    </div>`;
+                  } else if (a.action_type === 'OPEN_FUT' && a.core_id && a.raw_ct_1x) {
+                    const tgtCt = Math.round(Number(a.raw_ct_1x) * eff1);
+                    extraLine = `<div style="margin-top:6px;padding:6px 8px;border-radius:7px;background:rgba(13,148,136,0.08);font-size:11.5px;font-weight:700;color:var(--ink);">
+                      목표 계약(Vol $${fmtNum(selectedSetting === 'A' ? customVolM : (s.target_vol || 800000) / 1e6, 1)}M): <b>${esc(a.core_id)} ${fmtSigned(tgtCt, 0)} ct</b>
+                    </div>`;
+                    actionBtn = `<div style="margin-top:8px;display:flex;justify-content:flex-end;">
+                      <button type="button" class="btn primary a4-open-fut"
+                        data-cid="${esc(a.core_id)}" data-ct="${tgtCt}"
+                        style="padding:5px 11px;font-size:11.5px;">신규 선물 등록 (${esc(a.core_id)})</button>
+                    </div>`;
+                  }
                   return `<div style="border:1px solid var(--line);border-left:4px solid ${bcol};border-radius:10px;padding:10px 12px;background:var(--panel2);">
                     <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:4px;">
                       <span style="font-size:11px;font-weight:800;color:var(--muted);">${esc(a.engine)} · ${esc(a.instrument)}</span>
@@ -719,6 +780,8 @@ function renderCockpit(data, s, scaleMul) {
                     </div>
                     <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:3px;">${esc(a.title)}</div>
                     <div style="font-size:11.5px;color:var(--muted);line-height:1.45;">${esc(a.detail)}</div>
+                    ${extraLine}
+                    ${actionBtn}
                   </div>`;
                 })
                 .join('')}
@@ -785,7 +848,7 @@ function renderCockpit(data, s, scaleMul) {
         <div class="panel-head">
           <div>
             <h2 style="margin:0;">FX 통화별 네팅 실행 주문표 (${is2E ? 'FX4 단독 50% · USD 중립' : 'E3 + E4 네팅'})</h2>
-            <small>블룸버그 15분 스팟 · FX4 3페어 통화별 상계 후 순주문</small>
+            <small>전일 뉴욕 종가 신규 신호 포함 · CME/KRX FX 선물 환산 계약수 동시 표기</small>
           </div>
           <span style="font-size:11.5px;font-weight:700;color:var(--muted);">Net USD ${fmtM(targetNetUsdLeg)}</span>
         </div>
@@ -793,9 +856,9 @@ function renderCockpit(data, s, scaleMul) {
           <table class="wide-table" style="font-size:12px;">
             <thead>
               <tr>
-                <th>통화</th>
+                <th>통화 / 선물</th>
                 <th class="number">BBG 스팟 (%)</th>
-                <th class="number">모델 목표</th>
+                <th class="number">모델 목표 (선물)</th>
                 <th class="number">실보유 (#book)</th>
                 <th class="number">실행 주문 (Delta)</th>
                 <th>상태</th>
@@ -805,16 +868,19 @@ function renderCockpit(data, s, scaleMul) {
             <tbody>
               ${fxExecRows
                 .map((r) => {
+                  const ftTgt = calcFxFut(r.ccy, r.target_usd, r.live_spot);
+                  const ftAct = calcFxFut(r.ccy, r.actual_usd, r.live_spot);
+                  const ftDlt = calcFxFut(r.ccy, r.delta_usd, r.live_spot);
                   const ordTxt =
                     Math.abs(r.delta_usd) < 50000
-                      ? '<span class="muted">$0.00M</span>'
-                      : `<b class="${r.delta_usd > 0 ? 'green' : 'red'}">${r.delta_usd > 0 ? 'LONG +' : 'SHORT '}${fmtM(r.delta_usd, false)}</b>`;
+                      ? '<span class="muted">$0.00M (0 ct)</span>'
+                      : `<b class="${r.delta_usd > 0 ? 'green' : 'red'}">${r.delta_usd > 0 ? 'LONG +' : 'SHORT '}${fmtM(r.delta_usd, false)}</b><div class="pair-sub"><b class="${clsVal(ftDlt.ct)}">${esc(ftDlt.code)} ${ftDlt.ct > 0 ? '매수 +' : '매도 '}${ftDlt.ct} ct</b></div>`;
                   const hasPos = r.pos_ids.length > 0;
                   return `<tr>
-                    <td><b>${esc(r.ccy)}</b></td>
+                    <td><b>${esc(r.ccy)}</b> <span class="muted">${esc(ftTgt.code)}</span><div class="pair-sub">1ct ≈ $${fmtNum(ftTgt.usdPerCt, 0)}</div></td>
                     <td class="number"><b>${fmtNum(r.live_spot, 4)}</b><div class="pair-sub ${clsVal(r.chg_pct)}">${fmtSigned(r.chg_pct, 2)}%</div></td>
-                    <td class="number"><b class="${clsVal(r.target_usd)}">${fmtM(r.target_usd)}</b>${!is2E ? `<div class="pair-sub">E3 ${fmtM(r.e3_usd)} / E4 ${fmtM(r.e4_usd)}</div>` : ''}</td>
-                    <td class="number"><b>${fmtM(r.actual_usd)}</b></td>
+                    <td class="number"><b class="${clsVal(r.target_usd)}">${fmtM(r.target_usd)}</b><div class="pair-sub">${esc(ftTgt.code)} <b>${fmtSigned(ftTgt.ct, 0)} ct</b>${!is2E ? ` (E3 ${fmtM(r.e3_usd)})` : ''}</div></td>
+                    <td class="number"><b>${fmtM(r.actual_usd)}</b><div class="pair-sub">${fmtSigned(ftAct.ct, 0)} ct</div></td>
                     <td class="number">${ordTxt}</td>
                     <td>${bandPill(r.band)}</td>
                     <td style="text-align:right;white-space:nowrap;">
@@ -915,8 +981,11 @@ function renderCockpit(data, s, scaleMul) {
                   const zcol = absZ <= 0.35 ? '#0d9488' : absZ >= 3.5 ? '#dc2626' : '#2563eb';
                   const legUsd = Math.round((op.raw_leg_1x || 0) * eff3);
                   const [c1, c2] = op.pair.split('/');
-                  return `<tr>
-                    <td><b>${esc(op.pair)}</b><div class="pair-sub">${esc(op.side)} · ${op.hd}d</div></td>
+                  const f1 = calcFxFut(c1, (op.s1 || 1) * legUsd, lo.fx_quotes?.[c1]?.live_spot);
+                  const f2 = calcFxFut(c2, (op.s2 || -1) * legUsd, lo.fx_quotes?.[c2]?.live_spot);
+                  const isNew = Boolean(op.new_today);
+                  return `<tr style="${isNew ? 'background:rgba(13,148,136,0.07);' : ''}">
+                    <td><b>${esc(op.pair)}</b><div class="pair-sub">${esc(op.side)} · ${isNew ? '오늘 아침 신규(0d)' : `${op.hd}d`}</div></td>
                     <td>
                       <div style="font-size:11px;">진입 ${fmtSigned(op.entry_z, 2)}σ → <b style="color:${zcol};">실시간 ${fmtSigned(lz, 2)}σ</b></div>
                       <div style="height:5px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:3px;max-width:170px;">
@@ -924,12 +993,12 @@ function renderCockpit(data, s, scaleMul) {
                       </div>
                     </td>
                     <td class="number"><b class="green">+${fmtNum(op.carry_pct, 2)}%</b></td>
-                    <td class="number"><b>${fmtM(legUsd, false)}</b></td>
+                    <td class="number"><b>${fmtM(legUsd, false)}</b><div class="pair-sub">${esc(f1.code)} ${fmtSigned(f1.ct, 0)} / ${esc(f2.code)} ${fmtSigned(f2.ct, 0)} ct</div></td>
                     <td>${liveStatusPill(op.live_status)}</td>
                     <td style="text-align:right;">
-                      <button type="button" class="btn quiet a4-open-fx-pair"
+                      <button type="button" class="btn ${isNew ? 'primary' : 'quiet'} a4-open-fx-pair"
                         data-c1="${esc(c1)}" data-c2="${esc(c2)}" data-s1="${op.s1 || 1}" data-s2="${op.s2 || -1}" data-mio="${(legUsd / 1e6).toFixed(2)}"
-                        style="padding:3px 8px;font-size:11px;">페어 등록</button>
+                        style="padding:3px 8px;font-size:11px;">${isNew ? '신규 등록' : '페어 등록'}</button>
                     </td>
                   </tr>`;
                 })

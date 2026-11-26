@@ -2,7 +2,7 @@
   "meta": {
     "model_name": "2엔진 50/50 액티브 FICC 북 (E1 국채방향 50% + FX4 평균회귀 50% · Vol $0.8M · 실BBG 3M캐리)",
     "as_of": "2026-11-25",
-    "generated_at": "2026-11-26 10:00:29",
+    "generated_at": "2026-11-26 10:22:29",
     "default_setting": "A",
     "active_engines": [
       "E1",
@@ -1329,6 +1329,18 @@
       "live_net_fx": {
         "rows": [
           {
+            "ccy": "GBP",
+            "e3_usd": 3713092,
+            "e4_usd": 0,
+            "net_usd": 3713092
+          },
+          {
+            "ccy": "CAD",
+            "e3_usd": -3713092,
+            "e4_usd": 0,
+            "net_usd": -3713092
+          },
+          {
             "ccy": "AUD",
             "e3_usd": 3524492,
             "e4_usd": 0,
@@ -1348,7 +1360,7 @@
           }
         ],
         "net_usd_leg": 0,
-        "gross_fx_usd": 7048984
+        "gross_fx_usd": 14475168
       }
     },
     "B": {
@@ -3882,6 +3894,18 @@
             "net_usd": -5348474
           },
           {
+            "ccy": "GBP",
+            "e3_usd": 3328986,
+            "e4_usd": 0,
+            "net_usd": 3328986
+          },
+          {
+            "ccy": "CAD",
+            "e3_usd": -3328986,
+            "e4_usd": 0,
+            "net_usd": -3328986
+          },
+          {
             "ccy": "AUD",
             "e3_usd": 3159896,
             "e4_usd": 0,
@@ -3907,7 +3931,7 @@
           }
         ],
         "net_usd_leg": 2149354,
-        "gross_fx_usd": 11862728
+        "gross_fx_usd": 18520699
       }
     }
   },
@@ -3935,6 +3959,7 @@
           "entry_px": 100.67,
           "hd": 10,
           "stage": 2,
+          "new_today": false,
           "trail_px": 101.43,
           "ch50_exit": 101.24,
           "raw_pnl": -19159,
@@ -3997,6 +4022,7 @@
           "entry_px": 106.59,
           "hd": 101,
           "stage": 2,
+          "new_today": false,
           "trail_px": 106.02,
           "ch50_exit": 105.99,
           "raw_pnl": 26166,
@@ -4214,8 +4240,8 @@
       "move_val": 97.5,
       "s4_scale": 1.0,
       "allow_new": true,
-      "open_count": 2,
-      "net_beta": 1.7
+      "open_count": 3,
+      "net_beta": 1.6
     },
     "e3_open": [
       {
@@ -4229,6 +4255,7 @@
         "sd_pct": 0.961,
         "carry_pct": 2.91,
         "hd": 17,
+        "new_today": false,
         "raw_pnl": -4857,
         "raw_leg_1x": 1340082
       },
@@ -4243,22 +4270,27 @@
         "sd_pct": 0.895,
         "carry_pct": 2.18,
         "hd": 5,
+        "new_today": false,
         "raw_pnl": -18209,
         "raw_leg_1x": 1423810
-      }
-    ],
-    "e3_candidates": [
+      },
       {
         "pair": "GBP/CAD",
         "side": "L GBP / S CAD",
-        "z": -2.49,
+        "entry_date": "2026-11-25",
+        "entry_z": -2.49,
+        "cur_z": -2.49,
+        "tp_z": 0.2,
+        "beta": 0.868,
+        "sd_pct": 0.364,
         "carry_pct": 1.63,
-        "sd_pct": 0.36,
-        "corr": 0.95,
-        "edge_x": 10.4,
-        "beta_add": -0.1,
-        "status": "SIGNAL"
-      },
+        "hd": 0,
+        "new_today": true,
+        "raw_pnl": 0,
+        "raw_leg_1x": 1500000
+      }
+    ],
+    "e3_candidates": [
       {
         "pair": "AUD/EUR",
         "side": "L AUD / S EUR",
@@ -4268,6 +4300,17 @@
         "corr": 0.91,
         "edge_x": 27.0,
         "beta_add": 1.2,
+        "status": "OPEN"
+      },
+      {
+        "pair": "GBP/CAD",
+        "side": "L GBP / S CAD",
+        "z": -2.49,
+        "carry_pct": 1.63,
+        "sd_pct": 0.36,
+        "corr": 0.95,
+        "edge_x": 10.4,
+        "beta_add": -0.1,
         "status": "OPEN"
       },
       {
