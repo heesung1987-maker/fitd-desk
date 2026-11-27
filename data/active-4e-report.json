@@ -1,8 +1,8 @@
 {
   "meta": {
     "model_name": "2엔진 50/50 액티브 FICC 북 (E1 국채방향 50% + FX4 평균회귀 50% · Vol $0.8M · 실BBG 3M캐리)",
-    "as_of": "2026-11-27",
-    "generated_at": "2026-11-27 10:20:00",
+    "as_of": "2026-11-26",
+    "generated_at": "2026-11-27 10:22:03",
     "default_setting": "A",
     "active_engines": [
       "E1",
@@ -55,16 +55,16 @@
       "RX": "RXZ26"
     },
     "fx": {
-      "EUR": 1.0972,
+      "EUR": 1.0969,
       "GBP": 1.3107,
-      "AUD": 0.6634,
+      "AUD": 0.6635,
       "NZD": 0.547,
-      "CAD": 1.424329,
+      "CAD": 1.424567,
       "JPY": 159.25,
-      "CHF": 0.8343,
+      "CHF": 0.8345,
       "BRL": 5.661,
-      "MXN": 19.7133,
-      "KRW": 1344.05
+      "MXN": 19.7113,
+      "KRW": 1344.0
     }
   },
   "settings": {
@@ -80,16 +80,16 @@
       ],
       "target_vol": 800000,
       "summary_5y": {
-        "tot": 6277082,
-        "ann": 1235801,
-        "ann_vol": 898239,
+        "tot": 6278257,
+        "ann": 1236998,
+        "ann_vol": 898586,
         "mdd": 955219,
         "shp": 1.38,
         "cal": 1.29,
         "pos_m": 41,
         "tot_m": 59,
         "win_m_pct": 69.5,
-        "avg_m": 106391,
+        "avg_m": 106411,
         "med_m": 77648,
         "best_m": {
           "ym": "2024-04",
@@ -104,20 +104,20 @@
         "tot_y": 5,
         "worst_y": {
           "year": "2026",
-          "pnl": 110623
+          "pnl": 111798
         }
       },
       "summary_11y": {
-        "tot": 7140610,
-        "ann": 617937,
-        "ann_vol": 905371,
+        "tot": 7141785,
+        "ann": 618251,
+        "ann_vol": 905526,
         "mdd": 2579675,
         "shp": 0.68,
         "cal": 0.24,
         "pos_m": 76,
         "tot_m": 134,
         "win_m_pct": 56.7,
-        "avg_m": 53288,
+        "avg_m": 53297,
         "med_m": 22318,
         "best_m": {
           "ym": "2024-04",
@@ -137,16 +137,16 @@
         "stop_days": 0
       },
       "summary_26y": {
-        "tot": 13846057,
-        "ann": 516231,
-        "ann_vol": 885436,
+        "tot": 13847241,
+        "ann": 516352,
+        "ann_vol": 885501,
         "mdd": 3297395,
         "shp": 0.58,
         "cal": 0.16,
         "pos_m": 165,
         "tot_m": 311,
         "win_m_pct": 53.1,
-        "avg_m": 44521,
+        "avg_m": 44525,
         "med_m": 21411,
         "best_m": {
           "ym": "2025-08",
@@ -806,11 +806,11 @@
         },
         {
           "ym": "2026-11",
-          "pnl": -282115,
-          "cum": 6277082,
+          "pnl": -280940,
+          "cum": 6278257,
           "e1": -76627,
           "e2": 0,
-          "e3": -205488,
+          "e3": -204313,
           "e4": 0,
           "dd_scale_avg": 1.0,
           "stop_days": 0
@@ -930,11 +930,11 @@
         {
           "year": "2026",
           "period": "5Y",
-          "pnl": 110623,
+          "pnl": 111798,
           "yr_dd": 858406,
           "e1": -213275,
           "e2": 0,
-          "e3": 323897,
+          "e3": 325072,
           "e4": 0
         }
       ],
@@ -1192,11 +1192,11 @@
         {
           "year": "2026",
           "period": "5Y",
-          "pnl": 423536,
+          "pnl": 424721,
           "yr_dd": 625709,
           "e1": 107943,
           "e2": 0,
-          "e3": 315593,
+          "e3": 316778,
           "e4": 0
         }
       ],
@@ -1259,36 +1259,36 @@
         },
         {
           "label": "2022~2026 인플레·재변동",
-          "tot": 7194626,
-          "ann": 1416442,
+          "tot": 7195810,
+          "ann": 1417783,
           "shp": 1.58,
           "mdd": 932987
         }
       ],
       "live_scales": {
         "dd_scale": 1.0,
-        "port_mult_150": 1.09,
-        "tot_scale": 5.79,
-        "norm_e1": 0.98,
+        "port_mult_150": 1.04,
+        "tot_scale": 5.56,
+        "norm_e1": 0.97,
         "norm_e2": 1.65,
-        "norm_e3": 0.91,
-        "norm_e4": 1.17,
-        "eff_e1": 2.83,
+        "norm_e3": 0.88,
+        "norm_e4": 1.18,
+        "eff_e1": 2.71,
         "eff_e2": 0.0,
-        "eff_e3": 2.64,
+        "eff_e3": 2.45,
         "eff_e4": 0.0,
-        "ytd_pnl": 110623,
-        "peak_dd": 473543
+        "ytd_pnl": 111798,
+        "peak_dd": 472368
       },
       "live_net_futures": {
         "rows": [
           {
             "cid": "TU",
             "name": "미 국채 2Y (TU)",
-            "e1_ct": -65.9,
+            "e1_ct": -63.1,
             "e2_ct": 0.0,
-            "net_ct": -66,
-            "dv01_usd": -2508
+            "net_ct": -63,
+            "dv01_usd": -2394
           },
           {
             "cid": "FV",
@@ -1309,10 +1309,10 @@
           {
             "cid": "DU",
             "name": "독 국채 2Y (DU)",
-            "e1_ct": -144.2,
+            "e1_ct": -138.0,
             "e2_ct": 0.0,
-            "net_ct": -144,
-            "dv01_usd": -3024
+            "net_ct": -138,
+            "dv01_usd": -2898
           },
           {
             "cid": "RX",
@@ -1323,44 +1323,44 @@
             "dv01_usd": 0
           }
         ],
-        "abs_dv01_usd": 5532,
-        "net_dv01_usd": -5532
+        "abs_dv01_usd": 5292,
+        "net_dv01_usd": -5292
       },
       "live_net_fx": {
         "rows": [
           {
             "ccy": "GBP",
-            "e3_usd": 3957798,
+            "e3_usd": 3672176,
             "e4_usd": 0,
-            "net_usd": 3957798
+            "net_usd": 3672176
           },
           {
             "ccy": "CAD",
-            "e3_usd": -3957798,
+            "e3_usd": -3672176,
             "e4_usd": 0,
-            "net_usd": -3957798
+            "net_usd": -3672176
           },
           {
             "ccy": "AUD",
-            "e3_usd": 3756769,
+            "e3_usd": 3485654,
             "e4_usd": 0,
-            "net_usd": 3756769
+            "net_usd": 3485654
           },
           {
             "ccy": "CHF",
-            "e3_usd": -3535848,
+            "e3_usd": -3280677,
             "e4_usd": 0,
-            "net_usd": -3535848
+            "net_usd": -3280677
           },
           {
             "ccy": "EUR",
-            "e3_usd": -220920,
+            "e3_usd": -204977,
             "e4_usd": 0,
-            "net_usd": -220920
+            "net_usd": -204977
           }
         ],
         "net_usd_leg": 0,
-        "gross_fx_usd": 15429133
+        "gross_fx_usd": 14315660
       }
     },
     "B": {
@@ -1376,8 +1376,8 @@
       "target_vol": 1000000,
       "summary_5y": {
         "tot": 5074968,
-        "ann": 999134,
-        "ann_vol": 869554,
+        "ann": 999915,
+        "ann_vol": 869892,
         "mdd": 1112458,
         "shp": 1.15,
         "cal": 0.9,
@@ -1404,8 +1404,8 @@
       },
       "summary_11y": {
         "tot": 6329110,
-        "ann": 547711,
-        "ann_vol": 819994,
+        "ann": 547900,
+        "ann_vol": 820134,
         "mdd": 1908613,
         "shp": 0.67,
         "cal": 0.29,
@@ -1429,12 +1429,12 @@
           "year": "2026",
           "pnl": -681955
         },
-        "stop_days": 190
+        "stop_days": 189
       },
       "summary_26y": {
         "tot": 13086143,
-        "ann": 487899,
-        "ann_vol": 763001,
+        "ann": 487971,
+        "ann_vol": 763058,
         "mdd": 2364149,
         "shp": 0.64,
         "cal": 0.21,
@@ -1458,7 +1458,7 @@
           "year": "2026",
           "pnl": -643135
         },
-        "stop_days": 292
+        "stop_days": 291
       },
       "monthly_5y": [
         {
@@ -2108,7 +2108,7 @@
           "e3": 0,
           "e4": 0,
           "dd_scale_avg": 0.0,
-          "stop_days": 20
+          "stop_days": 19
         }
       ],
       "annual_11y": [
@@ -2555,19 +2555,19 @@
         {
           "label": "2022~2026 인플레·재변동",
           "tot": 6134366,
-          "ann": 1207703,
+          "ann": 1208648,
           "shp": 1.25,
           "mdd": 991033
         }
       ],
       "live_scales": {
         "dd_scale": 0.0,
-        "port_mult_150": 1.09,
+        "port_mult_150": 1.04,
         "tot_scale": 0.0,
-        "norm_e1": 0.98,
+        "norm_e1": 0.97,
         "norm_e2": 1.65,
-        "norm_e3": 0.91,
-        "norm_e4": 1.17,
+        "norm_e3": 0.88,
+        "norm_e4": 1.18,
         "eff_e1": 0.0,
         "eff_e2": 0.0,
         "eff_e3": 0.0,
@@ -2639,16 +2639,16 @@
       ],
       "target_vol": 800000,
       "summary_5y": {
-        "tot": 5231154,
-        "ann": 1029883,
-        "ann_vol": 862121,
+        "tot": 5232370,
+        "ann": 1030928,
+        "ann_vol": 862455,
         "mdd": 1279786,
-        "shp": 1.19,
-        "cal": 0.8,
+        "shp": 1.2,
+        "cal": 0.81,
         "pos_m": 36,
         "tot_m": 59,
         "win_m_pct": 61.0,
-        "avg_m": 88664,
+        "avg_m": 88684,
         "med_m": 90934,
         "best_m": {
           "ym": "2023-06",
@@ -2663,20 +2663,20 @@
         "tot_y": 5,
         "worst_y": {
           "year": "2026",
-          "pnl": -104666
+          "pnl": -103450
         }
       },
       "summary_11y": {
-        "tot": 5768808,
-        "ann": 499224,
-        "ann_vol": 868427,
+        "tot": 5770024,
+        "ann": 499500,
+        "ann_vol": 868575,
         "mdd": 1939576,
-        "shp": 0.57,
+        "shp": 0.58,
         "cal": 0.26,
         "pos_m": 70,
         "tot_m": 134,
         "win_m_pct": 52.2,
-        "avg_m": 43051,
+        "avg_m": 43060,
         "med_m": 17790,
         "best_m": {
           "ym": "2023-06",
@@ -2696,16 +2696,16 @@
         "stop_days": 0
       },
       "summary_26y": {
-        "tot": 16287071,
-        "ann": 607241,
-        "ann_vol": 860944,
+        "tot": 16288320,
+        "ann": 607377,
+        "ann_vol": 861007,
         "mdd": 2376595,
         "shp": 0.71,
         "cal": 0.26,
         "pos_m": 176,
         "tot_m": 311,
         "win_m_pct": 56.6,
-        "avg_m": 52370,
+        "avg_m": 52374,
         "med_m": 28149,
         "best_m": {
           "ym": "2022-03",
@@ -3365,12 +3365,12 @@
         },
         {
           "ym": "2026-11",
-          "pnl": -149502,
-          "cum": 5231154,
+          "pnl": -148286,
+          "cum": 5232370,
           "e1": -61212,
           "e2": 35449,
-          "e3": -188009,
-          "e4": 64270,
+          "e3": -186988,
+          "e4": 64465,
           "dd_scale_avg": 1.0,
           "stop_days": 0
         }
@@ -3489,12 +3489,12 @@
         {
           "year": "2026",
           "period": "5Y",
-          "pnl": -104666,
+          "pnl": -103450,
           "yr_dd": 723683,
           "e1": -95350,
           "e2": -423043,
-          "e3": 294846,
-          "e4": 118881
+          "e3": 295867,
+          "e4": 119076
         }
       ],
       "annual_26y": [
@@ -3751,12 +3751,12 @@
         {
           "year": "2026",
           "period": "5Y",
-          "pnl": 367566,
+          "pnl": 368815,
           "yr_dd": 464368,
           "e1": 151121,
-          "e2": -200408,
-          "e3": 283970,
-          "e4": 132882
+          "e2": -200442,
+          "e3": 285047,
+          "e4": 133089
         }
       ],
       "regimes_26y": [
@@ -3818,36 +3818,36 @@
         },
         {
           "label": "2022~2026 인플레·재변동",
-          "tot": 7127985,
-          "ann": 1403322,
+          "tot": 7129234,
+          "ann": 1404665,
           "shp": 1.6,
           "mdd": 944260
         }
       ],
       "live_scales": {
         "dd_scale": 1.0,
-        "port_mult_150": 1.35,
-        "tot_scale": 7.18,
-        "norm_e1": 0.98,
+        "port_mult_150": 1.32,
+        "tot_scale": 7.06,
+        "norm_e1": 0.97,
         "norm_e2": 1.65,
-        "norm_e3": 0.91,
-        "norm_e4": 1.17,
-        "eff_e1": 2.11,
-        "eff_e2": 1.78,
-        "eff_e3": 2.29,
-        "eff_e4": 1.68,
-        "ytd_pnl": -104666,
-        "peak_dd": 426586
+        "norm_e3": 0.88,
+        "norm_e4": 1.18,
+        "eff_e1": 2.06,
+        "eff_e2": 1.75,
+        "eff_e3": 2.18,
+        "eff_e4": 1.66,
+        "ytd_pnl": -103450,
+        "peak_dd": 425370
       },
       "live_net_futures": {
         "rows": [
           {
             "cid": "TU",
             "name": "미 국채 2Y (TU)",
-            "e1_ct": -49.1,
-            "e2_ct": -82.9,
-            "net_ct": -132,
-            "dv01_usd": -5016
+            "e1_ct": -48.1,
+            "e2_ct": -81.0,
+            "net_ct": -129,
+            "dv01_usd": -4902
           },
           {
             "cid": "FV",
@@ -3861,17 +3861,17 @@
             "cid": "UXY",
             "name": "미 울트라 10Y (UXY)",
             "e1_ct": 0.0,
-            "e2_ct": 28.0,
+            "e2_ct": 27.5,
             "net_ct": 28,
             "dv01_usd": 2464
           },
           {
             "cid": "DU",
             "name": "독 국채 2Y (DU)",
-            "e1_ct": -107.3,
-            "e2_ct": 52.0,
-            "net_ct": -55,
-            "dv01_usd": -1155
+            "e1_ct": -105.2,
+            "e2_ct": 51.5,
+            "net_ct": -54,
+            "dv01_usd": -1134
           },
           {
             "cid": "RX",
@@ -3882,56 +3882,56 @@
             "dv01_usd": 0
           }
         ],
-        "abs_dv01_usd": 8635,
-        "net_dv01_usd": -3707
+        "abs_dv01_usd": 8500,
+        "net_dv01_usd": -3572
       },
       "live_net_fx": {
         "rows": [
           {
             "ccy": "CHF",
-            "e3_usd": -3070880,
-            "e4_usd": -2292696,
-            "net_usd": -5363576
+            "e3_usd": -2917042,
+            "e4_usd": -2269717,
+            "net_usd": -5186759
           },
           {
             "ccy": "GBP",
-            "e3_usd": 3437343,
+            "e3_usd": 3265146,
             "e4_usd": 0,
-            "net_usd": 3437343
+            "net_usd": 3265146
           },
           {
             "ccy": "CAD",
-            "e3_usd": -3437343,
+            "e3_usd": -3265146,
             "e4_usd": 0,
-            "net_usd": -3437343
+            "net_usd": -3265146
           },
           {
             "ccy": "AUD",
-            "e3_usd": 3262749,
+            "e3_usd": 3099299,
             "e4_usd": 0,
-            "net_usd": 3262749
+            "net_usd": 3099299
           },
           {
             "ccy": "KRW",
             "e3_usd": 0,
-            "e4_usd": 1638405,
-            "net_usd": 1638405
+            "e4_usd": 1621984,
+            "net_usd": 1621984
           },
           {
             "ccy": "NZD",
             "e3_usd": 0,
-            "e4_usd": -1421104,
-            "net_usd": -1421104
+            "e4_usd": -1406860,
+            "net_usd": -1406860
           },
           {
             "ccy": "EUR",
-            "e3_usd": -191869,
+            "e3_usd": -182257,
             "e4_usd": 0,
-            "net_usd": -191869
+            "net_usd": -182257
           }
         ],
-        "net_usd_leg": 2075395,
-        "gross_fx_usd": 18752388
+        "net_usd_leg": 2054594,
+        "gross_fx_usd": 18027452
       }
     }
   },
@@ -3941,9 +3941,9 @@
         "cid": "TU",
         "name": "미 국채 2Y (TU)",
         "px": 100.98,
-        "cta": -0.45,
+        "cta": -0.48,
         "agree": 5,
-        "vol60": 0.113,
+        "vol60": 0.114,
         "ch10": [
           100.53,
           101.0
@@ -3957,10 +3957,10 @@
           "dir": -1,
           "entry_date": "2026-11-12",
           "entry_px": 100.67,
-          "hd": 12,
+          "hd": 11,
           "stage": 2,
           "new_today": false,
-          "trail_px": 101.43,
+          "trail_px": 101.44,
           "ch50_exit": 101.24,
           "raw_pnl": -19159,
           "raw_ct_1x": -23.29
@@ -3970,9 +3970,9 @@
         "cid": "FV",
         "name": "미 국채 5Y (FV)",
         "px": 107.16,
-        "cta": -0.3,
-        "agree": 4,
-        "vol60": 0.258,
+        "cta": -0.33,
+        "agree": 5,
+        "vol60": 0.259,
         "ch10": [
           105.82,
           107.16
@@ -3987,9 +3987,9 @@
         "cid": "UXY",
         "name": "미 울트라 10Y (UXY)",
         "px": 116.91,
-        "cta": -0.23,
+        "cta": -0.25,
         "agree": 3,
-        "vol60": 0.472,
+        "vol60": 0.473,
         "ch10": [
           114.28,
           116.91
@@ -4004,7 +4004,7 @@
         "cid": "DU",
         "name": "독 국채 2Y (DU)",
         "px": 105.84,
-        "cta": -0.44,
+        "cta": -0.49,
         "agree": 5,
         "vol60": 0.098,
         "ch10": [
@@ -4020,10 +4020,10 @@
           "dir": -1,
           "entry_date": "2026-07-08",
           "entry_px": 106.59,
-          "hd": 103,
+          "hd": 102,
           "stage": 2,
           "new_today": false,
-          "trail_px": 106.03,
+          "trail_px": 106.02,
           "ch50_exit": 105.99,
           "raw_pnl": 31944,
           "raw_ct_1x": -50.95
@@ -4033,9 +4033,9 @@
         "cid": "RX",
         "name": "독 국채 10Y (RX)",
         "px": 153.23,
-        "cta": -0.19,
-        "agree": 1,
-        "vol60": 0.384,
+        "cta": -0.21,
+        "agree": 3,
+        "vol60": 0.383,
         "ch10": [
           151.87,
           153.59
@@ -4127,17 +4127,17 @@
         "label": "미국 2s10s 커브 (UXY vs TU)",
         "leg_a": "UXY",
         "leg_b": "TU",
-        "cta": 0.56,
+        "cta": 0.6,
         "agree": 6,
         "open": {
           "side": "LONG",
           "dir": 1,
           "entry_date": "2026-10-21",
-          "hd": 28,
+          "hd": 27,
           "stage": 2,
           "raw_pnl": 10181,
-          "ct_a_1x": 15.75,
-          "ct_b_1x": -32.87
+          "ct_a_1x": 15.7,
+          "ct_b_1x": -32.64
         }
       },
       {
@@ -4145,17 +4145,17 @@
         "label": "미-독 2Y 스프레드 (TU vs DU)",
         "leg_a": "TU",
         "leg_b": "DU",
-        "cta": 0.04,
+        "cta": 0.05,
         "agree": 4,
         "open": {
           "side": "SHORT",
           "dir": -1,
           "entry_date": "2026-10-05",
-          "hd": 40,
+          "hd": 39,
           "stage": 2,
           "raw_pnl": -14398,
-          "ct_a_1x": -13.71,
-          "ct_b_1x": 29.23
+          "ct_a_1x": -13.61,
+          "ct_b_1x": 29.41
         }
       }
     ],
@@ -4234,9 +4234,9 @@
       }
     ],
     "e3_macro": {
-      "stress": 0.96,
-      "rv10_60": 0.89,
-      "move_rel": 1.02,
+      "stress": 0.93,
+      "rv10_60": 0.83,
+      "move_rel": 1.03,
       "move_val": 97.5,
       "s4_scale": 1.0,
       "allow_new": true,
@@ -4249,14 +4249,14 @@
         "side": "L EUR / S CHF",
         "entry_date": "2026-11-02",
         "entry_z": -2.83,
-        "cur_z": -1.22,
+        "cur_z": -1.28,
         "tp_z": 0.2,
-        "beta": 1.303,
-        "sd_pct": 0.991,
-        "carry_pct": 2.84,
-        "hd": 19,
+        "beta": 1.281,
+        "sd_pct": 0.981,
+        "carry_pct": 2.77,
+        "hd": 18,
         "new_today": false,
-        "raw_pnl": 582,
+        "raw_pnl": 389,
         "raw_leg_1x": 1340082
       },
       {
@@ -4264,14 +4264,14 @@
         "side": "L AUD / S EUR",
         "entry_date": "2026-11-18",
         "entry_z": -2.42,
-        "cur_z": -2.0,
+        "cur_z": -2.11,
         "tp_z": 0.2,
-        "beta": 1.059,
-        "sd_pct": 0.948,
-        "carry_pct": 2.14,
-        "hd": 7,
+        "beta": 1.02,
+        "sd_pct": 0.939,
+        "carry_pct": 2.11,
+        "hd": 6,
         "new_today": false,
-        "raw_pnl": -15818,
+        "raw_pnl": -15333,
         "raw_leg_1x": 1423810
       },
       {
@@ -4279,14 +4279,14 @@
         "side": "L GBP / S CAD",
         "entry_date": "2026-11-25",
         "entry_z": -2.46,
-        "cur_z": -1.94,
+        "cur_z": -1.99,
         "tp_z": 0.2,
-        "beta": 0.879,
-        "sd_pct": 0.389,
-        "carry_pct": 1.58,
-        "hd": 2,
+        "beta": 0.876,
+        "sd_pct": 0.38,
+        "carry_pct": 1.63,
+        "hd": 1,
         "new_today": false,
-        "raw_pnl": 1546,
+        "raw_pnl": 1700,
         "raw_leg_1x": 1500000
       }
     ],
@@ -4294,104 +4294,115 @@
       {
         "pair": "AUD/EUR",
         "side": "L AUD / S EUR",
-        "z": -2.0,
-        "carry_pct": 2.14,
-        "sd_pct": 0.95,
+        "z": -2.11,
+        "carry_pct": 2.11,
+        "sd_pct": 0.94,
         "corr": 0.91,
-        "edge_x": 21.4,
+        "edge_x": 22.4,
         "beta_add": 1.2,
         "status": "OPEN"
       },
       {
         "pair": "GBP/CAD",
         "side": "L GBP / S CAD",
-        "z": -1.94,
-        "carry_pct": 1.58,
-        "sd_pct": 0.39,
+        "z": -1.99,
+        "carry_pct": 1.63,
+        "sd_pct": 0.38,
         "corr": 0.94,
-        "edge_x": 8.4,
+        "edge_x": 8.5,
         "beta_add": -0.1,
         "status": "OPEN"
       },
       {
         "pair": "AUD/CAD",
         "side": "L AUD / S CAD",
-        "z": -2.51,
-        "carry_pct": 2.17,
-        "sd_pct": 1.17,
-        "corr": 0.85,
-        "edge_x": 33.7,
+        "z": -2.66,
+        "carry_pct": 2.21,
+        "sd_pct": 1.13,
+        "corr": 0.86,
+        "edge_x": 34.7,
         "beta_add": 0.5,
-        "status": "COOLDOWN(13d)"
-      },
-      {
-        "pair": "MXN/KRW",
-        "side": "L MXN / L KRW",
-        "z": -2.41,
-        "carry_pct": 1.4,
-        "sd_pct": 3.23,
-        "corr": -0.67,
-        "edge_x": 35.6,
-        "beta_add": 2.0,
-        "status": "WATCH"
+        "status": "COOLDOWN(14d)"
       },
       {
         "pair": "AUD/BRL",
         "side": "L AUD / S BRL",
-        "z": -2.33,
-        "carry_pct": -6.66,
-        "sd_pct": 0.76,
-        "corr": 0.79,
-        "edge_x": 11.7,
+        "z": -2.56,
+        "carry_pct": -6.63,
+        "sd_pct": 0.74,
+        "corr": 0.78,
+        "edge_x": 12.5,
         "beta_add": -0.2,
+        "status": "WATCH"
+      },
+      {
+        "pair": "MXN/KRW",
+        "side": "L MXN / L KRW",
+        "z": -2.55,
+        "carry_pct": 1.48,
+        "sd_pct": 3.09,
+        "corr": -0.69,
+        "edge_x": 36.3,
+        "beta_add": 2.0,
         "status": "WATCH"
       },
       {
         "pair": "GBP/CHF",
         "side": "L GBP / S CHF",
-        "z": -2.27,
-        "carry_pct": 4.4,
-        "sd_pct": 0.34,
-        "corr": 0.95,
-        "edge_x": 8.8,
+        "z": -2.37,
+        "carry_pct": 4.3,
+        "sd_pct": 0.33,
+        "corr": 0.96,
+        "edge_x": 8.9,
         "beta_add": 1.1,
         "status": "WATCH"
       },
       {
         "pair": "AUD/CHF",
         "side": "L AUD / S CHF",
-        "z": -2.15,
-        "carry_pct": 4.99,
-        "sd_pct": 1.27,
+        "z": -2.25,
+        "carry_pct": 4.88,
+        "sd_pct": 1.25,
         "corr": 0.81,
-        "edge_x": 31.0,
+        "edge_x": 32.1,
         "beta_add": 1.7,
         "status": "WATCH"
       },
       {
         "pair": "AUD/JPY",
         "side": "L AUD / S JPY",
-        "z": -2.03,
-        "carry_pct": 3.62,
-        "sd_pct": 2.01,
-        "corr": 0.52,
-        "edge_x": 46.1,
+        "z": -2.16,
+        "carry_pct": 3.56,
+        "sd_pct": 1.98,
+        "corr": 0.5,
+        "edge_x": 48.3,
         "beta_add": 1.8,
         "status": "WATCH"
+      },
+      {
+        "pair": "AUD/NZD",
+        "side": "L AUD / S NZD",
+        "z": -2.01,
+        "carry_pct": 1.82,
+        "sd_pct": 1.01,
+        "corr": 0.89,
+        "edge_x": 22.9,
+        "beta_add": 0.0,
+        "status": "COOLDOWN(19d)"
       }
     ],
     "e3_cooldowns": [
       {
         "pair": "AUD/NZD",
-        "remain_days": 18
+        "remain_days": 19
       },
       {
         "pair": "BRL/NZD",
-        "remain_days": 14
+        "remain_days": 15
       },
       {
         "pair": "AUD/CAD",
-        "remain_days": 13
+        "remain_days": 14
       }
     ],
     "e3_recent_closed": [
@@ -4464,10 +4475,10 @@
       {
         "ccy": "EUR",
         "is_g10": true,
-        "cta": -0.77,
+        "cta": -0.78,
         "agree": 6,
         "vol60_pct": 0.32,
-        "carry_vs_usd": -1.59,
+        "carry_vs_usd": -1.56,
         "open": null
       },
       {
@@ -4476,7 +4487,7 @@
         "cta": -0.56,
         "agree": 6,
         "vol60_pct": 0.35,
-        "carry_vs_usd": -0.04,
+        "carry_vs_usd": -0.03,
         "open": null
       },
       {
@@ -4493,60 +4504,60 @@
         "is_g10": true,
         "cta": -0.82,
         "agree": 6,
-        "vol60_pct": 0.45,
-        "carry_vs_usd": -1.25,
+        "vol60_pct": 0.46,
+        "carry_vs_usd": -1.27,
         "open": {
           "side": "SHORT",
           "dir": -1,
           "entry_date": "2026-09-17",
-          "hd": 52,
+          "hd": 51,
           "stage": 2,
-          "raw_pnl": 38885,
+          "raw_pnl": 38842,
           "raw_notional_1x": -846766
         }
       },
       {
         "ccy": "CAD",
         "is_g10": true,
-        "cta": -0.59,
-        "agree": 5,
+        "cta": -0.6,
+        "agree": 6,
         "vol60_pct": 0.28,
-        "carry_vs_usd": -1.62,
+        "carry_vs_usd": -1.66,
         "open": null
       },
       {
         "ccy": "JPY",
         "is_g10": true,
-        "cta": -0.36,
+        "cta": -0.37,
         "agree": 6,
-        "vol60_pct": 0.39,
-        "carry_vs_usd": -3.07,
+        "vol60_pct": 0.46,
+        "carry_vs_usd": -3.01,
         "open": null
       },
       {
         "ccy": "CHF",
         "is_g10": true,
-        "cta": -0.48,
-        "agree": 5,
-        "vol60_pct": 0.39,
-        "carry_vs_usd": -4.43,
+        "cta": -0.49,
+        "agree": 6,
+        "vol60_pct": 0.4,
+        "carry_vs_usd": -4.33,
         "open": {
           "side": "SHORT",
           "dir": -1,
           "entry_date": "2026-08-14",
-          "hd": 76,
+          "hd": 75,
           "stage": 2,
-          "raw_pnl": 45511,
+          "raw_pnl": 45603,
           "raw_notional_1x": -1366105
         }
       },
       {
         "ccy": "BRL",
         "is_g10": false,
-        "cta": -0.81,
+        "cta": -0.83,
         "agree": 6,
-        "vol60_pct": 1.47,
-        "carry_vs_usd": 7.22,
+        "vol60_pct": 1.42,
+        "carry_vs_usd": 7.18,
         "open": null
       },
       {
@@ -4555,23 +4566,23 @@
         "cta": -0.84,
         "agree": 6,
         "vol60_pct": 0.75,
-        "carry_vs_usd": 2.26,
+        "carry_vs_usd": 2.25,
         "open": null
       },
       {
         "ccy": "KRW",
         "is_g10": false,
-        "cta": 0.45,
+        "cta": 0.47,
         "agree": 5,
         "vol60_pct": 0.55,
-        "carry_vs_usd": -0.86,
+        "carry_vs_usd": -0.78,
         "open": {
           "side": "LONG",
           "dir": 1,
           "entry_date": "2026-09-30",
-          "hd": 43,
+          "hd": 42,
           "stage": 2,
-          "raw_pnl": 8879,
+          "raw_pnl": 8945,
           "raw_notional_1x": 976245
         }
       }
@@ -4715,7 +4726,7 @@
       {
         "sp": "US_2s10s",
         "label": "미국 2s10s 커브 (UXY vs TU)",
-        "pnl_26y": 1321343,
+        "pnl_26y": 1321329,
         "shp_26y": 0.72,
         "pnl_11y": 213397,
         "shp_11y": 0.27,
@@ -4744,7 +4755,7 @@
       "tr_yr": 21.4,
       "wr": 47.3,
       "pf": 1.13,
-      "carry_26y": 1029572,
+      "carry_26y": 1029209,
       "cost_26y": 862547
     },
     "e4_summary": {
@@ -4752,7 +4763,7 @@
       "tr_yr": 13.1,
       "wr": 32.4,
       "pf": 1.18,
-      "carry_26y": 241320,
+      "carry_26y": 241073,
       "cost_26y": 163102
     },
     "e4_currencies": [
@@ -4782,8 +4793,8 @@
       },
       {
         "ccy": "NZD",
-        "pnl_26y": 284092,
-        "pnl_11y": -119720,
+        "pnl_26y": 284050,
+        "pnl_11y": -119762,
         "trades": 23,
         "wr": 30.4,
         "pf": 1.93
@@ -4806,8 +4817,8 @@
       },
       {
         "ccy": "CHF",
-        "pnl_26y": -219002,
-        "pnl_11y": -53919,
+        "pnl_26y": -218910,
+        "pnl_11y": -53826,
         "trades": 31,
         "wr": 32.3,
         "pf": 0.47
@@ -4830,18 +4841,18 @@
       },
       {
         "ccy": "KRW",
-        "pnl_26y": -3183,
-        "pnl_11y": -103454,
+        "pnl_26y": -3117,
+        "pnl_11y": -103388,
         "trades": 31,
         "wr": 25.8,
         "pf": 0.97
       }
     ],
     "hedge_proof": {
-      "fx4_avg": -101072,
+      "fx4_avg": -101052,
       "e1_avg": -2072,
-      "e2_avg": 1243,
-      "e4_avg": 12589
+      "e2_avg": 1242,
+      "e4_avg": 12596
     }
   },
   "stress_table": [
@@ -4849,106 +4860,106 @@
       "label": "기준 비용 (1.0x: G10 2bp / EM 5bp · 출구 50D)",
       "shp_26y": 0.58,
       "shp_11y": 0.68,
-      "tot_5y": 6277082,
+      "tot_5y": 6278257,
       "mdd_11y": 2579675,
       "verdict": "기준선",
-      "a_26_ann": 516231,
+      "a_26_ann": 516352,
       "a_26_shp": 0.58,
-      "a_11_ann": 617937,
+      "a_11_ann": 618251,
       "a_11_shp": 0.68,
-      "b_26_ann": 487899,
+      "b_26_ann": 487971,
       "b_26_shp": 0.64,
-      "b_11_ann": 547711,
+      "b_11_ann": 547900,
       "b_11_shp": 0.67,
-      "c_26_ann": 607241,
+      "c_26_ann": 607377,
       "c_26_shp": 0.71,
-      "c_11_ann": 499224,
-      "c_11_shp": 0.57
+      "c_11_ann": 499500,
+      "c_11_shp": 0.58
     },
     {
       "label": "비용 스트레스 1.5x (G10 3bp / EM 7.5bp)",
-      "shp_26y": 0.46,
+      "shp_26y": 0.47,
       "shp_11y": 0.51,
-      "tot_5y": 4979358,
+      "tot_5y": 4980117,
       "mdd_11y": 2708031,
       "verdict": "통과",
-      "a_26_ann": 409220,
-      "a_26_shp": 0.46,
-      "a_11_ann": 455297,
+      "a_26_ann": 409309,
+      "a_26_shp": 0.47,
+      "a_11_ann": 455519,
       "a_11_shp": 0.51,
-      "b_26_ann": 335619,
+      "b_26_ann": 335692,
       "b_26_shp": 0.47,
-      "b_11_ann": 281709,
+      "b_11_ann": 281806,
       "b_11_shp": 0.37,
-      "c_26_ann": 510807,
+      "c_26_ann": 510915,
       "c_26_shp": 0.6,
-      "c_11_ann": 358173,
+      "c_11_ann": 358370,
       "c_11_shp": 0.42
     },
     {
       "label": "비용 스트레스 2.0x (G10 4bp / EM 10bp)",
       "shp_26y": 0.3,
       "shp_11y": 0.34,
-      "tot_5y": 3711559,
+      "tot_5y": 3712347,
       "mdd_11y": 3012793,
       "verdict": "주의",
-      "a_26_ann": 267701,
+      "a_26_ann": 267770,
       "a_26_shp": 0.3,
-      "a_11_ann": 306083,
+      "a_11_ann": 306257,
       "a_11_shp": 0.34,
-      "b_26_ann": 148728,
+      "b_26_ann": 148774,
       "b_26_shp": 0.25,
-      "b_11_ann": 186821,
+      "b_11_ann": 186919,
       "b_11_shp": 0.25,
-      "c_26_ann": 369584,
+      "c_26_ann": 369672,
       "c_26_shp": 0.43,
-      "c_11_ann": 215189,
+      "c_11_ann": 215339,
       "c_11_shp": 0.25
     },
     {
       "label": "추세 출구 단축 (40D · 6σ/7σ)",
       "shp_26y": 0.57,
       "shp_11y": 0.59,
-      "tot_5y": 6164281,
+      "tot_5y": 6165477,
       "mdd_11y": 2698674,
       "verdict": "통과",
-      "a_26_ann": 500704,
+      "a_26_ann": 500822,
       "a_26_shp": 0.57,
-      "a_11_ann": 531319,
+      "a_11_ann": 531605,
       "a_11_shp": 0.59,
-      "b_26_ann": 532302,
+      "b_26_ann": 532417,
       "b_26_shp": 0.7,
-      "b_11_ann": 497697,
+      "b_11_ann": 497868,
       "b_11_shp": 0.6,
-      "c_26_ann": 538207,
+      "c_26_ann": 538335,
       "c_26_shp": 0.62,
-      "c_11_ann": 340846,
+      "c_11_ann": 341073,
       "c_11_shp": 0.39
     },
     {
       "label": "추세 출구 확대 (60D · 8σ/9σ)",
       "shp_26y": 0.68,
       "shp_11y": 0.74,
-      "tot_5y": 6470256,
+      "tot_5y": 6471446,
       "mdd_11y": 2595612,
       "verdict": "통과",
-      "a_26_ann": 603762,
+      "a_26_ann": 603896,
       "a_26_shp": 0.68,
-      "a_11_ann": 672481,
+      "a_11_ann": 672815,
       "a_11_shp": 0.74,
-      "b_26_ann": 542666,
+      "b_26_ann": 542746,
       "b_26_shp": 0.66,
-      "b_11_ann": 560665,
+      "b_11_ann": 560858,
       "b_11_shp": 0.67,
-      "c_26_ann": 633659,
+      "c_26_ann": 633810,
       "c_26_shp": 0.74,
-      "c_11_ann": 526186,
+      "c_11_ann": 526496,
       "c_11_shp": 0.61
     }
   ],
   "analog_analysis": {
-    "as_of": "2026-11-27",
-    "window_60d": "2026-09-04 ~ 2026-11-27",
+    "as_of": "2026-11-26",
+    "window_60d": "2026-09-03 ~ 2026-11-26",
     "curve_days": [
       0,
       5,
@@ -4968,26 +4979,26 @@
       {
         "name": "US 2Y (60D)",
         "unit": "bp",
-        "val": 27.6,
-        "z26": 0.62
+        "val": 30.5,
+        "z26": 0.68
       },
       {
         "name": "US 10Y (60D)",
         "unit": "bp",
-        "val": 7.3,
-        "z26": 0.18
+        "val": 8.7,
+        "z26": 0.21
       },
       {
         "name": "DE 2Y (60D)",
         "unit": "bp",
-        "val": 10.1,
-        "z26": 0.3
+        "val": 9.5,
+        "z26": 0.28
       },
       {
         "name": "DE 10Y (60D)",
         "unit": "bp",
-        "val": -8.9,
-        "z26": -0.22
+        "val": -9.3,
+        "z26": -0.24
       },
       {
         "name": "US 2s10s 레벨",
@@ -4998,8 +5009,8 @@
       {
         "name": "US 2s10s (60D)",
         "unit": "bp",
-        "val": -20.3,
-        "z26": -0.68
+        "val": -21.8,
+        "z26": -0.73
       },
       {
         "name": "US2-DE2 레벨",
@@ -5010,26 +5021,26 @@
       {
         "name": "US2-DE2 (60D)",
         "unit": "bp",
-        "val": 17.5,
-        "z26": 0.5
+        "val": 21.0,
+        "z26": 0.6
       },
       {
         "name": "광의 달러 (60D)",
         "unit": "%",
-        "val": 4.4,
-        "z26": 1.24
+        "val": 4.5,
+        "z26": 1.28
       },
       {
         "name": "EUR (60D)",
         "unit": "%",
-        "val": -5.7,
-        "z26": -1.34
+        "val": -5.8,
+        "z26": -1.37
       },
       {
         "name": "JPY (60D)",
         "unit": "%",
-        "val": 1.9,
-        "z26": 0.34
+        "val": 2.2,
+        "z26": 0.4
       },
       {
         "name": "AUD (60D)",
@@ -5040,14 +5051,14 @@
       {
         "name": "CHF (60D)",
         "unit": "%",
-        "val": 3.0,
-        "z26": 0.85
+        "val": 3.3,
+        "z26": 0.92
       },
       {
         "name": "EM FX (60D)",
         "unit": "%",
-        "val": -8.3,
-        "z26": -1.55
+        "val": -8.2,
+        "z26": -1.53
       },
       {
         "name": "MOVE 레벨",
@@ -5058,8 +5069,8 @@
       {
         "name": "SPX (60D)",
         "unit": "%",
-        "val": -7.2,
-        "z26": -1.15
+        "val": -7.6,
+        "z26": -1.2
       }
     ],
     "top8": [
@@ -5068,10 +5079,10 @@
         "date": "2021-11-26",
         "ym": "2021-11",
         "tag": "파월 매파전환(일시적 폐기)·오미크론",
-        "sim_all": 87.5,
-        "sim_rates": 80.6,
-        "sim_fx": 95.2,
-        "cosine": 0.86,
+        "sim_all": 87.9,
+        "sim_rates": 83.0,
+        "sim_fx": 95.1,
+        "cosine": 0.87,
         "levels": {
           "us2": 0.5,
           "us10": 1.48,
@@ -5180,9 +5191,9 @@
         "date": "2022-07-15",
         "ym": "2022-07",
         "tag": "연준 75bp 자이언트스텝·강달러",
-        "sim_all": 86.4,
+        "sim_all": 87.1,
         "sim_rates": 86.5,
-        "sim_fx": 88.0,
+        "sim_fx": 89.0,
         "cosine": 0.89,
         "levels": {
           "us2": 3.12,
@@ -5291,10 +5302,10 @@
         "date": "2016-01-07",
         "ym": "2016-01",
         "tag": "연준 첫 금리인상 직후·중국 쇼크",
-        "sim_all": 84.2,
-        "sim_rates": 68.4,
-        "sim_fx": 92.2,
-        "cosine": 0.82,
+        "sim_all": 85.1,
+        "sim_rates": 71.5,
+        "sim_fx": 92.0,
+        "cosine": 0.83,
         "levels": {
           "us2": 0.95,
           "us10": 2.15,
@@ -5403,9 +5414,9 @@
         "date": "2015-08-07",
         "ym": "2015-08",
         "tag": "중국 8.11 위안화 절하 직전·EM 약세",
-        "sim_all": 84.2,
-        "sim_rates": 54.7,
-        "sim_fx": 92.2,
+        "sim_all": 84.7,
+        "sim_rates": 57.4,
+        "sim_fx": 93.1,
         "cosine": 0.83,
         "levels": {
           "us2": 0.72,
@@ -5514,10 +5525,10 @@
         "date": "2018-06-01",
         "ym": "2018-06",
         "tag": "2018년 6월 긴축·강달러 국면",
-        "sim_all": 82.2,
-        "sim_rates": 73.0,
-        "sim_fx": 94.9,
-        "cosine": 0.8,
+        "sim_all": 82.5,
+        "sim_rates": 73.3,
+        "sim_fx": 95.3,
+        "cosine": 0.81,
         "levels": {
           "us2": 2.47,
           "us10": 2.9,
@@ -5622,10 +5633,10 @@
         "date": "2025-01-03",
         "ym": "2025-01",
         "tag": "트럼프 관세·인플레 재점화 피크",
-        "sim_all": 80.7,
-        "sim_rates": 67.5,
-        "sim_fx": 93.7,
-        "cosine": 0.8,
+        "sim_all": 81.2,
+        "sim_rates": 68.5,
+        "sim_fx": 94.9,
+        "cosine": 0.81,
         "levels": {
           "us2": 4.28,
           "us10": 4.6,
@@ -5731,9 +5742,9 @@
         "date": "2012-05-22",
         "ym": "2012-05",
         "tag": "2012년 5월 긴축·강달러 국면",
-        "sim_all": 79.1,
-        "sim_rates": 33.3,
-        "sim_fx": 95.0,
+        "sim_all": 78.8,
+        "sim_rates": 33.0,
+        "sim_fx": 94.8,
         "cosine": 0.77,
         "levels": {
           "us2": 0.29,
@@ -5842,10 +5853,10 @@
         "date": "2005-10-26",
         "ym": "2005-10",
         "tag": "그린스펀 인상 후반부·고금리 플래트닝",
-        "sim_all": 78.5,
-        "sim_rates": 85.2,
-        "sim_fx": 74.6,
-        "cosine": 0.74,
+        "sim_all": 78.8,
+        "sim_rates": 84.4,
+        "sim_fx": 75.5,
+        "cosine": 0.75,
         "levels": {
           "us2": 4.37,
           "us10": 4.58,
