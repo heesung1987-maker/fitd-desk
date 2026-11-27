@@ -337,9 +337,12 @@ async function load(forceRepaint = false) {
 
     $('#loading').hidden = true;
     $('#view').hidden = false;
+    const holShort = d.holiday_notice
+      ? (d.holiday_notice.includes('미국 휴장') ? ' · 미국 휴장(직전 종가 이월)' : d.holiday_notice.includes('유럽 휴장') ? ' · 유럽 휴장(직전 종가 이월)' : '')
+      : '';
     if (d.data_mode === 'live') {
       $('#asof').innerHTML = `${esc(d.as_of)} <span class="live-pill">LIVE</span>`;
-      $('#updated').textContent = `전일종가 ${d.base_as_of || '—'} + BBG 실시간 (${String(
+      $('#updated').textContent = `전일종가 ${d.base_as_of || '—'}${holShort} + BBG 실시간 (${String(
         d.updated_at
       ).slice(11, 19)} KST · 15분 주기)`;
       $('#connection').textContent = '● BBG 실시간 연동 (15m)';
@@ -348,15 +351,16 @@ async function load(forceRepaint = false) {
     } else {
       $('#asof').textContent = d.as_of;
       $('#updated').textContent =
-        'FITD 종가 · 계산 ' + String(d.updated_at).slice(5, 16).replace('T', ' ') + ' KST';
+        `FITD 종가 ${d.as_of || '—'}${holShort} · 계산 ` + String(d.updated_at).slice(5, 16).replace('T', ' ') + ' KST';
       $('#connection').textContent = '● FITD 종가 스냅샷';
       $('#connection').classList.remove('offline', 'live-conn');
     }
 
     let warning = [];
+    if (d.holiday_notice) warning.push(d.holiday_notice);
     if (d.heartbeat?.error) warning.push(d.heartbeat.error);
     if (d.pending_config) warning.push('설정 변경 반영 대기 중입니다.');
-    showNotice(warning.join(' '));
+    showNotice(warning.join(' · '));
     if (repaint || forceRepaint) render();
   } catch (e) {
     showNotice('대시보드 연결 실패: ' + e.message);
